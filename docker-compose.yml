@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:11.4
+    # restart: always
+    logging:
+      driver: journald
+      options:
+        tag: "postgres|{{.ImageName}}|{{.DaemonName}}"
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: techlock
+      POSTGRES_DB: auth_service
+    volumes:
+      - $HOME/docker-volume/auth_service/pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      args:
+        NEXUS_HOST: tl-nexus-ui-1158041382.us-east-2.elb.amazonaws.com
+    ports:
+      - 5000:5000
+    links:
+      - postgres
+    environment:
+      LOG_JSON: "true"
+      FLASK_SQLALCHEMY_DATABASE_URI: 'postgresql://techlock:password@postgres:5432/auth_service'
