@@ -1,5 +1,6 @@
 from .error_handlers import register_error_handlers
 
+from .access_denied import AccessDenied
 from .not_found_exception import NotFoundException
 from .conflict_exists_exception import ConflictException
 from .bad_request_exception import BadRequestException

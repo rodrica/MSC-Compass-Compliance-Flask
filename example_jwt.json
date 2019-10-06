@@ -1,0 +1,19 @@
+eyJraWQiOiJ2TngyYitqcW9YMzk2dU1aV1NxOEswbk10NGlnM09FTGFhSStRbTRwRUFjPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhNWQ0NGE5Mi1mZTY0LTRjMjMtOWM0Ny0zYTRiMTRiMGM1ODMiLCJjb2duaXRvOmdyb3VwcyI6WyJ0ZXN0X2FkbWluIl0sInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJhdXRoX3RpbWUiOjE1NzAxNTQyODQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTIuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0yX1pLUjd3Nnd4TCIsImV4cCI6MTU3MDE1Nzg4NCwiaWF0IjoxNTcwMTU0Mjg1LCJ2ZXJzaW9uIjoyLCJqdGkiOiIyYTc5ZWFmMS00NjZkLTRjZTEtODllMy0yZWY1N2E4NzA1M2YiLCJjbGllbnRfaWQiOiIyNjc3MWsxOHJubXBsaXRxNThoajRmNTM1dSIsInVzZXJuYW1lIjoiam10LnZhbmRlcmxlZUBnbWFpbC5jb20ifQ.EzwNe6YA2zIrx9XJbgkdyXK5i-IgeCwh2KheZlPyApa5_z99llHST6S__GqGK7xSYwplOLrpMdl2ssJv8hkWSzScZrbQAAoF8nxLCT4SzegYZ2VsxYjz3pcyskfdjY5PNl3KzXemHMf_XSFSe_RRJZ06u_X1n0BY9RBx086dfihj78dhe6kyVxigG_erM9lk-Ap4Vz5gpm7OxjjfpaVAgy_MFHtwQ5j4mOkpB3bL-rrEELj9SPU2ubJAEocEurUqf91csRBv2ndKtcRuJXaZcFd5Eogc-3lMMq-RxDqJJ5giMNYv4vgt6gKg0ZRQUWT-qYfHEBm-wVUU24mBuhPpcg
+
+
+{
+  "sub": "a5d44a92-fe64-4c23-9c47-3a4b14b0c583",
+  "cognito:groups": [
+    "test_admin"
+  ],
+  "token_use": "access",
+  "scope": "openid profile email",
+  "auth_time": 1570154284,
+  "iss": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_ZKR7w6wxL",
+  "exp": 1570157884,
+  "iat": 1570154285,
+  "version": 2,
+  "jti": "2a79eaf1-466d-4ce1-89e3-2ef57a87053f",
+  "client_id": "26771k18rnmplitq58hj4f535u",
+  "username": "jmt.vanderlee@gmail.com"
+}

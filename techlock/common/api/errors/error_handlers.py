@@ -2,6 +2,7 @@ import logging
 
 from flask import jsonify
 
+from .access_denied import AccessDenied
 from .bad_request_exception import BadRequestException
 from .conflict_exists_exception import ConflictException
 from .not_found_exception import NotFoundException
@@ -21,12 +22,13 @@ def register_error_handlers(app):
     app.register_error_handler(404, not_found_error)
     app.register_error_handler(500, internal_server_error)
 
-    app.register_error_handler(NotFoundException, aegis_exception_handler)
-    app.register_error_handler(ConflictException, aegis_exception_handler)
-    app.register_error_handler(BadRequestException, aegis_exception_handler)
-    app.register_error_handler(TimeoutException, aegis_exception_handler)
+    app.register_error_handler(AccessDenied, techlock_exception_handler)
+    app.register_error_handler(NotFoundException, techlock_exception_handler)
+    app.register_error_handler(ConflictException, techlock_exception_handler)
+    app.register_error_handler(BadRequestException, techlock_exception_handler)
+    app.register_error_handler(TimeoutException, techlock_exception_handler)
     app.register_error_handler(ProcessingException, processing_exception_handler)
-    app.register_error_handler(InvalidFilterException, aegis_exception_handler)
+    app.register_error_handler(InvalidFilterException, techlock_exception_handler)
 
 
 def not_found_error(error):
@@ -42,7 +44,7 @@ def internal_server_error(error):
     return jsonify({'error': True, 'msg': 'Unknown error occured on server.'}), 500
 
 
-def aegis_exception_handler(error):
+def techlock_exception_handler(error):
     _LOG.debug(error, exc_info=True)  # Logs traceback if debug enabled
     _LOG.error(error.message)
 

@@ -6,17 +6,19 @@ from decimal import Decimal
 from flask import Flask, json as flask_json
 from flask_cors import CORS
 from flask_compress import Compress
-from flask_jwt_extended import JWTManager
 from flask_log_request_id import RequestID
 from flask_migrate import Migrate
-from flask_rest_api import Api
+from flask_smorest import Api
 from typing import Any
 
 from techlock.common.api.errors import register_error_handlers
 from techlock.common.api.middleware import (
     register_logging, register_metrics, register_prometheus_metrics
 )
+from techlock.common.api.jwt_authorization import configure_jwt
 from techlock.common.orm.sqlalchemy.db import db, init_db
+from techlock.common.util.helper import parse_boolean
+
 
 logger = logging.getLogger(__name__)
 
@@ -30,9 +32,11 @@ default_flask_config = {
     'OPENAPI_REDOC_PATH': '/redoc',
     'OPENAPI_REDOC_URL': 'https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.min.js',
 
-    'SQLALCHEMY_DATABASE_URI': 'postgresql://postgres:password@192.168.10.10:5432/auth_service',
+    'SQLALCHEMY_DATABASE_URI': 'postgresql://postgres:password@192.168.10.10:5432/user_management_service',
 
-    'JWT_SECRET_KEY': 'super-secret',  # Change this!
+    'JWT_ALGORITHM': 'RS256',
+    'JWT_IDENTITY_CLAIM': 'sub',
+    'JWT_USER_CLAIMS': 'claims'
 }
 
 
@@ -61,7 +65,11 @@ class FlaskWrapper():
     migrate: Any
 
 
-def create_flask(import_name):
+def create_flask(
+    import_name,
+    enable_jwt=True,
+    audience=None,
+):
     '''
         Creates a Flask app and sets it up. This means:
         1. Register `request_context` to allow per request psql_connections
@@ -73,6 +81,8 @@ def create_flask(import_name):
             FlaskWrapper
     '''
     app = Flask(import_name)
+    if audience:
+        app.config['AUDIENCE'] = audience
     app.config.update(default_flask_config)
     app.config.update({k[6:]: v for k, v in os.environ.items() if k.startswith('FLASK_')})
 
@@ -97,7 +107,11 @@ def create_flask(import_name):
     db.init_app(app)
     migrate = Migrate(app, db)
 
-    jwt = JWTManager(app)
+    jwt = None
+    if enable_jwt or parse_boolean(os.environ.get('JWT_ENABLED')):
+        logger.info('Enabling JWT.')
+        jwt = configure_jwt(app)
+
     api = Api(app)
 
     return FlaskWrapper(
