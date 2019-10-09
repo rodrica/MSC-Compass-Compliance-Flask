@@ -41,7 +41,7 @@ class Auth0Idp(IdpProvider):
 
         return found_users[0]
 
-    def create_user(self, current_user: AuthInfo, user: User, email_verified=False):
+    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False):
         self.auth0.users.create({
             'email': user.email,
             'email_verified': email_verified,
@@ -50,6 +50,7 @@ class Auth0Idp(IdpProvider):
             'user_metadata': {
                 'custom:tenant_id': user.tenant_id,
             },
+            'password': password,
             'connection': self.connection_id,
         })
 

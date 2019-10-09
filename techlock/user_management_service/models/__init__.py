@@ -30,6 +30,7 @@ from .user import (
     User,
     UserSchema,
     UserPageableSchema,
+    PostUserSchema,
     USER_CLAIM_SPEC,
 )
 

@@ -17,6 +17,7 @@ from techlock.common.api.jwt_authorization import (
 from ..services import Auth0Idp, CognitoIdp
 from ..models import (
     User, UserSchema, UserPageableSchema,
+    PostUserSchema,
     USER_CLAIM_SPEC,
 )
 
@@ -56,24 +57,30 @@ class Users(MethodView):
 
         return pageable_resp
 
-    @blp.arguments(UserSchema)
+    @blp.arguments(PostUserSchema)
     @blp.response(UserSchema, code=201)
     @access_required('create', 'users')
     def post(self, data):
+        # TODO: Validate password strength
+
         current_user = get_current_user()
         logger.info('Creating User', extra={'data': data})
 
         data['entity_id'] = data.get('email')
+        # Get the password and remove it from the data. It is not part of the User object
+        temporary_password = data.pop('temporary_password')
         User.validate(data)
         user = User.get(current_user, data['entity_id'])
         if user is not None:
             raise ConflictException('User with email = {} already exists.'.format(data['entity_id']))
         user = User(**data)
-        user.save(current_user)
-        logger.info('User created, adding to idp')
 
-        self.idp.create_user(current_user, user)
-        logger.info('User added to idp')
+        logger.info('Adding user to idp')
+        self.idp.create_user(current_user, user, password=temporary_password)
+        logger.info('User added to idp, storing internally')
+
+        user.save(current_user)
+        logger.info('User created')
 
         return user
 
@@ -83,7 +90,8 @@ class UserById(MethodView):
 
     def __init__(self, *args, **kwargs):
         MethodView.__init__(self, *args, **kwargs)
-        self.idp = CognitoIdp()
+        # self.idp = CognitoIdp()
+        self.idp = Auth0Idp()
 
     @blp.response(UserSchema)
     @access_required(
@@ -117,7 +125,7 @@ class UserById(MethodView):
         if user is None or not can_access(user, claims):
             raise NotFoundException('No user found for id = {}'.format(user_id))
 
-        if user.email == data.get('email'):
+        if user.email != data.get('email'):
             raise BadRequestException('Email can not be changed.')
 
         attributes_to_update = dict()

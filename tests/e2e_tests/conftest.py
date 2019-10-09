@@ -126,6 +126,7 @@ def create_root():
 def main():
     _flush_local_dynamodb()
     _create_cognito_user_pool()
+    create_root()
 
 
 if __name__ == "__main__":

@@ -18,6 +18,7 @@ __all__ = [
     'User',
     'UserSchema',
     'UserPageableSchema',
+    'PostUserSchema',
     'USER_CLAIM_SPEC',
 ]
 
@@ -49,8 +50,8 @@ USER_CLAIM_SPEC = ClaimSpec(
 
 
 class UserSchema(PersistedObjectSchema):
-    email = mf.String()
-    name = mf.String()
+    email = mf.String(required=True)
+    name = mf.String(required=True)
     family_name = mf.String()
 
     role_ids = mf.List(mf.String(), allow_none=True)
@@ -64,6 +65,10 @@ class UserSchema(PersistedObjectSchema):
     )
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
+
+
+class PostUserSchema(UserSchema):
+    temporary_password = mf.String(required=True)
 
 
 class UserPageableSchema(PageableResponseBaseSchema):
