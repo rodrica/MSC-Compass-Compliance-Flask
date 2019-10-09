@@ -8,7 +8,7 @@ from ...models import User
 
 class IdpProvider():
 
-    def create_user(self, current_user: AuthInfo, user: User):
+    def create_user(self, current_user: AuthInfo, user: User, email_verified=False):
         pass
 
     def update_user_attributes(

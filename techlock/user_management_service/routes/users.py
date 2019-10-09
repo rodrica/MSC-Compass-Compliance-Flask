@@ -14,7 +14,7 @@ from techlock.common.api.jwt_authorization import (
     can_access,
 )
 
-from ..services import CognitoIdp
+from ..services import Auth0Idp, CognitoIdp
 from ..models import (
     User, UserSchema, UserPageableSchema,
     USER_CLAIM_SPEC,
@@ -30,7 +30,8 @@ class Users(MethodView):
 
     def __init__(self, *args, **kwargs):
         MethodView.__init__(self, *args, **kwargs)
-        self.idp = CognitoIdp()
+        # self.idp = CognitoIdp()
+        self.idp = Auth0Idp()
 
     @blp.arguments(PageableQueryParametersSchema, location='query')
     @blp.response(UserPageableSchema)

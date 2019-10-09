@@ -39,6 +39,7 @@ setup(
     author_email='jmt.vanderlee@gmail.com',
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[
+        'auth0-python>=3.9.1,<4',
         'aws-requests-auth>=0.4.1,<1.0.0',
         'boto3>=1.9.<2',
         'cachetools>=3.1,<4',
