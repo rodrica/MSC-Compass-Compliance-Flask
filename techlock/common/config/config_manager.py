@@ -51,12 +51,29 @@ class ConfigManager(metaclass=Singleton):
 
     def __init__(self, stage: str = None, cache_max_size: int = 64, cache_ttl: int = 60, table_tmpl: str = None, dynamo_endpoint_url=None):
         self.stage = stage or os.environ.get('STAGE', self._DEFAULT_STAGE)
-        self.table_tmpl = table_tmpl or os.environ.get('CONF_TABLE_TMPL', 'mss.{stage}.config')
-        self.table_name = self.table_tmpl.format(stage=self.stage)
+        self.table_name = self._get_table_name(stage=self.stage)
 
         self.static_config = dict()
         self.config = DefaultTTLCache(self._get_config, max_size=cache_max_size, ttl=cache_ttl)
         self.dynamo_endpoint_url = dynamo_endpoint_url
+
+    def _get_table_name(self, stage):
+        separator = os.environ.get('DDB_SEPARATOR', '-')
+
+        prefix = ''
+        db_prefix = os.environ.get('DDB_PREFIX')
+        if db_prefix:
+            prefix = '{prefix}{sep}'.format(prefix=db_prefix, sep=separator)
+
+        table_name = '{prefix}{stage}{sep}{table}'.format(
+            prefix=prefix,
+            stage=stage,
+            sep=separator,
+            table='config'
+        ).upper()
+
+        logger.debug('Using table: %s', table_name)
+        return table_name
 
     def _get_region_name(self, session):
         region_name = session.region_name

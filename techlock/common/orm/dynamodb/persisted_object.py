@@ -201,11 +201,19 @@ class PersistedObject:
 
     @classmethod
     def _get_table_name(cls):
+        separator = os.environ.get('DDB_SEPARATOR', '-')
+
         prefix = ''
-        db_prefix = os.environ.get('DB_PREFIX')
+        db_prefix = os.environ.get('DDB_PREFIX')
         if db_prefix:
-            prefix = '{}.'.format(db_prefix)
-        table_name = '{}{}.{}'.format(prefix, os.environ.get('STAGE'), cls.table)
+            prefix = '{prefix}{sep}'.format(prefix=db_prefix, sep=separator)
+
+        table_name = '{prefix}{stage}{sep}{table}'.format(
+            prefix=prefix,
+            stage=os.environ.get('STAGE'),
+            sep=separator,
+            table=cls.table
+        ).upper()
 
         logger.debug('Using table: %s', table_name)
         return table_name
