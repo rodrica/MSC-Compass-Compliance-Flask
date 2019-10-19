@@ -41,6 +41,10 @@ main() {
     if [ "$DOCKER" == true ]; then
         run_cmd "docker-compose -f ./tests/docker-compose.yml -p test build"
         run_cmd "NO_CACHE=true docker-compose -f ./tests/docker-compose.yml -p test up --exit-code-from test_runner"
+        ret=$?
+        if [ $ret -ne 0 ]; then
+            exit $ret
+        fi
         info "Completed with 'NO_CACHE=true'"
         # run_cmd "NO_CACHE=false docker-compose -f ./tests/docker-compose.yml -p test up --exit-code-from test_runner"
         # info "Completed with 'NO_CACHE=false'"
