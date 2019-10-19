@@ -1,2 +1,6 @@
-from .identity_providers.auth0 import Auth0Idp
-from .identity_providers.cognito import CognitoIdp
+from .identity_providers import (
+    Auth0Idp,
+    CognitoIdp,
+    MockIdp,
+    get_idp,
+)

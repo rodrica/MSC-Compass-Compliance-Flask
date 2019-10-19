@@ -25,7 +25,9 @@ services:
     build:
       context: ../
       args:
-        NEXUS_HOST: tl-nexus-ui-1158041382.us-east-2.elb.amazonaws.com
+        NEXUS_HOST: ${NEXUS_HOST}
+        NEXUS_USERNAME: ${NEXUS_USERNAME}
+        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
@@ -57,7 +59,9 @@ services:
       context: ../
       dockerfile: test.Dockerfile
       args:
-        NEXUS_HOST: tl-nexus-ui-1158041382.us-east-2.elb.amazonaws.com
+        NEXUS_HOST: ${NEXUS_HOST}
+        NEXUS_USERNAME: ${NEXUS_USERNAME}
+        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb

@@ -11,15 +11,14 @@ stages:
       headers:
         content-type: application/json
       json:
-        username: test@test.com
+        sub: test@test.com
+        tenant_id: tenant1
+        roles:
+          - tenant1
+          - tenant1:admin
         claims:
-          tenant_id: tenant1
-          roles:
-            - tenant1
-            - tenant1:admin
-          claims:
-            - allow:tenant1:user-management:*:users:*
-            - deny:tenant1:user-management:*:users:denied_user
+          - allow:tenant1:user-management:*:users:*
+          - deny:tenant1:user-management:*:users:denied_user
     response:
       status_code: 200
       save:
@@ -51,6 +50,7 @@ stages:
         name: Test
         family_name: e2e
         email: test2@test.com
+        temporary_password: changeme
     response:
       status_code: 201
       body:
@@ -113,7 +113,9 @@ stages:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
+        name: Test
         family_name: e2e_new
+        email: test2@test.com
     response:
       status_code: 200
       body:

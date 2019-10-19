@@ -11,16 +11,14 @@ stages:
       headers:
         content-type: application/json
       json:
-        sub: subject_id_0
-        username: test@test.com
+        sub: test@test.com
+        tenant_id: tenant1
+        roles:
+          - tenant1
+          - tenant1:admin
         claims:
-          tenant_id: tenant1
-          roles:
-            - tenant1
-            - tenant1:admin
-          claims:
-            - allow:*:user-management:*:tenants:*
-            - deny:*:user-management:*:tenants:denied_user
+          - allow:*:user-management:*:tenants:*
+          - deny:*:user-management:*:tenants:denied_user
     response:
       status_code: 200
       save:
