@@ -14,15 +14,10 @@ e2e-test:
   services:
     - docker:dind
   before_script:
+    - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
     - apk update
     - apk add bash curl py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
     - pip install docker-compose
-  # image: jonaskello/docker-and-compose:1.12.1-1.8.0
-  # services:
-  #   - docker:1.12.1-dind
-  # before_script:
-  #   - apk update
-  #   - apk add bash
   script:
     - ./run_tests.sh -d -e
 
