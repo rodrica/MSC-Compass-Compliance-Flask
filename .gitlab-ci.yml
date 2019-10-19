@@ -1,21 +1,18 @@
 
-# build-deploy-pypi:
-#   stage: build
-#   variables:
-#     PIP_REPO_DOMAIN: nexus.changedynamix.io
-#     PIP_REPO_PATH: repository/pypi-hosted/
-#     PIP_REPO_URL: https://${PIP_REPO_DOMAIN}/${PIP_REPO_PATH}
+test:
+  stage: test
+  image: python:3.7
+  script:
+    - pip3 install -r requirements
+    - pip3 install .
+    - python3 -m flake8
+    - python3 -m pytest . -W ignore
 
-#     PIP_TRUSTED_HOST: ${PIP_REPO_DOMAIN}
-#     PIP_EXTRA_INDEX_URL: https://${PIP_REPO_DOMAIN}/${PIP_REPO_PATH}/simple
-#   script:
-#     - python3 setup.py bdist_wheel # install for distribution
-#     - twine upload --repository-url "$PIP_REPO_URL" -u "$NEXUS_USERNAME" -p "$NEXUS_PASSWORD" dist/*
-#   except:
-#     - /^public_.*$/
-#     - /^qa_.*$/
-#     - /^stage_.*$/
-#     - /^prod_.*$/
+test-e2e:
+  stage: test
+  image: docker/compose:1.24.1
+  script:
+    - ./run_tests.sh -d -e
 
 deploy-docker:
   stage: deploy
