@@ -1,21 +1,25 @@
 
-# build-deploy-pypi:
-#   stage: build
-#   variables:
-#     PIP_REPO_DOMAIN: nexus.changedynamix.io
-#     PIP_REPO_PATH: repository/pypi-hosted/
-#     PIP_REPO_URL: https://${PIP_REPO_DOMAIN}/${PIP_REPO_PATH}
+unittest:
+  stage: test
+  image: python:3.7
+  script:
+    - pip3 install -r requirements.txt --extra-index-url "https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple/"
+    - pip3 install .
+    - python3 -m flake8
+    - python3 -m pytest -W ignore tests/unittests -vv
 
-#     PIP_TRUSTED_HOST: ${PIP_REPO_DOMAIN}
-#     PIP_EXTRA_INDEX_URL: https://${PIP_REPO_DOMAIN}/${PIP_REPO_PATH}/simple
-#   script:
-#     - python3 setup.py bdist_wheel # install for distribution
-#     - twine upload --repository-url "$PIP_REPO_URL" -u "$NEXUS_USERNAME" -p "$NEXUS_PASSWORD" dist/*
-#   except:
-#     - /^public_.*$/
-#     - /^qa_.*$/
-#     - /^stage_.*$/
-#     - /^prod_.*$/
+e2e-test:
+  stage: test
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
+    - apk update
+    - apk add bash curl py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
+    - pip install docker-compose
+  script:
+    - ./run_tests.sh -d -e
 
 deploy-docker:
   stage: deploy
@@ -25,7 +29,7 @@ deploy-docker:
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
   script:
-    - docker build --build-arg NEXUS_HOST=tl-nexus-ui-1158041382.us-east-2.elb.amazonaws.com --pull -t "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}" .
+    - docker build --build-arg NEXUS_HOST=${NEXUS_HOST} --build-arg NEXUS_USERNAME=${NEXUS_USERNAME} --build-arg NEXUS_PASSWORD=${NEXUS_PASSWORD}  --pull -t "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}" .
     - docker push "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}"
     - docker tag "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}" "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_latest"
     - docker push "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_latest"
@@ -40,7 +44,7 @@ deploy-docker-tags:
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
   script:
-    - docker build --build-arg NEXUS_HOST=tl-nexus-ui-1158041382.us-east-2.elb.amazonaws.com --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG" .
+    - docker build --build-arg NEXUS_HOST=${NEXUS_HOST} --build-arg NEXUS_USERNAME=${NEXUS_USERNAME} --build-arg NEXUS_PASSWORD=${NEXUS_PASSWORD} --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG" .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
     - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG" "$CI_REGISTRY_IMAGE:latest"
     - docker push "$CI_REGISTRY_IMAGE:latest"

@@ -3,27 +3,27 @@ services:
   redis:
     image: redis:5.0
     ports:
-      - 6100:6379
+      - 6379
+  dynamodb:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - 8000
   jwt:
     image: registry.gitlab.com/techlock/mock-jwt-service:master_fdd0e2e320a64bd4bc679786db047511282217a1
     environment:
       FLASK_JWT_IDENTITY_CLAIM: sub
       FLASK_JWT_USER_CLAIMS: claims
     ports:
-      - 6101:5000
-  dynamodb:
-    image: amazon/dynamodb-local:latest
-    ports:
-      - 6102:8000
+      - 5000
   cognito:
     image: motoserver/moto
     ports:
-      - 6103:5000
+      - 5000
     command: -p 5000 cognito-idp
 
-  init:
+  app:
     build:
-      context: .
+      context: ../
       args:
         NEXUS_HOST: ${NEXUS_HOST}
         NEXUS_USERNAME: ${NEXUS_USERNAME}
@@ -53,18 +53,11 @@ services:
       JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'
     ports:
       - 5000
-    entrypoint:
-      - "/usr/bin/wait-for-it"
-      - "cognito:5000"
-      - "-s"
-      - "--timeout=30"
-      - "--"
-      - 'python'
-      - '/app/tests/e2e_tests/conftest.py'
 
-  api:
+  test_runner:
     build:
-      context: .
+      context: ../
+      dockerfile: test.Dockerfile
       args:
         NEXUS_HOST: ${NEXUS_HOST}
         NEXUS_USERNAME: ${NEXUS_USERNAME}
@@ -74,7 +67,6 @@ services:
       - dynamodb
       - cognito
       - jwt
-      - init
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -88,10 +80,9 @@ services:
       AWS_SECRET_ACCESS_KEY: fake
       AWS_DEFAULT_REGION: us-east-1
       STAGE: test
-      # LOG_LEVEL: debug
       TENANT_ID: test
-      NO_CACHE: ${NO_CACHE:-true}
-      FLASK_JWT_ALGORITHM: RS256
-      JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'
-    ports:
-      - 6105:5000
+      PYTHONDONTWRITEBYTECODE: 1
+    entrypoint:
+      - "/app/run_tests.sh"
+      - "-e"
+      - "-v"
