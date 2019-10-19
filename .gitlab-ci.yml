@@ -20,6 +20,8 @@ e2e-test:
   image: jonaskello/docker-and-compose:1.12.1-1.8.0
   services:
     - docker:1.12.1-dind
+  before_script:
+    - apk add bash
   script:
     - ./run_tests.sh -d -e
 
