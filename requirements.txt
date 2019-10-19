@@ -1,1 +1,13 @@
 tl-msc-common==1.0.0.dev0+master.69e16f6ed5364d14a4e7fee134bc15c4cdf50f72
+
+# dev only requirements
+fakeredis<1
+flake8
+freezegun
+mock
+moto
+pytest
+pytest-flake8
+pytest-cov
+pytest-sugar
+tavern==0.22.1
