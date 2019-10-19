@@ -10,14 +10,16 @@ unittest:
 
 e2e-test:
   stage: test
-  image:
-  image: docker:latest
+  # image: docker:latest
+  # services:
+  #   - docker:dind
+  # before_script:
+  #   - apk add bash curl
+  #   - curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
+  #   - chmod +x /usr/bin/docker-compose
+  image: jonaskello/docker-and-compose:1.12.1-1.8.0
   services:
-    - docker:dind
-  before_script:
-    - apk add bash curl
-    - curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
-    - chmod +x /usr/bin/docker-compose
+    - docker:1.12.1-dind
   script:
     - ./run_tests.sh -d -e
 
