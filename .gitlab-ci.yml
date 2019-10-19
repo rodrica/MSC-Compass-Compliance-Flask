@@ -1,18 +1,20 @@
 
-test:
+unittest:
   stage: test
   image: python:3.7
   script:
     - pip3 install -r requirements.txt --extra-index-url "https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple/"
     - pip3 install .
     - python3 -m flake8
-    - python3 -m pytest . -W ignore
+    - python3 -m pytest -W ignore tests/unittests -vv
 
-test-e2e:
+e2e-test:
   stage: test
   image:
     name: docker/compose:1.24.1
     entrypoint: ["/bin/sh", "-c"]
+  before_script:
+    - apk add bash
   script:
     - ./run_tests.sh -d -e
 
