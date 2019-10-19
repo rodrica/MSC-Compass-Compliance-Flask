@@ -21,6 +21,7 @@ e2e-test:
   services:
     - docker:1.12.1-dind
   before_script:
+    - apk update
     - apk add bash
   script:
     - ./run_tests.sh -d -e
