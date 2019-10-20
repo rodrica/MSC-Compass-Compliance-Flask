@@ -31,11 +31,13 @@ build-docker:
 run:
 	# Runs the project in docker. Allows easy testing
 	@echo "Running docker-compose project"
+	@docker-compose build
 	@docker-compose up -d api
 
 run-dependencies:
 	# Runs the project dependencies only. Allows running the project in an IDE.
 	@echo "Running docker-compose project"
+	@docker-compose build
 	@docker-compose up -d init
 
 stop:

@@ -39,6 +39,6 @@ setup(
     author_email='jmt.vanderlee@gmail.com',
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[
-        'tl-msc-common==1.0.0.dev0+master.69e16f6ed5364d14a4e7fee134bc15c4cdf50f72',
+        'tl-msc-common==1.0.0.dev0+master.5ba1271d55c7b9e57734c4c768f5f4a8954d0545',
     ],
 )
