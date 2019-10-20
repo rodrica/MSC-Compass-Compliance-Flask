@@ -9,6 +9,7 @@ services:
     environment:
       FLASK_JWT_IDENTITY_CLAIM: sub
       FLASK_JWT_USER_CLAIMS: claims
+      FLASK_JWT_ACCESS_TOKEN_EXPIRES: false
     ports:
       - 6101:5000
   dynamodb:
