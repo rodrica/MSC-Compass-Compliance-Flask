@@ -56,9 +56,9 @@ Only PRs were the CI pipeline succeeds will be merged.
 5. Create `.env` file at the root of this project with the following contents:
 
     ```conf
-    NEXUS_HOST='nexus.techlockinc.com'
-    NEXUS_USERNAME='will_be_provided'
-    NEXUS_PASSWORD='will_be_provided'
+    NEXUS_HOST=nexus.techlockinc.com
+    NEXUS_USERNAME=will_be_provided
+    NEXUS_PASSWORD=will_be_provided
 
     AUDIENCE=user-management
 
@@ -77,7 +77,7 @@ Only PRs were the CI pipeline succeeds will be merged.
     NO_CACHE=false
     FLASK_JWT_ALGORITHM=RS256
 
-    JWKS_URLS='http://127.0.0.1:6101/.well-known/jwks.json'
+    JWKS_URLS=http://127.0.0.1:6101/.well-known/jwks.json
     DYNAMODB_ENDPOINT_URL=http://127.0.0.1:6102
     COGNITO_IDP_ENDPOINT_URL=http://127.0.0.1.10:6103
 
