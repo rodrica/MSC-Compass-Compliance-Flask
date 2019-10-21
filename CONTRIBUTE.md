@@ -66,8 +66,8 @@ Only PRs were the CI pipeline succeeds will be merged.
     REDIS_PORT=6100
     REDIS_DB=0
     REDIS_SOCKET_CONNECT_TIMEOUT=30
-    REDIS_IS_CLUSTER='false'
-    REDIS_SKIP_FULL_COVERAGE_CHECK='false'
+    REDIS_IS_CLUSTER=false
+    REDIS_SKIP_FULL_COVERAGE_CHECK=false
     AWS_ACCESS_KEY_ID=fake
     AWS_SECRET_ACCESS_KEY=fake
     AWS_DEFAULT_REGION=us-east-1
