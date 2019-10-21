@@ -1,0 +1,9 @@
+.env
+.gitignore
+.gitlab-ci.yml
+.vscode/
+
+docker-compose.yml
+
+CONTRIBUTE.md
+README.md
