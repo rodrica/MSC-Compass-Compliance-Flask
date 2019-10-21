@@ -9,13 +9,13 @@ clean:
 dev-setup:
 	# Installs development dependencies
 	@echo "Installing pip requirements"
-	@pip install -q -r requirements.txt \
+	@pip3 install -r requirements.txt \
 		--extra-index-url https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple
 
 install:
 	# Installs the project to your python installation
 	@echo "Installing"
-	@pip install -q \
+	@pip3 install \
 		--extra-index-url https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple \
 		.
 
@@ -48,7 +48,7 @@ stop:
 unittest:
 	# Run the unittests
 	@echo "Running unittests"
-	@python -m pytest -W ignore tests/unittests -vv
+	@python3 -m pytest -W ignore tests/unittests -vv
 
 e2e:
 	# Run the End-to-End tests
