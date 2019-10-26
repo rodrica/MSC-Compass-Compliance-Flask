@@ -37,8 +37,3 @@ for route in routes:
         api.register_blueprint(service.blp)
     elif isinstance(service.blp, flask.Blueprint):
         app.register_blueprint(service.blp)
-
-
-# @jwt.user_identity_loader
-# def user_identity_lookup(user):
-#     return user.email
