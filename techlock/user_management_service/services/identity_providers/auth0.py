@@ -47,7 +47,7 @@ class Auth0Idp(IdpProvider):
             'email_verified': email_verified,
             'name': user.name,
             'family_name': user.family_name,
-            'user_metadata': {
+            'app_metadata': {
                 'custom:tenant_id': user.tenant_id,
             },
             'password': password,
@@ -69,7 +69,7 @@ class Auth0Idp(IdpProvider):
                 user_attributes[k] = v
 
         if custom_attributes:
-            user_attributes['user_metadata'] = custom_attributes
+            user_attributes['app_metadata'] = custom_attributes
 
         found_user = self._get_user(user)
         self.auth0.users.update(found_user['user_id'], user_attributes)
