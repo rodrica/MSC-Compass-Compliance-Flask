@@ -5,11 +5,10 @@ services:
     ports:
       - 6100:6379
   jwt:
-    image: registry.gitlab.com/techlock/mock-jwt-service:master_fdd0e2e320a64bd4bc679786db047511282217a1
+    image: registry.gitlab.com/techlock/mock-jwt-service:master_2ff25d73caffcc426e1d5b8bdb044991986ed772
     environment:
       FLASK_JWT_IDENTITY_CLAIM: sub
       FLASK_JWT_USER_CLAIMS: claims
-      FLASK_JWT_ACCESS_TOKEN_EXPIRES: 'false'
     ports:
       - 6101:5000
   dynamodb:

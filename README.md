@@ -108,3 +108,21 @@ The unittests can be ran and debugged with VSCode's built-in test tool. Click on
 There is also a `run_tests.sh` script at the root of the project.
 You can run it as follows to run the unittests `./run_tests.sh --unittest`
 To run the e2e test you run `./run_tests.sh --end-to-end`
+
+## Config
+
+### General
+
+OS Variables:
+| Key | Required | Default | Description | Allowed Values |
+|-----|----------|---------|-------------|----------------|
+| IDP_NAME | False | MOCK | Which IDP to use for /user endpoints, default to the mock idp which does nothing | AUTH0, COGNITO, MOCK |
+
+### Hydrator
+
+OS Variables:
+| Key | Required | Default | Description |
+|-----|----------|---------|-------------|
+| HYDRATOR_BASIC_ENABLED | False | True | Flag to enable Basic authentication for the /hydrator endpoint | true, false |
+| HYDRATOR_BASIC_USER | True if HYDRATOR_BASIC_ENABLED is True | | Username to use in Basic authentication | |
+| HYDRATOR_BASIC_PASSWORD | True if HYDRATOR_BASIC_ENABLED is True | | Password to use in Basic authentication | |
