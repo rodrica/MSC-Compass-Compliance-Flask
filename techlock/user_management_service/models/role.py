@@ -1,8 +1,14 @@
+import marshmallow as ma
 import marshmallow.fields as mf
+from boto3.dynamodb.conditions import Attr
 from dataclasses import dataclass
 from typing import ClassVar, Dict, List
 
-from techlock.common.api import ClaimSpec, PageableResponseBaseSchema
+from techlock.common.api import (
+    ClaimSpec,
+    PageableResponseBaseSchema,
+    PageableQueryParameters, PageableQueryParametersSchema,
+)
 from techlock.common.orm.dynamodb import (
     NO_DEFAULT,
     PersistedObject,
@@ -13,6 +19,8 @@ __all__ = [
     'Role',
     'RoleSchema',
     'RolePageableSchema',
+    'RoleListQueryParameters',
+    'RoleListQueryParametersSchema',
     'ROLE_CLAIM_SPEC',
 ]
 
@@ -46,6 +54,14 @@ class RolePageableSchema(PageableResponseBaseSchema):
     items = mf.Nested(RoleSchema, many=True, dump_only=True)
 
 
+class RoleListQueryParametersSchema(PageableQueryParametersSchema):
+    name = mf.String(allow_none=True, description='Used to filter roles by name prefix.')
+
+    @ma.post_load
+    def make_object(self, data, **kwargs):
+        return RoleListQueryParameters(**data)
+
+
 @dataclass
 class Role(PersistedObject):
     table: ClassVar[str] = 'roles'
@@ -56,3 +72,16 @@ class Role(PersistedObject):
     claims_by_audience: Dict[str, List[str]] = None
 
     tags: Dict[str, str] = None
+
+
+@dataclass
+class RoleListQueryParameters(PageableQueryParameters):
+    name: str = None
+
+    def get_filters(self):
+        ddb_attrs = list()
+
+        if self.name is not None:
+            ddb_attrs.append(Attr('name').begins_with(self.name))
+
+        return ddb_attrs

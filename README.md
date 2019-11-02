@@ -118,6 +118,15 @@ OS Variables:
 |-----|----------|---------|-------------|----------------|
 | IDP_NAME | False | MOCK | Which IDP to use for /user endpoints, default to the mock idp which does nothing | AUTH0, COGNITO, MOCK |
 
+ConfigManager
+| Key | Required | Default | Description | Allowed Values |
+|-----|----------|---------|-------------|----------------|
+| idp.name | False | MOCK | Which IDP to use for /user endpoints, default to the mock idp which does nothing | AUTH0, COGNITO, MOCK |
+| auth0.domain | True if  | |
+| auth0.client_id |
+| | | | | |
+| sns.topics.UserNotification | False | | Which SNS Topic to publish UserNotifications to. If not set, will log each message in an error message | True, False |
+
 ### Hydrator
 
 OS Variables:

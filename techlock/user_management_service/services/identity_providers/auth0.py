@@ -77,3 +77,10 @@ class Auth0Idp(IdpProvider):
     def delete_user(self, current_user: AuthInfo, user: User):
         found_user = self._get_user(user)
         self.auth0.users.delete(found_user['user_id'])
+
+    def change_password(self, current_user: AuthInfo, user: User, new_password: str):
+        found_user = self._get_user(user)
+
+        self.auth0.users.update(found_user['user_id'], {
+            'password': new_password,
+        })

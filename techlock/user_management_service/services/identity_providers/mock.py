@@ -25,3 +25,6 @@ class MockIdp(IdpProvider):
 
     def delete_user(self, current_user: AuthInfo, user: User):
         logger.info("delete_user")
+
+    def change_password(self, current_user: AuthInfo, user: User, new_password: str):
+        logger.info("change_password")

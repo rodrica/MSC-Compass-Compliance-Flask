@@ -1,3 +1,4 @@
+import json
 import logging
 
 from flask.views import MethodView
@@ -6,18 +7,21 @@ from flask_smorest import Blueprint
 
 from techlock.common.api import (
     BadRequestException, ConflictException, NotFoundException,
-    PageableQueryParametersSchema,
 )
 from techlock.common.api.jwt_authorization import (
     access_required,
     get_request_claims,
     can_access,
 )
+from techlock.common.config import AuthInfo
+from techlock.common.messaging import UserNotification, Level, publish_sns
 
 from ..services import get_idp
 from ..models import (
     User, UserSchema, UserPageableSchema,
+    UserListQueryParameters, UserListQueryParametersSchema,
     PostUserSchema,
+    PostUserChangePasswordSchema,
     USER_CLAIM_SPEC,
 )
 
@@ -33,20 +37,22 @@ class Users(MethodView):
         MethodView.__init__(self, *args, **kwargs)
         self.idp = get_idp()
 
-    @blp.arguments(PageableQueryParametersSchema, location='query')
+    @blp.arguments(UserListQueryParametersSchema, location='query')
     @blp.response(UserPageableSchema)
     @access_required(
         'read', 'users',
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
-    def get(self, args):
+    def get(self, query_params: UserListQueryParameters):
         current_user = get_current_user()
         claims = get_request_claims()
 
         pageable_resp = User.get_all(
             current_user,
-            limit=args.get('limit', 50),
-            start_key=args.get('start_key'),
+            cursor=query_params.cursor,
+            include_page_cursors=query_params.include_page_cursors,
+            limit=query_params.limit,
+            additional_conditions=query_params.get_filters(),
             claims=claims,
         )
 
@@ -59,9 +65,7 @@ class Users(MethodView):
     @blp.arguments(PostUserSchema)
     @blp.response(UserSchema, code=201)
     @access_required('create', 'users')
-    def post(self, data):
-        # TODO: Validate password strength
-
+    def post(self, data: dict):
         current_user = get_current_user()
         logger.info('Creating User', extra={'data': data})
 
@@ -91,19 +95,23 @@ class UserById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
         self.idp = get_idp()
 
+    def get_user(self, current_user: AuthInfo, user_id: str):
+        claims = get_request_claims()
+
+        user = User.get(current_user, user_id)
+        if user is None or not can_access(user, claims):
+            raise NotFoundException('No user found for id = {}'.format(user_id))
+
+        return user
+
     @blp.response(UserSchema)
     @access_required(
         'read', 'users',
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
-    def get(self, user_id):
+    def get(self, user_id: str):
         current_user = get_current_user()
-        claims = get_request_claims()
-
-        user = User.get(current_user, user_id)
-        # If no access, return 404
-        if user is None or not can_access(user, claims):
-            raise NotFoundException('No user found for id = {}'.format(user_id))
+        user = self.get_user(current_user, user_id)
 
         return user
 
@@ -113,15 +121,12 @@ class UserById(MethodView):
         'update', 'users',
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
-    def put(self, data, user_id):
+    def put(self, data: dict, user_id: str):
         current_user = get_current_user()
-        claims = get_request_claims()
         logger.debug('Updating User', extra={'data': data})
 
         User.validate(data, validate_required_fields=False)
-        user = User.get(current_user, user_id)
-        if user is None or not can_access(user, claims):
-            raise NotFoundException('No user found for id = {}'.format(user_id))
+        user = self.get_user(current_user, user_id)
 
         if user.email != data.get('email'):
             raise BadRequestException('Email can not be changed.')
@@ -144,13 +149,9 @@ class UserById(MethodView):
         'delete', 'users',
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
-    def delete(self, user_id):
+    def delete(self, user_id: str):
         current_user = get_current_user()
-        claims = get_request_claims()
-
-        user = User.get(current_user, user_id)
-        if user is None or not can_access(user, claims):
-            raise NotFoundException('No user found for id = {}'.format(user_id))
+        user = self.get_user(current_user, user_id)
 
         self.idp.delete_user(current_user, user)
         logger.info('Deleted user from userpool')
@@ -159,3 +160,29 @@ class UserById(MethodView):
         logger.info('Deleted user', extra={'user': user.asdict()})
 
         return
+
+
+@blp.route('/<user_id>/change_password')
+class UserChangePassword(MethodView):
+
+    def __init__(self, *args, **kwargs):
+        MethodView.__init__(self, *args, **kwargs)
+        self.idp = get_idp()
+
+    @blp.arguments(PostUserChangePasswordSchema)
+    @blp.response()
+    def post(self, data: dict, user_id: str):
+        current_user = get_current_user()
+        user = self.get_user(current_user, user_id)
+
+        self.idp.change_password(current_user, user, data.get('new_password'))
+
+        publish_sns(UserNotification(
+            subject='Password Changed',
+            message=json.dumps({
+                'changed_by': current_user.user_id
+            }),
+            created_by='user-management-service',
+            tenant_id=current_user.tenant_id,
+            level=Level.warning,
+        ))

@@ -9,7 +9,7 @@ services:
     ports:
       - 8000
   jwt:
-    image: registry.gitlab.com/techlock/mock-jwt-service:master_fdd0e2e320a64bd4bc679786db047511282217a1
+    image: registry.gitlab.com/techlock/mock-jwt-service:master_db19813762b2309bc71cb3f539b51acefbc7c74a
     environment:
       FLASK_JWT_IDENTITY_CLAIM: sub
       FLASK_JWT_USER_CLAIMS: claims

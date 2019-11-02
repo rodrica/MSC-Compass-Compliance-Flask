@@ -21,3 +21,6 @@ class IdpProvider():
 
     def delete_user(self, current_user: AuthInfo, user: User):
         pass
+
+    def change_password(self, current_user: AuthInfo, user: User):
+        pass

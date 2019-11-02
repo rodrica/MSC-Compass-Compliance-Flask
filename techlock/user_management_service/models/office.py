@@ -1,11 +1,16 @@
+import marshmallow as ma
 import marshmallow.fields as mf
 from boto3.dynamodb.conditions import Attr
-from decimal import Decimal
 from dataclasses import dataclass
+from decimal import Decimal
 from typing import ClassVar, Dict, List
 
+from techlock.common.api import (
+    ClaimSpec,
+    PageableResponse, PageableResponseBaseSchema,
+    PageableQueryParameters, PageableQueryParametersSchema,
+)
 
-from techlock.common.api import ClaimSpec, PageableResponse, PageableResponseBaseSchema
 from techlock.common.config import AuthInfo
 from techlock.common.orm.dynamodb import (
     NO_DEFAULT,
@@ -19,6 +24,8 @@ __all__ = [
     'Office',
     'OfficeSchema',
     'OfficePageableSchema',
+    'OfficeListQueryParameters',
+    'OfficeListQueryParametersSchema',
     'OFFICE_CLAIM_SPEC',
 ]
 
@@ -52,6 +59,19 @@ class OfficeSchema(PersistedObjectSchema):
     department_ids = mf.List(mf.String(), allow_none=True)
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
+
+
+class OfficeListQueryParametersSchema(PageableQueryParametersSchema):
+    name = mf.String(allow_none=True, description='Used to filter offices by name prefix.')
+    city = mf.String(allow_none=True, description='Used to filter offices by city prefix.')
+    state = mf.String(allow_none=True, description='Used to filter offices by state prefix.')
+    country = mf.String(allow_none=True, description='Used to filter offices by country prefix.')
+
+    department_ids = mf.String(allow_none=True, description='Used to filter offices by department_ids. Comma delimited list of exact ids.')
+
+    @ma.post_load
+    def make_object(self, data, **kwargs):
+        return OfficeListQueryParameters(**data)
 
 
 class OfficePageableSchema(PageableResponseBaseSchema):
@@ -100,3 +120,27 @@ class Office(PersistedObject):
 
         data = Office.get_all(auth_info, additional_attrs=attrs)
         return data
+
+
+@dataclass
+class OfficeListQueryParameters(PageableQueryParameters):
+    name: str = None
+    city: str = None
+    state: str = None
+    country: str = None
+
+    department_ids: str = None
+
+    def get_filters(self):
+        ddb_attrs = list()
+
+        for attr in ('name', 'city', 'state', 'country'):
+            if getattr(self, attr, None) is not None:
+                ddb_attrs.append(Attr(attr).begins_with(getattr(self, attr)))
+
+        if self.department_ids is not None:
+            values = self.department_ids.split(',')
+            for v in values:
+                ddb_attrs.append(Attr(attr).contains(v))
+
+        return ddb_attrs

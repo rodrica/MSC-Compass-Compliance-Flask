@@ -1,4 +1,4 @@
-import os
+from techlock.common import ConfigManager
 
 from .auth0 import Auth0Idp
 from .cognito import CognitoIdp
@@ -13,7 +13,7 @@ _idp_map = {
 
 def get_idp(idp_name=None):
     if idp_name is None:
-        idp_name = os.environ.get('IDP_NAME', 'MOCK')
+        idp_name = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.name', 'MOCK')
 
     idp_class = _idp_map.get(idp_name.upper())
     if idp_class is None:

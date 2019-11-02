@@ -6,7 +6,6 @@ from flask_smorest import Blueprint
 
 from techlock.common.api import (
     BadRequestException, NotFoundException,
-    PageableQueryParametersSchema,
 )
 from techlock.common.api.jwt_authorization import (
     access_required,
@@ -16,6 +15,7 @@ from techlock.common.api.jwt_authorization import (
 
 from ..models import (
     Role, RoleSchema, RolePageableSchema,
+    RoleListQueryParameters, RoleListQueryParametersSchema,
     ROLE_CLAIM_SPEC,
 )
 
@@ -27,20 +27,22 @@ blp = Blueprint('roles', __name__, url_prefix='/roles')
 @blp.route('')
 class Roles(MethodView):
 
-    @blp.arguments(PageableQueryParametersSchema, location='query')
+    @blp.arguments(RoleListQueryParametersSchema, location='query')
     @blp.response(RolePageableSchema)
     @access_required(
         'read', 'roles',
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
     )
-    def get(self, args):
+    def get(self, query_params: RoleListQueryParameters):
         current_user = get_current_user()
         claims = get_request_claims()
 
         pageable_resp = Role.get_all(
             current_user,
-            limit=args.get('limit', 50),
-            start_key=args.get('start_key'),
+            cursor=query_params.cursor,
+            include_page_cursors=query_params.include_page_cursors,
+            limit=query_params.limit,
+            additional_conditions=query_params.get_filters(),
             claims=claims,
         )
 

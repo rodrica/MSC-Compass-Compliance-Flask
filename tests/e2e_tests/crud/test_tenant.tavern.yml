@@ -36,8 +36,10 @@ stages:
       status_code: 200
       body:
         items: []
-        last_key: null
         num_items: 0
+        cursor: null
+        page_cursors: null
+        total_items: 0
 
   - name: Create Tenant
     request:
