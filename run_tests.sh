@@ -72,6 +72,7 @@ main() {
             fi
         fi
         if [ "$ALL" == true ] || [ "$E2E" == true ]; then
+            run_cmd "sleep 10 && flask db upgrade"
             run_tests "--tavern-beta-new-traceback tests/e2e_tests"
             ret=$?
 

@@ -1,24 +1,22 @@
 import marshmallow as ma
 import marshmallow.fields as mf
-from boto3.dynamodb.conditions import Attr
 from dataclasses import dataclass
-from decimal import Decimal
-from typing import ClassVar, Dict, List
+from sqlalchemy import func as sa_fn
+from sqlalchemy.dialects.postgresql import JSONB, UUID
 
 from techlock.common.api import (
     ClaimSpec,
-    PageableResponse, PageableResponseBaseSchema,
-    PageableQueryParameters, PageableQueryParametersSchema,
+    OffsetPageableResponseBaseSchema,
+    OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
 )
-
 from techlock.common.config import AuthInfo
-from techlock.common.orm.dynamodb import (
-    NO_DEFAULT,
-    PersistedObject,
-    PersistedObjectSchema,
+from techlock.common.orm.sqlalchemy import (
+    db,
+    BaseModel, BaseModelSchema,
+    get_string_filter,
 )
 
-from .department import Department
+from .department import Department, DepartmentSchema
 
 __all__ = [
     'Office',
@@ -42,7 +40,7 @@ OFFICE_CLAIM_SPEC = ClaimSpec(
 )
 
 
-class OfficeSchema(PersistedObjectSchema):
+class OfficeSchema(BaseModelSchema):
     name = mf.String()
     description = mf.String(allow_none=True)
 
@@ -56,12 +54,12 @@ class OfficeSchema(PersistedObjectSchema):
     latitude = mf.Decimal(allow_none=True)
     longitude = mf.Decimal(allow_none=True)
 
-    department_ids = mf.List(mf.String(), allow_none=True)
+    departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
 
-class OfficeListQueryParametersSchema(PageableQueryParametersSchema):
+class OfficeListQueryParametersSchema(OffsetPageableQueryParametersSchema):
     name = mf.String(allow_none=True, description='Used to filter offices by name prefix.')
     city = mf.String(allow_none=True, description='Used to filter offices by city prefix.')
     state = mf.String(allow_none=True, description='Used to filter offices by state prefix.')
@@ -74,56 +72,44 @@ class OfficeListQueryParametersSchema(PageableQueryParametersSchema):
         return OfficeListQueryParameters(**data)
 
 
-class OfficePageableSchema(PageableResponseBaseSchema):
+class OfficePageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(OfficeSchema, many=True, dump_only=True)
 
 
-@dataclass
-class Office(PersistedObject):
-    table: ClassVar[str] = 'offices'
+offices_to_departments = db.Table(
+    'offices_to_departments',
+    db.Column('office_id', UUID(as_uuid=True), db.ForeignKey('offices.id'), primary_key=True),
+    db.Column('department_id', UUID(as_uuid=True), db.ForeignKey('departments.id'), primary_key=True)
+)
 
-    name: str = NO_DEFAULT
-    description: str = None
-    street1: str = None
-    street2: str = None
-    street3: str = None
-    city: str = None
-    state: str = None
-    country: str = None
-    postal_code: str = None
-    latitude: Decimal = None
-    longitude: Decimal = None
 
-    department_ids: List[str] = None
+class Office(BaseModel):
+    __tablename__ = 'offices'
 
-    tags: Dict[str, str] = None
+    name = db.Column(db.String, unique=False, nullable=False)
+    description = db.Column(db.String, unique=False, nullable=True)
+    street1 = db.Column(db.String, unique=False, nullable=True)
+    street2 = db.Column(db.String, unique=False, nullable=True)
+    street3 = db.Column(db.String, unique=False, nullable=True)
+    city = db.Column(db.String, unique=False, nullable=True)
+    state = db.Column(db.String, unique=False, nullable=True)
+    country = db.Column(db.String, unique=False, nullable=True)
+    postal_code = db.Column(db.String, unique=False, nullable=True)
+    latitude = db.Column(db.DECIMAL(precision=12), unique=False, nullable=True)
+    longitude = db.Column(db.DECIMAL(precision=12), unique=False, nullable=True)
 
-    def __post_init__(self):
-        super(Office, self).__post_init__()
-        if self.latitude and not isinstance(self.latitude, Decimal):
-            self.latitude = Decimal("{}".format(self.latitude))
-        if self.longitude and not isinstance(self.longitude, Decimal):
-            self.longitude = Decimal("{}".format(self.longitude))
+    departments = db.relationship(
+        'Department',
+        secondary=offices_to_departments,
+        lazy='subquery',
+        backref=db.backref('offices', lazy=True)
+    )
 
-    def get_departments(self, auth_info: AuthInfo):
-        '''Lazy load Departments'''
-        data = PageableResponse()
-        if self.department_ids:
-            data = Department.get_all(auth_info, ids=self.department_ids)
-        return data
-
-    @classmethod
-    def get_by_department_id(cls, auth_info: AuthInfo, department_id):
-        attrs = [
-            Attr('department_ids').contains(department_id)
-        ]
-
-        data = Office.get_all(auth_info, additional_attrs=attrs)
-        return data
+    tags = db.Column(JSONB, nullable=True)
 
 
 @dataclass
-class OfficeListQueryParameters(PageableQueryParameters):
+class OfficeListQueryParameters(OffsetPageableQueryParameters):
     name: str = None
     city: str = None
     state: str = None
@@ -131,16 +117,16 @@ class OfficeListQueryParameters(PageableQueryParameters):
 
     department_ids: str = None
 
-    def get_filters(self):
-        ddb_attrs = list()
+    def get_filters(self, auth_info: AuthInfo):
+        filters = list()
 
-        for attr in ('name', 'city', 'state', 'country'):
-            if getattr(self, attr, None) is not None:
-                ddb_attrs.append(Attr(attr).begins_with(getattr(self, attr)))
+        for field_name in ('name', 'city', 'state', 'country'):
+            value = getattr(self, field_name, None)
+            if value is not None:
+                filters.append(get_string_filter(sa_fn.lower(getattr(Office, field_name)), value))
 
-        if self.department_ids is not None:
-            values = self.department_ids.split(',')
-            for v in values:
-                ddb_attrs.append(Attr(attr).contains(v))
+        if self.department_id:
+            deparment = Department.get(auth_info, self.department_id, raise_if_not_found=True)
+            filters.append(Office.deparments.contains(deparment))
 
-        return ddb_attrs
+        return filters

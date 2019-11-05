@@ -1,7 +1,7 @@
 include .env
 export
 
-clean:
+clean: 
 # 	Remove __pycache__ and .pytest_cache folders
 	@echo "Cleaning project"
 	@py3clean .

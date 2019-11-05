@@ -49,10 +49,9 @@ class Users(MethodView):
 
         pageable_resp = User.get_all(
             current_user,
-            cursor=query_params.cursor,
-            include_page_cursors=query_params.include_page_cursors,
+            offset=query_params.offset,
             limit=query_params.limit,
-            additional_conditions=query_params.get_filters(),
+            additional_filters=query_params.get_filters(current_user),
             claims=claims,
         )
 
@@ -72,7 +71,7 @@ class Users(MethodView):
         data['entity_id'] = data.get('email')
         # Get the password and remove it from the data. It is not part of the User object
         temporary_password = data.pop('temporary_password')
-        User.validate(data)
+        # User.validate(data)
         user = User.get(current_user, data['entity_id'])
         if user is not None:
             raise ConflictException('User with email = {} already exists.'.format(data['entity_id']))
@@ -125,7 +124,7 @@ class UserById(MethodView):
         current_user = get_current_user()
         logger.debug('Updating User', extra={'data': data})
 
-        User.validate(data, validate_required_fields=False)
+        # User.validate(data, validate_required_fields=False)
         user = self.get_user(current_user, user_id)
 
         if user.email != data.get('email'):
@@ -157,7 +156,7 @@ class UserById(MethodView):
         logger.info('Deleted user from userpool')
 
         user.delete(current_user)
-        logger.info('Deleted user', extra={'user': user.asdict()})
+        logger.info('Deleted user', extra={'user': user.entity_id})
 
         return
 

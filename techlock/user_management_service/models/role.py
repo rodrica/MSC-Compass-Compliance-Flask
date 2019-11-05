@@ -1,18 +1,19 @@
 import marshmallow as ma
 import marshmallow.fields as mf
-from boto3.dynamodb.conditions import Attr
 from dataclasses import dataclass
-from typing import ClassVar, Dict, List
+from sqlalchemy import func as sa_fn
+from sqlalchemy.dialects.postgresql import JSONB
 
 from techlock.common.api import (
     ClaimSpec,
-    PageableResponseBaseSchema,
-    PageableQueryParameters, PageableQueryParametersSchema,
+    OffsetPageableResponseBaseSchema,
+    OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
 )
-from techlock.common.orm.dynamodb import (
-    NO_DEFAULT,
-    PersistedObject,
-    PersistedObjectSchema,
+from techlock.common.config import AuthInfo
+from techlock.common.orm.sqlalchemy import (
+    db,
+    BaseModel, BaseModelSchema,
+    get_string_filter,
 )
 
 __all__ = [
@@ -37,7 +38,7 @@ ROLE_CLAIM_SPEC = ClaimSpec(
 )
 
 
-class RoleSchema(PersistedObjectSchema):
+class RoleSchema(BaseModelSchema):
     name = mf.String()
     description = mf.String(allow_none=True)
 
@@ -50,11 +51,11 @@ class RoleSchema(PersistedObjectSchema):
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
 
-class RolePageableSchema(PageableResponseBaseSchema):
+class RolePageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(RoleSchema, many=True, dump_only=True)
 
 
-class RoleListQueryParametersSchema(PageableQueryParametersSchema):
+class RoleListQueryParametersSchema(OffsetPageableQueryParametersSchema):
     name = mf.String(allow_none=True, description='Used to filter roles by name prefix.')
 
     @ma.post_load
@@ -62,26 +63,24 @@ class RoleListQueryParametersSchema(PageableQueryParametersSchema):
         return RoleListQueryParameters(**data)
 
 
-@dataclass
-class Role(PersistedObject):
-    table: ClassVar[str] = 'roles'
+class Role(BaseModel):
+    __tablename__ = 'roles'
 
-    name: str = NO_DEFAULT
-    description: str = None
+    name = db.Column(db.String, unique=False, nullable=False)
+    description = db.Column(db.String, unique=False, nullable=True)
 
-    claims_by_audience: Dict[str, List[str]] = None
-
-    tags: Dict[str, str] = None
+    claims_by_audience = db.Column(JSONB, nullable=True)
+    tags = db.Column(JSONB, nullable=True)
 
 
 @dataclass
-class RoleListQueryParameters(PageableQueryParameters):
+class RoleListQueryParameters(OffsetPageableQueryParameters):
     name: str = None
 
-    def get_filters(self):
-        ddb_attrs = list()
+    def get_filters(self, auth_info: AuthInfo):
+        filters = list()
 
         if self.name is not None:
-            ddb_attrs.append(Attr('name').begins_with(self.name))
+            filters.append(get_string_filter(sa_fn.lower(Role.name), self.name))
 
-        return ddb_attrs
+        return filters

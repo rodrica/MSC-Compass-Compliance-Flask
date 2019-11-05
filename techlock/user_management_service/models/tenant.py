@@ -1,18 +1,19 @@
 import marshmallow as ma
 import marshmallow.fields as mf
-from boto3.dynamodb.conditions import Attr
 from dataclasses import dataclass
-from typing import ClassVar, Dict
+from sqlalchemy import func as sa_fn
+from sqlalchemy.dialects.postgresql import JSONB
 
 from techlock.common.api import (
     ClaimSpec,
-    PageableResponseBaseSchema,
-    PageableQueryParameters, PageableQueryParametersSchema,
+    OffsetPageableResponseBaseSchema,
+    OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
 )
-from techlock.common.orm.dynamodb import (
-    NO_DEFAULT,
-    PersistedObject,
-    PersistedObjectSchema,
+from techlock.common.config import AuthInfo
+from techlock.common.orm.sqlalchemy import (
+    db,
+    BaseModel, BaseModelSchema,
+    get_string_filter,
 )
 
 __all__ = [
@@ -37,18 +38,18 @@ TENANT_CLAIM_SPEC = ClaimSpec(
 )
 
 
-class TenantSchema(PersistedObjectSchema):
+class TenantSchema(BaseModelSchema):
     name = mf.String()
     description = mf.String(allow_none=True)
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
 
-class TenantPageableSchema(PageableResponseBaseSchema):
+class TenantPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(TenantSchema, many=True, dump_only=True)
 
 
-class TenantListQueryParametersSchema(PageableQueryParametersSchema):
+class TenantListQueryParametersSchema(OffsetPageableQueryParametersSchema):
     name = mf.String(allow_none=True, description='Used to filter tenants by name prefix.')
 
     @ma.post_load
@@ -56,24 +57,23 @@ class TenantListQueryParametersSchema(PageableQueryParametersSchema):
         return TenantListQueryParameters(**data)
 
 
+class Tenant(BaseModel):
+    __tablename__ = 'tenants'
+
+    name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=True)
+
+    tags = db.Column(JSONB, nullable=True)
+
+
 @dataclass
-class Tenant(PersistedObject):
-    table: ClassVar[str] = 'tenants'
-
-    name: str = NO_DEFAULT
-    description: str = None
-
-    tags: Dict[str, str] = None
-
-
-@dataclass
-class TenantListQueryParameters(PageableQueryParameters):
+class TenantListQueryParameters(OffsetPageableQueryParameters):
     name: str = None
 
-    def get_filters(self):
-        ddb_attrs = list()
+    def get_filters(self, auth_info: AuthInfo):
+        filters = list()
 
         if self.name is not None:
-            ddb_attrs.append(Attr('name').begins_with(self.name))
+            filters.append(get_string_filter(sa_fn.lower(Tenant.name), self.name))
 
-        return ddb_attrs
+        return filters

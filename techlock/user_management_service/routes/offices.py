@@ -39,10 +39,9 @@ class Offices(MethodView):
 
         pageable_resp = Office.get_all(
             current_user,
-            cursor=query_params.cursor,
-            include_page_cursors=query_params.include_page_cursors,
+            offset=query_params.offset,
             limit=query_params.limit,
-            additional_conditions=query_params.get_filters(),
+            additional_filters=query_params.get_filters(current_user),
             claims=claims,
         )
 
@@ -59,7 +58,7 @@ class Offices(MethodView):
         current_user = get_current_user()
         logger.info('Creating Office', extra={'data': data})
 
-        Office.validate(data)
+        # Office.validate(data)
         office = Office(**data)
         office.save(current_user)
 
@@ -96,7 +95,7 @@ class OfficeById(MethodView):
         claims = get_request_claims()
         logger.debug('Updating Office', extra={'data': data})
 
-        Office.validate(data, validate_required_fields=False)
+        # Office.validate(data, validate_required_fields=False)
         office = Office.get(current_user, office_id)
         if office is None or not can_access(office, claims):
             raise NotFoundException('No office found for id = {}'.format(office_id))

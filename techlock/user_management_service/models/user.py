@@ -1,23 +1,24 @@
 import marshmallow as ma
 import marshmallow.fields as mf
-from boto3.dynamodb.conditions import Attr
 from dataclasses import dataclass
-from typing import ClassVar, Dict, List
+from sqlalchemy import func as sa_fn
+from sqlalchemy.dialects.postgresql import JSONB, UUID
 
 from techlock.common.api import (
     ClaimSpec,
-    PageableResponse, PageableResponseBaseSchema,
-    PageableQueryParameters, PageableQueryParametersSchema,
+    OffsetPageableResponseBaseSchema,
+    OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
 )
 from techlock.common.config import AuthInfo
-from techlock.common.orm.dynamodb import (
-    NO_DEFAULT,
-    PersistedObject,
-    PersistedObjectSchema,
+from techlock.common.orm.sqlalchemy import (
+    db,
+    BaseModel, BaseModelSchema,
+    get_string_filter,
 )
 
-from .department import Department
-from .office import Office
+from .department import Department, DepartmentSchema
+from .office import Office, OfficeSchema
+from .role import Role, RoleSchema
 
 __all__ = [
     'User',
@@ -56,14 +57,14 @@ USER_CLAIM_SPEC = ClaimSpec(
 )
 
 
-class UserSchema(PersistedObjectSchema):
+class UserSchema(BaseModelSchema):
     email = mf.String(required=True)
     name = mf.String(required=True)
     family_name = mf.String()
 
-    role_ids = mf.List(mf.String(), allow_none=True)
-    department_ids = mf.List(mf.String(), allow_none=True)
-    office_ids = mf.List(mf.String(), allow_none=True)
+    roles = mf.Nested(RoleSchema, allow_none=True, many=True)
+    departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
+    offices = mf.Nested(OfficeSchema, allow_none=True, many=True)
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
@@ -82,7 +83,7 @@ class PostUserChangePasswordSchema(ma.Schema):
     new_password = mf.String(required=True)
 
 
-class UserListQueryParametersSchema(PageableQueryParametersSchema):
+class UserListQueryParametersSchema(OffsetPageableQueryParametersSchema):
     email = mf.String(allow_none=True, description='Used to filter users by email prefix.')
     name = mf.String(allow_none=True, description='Used to filter users by name prefix.')
     family_name = mf.String(allow_none=True, description='Used to filter users by family_name prefix.')
@@ -96,81 +97,86 @@ class UserListQueryParametersSchema(PageableQueryParametersSchema):
         return UserListQueryParameters(**data)
 
 
-class UserPageableSchema(PageableResponseBaseSchema):
+class UserPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(UserSchema, many=True, dump_only=True)
 
 
-@dataclass
-class User(PersistedObject):
-    table: ClassVar[str] = 'users'
-    # We'll be using the Cognito User Id as entity id.
-    is_entity_id_required: ClassVar[bool] = True
+users_to_roles = db.Table(
+    'users_to_roles',
+    db.Column('user_id', db.String, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('role_id', UUID(as_uuid=True), db.ForeignKey('roles.id'), primary_key=True)
+)
+users_to_departments = db.Table(
+    'users_to_departments',
+    db.Column('user_id', db.String, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('department_id', UUID(as_uuid=True), db.ForeignKey('departments.id'), primary_key=True)
+)
+users_to_offices = db.Table(
+    'users_to_offices',
+    db.Column('user_id', db.String, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('office_id', UUID(as_uuid=True), db.ForeignKey('offices.id'), primary_key=True)
+)
 
-    email: str = NO_DEFAULT
-    name: str = NO_DEFAULT
-    family_name: str = NO_DEFAULT
 
-    role_ids: List[str] = None
-    department_ids: List[str] = None
-    office_ids: List[str] = None
-    claims_by_audience: Dict[str, List[str]] = None
+class User(BaseModel):
+    __tablename__ = 'users'
 
-    tags: Dict[str, str] = None
+    entity_id = db.Column('id', db.String, primary_key=True)
+    email = db.Column(db.String, unique=False, nullable=False)
+    name = db.Column(db.String, unique=False, nullable=False)
+    family_name = db.Column(db.String, unique=False, nullable=False)
 
-    def get_departments(self, auth_info: AuthInfo):
-        '''Lazy load Departments'''
-        data = PageableResponse()
-        if self.department_ids:
-            data = Department.get_all(auth_info, ids=self.department_ids)
-        return data
+    roles = db.relationship(
+        'Role',
+        secondary=users_to_roles,
+        lazy='subquery',
+        backref=db.backref('users', lazy=True)
+    )
+    departments = db.relationship(
+        'Department',
+        secondary=users_to_departments,
+        lazy='subquery',
+        backref=db.backref('users', lazy=True)
+    )
+    offices = db.relationship(
+        'Office',
+        secondary=users_to_offices,
+        lazy='subquery',
+        backref=db.backref('users', lazy=True)
+    )
 
-    @classmethod
-    def get_by_department_id(cls, auth_info: AuthInfo, department_id):
-        attrs = [
-            Attr('department_ids').contains(department_id)
-        ]
-
-        data = User.get_all(auth_info, additional_attrs=attrs)
-        return data
-
-    def get_offices(self, auth_info: AuthInfo):
-        '''Lazy load Offices'''
-        data = PageableResponse()
-        if self.office_ids:
-            data = Office.get_all(auth_info, ids=self.office_ids)
-        return data
-
-    @classmethod
-    def get_by_office_id(cls, auth_info: AuthInfo, office_id):
-        attrs = [
-            Attr('office_ids').contains(office_id)
-        ]
-
-        data = User.get_all(auth_info, additional_attrs=attrs)
-        return data
+    claims_by_audience = db.Column(JSONB, nullable=True)
+    tags = db.Column(JSONB, nullable=True)
 
 
 @dataclass
-class UserListQueryParameters(PageableQueryParameters):
+class UserListQueryParameters(OffsetPageableQueryParameters):
     email: str = None
     name: str = None
     family_name: str = None
 
-    role_ids: str = None
-    department_ids: str = None
-    office_ids: str = None
+    role_id: str = None
+    department_id: str = None
+    office_id: str = None
 
-    def get_filters(self):
-        ddb_attrs = list()
+    def get_filters(self, auth_info: AuthInfo):
+        filters = list()
 
-        for attr in ('email', 'name', 'family_name'):
-            if getattr(self, attr, None) is not None:
-                ddb_attrs.append(Attr(attr).begins_with(getattr(self, attr)))
+        for field_name in ('email', 'name', 'family_name'):
+            value = getattr(self, field_name, None)
+            if value is not None:
+                filters.append(get_string_filter(sa_fn.lower(getattr(User, field_name)), value))
 
-        for attr in ('role_ids', 'department_ids', 'office_ids'):
-            if getattr(self, attr, None) is not None:
-                values = getattr(self, attr).split(',')
-                for v in values:
-                    ddb_attrs.append(Attr(attr).contains(v))
+        if self.role_id:
+            role = Role.get(auth_info, self.role_id, raise_if_not_found=True)
+            filters.append(User.roles.contains(role))
 
-        return ddb_attrs
+        if self.department_id:
+            deparment = Department.get(auth_info, self.department_id, raise_if_not_found=True)
+            filters.append(User.deparments.contains(deparment))
+
+        if self.office_id:
+            office = Office.get(auth_info, self.office_id, raise_if_not_found=True)
+            filters.append(User.offices.contains(office))
+
+        return filters

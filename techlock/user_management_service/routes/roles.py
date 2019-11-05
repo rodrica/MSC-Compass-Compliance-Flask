@@ -39,10 +39,9 @@ class Roles(MethodView):
 
         pageable_resp = Role.get_all(
             current_user,
-            cursor=query_params.cursor,
-            include_page_cursors=query_params.include_page_cursors,
+            offset=query_params.offset,
             limit=query_params.limit,
-            additional_conditions=query_params.get_filters(),
+            additional_filters=query_params.get_filters(current_user),
             claims=claims,
         )
 
@@ -59,7 +58,7 @@ class Roles(MethodView):
         current_user = get_current_user()
         logger.info('Creating Role', extra={'data': data})
 
-        Role.validate(data)
+        # Role.validate(data)
         role = Role(**data)
         role.save(current_user)
 
@@ -96,7 +95,7 @@ class RoleById(MethodView):
         claims = get_request_claims()
         logger.debug('Updating Role', extra={'data': data})
 
-        Role.validate(data, validate_required_fields=False)
+        # Role.validate(data, validate_required_fields=False)
         role = Role.get(current_user, role_id)
         if role is None or not can_access(role, claims):
             raise NotFoundException('No role found for id = {}'.format(role_id))

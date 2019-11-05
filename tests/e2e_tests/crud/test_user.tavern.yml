@@ -18,7 +18,6 @@ stages:
           - tenant1:admin
         claims:
           - allow:tenant1:user-management:*:users:*
-          - deny:tenant1:user-management:*:users:denied_user
     response:
       status_code: 200
       save:
@@ -37,8 +36,6 @@ stages:
       body:
         items: []
         num_items: 0
-        cursor: null
-        page_cursors: null
         total_items: 0
 
   - name: Create User
@@ -57,26 +54,23 @@ stages:
       status_code: 201
       body:
         $ext:
-          function: techlock.common.unittest.tavern_validators:validate_persisted_object
+          function: techlock.common.unittest.tavern_validators:validate_base_model
           extra_kwargs:
             expected:
               name: Test
               family_name: e2e
               email: test2@test.com
-              department_ids: null
-              office_ids: null
-              role_ids: null
+              departments: []
+              offices: []
+              roles: []
               claims_by_audience: null
               tenant_id: tenant1
-              is_latest: true
-              is_active: true
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
       save:
         body:
           created_id: entity_id
-          created_version: version
 
   - name: Get User
     request:
@@ -89,20 +83,18 @@ stages:
       status_code: 200
       body:
         $ext:
-          function: techlock.common.unittest.tavern_validators:validate_persisted_object
+          function: techlock.common.unittest.tavern_validators:validate_base_model
           extra_kwargs:
             expected:
               entity_id: "{created_id}"
               name: Test
               family_name: e2e
               email: test2@test.com
-              department_ids: null
-              office_ids: null
-              role_ids: null
+              departments: []
+              offices: []
+              roles: []
               claims_by_audience: null
               tenant_id: tenant1
-              is_latest: true
-              is_active: true
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
@@ -122,27 +114,21 @@ stages:
       status_code: 200
       body:
         $ext:
-          function: techlock.common.unittest.tavern_validators:validate_persisted_object
+          function: techlock.common.unittest.tavern_validators:validate_base_model
           extra_kwargs:
             expected:
               entity_id: "{created_id}"
               name: Test
               family_name: e2e_new
               email: test2@test.com
-              department_ids: null
-              office_ids: null
-              role_ids: null
+              departments: []
+              offices: []
+              roles: []
               claims_by_audience: null
               tenant_id: tenant1
-              is_latest: true
-              is_active: true
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
-              previous_version: "{created_version}"
-      save:
-        body:
-          updated_version: version
 
   - name: Delete User
     request:
@@ -166,6 +152,4 @@ stages:
       body:
         items: []
         num_items: 0
-        cursor: null
-        page_cursors: null
         total_items: 0

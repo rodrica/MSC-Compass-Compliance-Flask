@@ -40,10 +40,9 @@ class Departments(MethodView):
 
         pageable_resp = Department.get_all(
             current_user,
-            cursor=query_params.cursor,
-            include_page_cursors=query_params.include_page_cursors,
+            offset=query_params.offset,
             limit=query_params.limit,
-            additional_conditions=query_params.get_filters(),
+            additional_filters=query_params.get_filters(current_user),
             claims=claims,
         )
 
@@ -60,7 +59,7 @@ class Departments(MethodView):
         current_user = get_current_user()
         logger.info('Creating Department', extra={'data': data})
 
-        Department.validate(data)
+        # Department.validate(data)
         department = Department(**data)
         department.save(current_user)
 
@@ -97,7 +96,7 @@ class DepartmentById(MethodView):
         claims = get_request_claims()
         logger.debug('Updating Department', extra={'data': data})
 
-        Department.validate(data, validate_required_fields=False)
+        # Department.validate(data, validate_required_fields=False)
         department = Department.get(current_user, department_id)
         if department is None or not can_access(department, claims):
             raise NotFoundException('No department found for id = {}'.format(department_id))
