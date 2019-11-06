@@ -8,6 +8,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
     OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
+    SortableQueryParameters, SortableQueryParametersSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -59,7 +60,7 @@ class OfficeSchema(BaseModelSchema):
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
 
-class OfficeListQueryParametersSchema(OffsetPageableQueryParametersSchema):
+class OfficeListQueryParametersSchema(OffsetPageableQueryParametersSchema, SortableQueryParametersSchema):
     name = mf.String(allow_none=True, description='Used to filter offices by name prefix.')
     city = mf.String(allow_none=True, description='Used to filter offices by city prefix.')
     state = mf.String(allow_none=True, description='Used to filter offices by state prefix.')
@@ -109,7 +110,7 @@ class Office(BaseModel):
 
 
 @dataclass
-class OfficeListQueryParameters(OffsetPageableQueryParameters):
+class OfficeListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
     name: str = None
     city: str = None
     state: str = None

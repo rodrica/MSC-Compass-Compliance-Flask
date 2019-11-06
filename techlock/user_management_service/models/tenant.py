@@ -8,6 +8,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
     OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
+    SortableQueryParameters, SortableQueryParametersSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -49,7 +50,7 @@ class TenantPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(TenantSchema, many=True, dump_only=True)
 
 
-class TenantListQueryParametersSchema(OffsetPageableQueryParametersSchema):
+class TenantListQueryParametersSchema(OffsetPageableQueryParametersSchema, SortableQueryParametersSchema):
     name = mf.String(allow_none=True, description='Used to filter tenants by name prefix.')
 
     @ma.post_load
@@ -67,7 +68,7 @@ class Tenant(BaseModel):
 
 
 @dataclass
-class TenantListQueryParameters(OffsetPageableQueryParameters):
+class TenantListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
     name: str = None
 
     def get_filters(self, auth_info: AuthInfo):

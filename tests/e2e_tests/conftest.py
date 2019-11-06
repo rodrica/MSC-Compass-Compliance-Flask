@@ -112,7 +112,7 @@ def pytest_sessionfinish(session, exitstatus):
     print()
     print('========= Cleaning up local dynamodb =========')
     _flush_local_dynamodb(create=False)
-    _flush_local_psql(create=False)
+    # _flush_local_psql(create=False)
     redis = InstanceManager().get_instance('', INSTANCE_TYPES.REDIS)
     redis.flushall()
     print('========= Finished cleaning up local dynamodb =========')

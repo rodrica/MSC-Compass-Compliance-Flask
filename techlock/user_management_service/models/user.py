@@ -8,6 +8,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
     OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
+    SortableQueryParameters, SortableQueryParametersSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -83,7 +84,7 @@ class PostUserChangePasswordSchema(ma.Schema):
     new_password = mf.String(required=True)
 
 
-class UserListQueryParametersSchema(OffsetPageableQueryParametersSchema):
+class UserListQueryParametersSchema(OffsetPageableQueryParametersSchema, SortableQueryParametersSchema):
     email = mf.String(allow_none=True, description='Used to filter users by email prefix.')
     name = mf.String(allow_none=True, description='Used to filter users by name prefix.')
     family_name = mf.String(allow_none=True, description='Used to filter users by family_name prefix.')
@@ -150,7 +151,7 @@ class User(BaseModel):
 
 
 @dataclass
-class UserListQueryParameters(OffsetPageableQueryParameters):
+class UserListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
     email: str = None
     name: str = None
     family_name: str = None

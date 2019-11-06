@@ -8,6 +8,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
     OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
+    SortableQueryParameters, SortableQueryParametersSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -49,7 +50,7 @@ class DepartmentPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(DepartmentSchema, many=True, dump_only=True)
 
 
-class DepartmentListQueryParametersSchema(OffsetPageableQueryParametersSchema):
+class DepartmentListQueryParametersSchema(OffsetPageableQueryParametersSchema, SortableQueryParametersSchema):
     name = mf.String(allow_none=True, description='Used to filter departments by name prefix.')
 
     @ma.post_load
@@ -67,7 +68,7 @@ class Department(BaseModel):
 
 
 @dataclass
-class DepartmentListQueryParameters(OffsetPageableQueryParameters):
+class DepartmentListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
     name: str = None
 
     def get_filters(self, auth_info: AuthInfo):

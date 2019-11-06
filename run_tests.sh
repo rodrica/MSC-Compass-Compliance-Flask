@@ -50,6 +50,15 @@ main() {
         # info "Completed with 'NO_CACHE=false'"
     else
         env
+        if [ "$INIT" == true ]; then
+            run_cmd "flask db upgrade"
+            run_cmd "python /app/tests/e2e_tests/conftest.py"
+            ret=$?
+            if [ $ret -ne 0 ]; then
+                exit $ret
+            fi
+        fi
+
         if [ "$ALL" == true ] || [ "$LINT" == true ]; then
             run_cmd "flake8"
             ret=$?
@@ -104,6 +113,10 @@ while (("$#")); do
   case "$1" in
     -a|--all)
       ALL=true
+      shift
+      ;;
+    --init)
+      INIT=true
       shift
       ;;
     -i|--integration)
