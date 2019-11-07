@@ -168,7 +168,6 @@ class User(BaseModel):
     tags = db.Column(JSONB, nullable=True)
 
 
-
 @dataclass
 class UserListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
     email: str = None
