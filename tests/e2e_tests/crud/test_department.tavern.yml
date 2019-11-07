@@ -1,5 +1,5 @@
 ---
-test_name: Users API CRUD Happy
+test_name: Department API CRUD Happy
 marks:
   - usefixtures:
       - flush_local_dynamodb
@@ -17,16 +17,16 @@ stages:
           - tenant1
           - tenant1:admin
         claims:
-          - allow:tenant1:user-management:*:users:*
+          - allow:tenant1:user-management:*:departments:*
     response:
       status_code: 200
       save:
         body:
           access_token: access_token
 
-  - name: Get all Users
+  - name: Get all Departments
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -38,18 +38,15 @@ stages:
         num_items: 0
         total_items: 0
 
-  - name: Create User
+  - name: Create Department
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: POST
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
-        name: Test
-        family_name: e2e
-        email: test2@test.com
-        temporary_password: changeme
+        name: Finance
     response:
       status_code: 201
       body:
@@ -57,13 +54,8 @@ stages:
           function: techlock.common.unittest.tavern_validators:validate_base_model
           extra_kwargs:
             expected:
-              name: Test
-              family_name: e2e
-              email: test2@test.com
-              departments: []
-              offices: []
-              roles: []
-              claims_by_audience: null
+              name: Finance
+              description: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
@@ -72,9 +64,9 @@ stages:
         body:
           created_id: entity_id
 
-  - name: Get User
+  - name: Get Department
     request:
-      url: http://app:5000/users/{created_id}
+      url: http://app:5000/departments/{created_id}
       method: GET
       headers:
         content-type: application/json
@@ -87,29 +79,22 @@ stages:
           extra_kwargs:
             expected:
               entity_id: "{created_id}"
-              name: Test
-              family_name: e2e
-              email: test2@test.com
-              departments: []
-              offices: []
-              roles: []
-              claims_by_audience: null
+              name: Finance
+              description: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
 
-  - name: Update User
+  - name: Update Department
     request:
-      url: http://app:5000/users/{created_id}
+      url: http://app:5000/departments/{created_id}
       method: PUT
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
-        name: Test
-        family_name: e2e_new
-        email: test2@test.com
+        name: HR
     response:
       status_code: 200
       body:
@@ -118,21 +103,16 @@ stages:
           extra_kwargs:
             expected:
               entity_id: "{created_id}"
-              name: Test
-              family_name: e2e_new
-              email: test2@test.com
-              departments: []
-              offices: []
-              roles: []
-              claims_by_audience: null
+              name: HR
+              description: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
 
-  - name: Delete User
+  - name: Delete Department
     request:
-      url: http://app:5000/users/{created_id}
+      url: http://app:5000/departments/{created_id}
       method: DELETE
       headers:
         content-type: application/json
@@ -140,9 +120,9 @@ stages:
     response:
       status_code: 204
 
-  - name: Get all Users - confirm deletion
+  - name: Get all Departments - confirm deletion
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -155,7 +135,7 @@ stages:
         total_items: 0
 
 ---
-test_name: Users API GET Happy
+test_name: Departments API GET Happy
 marks:
   - usefixtures:
       - flush_local_dynamodb
@@ -173,7 +153,7 @@ stages:
           - tenant1
           - tenant1:admin
         claims:
-          - allow:tenant1:user-management:*:users:*
+          - allow:tenant1:user-management:*:departments:*
     response:
       status_code: 200
       save:
@@ -193,16 +173,16 @@ stages:
           - tenant2
           - tenant2:admin
         claims:
-          - allow:tenant2:user-management:*:users:*
+          - allow:tenant2:user-management:*:departments:*
     response:
       status_code: 200
       save:
         body:
           access_token2: access_token
 
-  - name: Get all Users - tenant1
+  - name: Get all Departments - tenant1
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -214,9 +194,9 @@ stages:
         num_items: 0
         total_items: 0
 
-  - name: Get all Users - tenant2
+  - name: Get all Departments - tenant2
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -228,63 +208,54 @@ stages:
         num_items: 0
         total_items: 0
 
-  - name: Create User1 - tenant1
+  - name: Create Department1 - tenant1
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: POST
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
         name: Alpha
-        family_name: Foo
-        email: afoo@test.com
-        temporary_password: changeme
     response:
       status_code: 201
       save:
         body:
-          user1: entity_id
+          department1: entity_id
 
-  - name: Create User2 - tenant1
+  - name: Create Department2 - tenant1
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: POST
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
         name: Beta
-        family_name: Bar
-        email: bbar@example.com
-        temporary_password: changeme
     response:
       status_code: 201
       save:
         body:
-          user2: entity_id
+          department2: entity_id
 
-  - name: Create User3 - tenant2
+  - name: Create Department3 - tenant2
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: POST
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token2}"
       json:
         name: Zeta
-        family_name: Bar
-        email: zbar@example.com
-        temporary_password: changeme
     response:
       status_code: 201
       save:
         body:
-          user3: entity_id
+          department3: entity_id
 
-  - name: Get all Users - tenant1 - no filters
+  - name: Get all Departments - tenant1 - no filters
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -297,26 +268,16 @@ stages:
           extra_kwargs:
             expected:
               items:
-                - entity_id: "{user1}"
+                - entity_id: "{department1}"
                   name: Alpha
-                  family_name: Foo
-                  email: afoo@test.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
+                  description: null
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
-                - entity_id: "{user2}"
+                - entity_id: "{department2}"
                   name: Beta
-                  family_name: Bar
-                  email: bbar@example.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
+                  description: null
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -324,9 +285,9 @@ stages:
               num_items: 2
               total_items: 2
 
-  - name: Get all Users - tenant2 - no filters
+  - name: Get all Departments - tenant2 - no filters
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -339,14 +300,9 @@ stages:
           extra_kwargs:
             expected:
               items:
-                - entity_id: "{user3}"
+                - entity_id: "{department3}"
                   name: Zeta
-                  family_name: Bar
-                  email: zbar@example.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
+                  description: null
                   tenant_id: tenant2
                   created_by: test2@test.com
                   changed_by: test2@test.com
@@ -354,15 +310,15 @@ stages:
               num_items: 1
               total_items: 1
 
-  - name: Get all Users - tenant1 - filter by name case insensitive
+  - name: Get all Departments - tenant1 - filter by name case insensitive endswith wildcard
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       params:
-        name: alpha
+        name: alp*
     response:
       status_code: 200
       body:
@@ -371,14 +327,9 @@ stages:
           extra_kwargs:
             expected:
               items:
-                - entity_id: "{user1}"
+                - entity_id: "{department1}"
                   name: Alpha
-                  family_name: Foo
-                  email: afoo@test.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
+                  description: null
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -386,73 +337,9 @@ stages:
               num_items: 1
               total_items: 1
 
-  - name: Get all Users - tenant1 - filter by family_name endswith wildcard
+  - name: Get all Departments - tenant1 - filter by created_by order by name desc
     request:
-      url: http://app:5000/users
-      method: GET
-      headers:
-        content-type: application/json
-        Authorization: "Bearer {access_token}"
-      params:
-        family_name: fo*
-    response:
-      status_code: 200
-      body:
-        $ext:
-          function: techlock.common.unittest.tavern_validators:validate_base_model
-          extra_kwargs:
-            expected:
-              items:
-                - entity_id: "{user1}"
-                  name: Alpha
-                  family_name: Foo
-                  email: afoo@test.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
-                  tenant_id: tenant1
-                  created_by: test@test.com
-                  changed_by: test@test.com
-                  tags: null
-              num_items: 1
-              total_items: 1
-
-  - name: Get all Users - tenant1 - filter by email contains wildcards
-    request:
-      url: http://app:5000/users
-      method: GET
-      headers:
-        content-type: application/json
-        Authorization: "Bearer {access_token}"
-      params:
-        email: afo*o@t*st.com
-    response:
-      status_code: 200
-      body:
-        $ext:
-          function: techlock.common.unittest.tavern_validators:validate_base_model
-          extra_kwargs:
-            expected:
-              items:
-                - entity_id: "{user1}"
-                  name: Alpha
-                  family_name: Foo
-                  email: afoo@test.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
-                  tenant_id: tenant1
-                  created_by: test@test.com
-                  changed_by: test@test.com
-                  tags: null
-              num_items: 1
-              total_items: 1
-
-  - name: Get all Users - tenant1 - filter by created_by order by name desc
-    request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -468,26 +355,16 @@ stages:
           extra_kwargs:
             expected:
               items:
-                - entity_id: "{user2}"
+                - entity_id: "{department2}"
                   name: Beta
-                  family_name: Bar
-                  email: bbar@example.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
+                  description: null
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
-                - entity_id: "{user1}"
+                - entity_id: "{department1}"
                   name: Alpha
-                  family_name: Foo
-                  email: afoo@test.com
-                  departments: []
-                  offices: []
-                  roles: []
-                  claims_by_audience: null
+                  description: null
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -495,9 +372,9 @@ stages:
               num_items: 2
               total_items: 2
 
-  - name: Get User1 - tenant1
+  - name: Get Department1 - tenant1
     request:
-      url: http://app:5000/users/{user1}
+      url: http://app:5000/departments/{department1}
       method: GET
       headers:
         content-type: application/json
@@ -509,22 +386,17 @@ stages:
           function: techlock.common.unittest.tavern_validators:validate_base_model
           extra_kwargs:
             expected:
-              entity_id: "{user1}"
+              entity_id: "{department1}"
               name: Alpha
-              family_name: Foo
-              email: afoo@test.com
-              departments: []
-              offices: []
-              roles: []
-              claims_by_audience: null
+              description: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
 
-  - name: Get User3 - tenant1
+  - name: Get Department3 - tenant1
     request:
-      url: http://app:5000/users/{user3}
+      url: http://app:5000/departments/{department3}
       method: GET
       headers:
         content-type: application/json
@@ -532,9 +404,9 @@ stages:
     response:
       status_code: 404
 
-  - name: Get User1 - tenant2
+  - name: Get Department1 - tenant2
     request:
-      url: http://app:5000/users/{user1}
+      url: http://app:5000/departments/{department1}
       method: GET
       headers:
         content-type: application/json
@@ -542,9 +414,9 @@ stages:
     response:
       status_code: 404
 
-  - name: Get User3 - tenant2
+  - name: Get Department3 - tenant2
     request:
-      url: http://app:5000/users/{user3}
+      url: http://app:5000/departments/{department3}
       method: GET
       headers:
         content-type: application/json
@@ -556,21 +428,16 @@ stages:
           function: techlock.common.unittest.tavern_validators:validate_base_model
           extra_kwargs:
             expected:
-              entity_id: "{user3}"
+              entity_id: "{department3}"
               name: Zeta
-              family_name: Bar
-              email: zbar@example.com
-              departments: []
-              offices: []
-              roles: []
-              claims_by_audience: null
+              description: null
               tenant_id: tenant2
               created_by: test2@test.com
               changed_by: test2@test.com
               tags: null
 
 ---
-test_name: Users API create and update validation
+test_name: Departments API create and update validation
 marks:
   - usefixtures:
       - flush_local_dynamodb
@@ -588,16 +455,16 @@ stages:
           - tenant1
           - tenant1:admin
         claims:
-          - allow:tenant1:user-management:*:users:*
+          - allow:tenant1:user-management:*:departments:*
     response:
       status_code: 200
       save:
         body:
           access_token: access_token
 
-  - name: Get all Users
+  - name: Get all Departments
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: GET
       headers:
         content-type: application/json
@@ -609,9 +476,9 @@ stages:
         num_items: 0
         total_items: 0
 
-  - name: Create User
+  - name: Create Department
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: POST
       headers:
         content-type: application/json
@@ -629,23 +496,18 @@ stages:
           extra_kwargs:
             expected:
               name: Test
-              family_name: e2e
-              email: test2@test.com
-              departments: []
-              offices: []
-              roles: []
-              claims_by_audience: null
+              description: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
       save:
         body:
-          user_id: entity_id
+          department_id: entity_id
 
-  - name: Create User - with empty body
+  - name: Create Department - with empty body
     request:
-      url: http://app:5000/users
+      url: http://app:5000/departments
       method: POST
       headers:
         content-type: application/json
@@ -656,115 +518,20 @@ stages:
       body:
         code: 422
         errors:
-          email:
-            - Missing data for required field.
           name:
             - Missing data for required field.
-          temporary_password:
-            - Missing data for required field.
-        status: Unprocessable Entity
-
-  - name: Create User - without password
-    request:
-      url: http://app:5000/users
-      method: POST
-      headers:
-        content-type: application/json
-        Authorization: "Bearer {access_token}"
-      json:
-        name: Test
-        family_name: e2e
-        email: test2@test.com
-    response:
-      status_code: 422
-      body:
-        code: 422
-        errors:
-          temporary_password:
-            - Missing data for required field.
-        status: Unprocessable Entity
-
-  - name: Create User - with invalid email and numeric name
-    request:
-      url: http://app:5000/users
-      method: POST
-      headers:
-        content-type: application/json
-        Authorization: "Bearer {access_token}"
-      json:
-        name: 123
-        family_name: e2e
-        email: testest.com
-        temporary_password: changeme
-    response:
-      status_code: 422
-      body:
-        code: 422
-        errors:
-          email:
-            - Not a valid email address.
-          name:
-            - Not a valid string.
-        status: Unprocessable Entity
-
-  - name: Create User - with non-uuid deparment, office, and role
-    request:
-      url: http://app:5000/users
-      method: POST
-      headers:
-        content-type: application/json
-        Authorization: "Bearer {access_token}"
-      json:
-        name: Test
-        family_name: e2e
-        email: test2@test.com
-        temporary_password: changeme
-        department_ids: ['not_a_uuid']
-        office_ids: ['not_a_uuid']
-        role_ids: ['not_a_uuid']
-    response:
-      status_code: 422
-      body:
-        code: 422
-        errors:
-          department_ids: {"0": ["Not a valid UUID."]}
-          office_ids: {"0": ["Not a valid UUID."]}
-          role_ids: {"0": ["Not a valid UUID."]}
-        status: Unprocessable Entity
-
-  - name: Create User - with invalid claim
-    request:
-      url: http://app:5000/users
-      method: POST
-      headers:
-        content-type: application/json
-        Authorization: "Bearer {access_token}"
-      json:
-        name: Test
-        family_name: e2e
-        email: test2@test.com
-        temporary_password: changeme
-        claims_by_audience: {"a": ["a"]}
-    response:
-      status_code: 422
-      body:
-        code: 422
-        errors:
-          claims_by_audience: {"a": {"value": {"0": ["Claim has too few parts, expected 6 or 7, found 2."]}}}
         status: Unprocessable Entity
 
   # TODO - update validation
-  - name: Update User
+  - name: Update Department
     request:
-      url: http://app:5000/users/{created_id}
+      url: http://app:5000/departments/{department_id}
       method: PUT
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
         name: Test
-        family_name: e2e_new
-        email: test2@test.com
     response:
       status_code: 200
       body:
@@ -772,14 +539,9 @@ stages:
           function: techlock.common.unittest.tavern_validators:validate_base_model
           extra_kwargs:
             expected:
-              entity_id: "{user_id}"
+              entity_id: "{department_id}"
               name: Test
-              family_name: e2e_new
-              email: test2@test.com
-              departments: []
-              offices: []
-              roles: []
-              claims_by_audience: null
+              description: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com

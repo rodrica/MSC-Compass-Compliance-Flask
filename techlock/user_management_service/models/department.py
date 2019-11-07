@@ -40,7 +40,7 @@ DEPARTMENT_CLAIM_SPEC = ClaimSpec(
 
 
 class DepartmentSchema(BaseModelSchema):
-    name = mf.String()
+    name = mf.String(required=True)
     description = mf.String(allow_none=True)
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)

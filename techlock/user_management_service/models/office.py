@@ -42,7 +42,7 @@ OFFICE_CLAIM_SPEC = ClaimSpec(
 
 
 class OfficeSchema(BaseModelSchema):
-    name = mf.String()
+    name = mf.String(required=True)
     description = mf.String(allow_none=True)
 
     street1 = mf.String(allow_none=True)
@@ -117,7 +117,7 @@ class OfficeListQueryParameters(OffsetPageableQueryParameters, SortableQueryPara
     state: str = None
     country: str = None
 
-    department_ids: str = None
+    department_id: str = None
 
     def get_filters(self, auth_info: AuthInfo):
         filters = list()

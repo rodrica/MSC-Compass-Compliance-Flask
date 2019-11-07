@@ -107,6 +107,14 @@ class OfficeById(MethodView):
         if office is None or not can_access(office, claims):
             raise NotFoundException('No office found for id = {}'.format(office_id))
 
+        # Validate that items exist and get actual items
+        # Ugly code, will have to do for now
+        departments = list()
+        for entity_id in data.get('department_ids', list()):
+            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        data.pop('department_ids', None)
+        data['departments'] = departments
+
         for k, v in data.items():
             if hasattr(office, k):
                 setattr(office, k, v)

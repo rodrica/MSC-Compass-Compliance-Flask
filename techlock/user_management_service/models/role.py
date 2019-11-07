@@ -40,7 +40,7 @@ ROLE_CLAIM_SPEC = ClaimSpec(
 
 
 class RoleSchema(BaseModelSchema):
-    name = mf.String()
+    name = mf.String(required=True)
     description = mf.String(allow_none=True)
 
     claims_by_audience = mf.Dict(

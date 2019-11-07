@@ -154,6 +154,24 @@ class UserById(MethodView):
         if user.email != data.get('email'):
             raise BadRequestException('Email can not be changed.')
 
+        # Validate that items exist and get actual items
+        # Ugly code, will have to do for now
+        roles = list()
+        for entity_id in data.get('role_ids', list()):
+            roles.append(Role.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        departments = list()
+        for entity_id in data.get('department_ids', list()):
+            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        offices = list()
+        for entity_id in data.get('office_ids', list()):
+            offices.append(Office.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        data.pop('role_ids', None)
+        data.pop('department_ids', None)
+        data.pop('office_ids', None)
+        data['roles'] = roles
+        data['departments'] = departments
+        data['offices'] = offices
+
         attributes_to_update = dict()
         for k, v in data.items():
             if hasattr(user, k):
