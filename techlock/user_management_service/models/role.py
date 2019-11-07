@@ -5,7 +5,7 @@ from sqlalchemy import func as sa_fn
 from sqlalchemy.dialects.postgresql import JSONB
 
 from techlock.common.api import (
-    ClaimSpec,
+    Claim, ClaimSpec,
     OffsetPageableResponseBaseSchema,
     OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
     SortableQueryParameters, SortableQueryParametersSchema,
@@ -45,7 +45,7 @@ class RoleSchema(BaseModelSchema):
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
-        values=mf.List(mf.String()),
+        values=mf.List(mf.String(validate=Claim.validate_claim_string)),
         allow_none=True
     )
 

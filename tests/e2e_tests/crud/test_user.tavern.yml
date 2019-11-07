@@ -155,7 +155,7 @@ stages:
         total_items: 0
 
 ---
-test_name: Users API List Happy
+test_name: Users API GET Happy
 marks:
   - usefixtures:
       - flush_local_dynamodb
@@ -494,3 +494,292 @@ stages:
                   tags: null
               num_items: 2
               total_items: 2
+
+  - name: Get User1 - tenant1
+    request:
+      url: http://app:5000/users/{user1}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              entity_id: "{user1}"
+              name: Alpha
+              family_name: Foo
+              email: afoo@test.com
+              departments: []
+              offices: []
+              roles: []
+              claims_by_audience: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+
+  - name: Get User3 - tenant1
+    request:
+      url: http://app:5000/users/{user3}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 404
+
+  - name: Get User1 - tenant2
+    request:
+      url: http://app:5000/users/{user1}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token2}"
+    response:
+      status_code: 404
+
+  - name: Get User3 - tenant2
+    request:
+      url: http://app:5000/users/{user3}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token2}"
+    response:
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              entity_id: "{user3}"
+              name: Zeta
+              family_name: Bar
+              email: zbar@example.com
+              departments: []
+              offices: []
+              roles: []
+              claims_by_audience: null
+              tenant_id: tenant2
+              created_by: test2@test.com
+              changed_by: test2@test.com
+              tags: null
+
+---
+test_name: Users API create and update validation
+marks:
+  - usefixtures:
+      - flush_local_dynamodb
+stages:
+  - name: Get JWT
+    request:
+      url: http://jwt:5000/login
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        sub: test@test.com
+        tenant_id: tenant1
+        roles:
+          - tenant1
+          - tenant1:admin
+        claims:
+          - allow:tenant1:user-management:*:users:*
+    response:
+      status_code: 200
+      save:
+        body:
+          access_token: access_token
+
+  - name: Get all Users
+    request:
+      url: http://app:5000/users
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 200
+      body:
+        items: []
+        num_items: 0
+        total_items: 0
+
+  - name: Create User
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        email: test2@test.com
+        temporary_password: changeme
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Test
+              family_name: e2e
+              email: test2@test.com
+              departments: []
+              offices: []
+              roles: []
+              claims_by_audience: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          user_id: entity_id
+
+  - name: Create User - with empty body
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json: {}
+    response:
+      status_code: 422
+      body:
+        code: 422
+        errors:
+          email:
+            - Missing data for required field.
+          name:
+            - Missing data for required field.
+          temporary_password:
+            - Missing data for required field.
+        status: Unprocessable Entity
+
+  - name: Create User - without password
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        email: test2@test.com
+    response:
+      status_code: 422
+      body:
+        code: 422
+        errors:
+          temporary_password:
+            - Missing data for required field.
+        status: Unprocessable Entity
+
+  - name: Create User - with invalid email and numeric name
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: 123
+        family_name: e2e
+        email: testest.com
+        temporary_password: changeme
+    response:
+      status_code: 422
+      body:
+        code: 422
+        errors:
+          email:
+            - Not a valid email address.
+          name:
+            - Not a valid string.
+        status: Unprocessable Entity
+
+  - name: Create User - with non-uuid deparment, office, and role
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        email: test2@test.com
+        temporary_password: changeme
+        department_ids: ['not_a_uuid']
+        office_ids: ['not_a_uuid']
+        role_ids: ['not_a_uuid']
+    response:
+      status_code: 422
+      body:
+        code: 422
+        errors:
+          department_ids: {"0": ["Not a valid UUID."]}
+          office_ids: {"0": ["Not a valid UUID."]}
+          role_ids: {"0": ["Not a valid UUID."]}
+        status: Unprocessable Entity
+
+  - name: Create User - with invalid claim
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        email: test2@test.com
+        temporary_password: changeme
+        claims_by_audience: {"a": ["a"]}
+    response:
+      status_code: 422
+      body:
+        code: 422
+        errors:
+          claims_by_audience: {"a": {"value": {"0": ["Claim has too few parts, expected 6 or 7, found 2."]}}}
+        status: Unprocessable Entity
+
+  - name: Update User
+    request:
+      url: http://app:5000/users/{created_id}
+      method: PUT
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e_new
+        email: test2@test.com
+    response:
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              entity_id: "{user_id}"
+              name: Test
+              family_name: e2e_new
+              email: test2@test.com
+              departments: []
+              offices: []
+              roles: []
+              claims_by_audience: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null

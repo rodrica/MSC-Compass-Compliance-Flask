@@ -42,6 +42,7 @@ from .user import (
     UserListQueryParametersSchema,
     PostUserSchema,
     PostUserChangePasswordSchema,
+    UpdateUserSchema,
     USER_CLAIM_SPEC,
 )
 

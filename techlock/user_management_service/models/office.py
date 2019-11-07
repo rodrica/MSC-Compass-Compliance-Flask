@@ -55,7 +55,8 @@ class OfficeSchema(BaseModelSchema):
     latitude = mf.Decimal(allow_none=True)
     longitude = mf.Decimal(allow_none=True)
 
-    departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
+    departments = mf.Nested(DepartmentSchema, allow_none=True, many=True, dump_only=True)
+    department_ids = mf.List(mf.UUID(), required=False, load_only=True)
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 

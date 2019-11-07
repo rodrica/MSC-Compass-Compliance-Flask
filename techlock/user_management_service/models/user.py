@@ -5,7 +5,7 @@ from sqlalchemy import func as sa_fn
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 
 from techlock.common.api import (
-    ClaimSpec,
+    Claim, ClaimSpec,
     OffsetPageableResponseBaseSchema,
     OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
     SortableQueryParameters, SortableQueryParametersSchema,
@@ -59,7 +59,7 @@ USER_CLAIM_SPEC = ClaimSpec(
 
 
 class UserSchema(BaseModelSchema):
-    email = mf.String(required=True)
+    email = mf.Email(required=True)
     name = mf.String(required=True)
     family_name = mf.String()
 
@@ -69,14 +69,32 @@ class UserSchema(BaseModelSchema):
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
-        values=mf.List(mf.String()),
+        values=mf.List(mf.String(validate=Claim.validate_claim_string)),
         allow_none=True
     )
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
 
-class PostUserSchema(UserSchema):
+class UpdateUserSchema(ma.Schema):
+    email = mf.Email(required=True)
+    name = mf.String(required=True)
+    family_name = mf.String()
+
+    claims_by_audience = mf.Dict(
+        keys=mf.String(),
+        values=mf.List(mf.String(validate=Claim.validate_claim_string)),
+        allow_none=True
+    )
+
+    tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
+
+    role_ids = mf.List(mf.UUID(), required=False)
+    department_ids = mf.List(mf.UUID(), required=False)
+    office_ids = mf.List(mf.UUID(), required=False)
+
+
+class PostUserSchema(UpdateUserSchema):
     temporary_password = mf.String(required=True)
 
 
@@ -89,9 +107,9 @@ class UserListQueryParametersSchema(OffsetPageableQueryParametersSchema, Sortabl
     name = mf.String(allow_none=True, description='Used to filter users by name prefix.')
     family_name = mf.String(allow_none=True, description='Used to filter users by family_name prefix.')
 
-    role_ids = mf.String(allow_none=True, description='Used to filter users by role_ids. Comma delimited list of exact ids.')
-    department_ids = mf.String(allow_none=True, description='Used to filter users by department_ids. Comma delimited list of exact ids.')
-    office_ids = mf.String(allow_none=True, description='Used to filter users by office_ids. Comma delimited list of exact ids.')
+    role_ids = mf.UUID(allow_none=True, description='Used to filter users by role_ids. Comma delimited list of exact ids.')
+    department_ids = mf.UUID(allow_none=True, description='Used to filter users by department_ids. Comma delimited list of exact ids.')
+    office_ids = mf.UUID(allow_none=True, description='Used to filter users by office_ids. Comma delimited list of exact ids.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -148,6 +166,7 @@ class User(BaseModel):
 
     claims_by_audience = db.Column(JSONB, nullable=True)
     tags = db.Column(JSONB, nullable=True)
+
 
 
 @dataclass

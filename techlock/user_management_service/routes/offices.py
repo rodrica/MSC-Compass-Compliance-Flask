@@ -14,6 +14,7 @@ from techlock.common.api.jwt_authorization import (
 )
 
 from ..models import (
+    Department,
     Office, OfficeSchema, OfficePageableSchema,
     OfficeListQueryParameters, OfficeListQueryParametersSchema,
     OFFICE_CLAIM_SPEC,
@@ -59,7 +60,12 @@ class Offices(MethodView):
         current_user = get_current_user()
         logger.info('Creating Office', extra={'data': data})
 
-        # Office.validate(data)
+        departments = list()
+        for entity_id in data.get('department_ids', list()):
+            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        data.pop('department_ids', None)
+        data['departments'] = departments
+
         office = Office(**data)
         office.save(current_user)
 

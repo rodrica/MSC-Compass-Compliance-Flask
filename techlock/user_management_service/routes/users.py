@@ -19,8 +19,10 @@ from techlock.common.messaging import UserNotification, Level, publish_sns
 from ..services import get_idp
 from ..models import (
     User, UserSchema, UserPageableSchema,
+    Department, Office, Role,
     UserListQueryParameters, UserListQueryParametersSchema,
     PostUserSchema,
+    UpdateUserSchema,
     PostUserChangePasswordSchema,
     USER_CLAIM_SPEC,
 )
@@ -69,14 +71,35 @@ class Users(MethodView):
         current_user = get_current_user()
         logger.info('Creating User', extra={'data': data})
 
-        data['entity_id'] = data.get('email')
         # Get the password and remove it from the data. It is not part of the User object
         temporary_password = data.pop('temporary_password')
         # User.validate(data)
-        user = User.get(current_user, data['entity_id'])
+        user = User.get(current_user, data['email'])
         if user is not None:
             raise ConflictException('User with email = {} already exists.'.format(data['entity_id']))
-        user = User(**data)
+
+        # Validate that items exist and get actual items
+        roles = list()
+        for entity_id in data.get('role_ids', list()):
+            roles.append(Role.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        departments = list()
+        for entity_id in data.get('department_ids', list()):
+            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        offices = list()
+        for entity_id in data.get('office_ids', list()):
+            offices.append(Office.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+
+        user = User(
+            entity_id=data.get('email'),
+            email=data.get('email'),
+            name=data.get('name'),
+            family_name=data.get('family_name'),
+            claims_by_audience=data.get('claims_by_audience'),
+            tags=data.get('tags'),
+            roles=roles,
+            departments=departments,
+            offices=offices,
+        )
 
         logger.info('Adding user to idp')
         self.idp.create_user(current_user, user, password=temporary_password)
@@ -115,7 +138,7 @@ class UserById(MethodView):
 
         return user
 
-    @blp.arguments(UserSchema)
+    @blp.arguments(UpdateUserSchema)
     @blp.response(UserSchema)
     @access_required(
         'update', 'users',
