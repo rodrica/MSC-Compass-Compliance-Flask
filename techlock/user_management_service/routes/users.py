@@ -94,6 +94,7 @@ class Users(MethodView):
             email=data.get('email'),
             name=data.get('name'),
             family_name=data.get('family_name'),
+            description=data.get('description'),
             claims_by_audience=data.get('claims_by_audience'),
             tags=data.get('tags'),
             roles=roles,

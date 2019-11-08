@@ -29,17 +29,19 @@ services:
       POSTGRES_PASSWORD: password
 
   init:
-    build:
-      context: .
-      args:
-        NEXUS_HOST: ${NEXUS_HOST}
-        NEXUS_USERNAME: ${NEXUS_USERNAME}
-        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
+    image: registry.gitlab.com/techlock/msc-user-management-service:psql-backend_6196fa6fe85ad5f8db2bd31f226ac251bde917ef
+    # build:
+    #   context: .
+    #   args:
+    #     NEXUS_HOST: ${NEXUS_HOST}
+    #     NEXUS_USERNAME: ${NEXUS_USERNAME}
+    #     NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
       - cognito
       - jwt
+      - psql
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -72,17 +74,19 @@ services:
       - '--init'
 
   api:
-    build:
-      context: .
-      args:
-        NEXUS_HOST: ${NEXUS_HOST}
-        NEXUS_USERNAME: ${NEXUS_USERNAME}
-        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
+    image: registry.gitlab.com/techlock/msc-user-management-service:psql-backend_6196fa6fe85ad5f8db2bd31f226ac251bde917ef
+    # build:
+    #   context: .
+    #   args:
+    #     NEXUS_HOST: ${NEXUS_HOST}
+    #     NEXUS_USERNAME: ${NEXUS_USERNAME}
+    #     NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
       - cognito
       - jwt
+      - psql
       - init
     environment:
       REDIS_HOST: redis

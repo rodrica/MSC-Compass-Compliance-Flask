@@ -1,20 +1,14 @@
 import marshmallow as ma
 import marshmallow.fields as mf
 from dataclasses import dataclass
-from sqlalchemy import func as sa_fn
-from sqlalchemy.dialects.postgresql import JSONB
 
 from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
-    OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
-    SortableQueryParameters, SortableQueryParametersSchema,
+    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
-from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
-    db,
     BaseModel, BaseModelSchema,
-    get_string_filter,
 )
 
 __all__ = [
@@ -40,19 +34,14 @@ TENANT_CLAIM_SPEC = ClaimSpec(
 
 
 class TenantSchema(BaseModelSchema):
-    name = mf.String(required=True)
-    description = mf.String(allow_none=True)
-
-    tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
+    pass
 
 
 class TenantPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(TenantSchema, many=True, dump_only=True)
 
 
-class TenantListQueryParametersSchema(OffsetPageableQueryParametersSchema, SortableQueryParametersSchema):
-    name = mf.String(allow_none=True, description='Used to filter tenants by name prefix.')
-
+class TenantListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     @ma.post_load
     def make_object(self, data, **kwargs):
         return TenantListQueryParameters(**data)
@@ -61,20 +50,7 @@ class TenantListQueryParametersSchema(OffsetPageableQueryParametersSchema, Sorta
 class Tenant(BaseModel):
     __tablename__ = 'tenants'
 
-    name = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=True)
-
-    tags = db.Column(JSONB, nullable=True)
-
 
 @dataclass
-class TenantListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
-    name: str = None
-
-    def get_filters(self, auth_info: AuthInfo):
-        filters = list()
-
-        if self.name is not None:
-            filters.append(get_string_filter(sa_fn.lower(Tenant.name), self.name))
-
-        return filters
+class TenantListQueryParameters(BaseOffsetListQueryParams):
+    __db_model__ = Tenant

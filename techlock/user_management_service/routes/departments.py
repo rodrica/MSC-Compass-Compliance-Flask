@@ -43,7 +43,7 @@ class Departments(MethodView):
             offset=query_params.offset,
             limit=query_params.limit,
             sort=query_params.sort,
-            additional_filters=query_params.get_filters(current_user),
+            additional_filters=query_params.get_filters(),
             claims=claims,
         )
 

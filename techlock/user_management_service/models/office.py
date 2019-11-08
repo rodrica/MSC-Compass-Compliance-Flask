@@ -2,13 +2,12 @@ import marshmallow as ma
 import marshmallow.fields as mf
 from dataclasses import dataclass
 from sqlalchemy import func as sa_fn
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.dialects.postgresql import UUID
 
 from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
-    OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
-    SortableQueryParameters, SortableQueryParametersSchema,
+    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -42,9 +41,6 @@ OFFICE_CLAIM_SPEC = ClaimSpec(
 
 
 class OfficeSchema(BaseModelSchema):
-    name = mf.String(required=True)
-    description = mf.String(allow_none=True)
-
     street1 = mf.String(allow_none=True)
     street2 = mf.String(allow_none=True)
     street3 = mf.String(allow_none=True)
@@ -58,11 +54,8 @@ class OfficeSchema(BaseModelSchema):
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True, dump_only=True)
     department_ids = mf.List(mf.UUID(), required=False, load_only=True)
 
-    tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
-
-class OfficeListQueryParametersSchema(OffsetPageableQueryParametersSchema, SortableQueryParametersSchema):
-    name = mf.String(allow_none=True, description='Used to filter offices by name prefix.')
+class OfficeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     city = mf.String(allow_none=True, description='Used to filter offices by city prefix.')
     state = mf.String(allow_none=True, description='Used to filter offices by state prefix.')
     country = mf.String(allow_none=True, description='Used to filter offices by country prefix.')
@@ -88,8 +81,6 @@ offices_to_departments = db.Table(
 class Office(BaseModel):
     __tablename__ = 'offices'
 
-    name = db.Column(db.String, unique=False, nullable=False)
-    description = db.Column(db.String, unique=False, nullable=True)
     street1 = db.Column(db.String, unique=False, nullable=True)
     street2 = db.Column(db.String, unique=False, nullable=True)
     street3 = db.Column(db.String, unique=False, nullable=True)
@@ -107,12 +98,11 @@ class Office(BaseModel):
         backref=db.backref('offices', lazy=True)
     )
 
-    tags = db.Column(JSONB, nullable=True)
-
 
 @dataclass
-class OfficeListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
-    name: str = None
+class OfficeListQueryParameters(BaseOffsetListQueryParams):
+    __db_model__ = Office
+
     city: str = None
     state: str = None
     country: str = None
@@ -122,7 +112,9 @@ class OfficeListQueryParameters(OffsetPageableQueryParameters, SortableQueryPara
     def get_filters(self, auth_info: AuthInfo):
         filters = list()
 
-        for field_name in ('name', 'city', 'state', 'country'):
+        filters.extend(super(OfficeListQueryParameters, self).get_filters())
+
+        for field_name in ('city', 'state', 'country'):
             value = getattr(self, field_name, None)
             if value is not None:
                 filters.append(get_string_filter(sa_fn.lower(getattr(Office, field_name)), value))

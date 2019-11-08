@@ -178,6 +178,7 @@ stages:
               name: Test
               family_name: e2e
               email: test2@test.com
+              description: null
               claims_by_audience: null
               departments:
                 - entity_id: "{department_id}"
@@ -315,6 +316,7 @@ stages:
               name: Test
               family_name: e2e
               email: test2@test.com
+              description: null
               claims_by_audience: null
               departments: []
               offices: []

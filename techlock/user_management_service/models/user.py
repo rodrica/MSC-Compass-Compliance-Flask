@@ -7,8 +7,7 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID
 from techlock.common.api import (
     Claim, ClaimSpec,
     OffsetPageableResponseBaseSchema,
-    OffsetPageableQueryParameters, OffsetPageableQueryParametersSchema,
-    SortableQueryParameters, SortableQueryParametersSchema,
+    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -60,7 +59,6 @@ USER_CLAIM_SPEC = ClaimSpec(
 
 class UserSchema(BaseModelSchema):
     email = mf.Email(required=True)
-    name = mf.String(required=True)
     family_name = mf.String()
 
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
@@ -73,13 +71,12 @@ class UserSchema(BaseModelSchema):
         allow_none=True
     )
 
-    tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
-
 
 class UpdateUserSchema(ma.Schema):
     email = mf.Email(required=True)
     name = mf.String(required=True)
     family_name = mf.String()
+    description = mf.String()
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
@@ -102,9 +99,8 @@ class PostUserChangePasswordSchema(ma.Schema):
     new_password = mf.String(required=True)
 
 
-class UserListQueryParametersSchema(OffsetPageableQueryParametersSchema, SortableQueryParametersSchema):
+class UserListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     email = mf.String(allow_none=True, description='Used to filter users by email prefix.')
-    name = mf.String(allow_none=True, description='Used to filter users by name prefix.')
     family_name = mf.String(allow_none=True, description='Used to filter users by family_name prefix.')
 
     role_ids = mf.UUID(allow_none=True, description='Used to filter users by role_ids. Comma delimited list of exact ids.')
@@ -142,7 +138,6 @@ class User(BaseModel):
 
     entity_id = db.Column('id', db.String, primary_key=True)
     email = db.Column(db.String, unique=False, nullable=False)
-    name = db.Column(db.String, unique=False, nullable=False)
     family_name = db.Column(db.String, unique=False, nullable=False)
 
     roles = db.relationship(
@@ -165,13 +160,13 @@ class User(BaseModel):
     )
 
     claims_by_audience = db.Column(JSONB, nullable=True)
-    tags = db.Column(JSONB, nullable=True)
 
 
 @dataclass
-class UserListQueryParameters(OffsetPageableQueryParameters, SortableQueryParameters):
+class UserListQueryParameters(BaseOffsetListQueryParams):
+    __db_model__ = User
+
     email: str = None
-    name: str = None
     family_name: str = None
 
     role_id: str = None
@@ -181,7 +176,9 @@ class UserListQueryParameters(OffsetPageableQueryParameters, SortableQueryParame
     def get_filters(self, auth_info: AuthInfo):
         filters = list()
 
-        for field_name in ('email', 'name', 'family_name'):
+        filters.extend(super(UserListQueryParameters, self).get_filters())
+
+        for field_name in ('email', 'family_name'):
             value = getattr(self, field_name, None)
             if value is not None:
                 filters.append(get_string_filter(sa_fn.lower(getattr(User, field_name)), value))

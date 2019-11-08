@@ -90,6 +90,7 @@ def upgrade():
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
+    sa.Column('description', sa.String(), nullable=True),
     sa.Column('family_name', sa.String(), nullable=False),
     sa.Column('claims_by_audience', postgresql.JSONB(astext_type=sa.Text()), nullable=True),
     sa.Column('tags', postgresql.JSONB(astext_type=sa.Text()), nullable=True),

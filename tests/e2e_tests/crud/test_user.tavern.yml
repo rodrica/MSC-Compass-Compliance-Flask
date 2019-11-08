@@ -63,6 +63,7 @@ stages:
               departments: []
               offices: []
               roles: []
+              description: null
               claims_by_audience: null
               tenant_id: tenant1
               created_by: test@test.com
@@ -93,6 +94,7 @@ stages:
               departments: []
               offices: []
               roles: []
+              description: null
               claims_by_audience: null
               tenant_id: tenant1
               created_by: test@test.com
@@ -124,6 +126,7 @@ stages:
               departments: []
               offices: []
               roles: []
+              description: null
               claims_by_audience: null
               tenant_id: tenant1
               created_by: test@test.com
@@ -304,6 +307,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant1
                   created_by: test@test.com
@@ -316,6 +320,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant1
                   created_by: test@test.com
@@ -346,6 +351,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant2
                   created_by: test2@test.com
@@ -378,6 +384,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant1
                   created_by: test@test.com
@@ -410,6 +417,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant1
                   created_by: test@test.com
@@ -442,6 +450,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant1
                   created_by: test@test.com
@@ -475,6 +484,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant1
                   created_by: test@test.com
@@ -487,6 +497,7 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  description: null
                   claims_by_audience: null
                   tenant_id: tenant1
                   created_by: test@test.com
@@ -516,6 +527,7 @@ stages:
               departments: []
               offices: []
               roles: []
+              description: null
               claims_by_audience: null
               tenant_id: tenant1
               created_by: test@test.com
@@ -563,6 +575,7 @@ stages:
               departments: []
               offices: []
               roles: []
+              description: null
               claims_by_audience: null
               tenant_id: tenant2
               created_by: test2@test.com
@@ -634,6 +647,7 @@ stages:
               departments: []
               offices: []
               roles: []
+              description: null
               claims_by_audience: null
               tenant_id: tenant1
               created_by: test@test.com
@@ -779,6 +793,7 @@ stages:
               departments: []
               offices: []
               roles: []
+              description: null
               claims_by_audience: null
               tenant_id: tenant1
               created_by: test@test.com

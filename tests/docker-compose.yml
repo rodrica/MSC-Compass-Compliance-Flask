@@ -40,6 +40,7 @@ services:
       - dynamodb
       - cognito
       - jwt
+      - psql
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -60,7 +61,6 @@ services:
       FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       FLASK_JWT_ALGORITHM: RS256
       JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'
-
     ports:
       - 5000
 
@@ -77,6 +77,7 @@ services:
       - dynamodb
       - cognito
       - jwt
+      - psql
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
