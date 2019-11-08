@@ -165,6 +165,7 @@ class User(BaseModel):
 @dataclass
 class UserListQueryParameters(BaseOffsetListQueryParams):
     __db_model__ = User
+    __query_fields__ = ('name', 'family_name', 'email')
 
     email: str = None
     family_name: str = None

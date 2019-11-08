@@ -102,6 +102,7 @@ class Office(BaseModel):
 @dataclass
 class OfficeListQueryParameters(BaseOffsetListQueryParams):
     __db_model__ = Office
+    __query_fields__ = ('name', 'city', 'state', 'country')
 
     city: str = None
     state: str = None
