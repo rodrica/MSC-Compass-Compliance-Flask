@@ -1,0 +1,327 @@
+---
+test_name: Relations API CRUD Happy
+marks:
+  - usefixtures:
+      - flush_local_dynamodb
+stages:
+  - name: Get JWT
+    request:
+      url: http://jwt:5000/login
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        sub: test@test.com
+        tenant_id: tenant1
+        roles:
+          - tenant1
+          - tenant1:admin
+        claims:
+          - allow:tenant1:user-management:*:*:*
+    response:
+      status_code: 200
+      save:
+        body:
+          access_token: access_token
+
+  - name: Create Tenant
+    request:
+      url: http://app:5000/tenants
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Stark Industries
+    response:
+      status_code: 201
+      save:
+        body:
+          tenant_id: entity_id
+
+  - name: Create Deparment
+    request:
+      url: http://app:5000/departments
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Finance
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Finance
+              description: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          department_id: entity_id
+          department_created_on: created_on
+          department_changed_on: changed_on
+
+  - name: Create Office
+    request:
+      url: http://app:5000/offices
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: New York
+        street1: Stark Avenue
+        city: New York
+        state: New York
+        postal_code: "10048"
+        country: United States
+        department_ids:
+          - "{department_id}"
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: New York
+              description: null
+              street1: Stark Avenue
+              street2: null
+              street3: null
+              city: New York
+              state: New York
+              country: United States
+              postal_code: "10048"
+              latitude: null
+              longitude: null
+              departments:
+                - entity_id: "{department_id}"
+                  name: Finance
+                  description: null
+                  tenant_id: tenant1
+                  created_by: test@test.com
+                  changed_by: test@test.com
+                  created_on: "{department_created_on}"
+                  changed_on: "{department_changed_on}"
+                  tags: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          office_id: entity_id
+          office_created_on: created_on
+          office_changed_on: changed_on
+
+  - name: Create Role
+    request:
+      url: http://app:5000/roles
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Analyst
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Analyst
+              description: null
+              claims_by_audience: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          role_id: entity_id
+          role_created_on: created_on
+          role_changed_on: changed_on
+
+  - name: Create User
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        email: test2@test.com
+        temporary_password: changeme
+        department_ids:
+          - "{department_id}"
+        office_ids:
+          - "{office_id}"
+        role_ids:
+          - "{role_id}"
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Test
+              family_name: e2e
+              email: test2@test.com
+              description: null
+              claims_by_audience: null
+              departments:
+                - entity_id: "{department_id}"
+                  name: Finance
+                  description: null
+                  tenant_id: tenant1
+                  created_by: test@test.com
+                  changed_by: test@test.com
+                  created_on: "{department_created_on}"
+                  changed_on: "{department_changed_on}"
+                  tags: null
+              offices:
+                - entity_id: "{office_id}"
+                  name: New York
+                  description: null
+                  street1: Stark Avenue
+                  street2: null
+                  street3: null
+                  city: New York
+                  state: New York
+                  postal_code: "10048"
+                  country: United States
+                  latitude: null
+                  longitude: null
+                  tenant_id: tenant1
+                  created_by: test@test.com
+                  changed_by: test@test.com
+                  created_on: "{office_created_on}"
+                  changed_on: "{office_changed_on}"
+                  tags: null
+                  departments:
+                    - entity_id: "{department_id}"
+                      name: Finance
+                      description: null
+                      tenant_id: tenant1
+                      created_by: test@test.com
+                      changed_by: test@test.com
+                      created_on: "{department_created_on}"
+                      changed_on: "{department_changed_on}"
+                      tags: null
+              roles:
+                - entity_id: "{role_id}"
+                  name: Analyst
+                  description: null
+                  claims_by_audience: null
+                  tenant_id: tenant1
+                  created_by: test@test.com
+                  changed_by: test@test.com
+                  created_on: "{role_created_on}"
+                  changed_on: "{role_changed_on}"
+                  tags: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          user_id: entity_id
+
+  - name: Delete Deparment
+    request:
+      url: http://app:5000/departments/{department_id}
+      method: DELETE
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 204
+
+  - name: Validate Department was deleted from Office
+    request:
+      url: http://app:5000/offices/{office_id}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: New York
+              description: null
+              street1: Stark Avenue
+              street2: null
+              street3: null
+              city: New York
+              state: New York
+              country: United States
+              postal_code: "10048"
+              latitude: null
+              longitude: null
+              departments: []
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+
+  - name: Delete Office
+    request:
+      url: http://app:5000/offices/{office_id}
+      method: DELETE
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 204
+
+  - name: Delete Role
+    request:
+      url: http://app:5000/roles/{role_id}
+      method: DELETE
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 204
+
+  - name: Validate items were deleted from User
+    request:
+      url: http://app:5000/users/{user_id}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Test
+              family_name: e2e
+              email: test2@test.com
+              description: null
+              claims_by_audience: null
+              departments: []
+              offices: []
+              roles: []
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null

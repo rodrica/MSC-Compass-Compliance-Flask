@@ -45,6 +45,13 @@ stop:
 	@echo "Stopping docker-compose"
 	@docker-compose down
 
+restart:
+# 	Restart the project in docker. Allows easy testing
+	@echo "Restarting docker-compose project"
+	@docker-compose down
+	@docker-compose build
+	@docker-compose up -d api
+
 unittest:
 # 	Run the unittests
 	@echo "Running unittests"

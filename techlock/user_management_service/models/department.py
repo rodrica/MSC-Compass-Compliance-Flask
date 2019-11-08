@@ -1,19 +1,16 @@
 import marshmallow as ma
 import marshmallow.fields as mf
-from boto3.dynamodb.conditions import Attr
 from dataclasses import dataclass
-from typing import ClassVar, Dict
 
 from techlock.common.api import (
     ClaimSpec,
-    PageableResponseBaseSchema,
-    PageableQueryParameters, PageableQueryParametersSchema,
+    OffsetPageableResponseBaseSchema,
+    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
-from techlock.common.orm.dynamodb import (
-    NO_DEFAULT,
-    PersistedObject,
-    PersistedObjectSchema,
+from techlock.common.orm.sqlalchemy import (
+    BaseModel, BaseModelSchema,
 )
+
 
 __all__ = [
     'Department',
@@ -37,43 +34,24 @@ DEPARTMENT_CLAIM_SPEC = ClaimSpec(
 )
 
 
-class DepartmentSchema(PersistedObjectSchema):
-    name = mf.String()
-    description = mf.String(allow_none=True)
-
-    tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
+class DepartmentSchema(BaseModelSchema):
+    pass
 
 
-class DepartmentPageableSchema(PageableResponseBaseSchema):
+class DepartmentPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(DepartmentSchema, many=True, dump_only=True)
 
 
-class DepartmentListQueryParametersSchema(PageableQueryParametersSchema):
-    name = mf.String(allow_none=True, description='Used to filter departments by name prefix.')
-
+class DepartmentListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     @ma.post_load
     def make_object(self, data, **kwargs):
         return DepartmentListQueryParameters(**data)
 
 
-@dataclass
-class Department(PersistedObject):
-    table: ClassVar[str] = 'departments'
-
-    name: str = NO_DEFAULT
-    description: str = None
-
-    tags: Dict[str, str] = None
+class Department(BaseModel):
+    __tablename__ = 'departments'
 
 
 @dataclass
-class DepartmentListQueryParameters(PageableQueryParameters):
-    name: str = None
-
-    def get_filters(self):
-        ddb_attrs = list()
-
-        if self.name is not None:
-            ddb_attrs.append(Attr('name').begins_with(self.name))
-
-        return ddb_attrs
+class DepartmentListQueryParameters(BaseOffsetListQueryParams):
+    __db_model__ = Department

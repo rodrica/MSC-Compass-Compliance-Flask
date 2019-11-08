@@ -32,7 +32,7 @@ class Auth0Idp(IdpProvider):
     def _get_user(self, user: User):
         found_users = self.auth0.users_by_email.search_users_by_email(user.email)
         if not found_users:
-            logger.error('User not found', extra={'user', user.asdict()})
+            logger.error('User not found', extra={'user', user.entity_id})
             raise NotFoundException('User not found')
         elif len(found_users) > 1:
             logger.warn('Found multiple users, expected one. Will use first one.', extra={

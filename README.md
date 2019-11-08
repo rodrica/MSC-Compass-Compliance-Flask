@@ -1,4 +1,4 @@
-# Techlock Auth Service
+# Techlock User Management Service
 
 This project uses `make` to help you develop.
 To view available commands and what they do, you can view the `Makefile` at the root of this project.

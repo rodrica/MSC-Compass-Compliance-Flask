@@ -20,19 +20,28 @@ services:
     ports:
       - 6103:5000
     command: -p 5000 cognito-idp
+  psql:
+    image: postgres:11
+    ports:
+      - 6104:5432
+    environment:
+      POSTGRES_USER: techlock
+      POSTGRES_PASSWORD: password
 
   init:
-    build:
-      context: .
-      args:
-        NEXUS_HOST: ${NEXUS_HOST}
-        NEXUS_USERNAME: ${NEXUS_USERNAME}
-        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
+    image: registry.gitlab.com/techlock/msc-user-management-service:psql-backend_6196fa6fe85ad5f8db2bd31f226ac251bde917ef
+    # build:
+    #   context: .
+    #   args:
+    #     NEXUS_HOST: ${NEXUS_HOST}
+    #     NEXUS_USERNAME: ${NEXUS_USERNAME}
+    #     NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
       - cognito
       - jwt
+      - psql
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -49,6 +58,8 @@ services:
       # LOG_LEVEL: debug
       TENANT_ID: test
       NO_CACHE: ${NO_CACHE:-true}
+      FLASK_APP: techlock/user_management_service/app.py
+      FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       FLASK_JWT_ALGORITHM: RS256
       JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'
     ports:
@@ -59,21 +70,23 @@ services:
       - "-s"
       - "--timeout=30"
       - "--"
-      - 'python'
-      - '/app/tests/e2e_tests/conftest.py'
+      - '/app/run_tests.sh'
+      - '--init'
 
   api:
-    build:
-      context: .
-      args:
-        NEXUS_HOST: ${NEXUS_HOST}
-        NEXUS_USERNAME: ${NEXUS_USERNAME}
-        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
+    image: registry.gitlab.com/techlock/msc-user-management-service:psql-backend_6196fa6fe85ad5f8db2bd31f226ac251bde917ef
+    # build:
+    #   context: .
+    #   args:
+    #     NEXUS_HOST: ${NEXUS_HOST}
+    #     NEXUS_USERNAME: ${NEXUS_USERNAME}
+    #     NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
       - cognito
       - jwt
+      - psql
       - init
     environment:
       REDIS_HOST: redis
@@ -91,6 +104,8 @@ services:
       # LOG_LEVEL: debug
       TENANT_ID: test
       NO_CACHE: ${NO_CACHE:-true}
+      FLASK_APP: techlock/user_management_service/app.py
+      FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       FLASK_JWT_ALGORITHM: RS256
       JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'
     ports:

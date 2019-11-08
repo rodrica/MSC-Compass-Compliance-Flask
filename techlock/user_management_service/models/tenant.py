@@ -1,18 +1,14 @@
 import marshmallow as ma
 import marshmallow.fields as mf
-from boto3.dynamodb.conditions import Attr
 from dataclasses import dataclass
-from typing import ClassVar, Dict
 
 from techlock.common.api import (
     ClaimSpec,
-    PageableResponseBaseSchema,
-    PageableQueryParameters, PageableQueryParametersSchema,
+    OffsetPageableResponseBaseSchema,
+    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
-from techlock.common.orm.dynamodb import (
-    NO_DEFAULT,
-    PersistedObject,
-    PersistedObjectSchema,
+from techlock.common.orm.sqlalchemy import (
+    BaseModel, BaseModelSchema,
 )
 
 __all__ = [
@@ -37,43 +33,24 @@ TENANT_CLAIM_SPEC = ClaimSpec(
 )
 
 
-class TenantSchema(PersistedObjectSchema):
-    name = mf.String()
-    description = mf.String(allow_none=True)
-
-    tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
+class TenantSchema(BaseModelSchema):
+    pass
 
 
-class TenantPageableSchema(PageableResponseBaseSchema):
+class TenantPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(TenantSchema, many=True, dump_only=True)
 
 
-class TenantListQueryParametersSchema(PageableQueryParametersSchema):
-    name = mf.String(allow_none=True, description='Used to filter tenants by name prefix.')
-
+class TenantListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     @ma.post_load
     def make_object(self, data, **kwargs):
         return TenantListQueryParameters(**data)
 
 
-@dataclass
-class Tenant(PersistedObject):
-    table: ClassVar[str] = 'tenants'
-
-    name: str = NO_DEFAULT
-    description: str = None
-
-    tags: Dict[str, str] = None
+class Tenant(BaseModel):
+    __tablename__ = 'tenants'
 
 
 @dataclass
-class TenantListQueryParameters(PageableQueryParameters):
-    name: str = None
-
-    def get_filters(self):
-        ddb_attrs = list()
-
-        if self.name is not None:
-            ddb_attrs.append(Attr('name').begins_with(self.name))
-
-        return ddb_attrs
+class TenantListQueryParameters(BaseOffsetListQueryParams):
+    __db_model__ = Tenant

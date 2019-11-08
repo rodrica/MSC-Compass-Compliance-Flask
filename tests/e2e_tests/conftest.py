@@ -2,8 +2,10 @@ import boto3
 import os
 import pytest
 
+from techlock.common.api.flask import create_flask
 from techlock.common.config import AuthInfo, ConfigManager
 from techlock.common.instance_manager import InstanceManager, INSTANCE_TYPES
+from techlock.common.orm.sqlalchemy import db
 from techlock.common.util.aws import get_client
 from techlock.common.util.helper import supress
 from techlock.user_management_service.models import (
@@ -14,6 +16,8 @@ from techlock.user_management_service.models import (
     User
 )
 
+flask_wrapper = create_flask(__name__, enable_jwt=False, audience='user-management')
+
 
 def _flush_local_dynamodb(create=True):
     if os.name == 'nt':
@@ -23,11 +27,11 @@ def _flush_local_dynamodb(create=True):
     ddb = boto3.client('dynamodb', endpoint_url=os.environ['DYNAMODB_ENDPOINT_URL'])
     tables = [
         ConfigManager().table_name,
-        Department._get_table_name(),
-        Office._get_table_name(),
-        Role._get_table_name(),
-        Tenant._get_table_name(),
-        User._get_table_name()
+        # Department._get_table_name(),
+        # Office._get_table_name(),
+        # Role._get_table_name(),
+        # Tenant._get_table_name(),
+        # User._get_table_name()
     ]
 
     for table in tables:
@@ -57,6 +61,17 @@ def _flush_local_dynamodb(create=True):
             )
 
 
+def _flush_local_psql(create=True):
+    with flask_wrapper.app.app_context():
+        with supress(Exception):
+            print('Dropping tables')
+            db.drop_all()
+
+        if create:
+            print('Creating tables')
+            db.create_all()
+
+
 def _create_cognito_user_pool():
     '''
         Creates a cognito user pool and sets the id in the config manager
@@ -77,6 +92,7 @@ def flush_local_dynamodb():
     yield
 
     _flush_local_dynamodb()
+    _flush_local_psql()
     _create_cognito_user_pool()
     redis = InstanceManager().get_instance('', INSTANCE_TYPES.REDIS)
     redis.flushall()
@@ -85,6 +101,7 @@ def flush_local_dynamodb():
 def pytest_sessionstart(session):
     print('========= Initializing local dynamodb =========')
     _flush_local_dynamodb()
+    _flush_local_psql()
     _create_cognito_user_pool()
     redis = InstanceManager().get_instance('', INSTANCE_TYPES.REDIS)
     redis.flushall()
@@ -95,6 +112,7 @@ def pytest_sessionfinish(session, exitstatus):
     print()
     print('========= Cleaning up local dynamodb =========')
     _flush_local_dynamodb(create=False)
+    # _flush_local_psql(create=False)
     redis = InstanceManager().get_instance('', INSTANCE_TYPES.REDIS)
     redis.flushall()
     print('========= Finished cleaning up local dynamodb =========')
@@ -125,6 +143,7 @@ def create_root():
 
 def main():
     _flush_local_dynamodb()
+    _flush_local_psql()
     _create_cognito_user_pool()
     create_root()
 

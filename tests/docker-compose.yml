@@ -20,6 +20,13 @@ services:
     ports:
       - 5000
     command: -p 5000 cognito-idp
+  psql:
+    image: postgres:11
+    ports:
+      - 5432
+    environment:
+      POSTGRES_USER: techlock
+      POSTGRES_PASSWORD: password
 
   app:
     build:
@@ -33,6 +40,7 @@ services:
       - dynamodb
       - cognito
       - jwt
+      - psql
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -49,6 +57,8 @@ services:
       # LOG_LEVEL: debug
       TENANT_ID: test
       NO_CACHE: ${NO_CACHE:-true}
+      FLASK_APP: techlock/user_management_service/app.py
+      FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       FLASK_JWT_ALGORITHM: RS256
       JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'
     ports:
@@ -67,6 +77,7 @@ services:
       - dynamodb
       - cognito
       - jwt
+      - psql
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -81,6 +92,8 @@ services:
       AWS_DEFAULT_REGION: us-east-1
       STAGE: test
       TENANT_ID: test
+      FLASK_APP: techlock/user_management_service/app.py
+      FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       PYTHONDONTWRITEBYTECODE: 1
     entrypoint:
       - "/app/run_tests.sh"

@@ -39,10 +39,10 @@ class Tenants(MethodView):
 
         pageable_resp = Tenant.get_all(
             current_user,
-            cursor=query_params.cursor,
-            include_page_cursors=query_params.include_page_cursors,
+            offset=query_params.offset,
             limit=query_params.limit,
-            additional_conditions=query_params.get_filters(),
+            sort=query_params.sort,
+            additional_filters=query_params.get_filters(),
             claims=claims,
         )
 
@@ -59,7 +59,7 @@ class Tenants(MethodView):
         current_user = get_current_user()
         logger.info('Creating Tenant', extra={'data': data})
 
-        Tenant.validate(data)
+        # Tenant.validate(data)
         tenant = Tenant(**data)
         tenant.save(current_user)
 
@@ -96,7 +96,7 @@ class TenantById(MethodView):
         claims = get_request_claims()
         logger.debug('Updating Tenant', extra={'data': data})
 
-        Tenant.validate(data, validate_required_fields=False)
+        # Tenant.validate(data, validate_required_fields=False)
         tenant = Tenant.get(current_user, tenant_id)
         if tenant is None or not can_access(tenant, claims):
             raise NotFoundException('No tenant found for id = {}'.format(tenant_id))
