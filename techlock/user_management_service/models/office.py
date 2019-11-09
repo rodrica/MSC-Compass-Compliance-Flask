@@ -60,7 +60,7 @@ class OfficeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     state = mf.String(allow_none=True, description='Used to filter offices by state prefix.')
     country = mf.String(allow_none=True, description='Used to filter offices by country prefix.')
 
-    department_ids = mf.String(allow_none=True, description='Used to filter offices by department_ids. Comma delimited list of exact ids.')
+    department_id = mf.String(allow_none=True, description='Used to filter offices by department_id.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -122,6 +122,6 @@ class OfficeListQueryParameters(BaseOffsetListQueryParams):
 
         if self.department_id:
             deparment = Department.get(auth_info, self.department_id, raise_if_not_found=True)
-            filters.append(Office.deparments.contains(deparment))
+            filters.append(Office.departments.contains(deparment))
 
         return filters

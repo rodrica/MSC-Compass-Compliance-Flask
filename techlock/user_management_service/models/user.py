@@ -189,8 +189,8 @@ class UserListQueryParameters(BaseOffsetListQueryParams):
             filters.append(User.roles.contains(role))
 
         if self.department_id:
-            deparment = Department.get(auth_info, self.department_id, raise_if_not_found=True)
-            filters.append(User.deparments.contains(deparment))
+            department = Department.get(auth_info, self.department_id, raise_if_not_found=True)
+            filters.append(User.departments.contains(department))
 
         if self.office_id:
             office = Office.get(auth_info, self.office_id, raise_if_not_found=True)
