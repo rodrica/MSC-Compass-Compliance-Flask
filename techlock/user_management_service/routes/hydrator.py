@@ -9,12 +9,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.api.jwt_authorization import Claim, tenant_header_key
-from techlock.common.config import AuthInfo
 from techlock.common.util.helper import parse_boolean
 from techlock.user_management_service.models import (
     HydratorPostSchema,
     User,
-    Role
 )
 
 
