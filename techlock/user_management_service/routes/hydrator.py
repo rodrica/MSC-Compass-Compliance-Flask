@@ -29,6 +29,8 @@ basic_enabled = parse_boolean(os.environ.get('HYDRATOR_BASIC_ENABLED', 'true'))
 basic_user = os.environ.get('HYDRATOR_BASIC_USER', '')
 basic_password = generate_password_hash(os.environ.get('HYDRATOR_BASIC_PASSWORD', ''))
 
+username_token_field = os.environ.get('USERNAME_TOKEN_FIELD', 'username')
+
 
 @auth.verify_password
 def verify_password(username, password):
@@ -47,7 +49,7 @@ class Hydrator(MethodView):
     @blp.response(HydratorPostSchema)
     @auth.login_required
     def post(self, data):
-        audience = request.headers.get('X-Audience')
+        audience = data.get('header').get('X-Audience')
         # Oathkeeper makes headers a list??
         if isinstance(audience, list):
             if len(audience) == 1:
@@ -55,7 +57,7 @@ class Hydrator(MethodView):
             else:
                 logger.error('Unsupported audience header', extra={'audience': audience})
 
-        email = data.get('extra').get('username')
+        email = data.get('extra').get(username_token_field)
 
         if email is None:
             logger.error('No username provided', extra={'data': data})
@@ -69,26 +71,21 @@ class Hydrator(MethodView):
         if tenant_header_key in request.headers:
             tenant_id = request.headers.get(tenant_header_key)
 
-        current_user = AuthInfo(user_id=user.email, tenant_id=user.tenant_id)
-        roles = Role.get_all(
-            current_user,
-            ids=user.role_ids,
-            claims=[Claim.from_string('{}:*:*:roles:*'.format(user.tenant_id))]
-        )
-
-        users_claims = user.claims_by_audience.get(audience)
+        users_claims = user.claims_by_audience.get(audience) if user.claims_by_audience else None
         claims = set(users_claims) if users_claims else set()
         role_names = set()
-        for role in roles.items:
-            claims.update(filter(
-                lambda x: Claim.from_string(x).tenant_id == tenant_id,
-                role.claims_by_audience.get(audience)
-            ))
-            role_names.add(role.name)
+        for role in user.roles:
+            if role.claims_by_audience:
+                claims.update(filter(
+                    lambda x: Claim.from_string(x).tenant_id == tenant_id,
+                    role.claims_by_audience.get(audience)
+                ))
+                role_names.add(role.name)
 
         response = {
-            'subject': email,
+            'subject': data['subject'],
             'extra': {
+                'user_id': user.entity_id,
                 'tenant_id': user.tenant_id,
                 'claims': list(claims),
                 'roles': list(role_names)
@@ -96,9 +93,9 @@ class Hydrator(MethodView):
             'header': data['header']
         }
 
-        logger.info('args', extra={
-            'args2': data,
-            'request.headers': request.headers,
+        logger.info('Hydrator data.', extra={
+            'data': data,
+            'request.headers': dict(request.headers),
             'response': response,
         })
         return response
