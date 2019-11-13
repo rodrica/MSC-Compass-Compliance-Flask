@@ -89,7 +89,7 @@ class DepartmentById(MethodView):
     def get(self, department_id):
         current_user = get_current_user()
 
-        department = self.get_department.get(current_user, department_id)
+        department = self.get_department(current_user, department_id)
 
         return department
 
@@ -103,7 +103,7 @@ class DepartmentById(MethodView):
         current_user = get_current_user()
         logger.debug('Updating Department', extra={'data': data})
 
-        department = self.get_department.get(current_user, department_id)
+        department = self.get_department(current_user, department_id)
 
         for k, v in data.items():
             if hasattr(department, k):
@@ -121,7 +121,7 @@ class DepartmentById(MethodView):
     def delete(self, department_id):
         current_user = get_current_user()
 
-        department = self.get_department.get(current_user, department_id)
+        department = self.get_department(current_user, department_id)
 
         department.delete(current_user)
         return department
