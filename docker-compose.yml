@@ -29,13 +29,13 @@ services:
       POSTGRES_PASSWORD: password
 
   init:
-    image: registry.gitlab.com/techlock/msc-user-management-service:psql-backend_6196fa6fe85ad5f8db2bd31f226ac251bde917ef
-    # build:
-    #   context: .
-    #   args:
-    #     NEXUS_HOST: ${NEXUS_HOST}
-    #     NEXUS_USERNAME: ${NEXUS_USERNAME}
-    #     NEXUS_PASSWORD: ${NEXUS_PASSWORD}
+    # image: registry.gitlab.com/techlock/msc-user-management-service:master_latest
+    build:
+      context: .
+      args:
+        NEXUS_HOST: ${NEXUS_HOST}
+        NEXUS_USERNAME: ${NEXUS_USERNAME}
+        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
@@ -74,13 +74,13 @@ services:
       - '--init'
 
   api:
-    image: registry.gitlab.com/techlock/msc-user-management-service:psql-backend_6196fa6fe85ad5f8db2bd31f226ac251bde917ef
-    # build:
-    #   context: .
-    #   args:
-    #     NEXUS_HOST: ${NEXUS_HOST}
-    #     NEXUS_USERNAME: ${NEXUS_USERNAME}
-    #     NEXUS_PASSWORD: ${NEXUS_PASSWORD}
+    # image: registry.gitlab.com/techlock/msc-user-management-service:master_latest
+    build:
+      context: .
+      args:
+        NEXUS_HOST: ${NEXUS_HOST}
+        NEXUS_USERNAME: ${NEXUS_USERNAME}
+        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
