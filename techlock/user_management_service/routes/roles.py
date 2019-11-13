@@ -7,6 +7,7 @@ from flask_smorest import Blueprint
 from techlock.common.api import (
     BadRequestException, NotFoundException,
 )
+from techlock.common.config import AuthInfo
 from techlock.common.api.jwt_authorization import (
     access_required,
     get_request_claims,
@@ -69,6 +70,16 @@ class Roles(MethodView):
 @blp.route('/<role_id>')
 class RoleById(MethodView):
 
+    def get_role(self, current_user: AuthInfo, role_id: str):
+        claims = get_request_claims()
+
+        role = Role.get(current_user, role_id)
+        # If no access, return 404
+        if role is None or not can_access(role, claims):
+            raise NotFoundException('No role found for id = {}'.format(role_id))
+
+        return role
+
     @blp.response(RoleSchema)
     @access_required(
         'read', 'roles',
@@ -76,12 +87,8 @@ class RoleById(MethodView):
     )
     def get(self, role_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        role = Role.get(current_user, role_id)
-        # If no access, return 404
-        if role is None or not can_access(role, claims):
-            raise NotFoundException('No role found for id = {}'.format(role_id))
+        role = self.get_role(current_user, role_id)
 
         return role
 
@@ -93,13 +100,9 @@ class RoleById(MethodView):
     )
     def put(self, data, role_id):
         current_user = get_current_user()
-        claims = get_request_claims()
         logger.debug('Updating Role', extra={'data': data})
 
-        # Role.validate(data, validate_required_fields=False)
-        role = Role.get(current_user, role_id)
-        if role is None or not can_access(role, claims):
-            raise NotFoundException('No role found for id = {}'.format(role_id))
+        role = self.get_role(current_user, role_id)
 
         for k, v in data.items():
             if hasattr(role, k):
@@ -116,11 +119,8 @@ class RoleById(MethodView):
     )
     def delete(self, role_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        role = Role.get(current_user, role_id)
-        if role is None or not can_access(role, claims):
-            raise NotFoundException('No role found for id = {}'.format(role_id))
+        role = self.get_role(current_user, role_id)
 
         role.delete(current_user)
         return role

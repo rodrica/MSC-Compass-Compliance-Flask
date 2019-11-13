@@ -7,6 +7,7 @@ from flask_smorest import Blueprint
 from techlock.common.api import (
     BadRequestException, NotFoundException,
 )
+from techlock.common.config import AuthInfo
 from techlock.common.api.jwt_authorization import (
     access_required,
     get_request_claims,
@@ -75,6 +76,16 @@ class Offices(MethodView):
 @blp.route('/<office_id>')
 class OfficeById(MethodView):
 
+    def get_office(self, current_user: AuthInfo, office_id: str):
+        claims = get_request_claims()
+
+        office = Office.get(current_user, office_id)
+        # If no access, return 404
+        if office is None or not can_access(office, claims):
+            raise NotFoundException('No office found for id = {}'.format(office_id))
+
+        return office
+
     @blp.response(OfficeSchema)
     @access_required(
         'read', 'offices',
@@ -82,12 +93,8 @@ class OfficeById(MethodView):
     )
     def get(self, office_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        office = Office.get(current_user, office_id)
-        # If no access, return 404
-        if office is None or not can_access(office, claims):
-            raise NotFoundException('No office found for id = {}'.format(office_id))
+        office = self.get_office(current_user, office_id)
 
         return office
 
@@ -99,13 +106,9 @@ class OfficeById(MethodView):
     )
     def put(self, data, office_id):
         current_user = get_current_user()
-        claims = get_request_claims()
         logger.debug('Updating Office', extra={'data': data})
 
-        # Office.validate(data, validate_required_fields=False)
-        office = Office.get(current_user, office_id)
-        if office is None or not can_access(office, claims):
-            raise NotFoundException('No office found for id = {}'.format(office_id))
+        office = self.get_office(current_user, office_id)
 
         # Validate that items exist and get actual items
         # Ugly code, will have to do for now
@@ -130,11 +133,8 @@ class OfficeById(MethodView):
     )
     def delete(self, office_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        office = Office.get(current_user, office_id)
-        if office is None or not can_access(office, claims):
-            raise NotFoundException('No office found for id = {}'.format(office_id))
+        office = self.get_office(current_user, office_id)
 
         office.delete(current_user)
         return office

@@ -7,6 +7,7 @@ from flask_smorest import Blueprint
 from techlock.common.api import (
     BadRequestException, NotFoundException,
 )
+from techlock.common.config import AuthInfo
 from techlock.common.api.jwt_authorization import (
     access_required,
     get_request_claims,
@@ -69,6 +70,16 @@ class Tenants(MethodView):
 @blp.route('/<tenant_id>')
 class TenantById(MethodView):
 
+    def get_tenant(self, current_user: AuthInfo, tenant_id: str):
+        claims = get_request_claims()
+
+        tenant = Tenant.get(current_user, tenant_id)
+        # If no access, return 404
+        if tenant is None or not can_access(tenant, claims):
+            raise NotFoundException('No tenant found for id = {}'.format(tenant_id))
+
+        return tenant
+
     @blp.response(TenantSchema)
     @access_required(
         'read', 'tenants',
@@ -76,12 +87,8 @@ class TenantById(MethodView):
     )
     def get(self, tenant_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        tenant = Tenant.get(current_user, tenant_id)
-        # If no access, return 404
-        if tenant is None or not can_access(tenant, claims):
-            raise NotFoundException('No tenant found for id = {}'.format(tenant_id))
+        tenant = self.get_tenant(current_user, tenant_id)
 
         return tenant
 
@@ -93,13 +100,9 @@ class TenantById(MethodView):
     )
     def put(self, data, tenant_id):
         current_user = get_current_user()
-        claims = get_request_claims()
         logger.debug('Updating Tenant', extra={'data': data})
 
-        # Tenant.validate(data, validate_required_fields=False)
-        tenant = Tenant.get(current_user, tenant_id)
-        if tenant is None or not can_access(tenant, claims):
-            raise NotFoundException('No tenant found for id = {}'.format(tenant_id))
+        tenant = self.get_tenant(current_user, tenant_id)
 
         for k, v in data.items():
             if hasattr(tenant, k):
@@ -116,11 +119,8 @@ class TenantById(MethodView):
     )
     def delete(self, tenant_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        tenant = Tenant.get(current_user, tenant_id)
-        if tenant is None or not can_access(tenant, claims):
-            raise NotFoundException('No tenant found for id = {}'.format(tenant_id))
+        tenant = self.get_tenant(current_user, tenant_id)
 
         tenant.delete(current_user)
         return tenant
