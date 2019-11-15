@@ -69,13 +69,15 @@ class Hydrator(MethodView):
         if tenant_header_key in request.headers:
             tenant_id = request.headers.get(tenant_header_key)
 
-        users_claims = user.claims_by_audience.get(audience) if user.claims_by_audience else None
-        claims = set(users_claims) if users_claims else set()
+        claims = set(filter(
+            lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
+            user.claims_by_audience.get(audience)
+        )) if user.claims_by_audience else set()
         role_names = set()
         for role in user.roles:
             if role.claims_by_audience:
                 claims.update(filter(
-                    lambda x: Claim.from_string(x).tenant_id == tenant_id,
+                    lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
                     role.claims_by_audience.get(audience)
                 ))
                 role_names.add(role.name)
