@@ -86,9 +86,9 @@ class UpdateUserSchema(ma.Schema):
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
-    role_ids = mf.List(mf.UUID(), required=False)
-    department_ids = mf.List(mf.UUID(), required=False)
-    office_ids = mf.List(mf.UUID(), required=False)
+    role_ids = mf.List(mf.UUID(), required=False, allow_none=True)
+    department_ids = mf.List(mf.UUID(), required=False, allow_none=True)
+    office_ids = mf.List(mf.UUID(), required=False, allow_none=True)
 
 
 class PostUserSchema(UpdateUserSchema):
