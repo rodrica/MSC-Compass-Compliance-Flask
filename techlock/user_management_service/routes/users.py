@@ -166,7 +166,7 @@ class UserById(MethodView):
         # Validate that items exist and get actual items
         data['roles'] = _get_items_from_id_list(current_user, data.pop('role_ids', None), Role)
         data['departments'] = _get_items_from_id_list(current_user, data.pop('department_ids', None), Department)
-        data['offices'] = _get_items_from_id_list(current_user, data.pop('office_ids'), None, Office)
+        data['offices'] = _get_items_from_id_list(current_user, data.pop('office_ids', None), Office)
 
         attributes_to_update = dict()
         for k, v in data.items():
