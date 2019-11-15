@@ -3,6 +3,8 @@ import logging
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
+from typing import List, Union
+from uuid import UUID
 
 from techlock.common.api import (
     BadRequestException, NotFoundException,
@@ -13,6 +15,7 @@ from techlock.common.api.jwt_authorization import (
     get_request_claims,
     can_access,
 )
+from techlock.common.orm.sqlalchemy import BaseModel
 
 from ..models import (
     Department,
@@ -24,6 +27,17 @@ from ..models import (
 logger = logging.getLogger(__name__)
 
 blp = Blueprint('offices', __name__, url_prefix='/offices')
+
+
+def _get_items_from_id_list(current_user: AuthInfo, id_list: List[Union[str, UUID]], ormClass: BaseModel):
+    items = list()
+    if not id_list:
+        return items
+
+    for entity_id in id_list:
+        items.append(ormClass.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+
+    return items
 
 
 @blp.route('')
@@ -61,11 +75,7 @@ class Offices(MethodView):
         current_user = get_current_user()
         logger.info('Creating Office', extra={'data': data})
 
-        departments = list()
-        for entity_id in data.get('department_ids', list()):
-            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
-        data.pop('department_ids', None)
-        data['departments'] = departments
+        data['departments'] = _get_items_from_id_list(current_user, data.pop('department_ids', None), Department)
 
         office = Office(**data)
         office.save(current_user)
@@ -111,12 +121,7 @@ class OfficeById(MethodView):
         office = self.get_office(current_user, office_id)
 
         # Validate that items exist and get actual items
-        # Ugly code, will have to do for now
-        departments = list()
-        for entity_id in data.get('department_ids', list()):
-            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
-        data.pop('department_ids', None)
-        data['departments'] = departments
+        data['departments'] = _get_items_from_id_list(current_user, data.pop('department_ids', None), Department)
 
         for k, v in data.items():
             if hasattr(office, k):
