@@ -88,8 +88,8 @@ class Office(BaseModel):
     state = db.Column(db.String, unique=False, nullable=True)
     country = db.Column(db.String, unique=False, nullable=True)
     postal_code = db.Column(db.String, unique=False, nullable=True)
-    latitude = db.Column(db.DECIMAL(precision=12), unique=False, nullable=True)
-    longitude = db.Column(db.DECIMAL(precision=12), unique=False, nullable=True)
+    latitude = db.Column(db.DECIMAL(precision=12, scale=9), unique=False, nullable=True)
+    longitude = db.Column(db.DECIMAL(precision=12, scale=9), unique=False, nullable=True)
 
     departments = db.relationship(
         'Department',
