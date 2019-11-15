@@ -11,7 +11,8 @@ stages:
       headers:
         content-type: application/json
       json:
-        sub: test@test.com
+        sub: auth0|foobar
+        user_id: test@test.com
         tenant_id: tenant1
         roles:
           - tenant1
@@ -170,7 +171,8 @@ stages:
       headers:
         content-type: application/json
       json:
-        sub: test@test.com
+        sub: auth0|foobar
+        user_id: test@test.com
         tenant_id: tenant1
         roles:
           - tenant1
@@ -190,7 +192,8 @@ stages:
       headers:
         content-type: application/json
       json:
-        sub: test2@test.com
+        sub: auth0|foobar2
+        user_id: test2@test.com
         tenant_id: tenant2
         roles:
           - tenant2
@@ -595,7 +598,8 @@ stages:
       headers:
         content-type: application/json
       json:
-        sub: test@test.com
+        sub: auth0|foobar
+        user_id: test@test.com
         tenant_id: tenant1
         roles:
           - tenant1
