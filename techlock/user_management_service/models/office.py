@@ -52,7 +52,7 @@ class OfficeSchema(BaseModelSchema):
     longitude = mf.Decimal(allow_none=True)
 
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True, dump_only=True)
-    department_ids = mf.List(mf.UUID(), required=False, load_only=True)
+    department_ids = mf.List(mf.UUID(), allow_none=True, required=False, load_only=True)
 
 
 class OfficeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
