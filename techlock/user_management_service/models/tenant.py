@@ -8,6 +8,7 @@ from techlock.common.api import (
     BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
 from techlock.common.orm.sqlalchemy import (
+    db,
     BaseModel, BaseModelSchema,
 )
 
@@ -34,7 +35,7 @@ TENANT_CLAIM_SPEC = ClaimSpec(
 
 
 class TenantSchema(BaseModelSchema):
-    pass
+    service_now_id = mf.String(allow_none=True)
 
 
 class TenantPageableSchema(OffsetPageableResponseBaseSchema):
@@ -49,6 +50,8 @@ class TenantListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 
 class Tenant(BaseModel):
     __tablename__ = 'tenants'
+
+    service_now_id = db.Column(db.String, nullable=True)
 
 
 @dataclass

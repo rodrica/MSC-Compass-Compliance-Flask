@@ -49,6 +49,7 @@ stages:
       json:
         name: Test Tenant
         description: Simple description
+        service_now_id: null
     response:
       status_code: 201
       body:
@@ -58,6 +59,7 @@ stages:
             expected:
               name: Test Tenant
               description: Simple description
+              service_now_id: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
@@ -83,6 +85,7 @@ stages:
               entity_id: "{created_id}"
               name: Test Tenant
               description: Simple description
+              service_now_id: null
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
