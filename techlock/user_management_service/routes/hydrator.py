@@ -75,7 +75,7 @@ class Hydrator(MethodView):
         )) if user.claims_by_audience else set()
         role_names = set()
         for role in user.roles:
-            if role.claims_by_audience:
+            if role.claims_by_audience and role.claims_by_audience.get(audience):
                 claims.update(filter(
                     lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
                     role.claims_by_audience.get(audience)
