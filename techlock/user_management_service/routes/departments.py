@@ -7,6 +7,7 @@ from flask_smorest import Blueprint
 from techlock.common.api import (
     BadRequestException, NotFoundException,
 )
+from techlock.common.config import AuthInfo
 from techlock.common.api.jwt_authorization import (
     access_required,
     get_request_claims,
@@ -70,6 +71,16 @@ class Departments(MethodView):
 @blp.route('/<department_id>')
 class DepartmentById(MethodView):
 
+    def get_department(self, current_user: AuthInfo, department_id: str):
+        claims = get_request_claims()
+
+        department = Department.get(current_user, department_id)
+        # If no access, return 404
+        if department is None or not can_access(department, claims):
+            raise NotFoundException('No department found for id = {}'.format(department_id))
+
+        return department
+
     @blp.response(DepartmentSchema)
     @access_required(
         'read', 'departments',
@@ -77,12 +88,8 @@ class DepartmentById(MethodView):
     )
     def get(self, department_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        department = Department.get(current_user, department_id)
-        # If no access, return 404
-        if department is None or not can_access(department, claims):
-            raise NotFoundException('No department found for id = {}'.format(department_id))
+        department = self.get_department(current_user, department_id)
 
         return department
 
@@ -94,13 +101,9 @@ class DepartmentById(MethodView):
     )
     def put(self, data, department_id):
         current_user = get_current_user()
-        claims = get_request_claims()
         logger.debug('Updating Department', extra={'data': data})
 
-        # Department.validate(data, validate_required_fields=False)
-        department = Department.get(current_user, department_id)
-        if department is None or not can_access(department, claims):
-            raise NotFoundException('No department found for id = {}'.format(department_id))
+        department = self.get_department(current_user, department_id)
 
         for k, v in data.items():
             if hasattr(department, k):
@@ -117,11 +120,8 @@ class DepartmentById(MethodView):
     )
     def delete(self, department_id):
         current_user = get_current_user()
-        claims = get_request_claims()
 
-        department = Department.get(current_user, department_id)
-        if department is None or not can_access(department, claims):
-            raise NotFoundException('No department found for id = {}'.format(department_id))
+        department = self.get_department(current_user, department_id)
 
         department.delete(current_user)
         return department

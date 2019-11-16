@@ -4,6 +4,8 @@ import logging
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
+from typing import List, Union
+from uuid import UUID
 
 from techlock.common.api import (
     BadRequestException, ConflictException, NotFoundException,
@@ -15,6 +17,7 @@ from techlock.common.api.jwt_authorization import (
 )
 from techlock.common.config import AuthInfo
 from techlock.common.messaging import UserNotification, Level, publish_sns
+from techlock.common.orm.sqlalchemy import BaseModel
 
 from ..services import get_idp
 from ..models import (
@@ -30,6 +33,17 @@ from ..models import (
 logger = logging.getLogger(__name__)
 
 blp = Blueprint('users', __name__, url_prefix='/users')
+
+
+def _get_items_from_id_list(current_user: AuthInfo, id_list: List[Union[str, UUID]], ormClass: BaseModel):
+    items = list()
+    if not id_list:
+        return items
+
+    for entity_id in id_list:
+        items.append(ormClass.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+
+    return items
 
 
 @blp.route('')
@@ -79,15 +93,9 @@ class Users(MethodView):
             raise ConflictException('User with email = {} already exists.'.format(data['entity_id']))
 
         # Validate that items exist and get actual items
-        roles = list()
-        for entity_id in data.get('role_ids', list()):
-            roles.append(Role.get(current_user, entity_id=entity_id, raise_if_not_found=True))
-        departments = list()
-        for entity_id in data.get('department_ids', list()):
-            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
-        offices = list()
-        for entity_id in data.get('office_ids', list()):
-            offices.append(Office.get(current_user, entity_id=entity_id, raise_if_not_found=True))
+        roles = _get_items_from_id_list(current_user, data.get('role_ids'), Role)
+        departments = _get_items_from_id_list(current_user, data.get('department_ids'), Department)
+        offices = _get_items_from_id_list(current_user, data.get('office_ids'), Office)
 
         user = User(
             entity_id=data.get('email'),
@@ -156,22 +164,9 @@ class UserById(MethodView):
             raise BadRequestException('Email can not be changed.')
 
         # Validate that items exist and get actual items
-        # Ugly code, will have to do for now
-        roles = list()
-        for entity_id in data.get('role_ids', list()):
-            roles.append(Role.get(current_user, entity_id=entity_id, raise_if_not_found=True))
-        departments = list()
-        for entity_id in data.get('department_ids', list()):
-            departments.append(Department.get(current_user, entity_id=entity_id, raise_if_not_found=True))
-        offices = list()
-        for entity_id in data.get('office_ids', list()):
-            offices.append(Office.get(current_user, entity_id=entity_id, raise_if_not_found=True))
-        data.pop('role_ids', None)
-        data.pop('department_ids', None)
-        data.pop('office_ids', None)
-        data['roles'] = roles
-        data['departments'] = departments
-        data['offices'] = offices
+        data['roles'] = _get_items_from_id_list(current_user, data.pop('role_ids', None), Role)
+        data['departments'] = _get_items_from_id_list(current_user, data.pop('department_ids', None), Department)
+        data['offices'] = _get_items_from_id_list(current_user, data.pop('office_ids', None), Office)
 
         attributes_to_update = dict()
         for k, v in data.items():

@@ -11,7 +11,8 @@ stages:
       headers:
         content-type: application/json
       json:
-        sub: test@test.com
+        sub: auth0|foobar
+        user_id: test@test.com
         tenant_id: tenant1
         roles:
           - tenant1

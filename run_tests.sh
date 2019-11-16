@@ -39,6 +39,7 @@ run_cmd() {
 
 main() {
     if [ "$DOCKER" == true ]; then
+        run_cmd "docker-compose -f ./tests/docker-compose.yml -p test down"
         run_cmd "docker-compose -f ./tests/docker-compose.yml -p test build"
         run_cmd "NO_CACHE=true docker-compose -f ./tests/docker-compose.yml -p test up --exit-code-from test_runner"
         ret=$?

@@ -48,8 +48,8 @@ def upgrade():
     sa.Column('state', sa.String(), nullable=True),
     sa.Column('country', sa.String(), nullable=True),
     sa.Column('postal_code', sa.String(), nullable=True),
-    sa.Column('latitude', sa.DECIMAL(precision=12), nullable=True),
-    sa.Column('longitude', sa.DECIMAL(precision=12), nullable=True),
+    sa.Column('latitude', sa.DECIMAL(precision=12, scale=9), nullable=True),
+    sa.Column('longitude', sa.DECIMAL(precision=12, scale=9), nullable=True),
     sa.Column('tags', postgresql.JSONB(astext_type=sa.Text()), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )

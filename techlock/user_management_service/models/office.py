@@ -52,7 +52,7 @@ class OfficeSchema(BaseModelSchema):
     longitude = mf.Decimal(allow_none=True)
 
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True, dump_only=True)
-    department_ids = mf.List(mf.UUID(), required=False, load_only=True)
+    department_ids = mf.List(mf.UUID(), allow_none=True, required=False, load_only=True)
 
 
 class OfficeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
@@ -60,7 +60,7 @@ class OfficeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     state = mf.String(allow_none=True, description='Used to filter offices by state prefix.')
     country = mf.String(allow_none=True, description='Used to filter offices by country prefix.')
 
-    department_ids = mf.String(allow_none=True, description='Used to filter offices by department_ids. Comma delimited list of exact ids.')
+    department_id = mf.String(allow_none=True, description='Used to filter offices by department_id.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -88,8 +88,8 @@ class Office(BaseModel):
     state = db.Column(db.String, unique=False, nullable=True)
     country = db.Column(db.String, unique=False, nullable=True)
     postal_code = db.Column(db.String, unique=False, nullable=True)
-    latitude = db.Column(db.DECIMAL(precision=12), unique=False, nullable=True)
-    longitude = db.Column(db.DECIMAL(precision=12), unique=False, nullable=True)
+    latitude = db.Column(db.DECIMAL(precision=12, scale=9), unique=False, nullable=True)
+    longitude = db.Column(db.DECIMAL(precision=12, scale=9), unique=False, nullable=True)
 
     departments = db.relationship(
         'Department',
@@ -122,6 +122,6 @@ class OfficeListQueryParameters(BaseOffsetListQueryParams):
 
         if self.department_id:
             deparment = Department.get(auth_info, self.department_id, raise_if_not_found=True)
-            filters.append(Office.deparments.contains(deparment))
+            filters.append(Office.departments.contains(deparment))
 
         return filters
