@@ -89,7 +89,7 @@ class Hydrator(MethodView):
         claims = self._filter_claims(user.claims_by_audience, audience, tenant_id)
         role_names = set()
         for role in user.roles:
-            self._filter_claims(role.claims_by_audience, audience, tenant_id)
+            claims.update(self._filter_claims(role.claims_by_audience, audience, tenant_id))
             role_names.add(role.name)
 
         response = {
