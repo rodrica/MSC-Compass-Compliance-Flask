@@ -5,6 +5,7 @@ from flask import request
 from flask.views import MethodView
 from flask_httpauth import HTTPBasicAuth
 from flask_smorest import Blueprint
+from typing import Dict
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from techlock.common.api import BadRequestException, NotFoundException
@@ -43,6 +44,22 @@ def verify_password(username, password):
 @blp.route('')
 class Hydrator(MethodView):
 
+    def _filter_claims(self, claims_by_audience: Dict, audience: str, tenant_id: str):
+        claims = set()
+        if claims_by_audience:
+            if claims_by_audience.get('*'):
+                claims.update(filter(
+                    lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
+                    claims_by_audience.get('*')
+                ))
+            if claims_by_audience.get(audience):
+                claims.update(filter(
+                    lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
+                    claims_by_audience.get(audience)
+                ))
+
+        return claims
+
     @blp.arguments(HydratorPostSchema)
     @blp.response(HydratorPostSchema)
     @auth.login_required
@@ -69,18 +86,11 @@ class Hydrator(MethodView):
         if tenant_header_key in request.headers:
             tenant_id = request.headers.get(tenant_header_key)
 
-        claims = set(filter(
-            lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
-            user.claims_by_audience.get(audience)
-        )) if user.claims_by_audience else set()
+        claims = self._filter_claims(user.claims_by_audience, audience, tenant_id)
         role_names = set()
         for role in user.roles:
-            if role.claims_by_audience and role.claims_by_audience.get(audience):
-                claims.update(filter(
-                    lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
-                    role.claims_by_audience.get(audience)
-                ))
-                role_names.add(role.name)
+            self._filter_claims(role.claims_by_audience, audience, tenant_id)
+            role_names.add(role.name)
 
         response = {
             'subject': data['subject'],
