@@ -14,6 +14,7 @@ from techlock.common.util.helper import parse_boolean
 from techlock.user_management_service.models import (
     HydratorPostSchema,
     User,
+    Tenant,
 )
 
 
@@ -92,11 +93,14 @@ class Hydrator(MethodView):
             claims.update(self._filter_claims(role.claims_by_audience, audience, tenant_id))
             role_names.add(role.name)
 
+        tenant = Tenant._unsecure_get(tenant_id)
+
         response = {
             'subject': data['subject'],
             'extra': {
                 'user_id': user.entity_id,
                 'tenant_id': user.tenant_id,
+                'service_now_customer_id': tenant.service_now_id,
                 'claims': list(claims),
                 'roles': list(role_names)
             },
