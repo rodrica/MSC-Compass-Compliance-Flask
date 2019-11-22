@@ -2,7 +2,7 @@ import json
 import logging
 
 from flask.views import MethodView
-from flask_jwt_extended import get_current_user
+from flask_jwt_extended import get_current_user, jwt_required
 from flask_smorest import Blueprint
 from typing import List, Union
 from uuid import UUID
@@ -209,6 +209,7 @@ class UserChangePassword(MethodView):
 
     @blp.arguments(PostUserChangePasswordSchema)
     @blp.response()
+    @jwt_required()
     def post(self, data: dict, user_id: str):
         current_user = get_current_user()
         user = _get_user(current_user, user_id)
