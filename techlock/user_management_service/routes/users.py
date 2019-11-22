@@ -46,6 +46,16 @@ def _get_items_from_id_list(current_user: AuthInfo, id_list: List[Union[str, UUI
     return items
 
 
+def _get_user(current_user: AuthInfo, user_id: str):
+    claims = get_request_claims()
+
+    user = User.get(current_user, user_id)
+    if user is None or not can_access(user, claims):
+        raise NotFoundException('No user found for id = {}'.format(user_id))
+
+    return user
+
+
 @blp.route('')
 class Users(MethodView):
 
@@ -127,15 +137,6 @@ class UserById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
         self.idp = get_idp()
 
-    def get_user(self, current_user: AuthInfo, user_id: str):
-        claims = get_request_claims()
-
-        user = User.get(current_user, user_id)
-        if user is None or not can_access(user, claims):
-            raise NotFoundException('No user found for id = {}'.format(user_id))
-
-        return user
-
     @blp.response(UserSchema)
     @access_required(
         'read', 'users',
@@ -143,7 +144,7 @@ class UserById(MethodView):
     )
     def get(self, user_id: str):
         current_user = get_current_user()
-        user = self.get_user(current_user, user_id)
+        user = _get_user(current_user, user_id)
 
         return user
 
@@ -158,7 +159,7 @@ class UserById(MethodView):
         logger.debug('Updating User', extra={'data': data})
 
         # User.validate(data, validate_required_fields=False)
-        user = self.get_user(current_user, user_id)
+        user = _get_user(current_user, user_id)
 
         if user.email != data.get('email'):
             raise BadRequestException('Email can not be changed.')
@@ -188,7 +189,7 @@ class UserById(MethodView):
     )
     def delete(self, user_id: str):
         current_user = get_current_user()
-        user = self.get_user(current_user, user_id)
+        user = _get_user(current_user, user_id)
 
         self.idp.delete_user(current_user, user)
         logger.info('Deleted user from userpool')
@@ -210,7 +211,7 @@ class UserChangePassword(MethodView):
     @blp.response()
     def post(self, data: dict, user_id: str):
         current_user = get_current_user()
-        user = self.get_user(current_user, user_id)
+        user = _get_user(current_user, user_id)
 
         self.idp.change_password(current_user, user, data.get('new_password'))
 
