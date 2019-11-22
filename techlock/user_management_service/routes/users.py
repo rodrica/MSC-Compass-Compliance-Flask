@@ -2,7 +2,7 @@ import json
 import logging
 
 from flask.views import MethodView
-from flask_jwt_extended import get_current_user, jwt_required
+from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from typing import List, Union
 from uuid import UUID
@@ -11,6 +11,7 @@ from techlock.common.api import (
     BadRequestException, ConflictException, NotFoundException,
 )
 from techlock.common.api.jwt_authorization import (
+    Claim,
     access_required,
     get_request_claims,
     can_access,
@@ -50,7 +51,7 @@ def _get_user(current_user: AuthInfo, user_id: str):
     claims = get_request_claims()
 
     user = User.get(current_user, user_id)
-    if user is None or not can_access(user, claims):
+    if user is None or (current_user.user_id != user_id and not can_access(user, claims)):
         raise NotFoundException('No user found for id = {}'.format(user_id))
 
     return user
@@ -72,6 +73,10 @@ class Users(MethodView):
     def get(self, query_params: UserListQueryParameters):
         current_user = get_current_user()
         claims = get_request_claims()
+
+        if not claims:
+            # if no claims, at one that allows the user to see himself
+            claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', current_user.user_id)]
 
         pageable_resp = User.get_all(
             current_user,
@@ -189,6 +194,10 @@ class UserById(MethodView):
     )
     def delete(self, user_id: str):
         current_user = get_current_user()
+
+        if current_user.user_id == user_id:
+            return BadRequestException('Can not delete yourself.')
+
         user = _get_user(current_user, user_id)
 
         self.idp.delete_user(current_user, user)
@@ -209,7 +218,10 @@ class UserChangePassword(MethodView):
 
     @blp.arguments(PostUserChangePasswordSchema)
     @blp.response()
-    @jwt_required()
+    @access_required(
+        'update', 'user_passwords',
+        allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
+    )
     def post(self, data: dict, user_id: str):
         current_user = get_current_user()
         user = _get_user(current_user, user_id)
