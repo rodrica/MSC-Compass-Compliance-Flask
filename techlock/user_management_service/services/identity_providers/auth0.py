@@ -2,9 +2,10 @@ import logging
 from typing import Dict
 
 from auth0.v3.authentication import GetToken
+from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
 
-from techlock.common.api import NotFoundException
+from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
@@ -81,6 +82,23 @@ class Auth0Idp(IdpProvider):
     def change_password(self, current_user: AuthInfo, user: User, new_password: str):
         found_user = self._get_user(user)
 
-        self.auth0.users.update(found_user['user_id'], {
-            'password': new_password,
-        })
+        try:
+            self.auth0.users.update(found_user['user_id'], {
+                'password': new_password,
+            })
+        except Auth0Error as e:
+            if e.error_code == 'PasswordStrengthError':
+                conn_options = self.auth0.connections.get(self.connection_id)['options']
+
+                raise BadRequestException('Password is too weak.', payload={
+                    'rules': {
+                        'min_length': conn_options['password_complexity_options']['min_length'],
+                        'history_size': conn_options['password_history']['size'],
+                        'no_personal_info': conn_options['password_no_personal_info']['enabled'],
+                        'must_incl_number': conn_options['passwordPolicy'] in ('fair', 'good', 'excellent'),
+                        'must_incl_special': conn_options['passwordPolicy'] in ('good', 'excellent'),
+                        'no_consecutive': conn_options['passwordPolicy'] == 'excellent',
+                    }
+                })
+            else:
+                raise BadRequestException(f'{e.error_code}: {e.message}')
