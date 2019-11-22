@@ -39,7 +39,7 @@ setup(
     author_email='jmt.vanderlee@gmail.com',
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[
-        'tl-msc-common==1.0.0.dev0+master.7e4cda35e7d44f87b6e6f21e02ea1c3a98dfdb1b',
+        'tl-msc-common==1.0.0.dev0+master.84b1b58bd7ba897661cd88e400a3116d392cb09d',
         'Flask-HTTPAuth==3.3.0',
     ],
 )
