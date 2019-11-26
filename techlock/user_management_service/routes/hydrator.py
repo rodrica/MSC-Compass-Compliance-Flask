@@ -4,11 +4,11 @@ import os
 from flask import request
 from flask.views import MethodView
 from flask_httpauth import HTTPBasicAuth
-from flask_smorest import Blueprint
 from typing import Dict
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from techlock.common.api import BadRequestException, NotFoundException
+from techlock.common.api.blueprint import Blueprint
 from techlock.common.api.jwt_authorization import Claim, tenant_header_key
 from techlock.common.util.helper import parse_boolean
 from techlock.user_management_service.models import (
@@ -42,7 +42,7 @@ def verify_password(username, password):
     return False
 
 
-@blp.route('')
+@blp.route('', document=False)
 class Hydrator(MethodView):
 
     def _filter_claims(self, claims_by_audience: Dict, audience: str, tenant_id: str):
