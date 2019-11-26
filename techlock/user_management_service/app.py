@@ -20,7 +20,7 @@ routes = [
     'users',
 ]
 
-flask_wrapper = create_flask(__name__, enable_jwt=True, audience='user-management')
+flask_wrapper = create_flask("User Management", enable_jwt=True, audience='user-management')
 # unwrap wrapper to ensure all plugins work properly
 app = flask_wrapper.app
 migrate = flask_wrapper.migrate
