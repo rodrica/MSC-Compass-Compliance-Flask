@@ -1,21 +1,23 @@
-
-from typing import Dict
+from __future__ import annotations
+from typing import Dict, TYPE_CHECKING
 
 from techlock.common.config import AuthInfo
 
-from ...models import User
+if TYPE_CHECKING:
+    from ...models import User
 
 
 class IdpProvider():
 
-    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False):
+    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False, **kwargs):
         pass
 
     def update_user_attributes(
         self,
         current_user: AuthInfo,
         user: User,
-        attributes: Dict[str, str]
+        attributes: Dict[str, str],
+        **kwargs
     ):
         pass
 
@@ -23,4 +25,7 @@ class IdpProvider():
         pass
 
     def change_password(self, current_user: AuthInfo, user: User):
+        pass
+
+    def get_user_attributes(self, user: User):
         pass

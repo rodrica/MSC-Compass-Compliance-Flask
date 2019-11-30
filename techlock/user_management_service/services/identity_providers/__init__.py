@@ -1,6 +1,7 @@
 from techlock.common import ConfigManager
 
 from .auth0 import Auth0Idp
+from .base import IdpProvider
 from .cognito import CognitoIdp
 from .mock import MockIdp
 
@@ -11,7 +12,7 @@ _idp_map = {
 }
 
 
-def get_idp(idp_name=None):
+def get_idp(idp_name=None) -> IdpProvider:
     if idp_name is None:
         idp_name = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.name', 'MOCK')
 

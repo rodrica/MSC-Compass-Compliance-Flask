@@ -1,11 +1,13 @@
-
-from typing import Dict
+from __future__ import annotations
+from typing import Dict, TYPE_CHECKING
 
 from techlock.common.config import AuthInfo, ConfigManager
 from techlock.common.util.aws import get_client
 
 from .base import IdpProvider
-from ...models import User
+
+if TYPE_CHECKING:
+    from ...models import User
 
 
 class CognitoIdp(IdpProvider):
@@ -50,3 +52,6 @@ class CognitoIdp(IdpProvider):
             UserPoolId=user_pool_id,
             Username=user.email,
         )
+
+    def get_user_attributes(self, user: User):
+        return NotImplementedError()

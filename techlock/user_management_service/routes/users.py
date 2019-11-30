@@ -75,8 +75,8 @@ class Users(MethodView):
         claims = get_request_claims()
 
         if not claims:
-            # if no claims, at one that allows the user to see himself
-            claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', current_user.user_id)]
+            # if no claims, add one that allows the user to see himself
+            claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', id=current_user.user_id)]
 
         pageable_resp = User.get_all(
             current_user,
@@ -105,7 +105,7 @@ class Users(MethodView):
         # User.validate(data)
         user = User.get(current_user, data['email'])
         if user is not None:
-            raise ConflictException('User with email = {} already exists.'.format(data['entity_id']))
+            raise ConflictException('User with email = {} already exists.'.format(data['email']))
 
         # Validate that items exist and get actual items
         roles = _get_items_from_id_list(current_user, data.get('role_ids'), Role)

@@ -1,6 +1,8 @@
 import marshmallow as ma
 import marshmallow.fields as mf
 from dataclasses import dataclass
+from enum import Enum
+from marshmallow_enum import EnumField
 from sqlalchemy import func as sa_fn
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 
@@ -19,6 +21,7 @@ from techlock.common.orm.sqlalchemy import (
 from .department import Department, DepartmentSchema
 from .office import Office, OfficeSchema
 from .role import Role, RoleSchema
+from ..services import get_idp
 
 __all__ = [
     'User',
@@ -57,9 +60,17 @@ USER_CLAIM_SPEC = ClaimSpec(
 )
 
 
+class EndgameRoles(Enum):
+    alert_triage = 'alert_triage'
+    hunter = 'hunter'
+    gatherer = 'gatherer'
+    admin = 'admin'
+
+
 class UserSchema(BaseModelSchema):
     email = mf.Email(required=True)
     family_name = mf.String()
+    endgame_role = EnumField(EndgameRoles)
 
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
@@ -75,8 +86,9 @@ class UserSchema(BaseModelSchema):
 class UpdateUserSchema(ma.Schema):
     email = mf.Email(required=True)
     name = mf.String(required=True)
-    family_name = mf.String()
+    family_name = mf.String(required=True)
     description = mf.String()
+    endgame_role = EnumField(EndgameRoles, allow_none=True)
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
@@ -160,6 +172,20 @@ class User(BaseModel):
     )
 
     claims_by_audience = db.Column(JSONB, nullable=True)
+
+    _idp_attrs = None
+
+    def _fetch_idp_attrs(self):
+        idp = get_idp()
+        self._idp_attrs = idp.get_user_attributes(self)
+
+    @property
+    def endgame_role(self):
+        if self._idp_attrs is None:
+            self._fetch_idp_attrs()
+
+        role_name = self._idp_attrs.get('endgame_role')
+        return EndgameRoles[role_name] if role_name else None
 
 
 @dataclass

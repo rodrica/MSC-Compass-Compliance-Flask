@@ -1,10 +1,13 @@
+from __future__ import annotations
 import logging
-from typing import Dict
+from typing import Dict, TYPE_CHECKING
 
 from techlock.common.config import AuthInfo
 
 from .base import IdpProvider
-from ...models import User
+
+if TYPE_CHECKING:
+    from ...models import User
 
 logger = logging.getLogger(__name__)
 
@@ -28,3 +31,6 @@ class MockIdp(IdpProvider):
 
     def change_password(self, current_user: AuthInfo, user: User, new_password: str):
         logger.info("change_password")
+
+    def get_user_attributes(self, user: User):
+        logger.info("get_user_attributes")

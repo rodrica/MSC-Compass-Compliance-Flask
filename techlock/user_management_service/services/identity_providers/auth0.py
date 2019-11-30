@@ -1,6 +1,6 @@
+from __future__ import annotations
 import logging
-from typing import Dict
-
+from typing import Dict, TYPE_CHECKING
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
@@ -9,9 +9,14 @@ from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
-from ...models import User
+if TYPE_CHECKING:
+    from ...models import User
 
 logger = logging.getLogger(__name__)
+
+_app_metadata_keys = [
+    'endgame_role',
+]
 
 
 class Auth0Idp(IdpProvider):
@@ -49,7 +54,8 @@ class Auth0Idp(IdpProvider):
             'name': user.name,
             'family_name': user.family_name,
             'app_metadata': {
-                'custom:tenant_id': user.tenant_id,
+                'tenant_id': user.tenant_id,
+                'endgame_role': user.endgame_role,
             },
             'password': password,
             'connection': self.connection_id,
@@ -64,7 +70,7 @@ class Auth0Idp(IdpProvider):
         user_attributes = dict()
         custom_attributes = dict()
         for k, v in attributes.items():
-            if k.startswith('custom:'):
+            if k.startswith('custom:') or k in (_app_metadata_keys):
                 custom_attributes[k] = v
             else:
                 user_attributes[k] = v
@@ -102,3 +108,8 @@ class Auth0Idp(IdpProvider):
                 })
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')
+
+    def get_user_attributes(self, user: User):
+        found_user = self._get_user(user)
+
+        return found_user.get('app_metadata', dict())
