@@ -52,6 +52,7 @@ class Auth0Idp(IdpProvider):
             'email': user.email,
             'email_verified': email_verified,
             'name': user.name,
+            'given_name': user.name,
             'family_name': user.family_name,
             'app_metadata': {
                 'tenant_id': user.tenant_id,
