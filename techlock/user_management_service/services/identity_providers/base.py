@@ -21,11 +21,11 @@ class IdpProvider():
     ):
         pass
 
-    def delete_user(self, current_user: AuthInfo, user: User):
+    def delete_user(self, current_user: AuthInfo, user: User, **kwargs):
         pass
 
-    def change_password(self, current_user: AuthInfo, user: User):
+    def change_password(self, current_user: AuthInfo, user: User, **kwargs):
         pass
 
-    def get_user_attributes(self, user: User):
+    def get_user_attributes(self, user: User, **kwargs):
         pass

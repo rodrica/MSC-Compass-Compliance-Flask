@@ -14,7 +14,7 @@ class CognitoIdp(IdpProvider):
     def __init__(self):
         self.cognito = get_client('cognito-idp')
 
-    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False):
+    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False, **kwargs):
         user_pool_id = ConfigManager().get(current_user, 'user_pool_id', raise_if_not_found=True)
         self.cognito.admin_create_user(
             UserPoolId=user_pool_id,
@@ -34,7 +34,8 @@ class CognitoIdp(IdpProvider):
         self,
         current_user: AuthInfo,
         user: User,
-        attributes: Dict[str, str]
+        attributes: Dict[str, str],
+        **kwargs
     ):
         user_pool_id = ConfigManager().get(current_user, 'user_pool_id', raise_if_not_found=True)
         self.cognito.admin_update_user_attributes(
@@ -46,12 +47,12 @@ class CognitoIdp(IdpProvider):
             ]
         )
 
-    def delete_user(self, current_user: AuthInfo, user: User):
+    def delete_user(self, current_user: AuthInfo, user: User, **kwargs):
         user_pool_id = ConfigManager().get(current_user, 'user_pool_id', raise_if_not_found=True)
         self.cognito.admin_delete_user(
             UserPoolId=user_pool_id,
             Username=user.email,
         )
 
-    def get_user_attributes(self, user: User):
+    def get_user_attributes(self, user: User, **kwargs):
         return NotImplementedError()

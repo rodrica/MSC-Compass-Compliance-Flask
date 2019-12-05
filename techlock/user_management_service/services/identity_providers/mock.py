@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 class MockIdp(IdpProvider):
 
-    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False):
+    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False, **kwargs):
         logger.info("create_user")
         pass
 
@@ -22,15 +22,16 @@ class MockIdp(IdpProvider):
         self,
         current_user: AuthInfo,
         user: User,
-        attributes: Dict[str, str]
+        attributes: Dict[str, str],
+        **kwargs
     ):
         logger.info("update_user_attributes")
 
-    def delete_user(self, current_user: AuthInfo, user: User):
+    def delete_user(self, current_user: AuthInfo, user: User, **kwargs):
         logger.info("delete_user")
 
-    def change_password(self, current_user: AuthInfo, user: User, new_password: str):
+    def change_password(self, current_user: AuthInfo, user: User, new_password: str, **kwargs):
         logger.info("change_password")
 
-    def get_user_attributes(self, user: User):
+    def get_user_attributes(self, user: User, **kwargs):
         logger.info("get_user_attributes")

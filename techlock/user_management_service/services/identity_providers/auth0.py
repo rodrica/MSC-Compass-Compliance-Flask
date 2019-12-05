@@ -68,7 +68,8 @@ class Auth0Idp(IdpProvider):
         self,
         current_user: AuthInfo,
         user: User,
-        attributes: Dict[str, str]
+        attributes: Dict[str, str],
+        **kwargs
     ):
         user_attributes = dict()
         custom_attributes = dict()
@@ -84,11 +85,11 @@ class Auth0Idp(IdpProvider):
         found_user = self._get_user(user)
         self.auth0.users.update(found_user['user_id'], user_attributes)
 
-    def delete_user(self, current_user: AuthInfo, user: User):
+    def delete_user(self, current_user: AuthInfo, user: User, **kwargs):
         found_user = self._get_user(user)
         self.auth0.users.delete(found_user['user_id'])
 
-    def change_password(self, current_user: AuthInfo, user: User, new_password: str):
+    def change_password(self, current_user: AuthInfo, user: User, new_password: str, **kwargs):
         found_user = self._get_user(user)
 
         try:
@@ -112,7 +113,7 @@ class Auth0Idp(IdpProvider):
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')
 
-    def get_user_attributes(self, user: User):
+    def get_user_attributes(self, user: User, **kwargs):
         found_user = self._get_user(user)
 
         return found_user.get('app_metadata', dict())
