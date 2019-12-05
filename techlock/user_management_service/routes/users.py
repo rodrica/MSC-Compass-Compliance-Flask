@@ -35,6 +35,9 @@ logger = logging.getLogger(__name__)
 
 blp = Blueprint('users', __name__, url_prefix='/users')
 
+idp_attribute_keys = [
+    'endgame_role',
+]
 
 def _get_items_from_id_list(current_user: AuthInfo, id_list: List[Union[str, UUID]], ormClass: BaseModel):
     items = list()
@@ -126,7 +129,8 @@ class Users(MethodView):
         )
 
         logger.info('Adding user to idp')
-        self.idp.create_user(current_user, user, password=temporary_password)
+        idp_attributes = {k: v for k, v in data.items() if k in idp_attribute_keys}
+        self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
         logger.info('User added to idp, storing internally')
 
         user.save(current_user)
@@ -176,7 +180,9 @@ class UserById(MethodView):
 
         attributes_to_update = dict()
         for k, v in data.items():
-            if hasattr(user, k):
+            if k in idp_attribute_keys:
+                attributes_to_update[k] = v
+            elif hasattr(user, k):
                 setattr(user, k, v)
                 if k in ('name', 'family_name'):
                     attributes_to_update[k] = v

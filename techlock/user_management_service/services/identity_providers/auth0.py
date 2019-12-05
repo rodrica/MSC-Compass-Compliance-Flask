@@ -47,17 +47,19 @@ class Auth0Idp(IdpProvider):
 
         return found_users[0]
 
-    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False):
+    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified: bool = False, idp_attibutes: dict = None):
+        app_metadata = {
+            'tenant_id': user.tenant_id,
+        }
+        app_metadata.update(idp_attibutes)
+
         self.auth0.users.create({
             'email': user.email,
             'email_verified': email_verified,
             'name': user.name,
             'given_name': user.name,
             'family_name': user.family_name,
-            'app_metadata': {
-                'tenant_id': user.tenant_id,
-                'endgame_role': user.endgame_role,
-            },
+            'app_metadata': app_metadata,
             'password': password,
             'connection': self.connection_id,
         })
