@@ -39,6 +39,7 @@ idp_attribute_keys = [
     'endgame_role',
 ]
 
+
 def _get_items_from_id_list(current_user: AuthInfo, id_list: List[Union[str, UUID]], ormClass: BaseModel):
     items = list()
     if not id_list:
