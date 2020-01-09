@@ -80,7 +80,7 @@ class Users(MethodView):
 
         if not claims:
             # if no claims, add one that allows the user to see himself
-            claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', id=current_user.user_id)]
+            claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', id=current_user.user_id, filter_field=None, filter_value=None)]
 
         pageable_resp = User.get_all(
             current_user,
