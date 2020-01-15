@@ -116,13 +116,26 @@ class Users(MethodView):
         departments = _get_items_from_id_list(current_user, data.get('department_ids'), Department)
         offices = _get_items_from_id_list(current_user, data.get('office_ids'), Office)
 
+        claims_by_audience = data.get('claims_by_audience')
+        if claims_by_audience is not None:
+            for key, claims in claims_by_audience.items():
+                new_claims = []
+                for claim in claims:
+                    c = Claim.from_string(claim)
+                    if c.tenant_id == '':
+                        c.tenant_id = current_user.tenant_id
+                    allow = "allow" if c.allow else "deny"
+                    claim_str = f'{allow}:{c.tenant_id}:{c.audience}:{c.action}:{c.resource}:{c.id}'
+                    new_claims = new_claims + [claim_str]
+                claims_by_audience[key] = new_claims
+
         user = User(
             entity_id=data.get('email'),
             email=data.get('email'),
             name=data.get('name'),
             family_name=data.get('family_name'),
             description=data.get('description'),
-            claims_by_audience=data.get('claims_by_audience'),
+            claims_by_audience=claims_by_audience,
             tags=data.get('tags'),
             roles=roles,
             departments=departments,

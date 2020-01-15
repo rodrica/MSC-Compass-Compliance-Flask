@@ -1,0 +1,90 @@
+test_name: Test replacing empty tenant
+marks:
+  - usefixtures:
+      - flush_local_dynamodb
+
+stages:
+  - name: Get JWT
+    request:
+      url: http://jwt:5000/login
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        sub: auth0|foobar
+        user_id: test@test.com
+        tenant_id: tenant1
+        roles:
+          - tenant1
+          - tenant1:admin
+        claims:
+          - allow:tenant1:user-management:*:roles:*
+    response:
+      status_code: 200
+      save:
+        body:
+          access_token: access_token
+
+  - name: Create Role
+    request:
+      url: http://app:5000/roles
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Manage users
+        claims_by_audience:
+           user_management:
+              - allow::user-management:create:users:*
+    response:
+      status_code: 201
+      verify_response_with:
+        function: techlock.common.unittest.tavern_validators:validate_base_model
+        extra_kwargs:
+          expected:
+            name: Manage users
+            description: null
+            claims_by_audience:
+              user_management:
+                - allow:tenant1:user-management:create:users:*
+            tenant_id: tenant1
+            created_by: test@test.com
+            changed_by: test@test.com
+            tags: null
+
+  - name: Create User
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        email: test2@test.com
+        temporary_password: changeme
+        claims_by_audience:
+           user_management:
+              - allow::user-management:create:users:*
+    response:
+      status_code: 201
+      verify_response_with:
+        function: techlock.common.unittest.tavern_validators:validate_base_model
+        extra_kwargs:
+          expected:
+            name: Test
+            family_name: e2e
+            email: test2@test.com
+            departments: []
+            offices: []
+            roles: []
+            description: null
+            claims_by_audience:
+              user_management:
+                - allow:tenant1:user-management:create:users:*
+            tenant_id: tenant1
+            created_by: test@test.com
+            changed_by: test@test.com
+            tags: null
