@@ -9,6 +9,14 @@ from techlock.common.orm.sqlalchemy import db
 from techlock.common.util.aws import get_client
 from techlock.common.util.helper import supress
 
+# import tables so that _flush_local_psql creates and drops their tables
+from techlock.user_management_service.models import (
+    Department,
+    Office,
+    Role,
+    Tenant,
+    User
+)
 
 flask_wrapper = create_flask(__name__, enable_jwt=False, audience='user-management')
 
