@@ -22,7 +22,7 @@ class ConfigUrls(MethodView):
     )
     def get(self):
         current_user = get_current_user()
-        ensilo_url = ConfigManager().get(current_user, 'ui_config_ensio_url', raise_if_not_found=False)
-        kibana_url = ConfigManager().get(current_user, 'ui_config_kibana_url', raise_if_not_found=False)
+        ensilo_url = ConfigManager().get(current_user, 'ui_config.ensilo_url', raise_if_not_found=False)
+        kibana_url = ConfigManager().get(current_user, 'ui_config.kibana_url', raise_if_not_found=False)
 
         return {"ensilo_url": ensilo_url, "kibana_url": kibana_url}
