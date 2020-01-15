@@ -88,6 +88,12 @@ services:
       - jwt
       - psql
       - init
+    entrypoint:
+      - flask
+      - run
+      - --host=0.0.0.0
+    volumes:
+      - './techlock/user_management_service/:/app/techlock/user_management_service/'
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -96,6 +102,8 @@ services:
       REDIS_IS_CLUSTER: 'false'
       REDIS_SKIP_FULL_COVERAGE_CHECK: 'false'
       DYNAMODB_ENDPOINT_URL: http://dynamodb:8000
+      UI_CONFIG_ENSILO_URL: https://techlockinc.console.ensilo.com
+      UI_CONFIG_KIBANA_URL: http://techlock.kibana.com
       COGNITO_IDP_ENDPOINT_URL: http://cognito:5000
       AWS_ACCESS_KEY_ID: fake
       AWS_SECRET_ACCESS_KEY: fake
@@ -105,6 +113,8 @@ services:
       TENANT_ID: test
       NO_CACHE: ${NO_CACHE:-true}
       FLASK_APP: techlock/user_management_service/app.py
+      FLASK_ENV: development
+      FLASK_DEBUG: 1
       FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       FLASK_JWT_ALGORITHM: RS256
       JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'

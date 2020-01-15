@@ -20,6 +20,7 @@ routes = [
     'roles',
     'tenants',
     'users',
+    'ui_data',
 ]
 
 flask_wrapper = create_flask(
