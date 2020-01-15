@@ -1,5 +1,5 @@
 FROM python:3.7-slim-stretch
-LABEL maintainer_name="Michiel Vanderlee" maintainer_email="mvanderlee@changedynamix.io"
+LABEL maintainer_name="Michiel Vanderlee" maintainer_email="mvanderlee@techlockinc.com"
 
 # Install packages that must be present at runtime
 RUN apt-get update \

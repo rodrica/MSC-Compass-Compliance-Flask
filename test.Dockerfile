@@ -1,5 +1,5 @@
 FROM python:3.7-alpine3.10
-LABEL maintainer_name="Michiel Vanderlee" maintainer_email="mvanderlee@changedynamix.io"
+LABEL maintainer_name="Michiel Vanderlee" maintainer_email="mvanderlee@techlockinc.com"
 
 # Install packages that must be present at runtime
 RUN apk add --no-cache \
@@ -26,7 +26,6 @@ RUN apk add --no-cache --virtual .build-deps \
     libffi-dev \
     libressl-dev \
   && pip install -r requirements.txt \
-    --no-cache-dir \
     --no-cache-dir \
     --extra-index-url "https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple/" \
   && pip install \

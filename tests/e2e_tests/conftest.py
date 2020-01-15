@@ -8,13 +8,7 @@ from techlock.common.instance_manager import InstanceManager, INSTANCE_TYPES
 from techlock.common.orm.sqlalchemy import db
 from techlock.common.util.aws import get_client
 from techlock.common.util.helper import supress
-from techlock.user_management_service.models import (
-    Department,
-    Office,
-    Role,
-    Tenant,
-    User
-)
+
 
 flask_wrapper = create_flask(__name__, enable_jwt=False, audience='user-management')
 
@@ -27,11 +21,6 @@ def _flush_local_dynamodb(create=True):
     ddb = boto3.client('dynamodb', endpoint_url=os.environ['DYNAMODB_ENDPOINT_URL'])
     tables = [
         ConfigManager().table_name,
-        # Department._get_table_name(),
-        # Office._get_table_name(),
-        # Role._get_table_name(),
-        # Tenant._get_table_name(),
-        # User._get_table_name()
     ]
 
     for table in tables:
