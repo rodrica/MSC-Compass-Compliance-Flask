@@ -1,8 +1,116 @@
-test_name: Test replacing empty tenant
+---
+test_name: Test creating/updating user with empty tenant in claims_by_audience
 marks:
   - usefixtures:
       - flush_local_dynamodb
+stages:
+  - name: Get JWT
+    request:
+      url: http://jwt:5000/login
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        sub: auth0|foobar
+        user_id: test@test.com
+        tenant_id: tenant1
+        roles:
+          - tenant1
+          - tenant1:admin
+        claims:
+          - allow:tenant1:user-management:*:users:*
+    response:
+      status_code: 200
+      save:
+        body:
+          access_token: access_token
 
+  - name: Create User
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        email: test2@test.com
+        temporary_password: changeme
+        claims_by_audience:
+           user_management:
+              - allow::user-management:create:users:*
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Test
+              family_name: e2e
+              email: test2@test.com
+              departments: []
+              offices: []
+              roles: []
+              description: null
+              claims_by_audience:
+                user_management:
+                  - allow:tenant1:user-management:create:users:*
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          created_id: entity_id
+
+  - name: Update User
+    request:
+      url: http://app:5000/users/{created_id}
+      method: PUT
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e_new
+        email: test2@test.com
+        claims_by_audience:
+           user_management:
+              - allow::user-management:update:users:*
+              - allow::user-management:create:users:*
+              - deny::user-management:delete:users:*
+    response:
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              entity_id: "{created_id}"
+              name: Test
+              family_name: e2e_new
+              email: test2@test.com
+              departments: []
+              offices: []
+              roles: []
+              description: null
+              claims_by_audience:
+                user_management:
+                  - allow:tenant1:user-management:update:users:*
+                  - allow:tenant1:user-management:create:users:*
+                  - deny:tenant1:user-management:delete:users:*
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+
+---
+test_name: Test creating/updating role with empty tenant in claims_by_audience
+marks:
+  - usefixtures:
+      - flush_local_dynamodb
 stages:
   - name: Get JWT
     request:
@@ -33,58 +141,60 @@ stages:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
-        name: Manage users
+        name: Finance
         claims_by_audience:
            user_management:
-              - allow::user-management:create:users:*
+              - allow::user-management:create:roles:*
     response:
       status_code: 201
-      verify_response_with:
-        function: techlock.common.unittest.tavern_validators:validate_base_model
-        extra_kwargs:
-          expected:
-            name: Manage users
-            description: null
-            claims_by_audience:
-              user_management:
-                - allow:tenant1:user-management:create:users:*
-            tenant_id: tenant1
-            created_by: test@test.com
-            changed_by: test@test.com
-            tags: null
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Finance
+              description: null
+              claims_by_audience:
+                user_management:
+                  - allow:tenant1:user-management:create:roles:*
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          created_id: entity_id
 
-  - name: Create User
+  - name: Update Role
     request:
-      url: http://app:5000/users
-      method: POST
+      url: http://app:5000/roles/{created_id}
+      method: PUT
       headers:
         content-type: application/json
         Authorization: "Bearer {access_token}"
       json:
-        name: Test
-        family_name: e2e
-        email: test2@test.com
-        temporary_password: changeme
+        name: HR
         claims_by_audience:
            user_management:
-              - allow::user-management:create:users:*
+              - allow::user-management:update:roles:*
+              - allow::user-management:create:roles:*
+              - deny::user-management:delete:roles:*
     response:
-      status_code: 201
-      verify_response_with:
-        function: techlock.common.unittest.tavern_validators:validate_base_model
-        extra_kwargs:
-          expected:
-            name: Test
-            family_name: e2e
-            email: test2@test.com
-            departments: []
-            offices: []
-            roles: []
-            description: null
-            claims_by_audience:
-              user_management:
-                - allow:tenant1:user-management:create:users:*
-            tenant_id: tenant1
-            created_by: test@test.com
-            changed_by: test@test.com
-            tags: null
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              entity_id: "{created_id}"
+              name: HR
+              description: null
+              claims_by_audience:
+                user_management:
+                  - allow:tenant1:user-management:update:roles:*
+                  - allow:tenant1:user-management:create:roles:*
+                  - deny:tenant1:user-management:delete:roles:*
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null

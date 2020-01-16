@@ -3,6 +3,7 @@ import logging
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
+from uuid import UUID
 
 from techlock.common.api import (
     BadRequestException, NotFoundException,
@@ -24,6 +25,22 @@ from ..models import (
 logger = logging.getLogger(__name__)
 
 blp = Blueprint('roles', __name__, url_prefix='/roles')
+
+
+def check_role_claims(data: dict, default_tenant_id: UUID):
+    claims_by_audience = data.get('claims_by_audience')
+    if claims_by_audience is not None:
+        for key, claims in claims_by_audience.items():
+            new_claims = []
+            for claim in claims:
+                c = Claim.from_string(claim)
+                if c.tenant_id == '':
+                    c.tenant_id = default_tenant_id
+                allow = "allow" if c.allow else "deny"
+                claim_str = f'{allow}:{c.tenant_id}:{c.audience}:{c.action}:{c.resource}:{c.id}'
+                new_claims = new_claims + [claim_str]
+            claims_by_audience[key] = new_claims
+    return claims_by_audience
 
 
 @blp.route('')
@@ -63,17 +80,7 @@ class Roles(MethodView):
 
         # Role.validate(data)
         role = Role(**data)
-        if role.claims_by_audience is not None:
-            for key, claims in role.claims_by_audience.items():
-                new_claims = []
-                for claim in claims:
-                    c = Claim.from_string(claim)
-                    if c.tenant_id == '':
-                        c.tenant_id = current_user.tenant_id
-                    allow = "allow" if c.allow else "deny"
-                    claim_str = f'{allow}:{c.tenant_id}:{c.audience}:{c.action}:{c.resource}:{c.id}'
-                    new_claims = new_claims + [claim_str]
-                role.claims_by_audience[key] = new_claims
+        role.claims_by_audience = check_role_claims(data, current_user.tenant_id)
 
         role.save(current_user)
 
@@ -116,12 +123,14 @@ class RoleById(MethodView):
         logger.debug('Updating Role', extra={'data': data})
 
         role = self.get_role(current_user, role_id)
-
         for k, v in data.items():
             if hasattr(role, k):
                 setattr(role, k, v)
             else:
                 raise BadRequestException('Role has no attribute: %s' % k)
+
+        role.claims_by_audience = check_role_claims(data, current_user.tenant_id)
+
         role.save(current_user)
         return role
 
