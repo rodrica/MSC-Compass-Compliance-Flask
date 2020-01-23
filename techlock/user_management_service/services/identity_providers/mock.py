@@ -7,7 +7,7 @@ from techlock.common.config import AuthInfo
 from .base import IdpProvider
 
 if TYPE_CHECKING:
-    from ...models import User
+    from ...models import User, Role
 
 logger = logging.getLogger(__name__)
 
