@@ -4,7 +4,7 @@ from typing import Dict, TYPE_CHECKING
 from techlock.common.config import AuthInfo
 
 if TYPE_CHECKING:
-    from ...models import User
+    from ...models import User, Role
 
 
 class IdpProvider():
@@ -35,4 +35,13 @@ class IdpProvider():
         pass
 
     def get_user_attributes(self, user: User, **kwargs):
+        pass
+
+    def create_role(self, current_user: AuthInfo, role: Role):
+        pass
+
+    def update_or_create_role(self, current_user: AuthInfo, role: Role, role_name: str):
+        pass
+
+    def delete_role(self, current_user: AuthInfo, role: Role):
         pass

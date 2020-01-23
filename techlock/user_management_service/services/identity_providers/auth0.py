@@ -12,7 +12,7 @@ from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
 if TYPE_CHECKING:
-    from ...models import User
+    from ...models import User, Role
 
 logger = logging.getLogger(__name__)
 
@@ -112,6 +112,23 @@ class Auth0Idp(IdpProvider):
 
         return found_users['users'][0]
 
+    def _get_role(self, role_name: str, throw_if_not_found: bool = True):
+        roles = self.auth0.roles.list(name_filter=role_name)['roles']
+        if len(roles) > 1:
+            logger.warn('Found multiple roles, expected one. Will use first one.', extra={
+                'roles': roles
+            })
+
+        for role in roles:
+            if role['name'] == role_name:
+                return role
+
+        if throw_if_not_found:
+            logger.error(f'Role {role_name} not found')
+            raise NotFoundException('Role not found')
+        else:
+            return None
+
     def create_user(
         self,
         current_user: AuthInfo,
@@ -203,3 +220,17 @@ class Auth0Idp(IdpProvider):
             'logins_count': found_user.get('logins_count')
         }
         return attrs
+
+    def create_role(self, current_user: AuthInfo, role: Role):
+        self.auth0.roles.create(body={'name': f'{role.tenant_id}_{role.name}'})
+
+    def update_or_create_role(self, current_user: AuthInfo, role: Role, role_name: str):
+        auth0_role = self._get_role(role.name, False)
+        if auth0_role is None:
+            self.auth0.roles.create(body={'name': f'{role.tenant_id}_{role_name}'})
+        else:
+            self.auth0.roles.update(auth0_role['id'], body={'name': f'{role.tenant_id}_{role_name}'})
+
+    def delete_role(self, current_user: AuthInfo, role: Role):
+        auth0_role = self._get_role(role.name)
+        self.auth0.roles.delete(auth0_role['id'])

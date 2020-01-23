@@ -35,3 +35,12 @@ class MockIdp(IdpProvider):
 
     def get_user_attributes(self, user: User, **kwargs):
         logger.info("get_user_attributes")
+
+    def create_role(self, current_user: AuthInfo, role: Role):
+        logger.info("create_role")
+
+    def update_or_create_role(self, current_user: AuthInfo, role: Role, role_name: str):
+        logger.info("update_or_create_role")
+
+    def delete_role(self, current_user: AuthInfo, role: Role):
+        logger.info("delete_role")
