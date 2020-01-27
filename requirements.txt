@@ -1,5 +1,4 @@
-tl-msc-common==1.0.0.dev0+master.ac239462ee01d1fee339417808a06215741deb6e
-
+tl-msc-common==1.0.0.dev0+master.7647bd8e0296615024c69972216f4e45c0fcec29               
 Flask-HTTPAuth==3.3.0
 
 # dev only requirements
