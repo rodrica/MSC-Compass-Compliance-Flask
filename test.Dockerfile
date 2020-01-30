@@ -37,6 +37,7 @@ RUN apk add --no-cache --virtual .build-deps \
 
 # Copy the app code, and install it without dependencies.
 COPY . /app
+RUN chmod +x /app/*.sh
 WORKDIR /app
 RUN pip install --no-cache-dir --no-dependencies .
 

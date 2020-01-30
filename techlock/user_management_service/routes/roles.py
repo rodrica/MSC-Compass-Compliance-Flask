@@ -3,9 +3,11 @@ import logging
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
+from uuid import UUID
 
 from techlock.common.api import (
     BadRequestException, NotFoundException,
+    Claim
 )
 from techlock.common.config import AuthInfo
 from techlock.common.api.jwt_authorization import (
@@ -23,6 +25,20 @@ from ..models import (
 logger = logging.getLogger(__name__)
 
 blp = Blueprint('roles', __name__, url_prefix='/roles')
+
+
+def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+    claims_by_audience = data.get('claims_by_audience')
+    if claims_by_audience is not None:
+        for key, claims in claims_by_audience.items():
+            new_claims = []
+            for claim in claims:
+                c = Claim.from_string(claim)
+                if c.tenant_id == '':
+                    c.tenant_id = default_tenant_id
+                new_claims = new_claims + [str(c)]
+            claims_by_audience[key] = new_claims
+    return claims_by_audience
 
 
 @blp.route('')
@@ -62,6 +78,8 @@ class Roles(MethodView):
 
         # Role.validate(data)
         role = Role(**data)
+        role.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+
         role.save(current_user)
 
         return role
@@ -103,12 +121,14 @@ class RoleById(MethodView):
         logger.debug('Updating Role', extra={'data': data})
 
         role = self.get_role(current_user, role_id)
-
         for k, v in data.items():
             if hasattr(role, k):
                 setattr(role, k, v)
             else:
                 raise BadRequestException('Role has no attribute: %s' % k)
+
+        role.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+
         role.save(current_user)
         return role
 

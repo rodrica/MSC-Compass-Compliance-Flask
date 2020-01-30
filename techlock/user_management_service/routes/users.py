@@ -61,6 +61,20 @@ def _get_user(current_user: AuthInfo, user_id: str):
     return user
 
 
+def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+    claims_by_audience = data.get('claims_by_audience')
+    if claims_by_audience is not None:
+        for key, claims in claims_by_audience.items():
+            new_claims = []
+            for claim in claims:
+                c = Claim.from_string(claim)
+                if c.tenant_id == '':
+                    c.tenant_id = default_tenant_id
+                new_claims = new_claims + [str(c)]
+            claims_by_audience[key] = new_claims
+    return claims_by_audience
+
+
 @blp.route('')
 class Users(MethodView):
 
@@ -122,7 +136,7 @@ class Users(MethodView):
             name=data.get('name'),
             family_name=data.get('family_name'),
             description=data.get('description'),
-            claims_by_audience=data.get('claims_by_audience'),
+            claims_by_audience=set_claims_default_tenant(data, current_user.tenant_id),
             tags=data.get('tags'),
             roles=roles,
             departments=departments,
@@ -189,6 +203,9 @@ class UserById(MethodView):
                     attributes_to_update[k] = v
             else:
                 raise BadRequestException('User has no attribute: %s' % k)
+
+        user.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+
         user.save(current_user)
         self.idp.update_user_attributes(current_user, user, attributes_to_update)
 

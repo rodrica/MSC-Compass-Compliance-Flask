@@ -40,6 +40,7 @@ RUN apt-get update \
 
 # Copy the app code, and install it without dependencies.
 COPY . /app
+RUN chmod +x /app/*.sh
 WORKDIR /app
 RUN pip install --no-cache-dir --no-dependencies .
 
