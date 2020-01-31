@@ -221,16 +221,38 @@ class Auth0Idp(IdpProvider):
         }
         return attrs
 
-    def create_role(self, current_user: AuthInfo, role: Role):
-        self.auth0.roles.create(body={'name': f'{role.tenant_id}_{role.name}'})
-
     def update_or_create_role(self, current_user: AuthInfo, role: Role, role_name: str):
         auth0_role = self._get_role(role.name, False)
         if auth0_role is None:
-            self.auth0.roles.create(body={'name': f'{role.tenant_id}_{role_name}'})
+            self.auth0.roles.create(body={'name': role.idp_name})
         else:
-            self.auth0.roles.update(auth0_role['id'], body={'name': f'{role.tenant_id}_{role_name}'})
+            self.auth0.roles.update(auth0_role['id'], body={'name': role.idp_name})
 
     def delete_role(self, current_user: AuthInfo, role: Role):
         auth0_role = self._get_role(role.name)
         self.auth0.roles.delete(auth0_role['id'])
+
+    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list):
+        auth0_user = self._get_user(user)
+        auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'])['roles']
+        all_roles = self.auth0.roles.list()['roles']
+
+        add_roles = []
+        del_roles = []
+        for role in roles:
+            role_exists = next((x for x in auth0_roles if x['name'] == f'{role.tenant_id}_{role.name}'), None)
+            if role_exists is None:
+                auth0_role = next((x for x in all_roles if x['name'] == f'{role.tenant_id}_{role.name}'), None)
+                if auth0_role is not None:
+                    add_roles += [auth0_role['id']]
+
+        for auth0_role in auth0_roles:
+            role_exists = next((x for x in user.roles if f'{x.tenant_id}_{x.name}' == auth0_role['name']), None)
+            if role_exists is None:
+                del_roles += [auth0_role['id']]
+
+        if len(add_roles) > 0:
+            self.auth0.users.add_roles(auth0_user['user_id'], add_roles)
+
+        if len(del_roles) > 0:
+            self.auth0.users.remove_roles(auth0_user['user_id'], del_roles)

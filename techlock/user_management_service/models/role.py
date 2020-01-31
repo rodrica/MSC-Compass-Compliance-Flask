@@ -60,6 +60,10 @@ class Role(BaseModel):
 
     claims_by_audience = db.Column(JSONB, nullable=True)
 
+    @property
+    def idp_name(self):
+        return f'{self.tenant_id}_{self.name}'
+
 
 @dataclass
 class RoleListQueryParameters(BaseOffsetListQueryParams):

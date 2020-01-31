@@ -87,7 +87,7 @@ class Roles(MethodView):
 
         role.save(current_user)
 
-        self.idp.create_role(current_user, role)
+        self.idp.update_or_create_role(current_user, role)
 
         return role
 
@@ -133,9 +133,6 @@ class RoleById(MethodView):
 
         role = self.get_role(current_user, role_id)
 
-        role_name = data.get('name')
-        self.idp.update_or_create_role(current_user, role, role_name)
-
         for k, v in data.items():
             if hasattr(role, k):
                 setattr(role, k, v)
@@ -145,6 +142,7 @@ class RoleById(MethodView):
         role.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         role.save(current_user)
+        self.idp.update_or_create_role(current_user, role)
 
         return role
 
@@ -157,7 +155,7 @@ class RoleById(MethodView):
         current_user = get_current_user()
         role = self.get_role(current_user, role_id)
 
-        self.idp.delete_role(current_user, f'{role.tenant_id}_{role.name}')
+        self.idp.delete_role(current_user, role.idp_name)
 
         role.delete(current_user)
         return role

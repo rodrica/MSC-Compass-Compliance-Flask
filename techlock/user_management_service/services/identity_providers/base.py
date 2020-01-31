@@ -37,11 +37,11 @@ class IdpProvider():
     def get_user_attributes(self, user: User, **kwargs):
         pass
 
-    def create_role(self, current_user: AuthInfo, role: Role):
-        pass
-
-    def update_or_create_role(self, current_user: AuthInfo, role: Role, role_name: str):
+    def update_or_create_role(self, current_user: AuthInfo, role: Role):
         pass
 
     def delete_role(self, current_user: AuthInfo, role: Role):
+        pass
+
+    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list):
         pass

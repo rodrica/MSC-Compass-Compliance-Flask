@@ -7,7 +7,7 @@ from techlock.common.util.aws import get_client
 from .base import IdpProvider
 
 if TYPE_CHECKING:
-    from ...models import User
+    from ...models import User, Role
 
 
 class CognitoIdp(IdpProvider):
@@ -55,4 +55,13 @@ class CognitoIdp(IdpProvider):
         )
 
     def get_user_attributes(self, user: User, **kwargs):
+        return NotImplementedError()
+
+    def update_or_create_role(self, current_user: AuthInfo, role: Role):
+        return NotImplementedError()
+
+    def delete_role(self, current_user: AuthInfo, role: Role):
+        return NotImplementedError()
+
+    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list):
         return NotImplementedError()

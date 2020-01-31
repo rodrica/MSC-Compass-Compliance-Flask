@@ -164,8 +164,9 @@ class Users(MethodView):
         logger.info('Adding user to idp')
         idp_attributes = {k: v for k, v in data.items() if k in idp_attribute_keys}
         self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
-        logger.info('User added to idp, storing internally')
+        self.idp.update_user_roles(current_user, user, user.roles)
 
+        logger.info('User added to idp, storing internally')
         user.save(current_user)
         logger.info('User created')
 
@@ -230,7 +231,9 @@ class UserById(MethodView):
         user.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         user.save(current_user)
+
         self.idp.update_user_attributes(current_user, user, attributes_to_update)
+        self.idp.update_user_roles(current_user, user, data['roles'])
 
         return user
 
