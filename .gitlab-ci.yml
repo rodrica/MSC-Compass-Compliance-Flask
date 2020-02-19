@@ -12,7 +12,7 @@ e2e-test:
   stage: test
   image: docker:latest
   services:
-    - docker:dind
+    - docker:19.03.5-dind  # https://gitlab.com/gitlab-com/support-forum/issues/5202
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
     - apk update
@@ -25,7 +25,7 @@ deploy-docker:
   stage: deploy
   image: docker:latest
   services:
-    - docker:dind
+    - docker:19.03.5-dind  # https://gitlab.com/gitlab-com/support-forum/issues/5202
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
   script:
@@ -40,7 +40,7 @@ deploy-docker-tags:
   stage: deploy
   image: docker:latest
   services:
-    - docker:dind
+    - docker:19.03.5-dind  # https://gitlab.com/gitlab-com/support-forum/issues/5202
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
   script:
