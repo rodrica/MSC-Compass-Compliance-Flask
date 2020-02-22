@@ -22,12 +22,15 @@ class ConfigUrls(MethodView):
     )
     def get(self):
         current_user = get_current_user()
-        ensilo_url = ConfigManager().get(current_user, 'ui_config.ensilo_url')
-        kibana_url = ConfigManager().get(current_user, 'ui_config.kibana_url')
-        kenna_url = ConfigManager().get(current_user, 'ui_config.kenna_url')
+        cm = ConfigManager()
+        ensilo_url = cm.get(current_user, 'ui_config.ensilo_url')
+        kibana_url = cm.get(current_user, 'ui_config.kibana_url')
+        kenna_url = cm.get(current_user, 'ui_config.kenna_url')
+        feature_flags = cm.get(current_user, 'ui_config.feature_flags', default=dict())
 
         return {
             "ensilo_url": ensilo_url,
             "kibana_url": kibana_url,
             "kenna_url": kenna_url,
+            "feature_flags": feature_flags,
         }
