@@ -36,7 +36,7 @@ class Auth0Idp(IdpProvider):
         self.auth0 = Auth0(domain, mgmt_api_token)
 
     def _get_user(self, user: User):
-        found_users = self.auth0.users.list(q='identities.connection: "{self.connection_id}" AND email: "{user.email}"')
+        found_users = self.auth0.users.list(q=f'identities.connection: "{self.connection_id}" AND email: "{user.email}"')
         total_found_users = found_users['total']
         if not total_found_users:
             logger.error('User not found', extra={'user', user.entity_id})
