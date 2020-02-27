@@ -37,15 +37,16 @@ class Auth0Idp(IdpProvider):
 
     def _get_user(self, user: User):
         found_users = self.auth0.users.list(q='identities.connection: "{self.connection_id}" AND email: "{user.email}"')
-        if not found_users:
+        total_found_users = found_users['total']
+        if not total_found_users:
             logger.error('User not found', extra={'user', user.entity_id})
             raise NotFoundException('User not found')
-        elif len(found_users) > 1:
+        elif total_found_users > 1:
             logger.warn('Found multiple users, expected one. Will use first one.', extra={
                 'found_users': found_users
             })
 
-        return found_users[0]
+        return found_users['users'][0]
 
     def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified: bool = False, idp_attributes: dict = None):
         app_metadata = {

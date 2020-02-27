@@ -16,8 +16,8 @@ e2e-test:
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
     - apk update
-    - apk add bash curl py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
-    - pip install docker-compose
+    - apk add bash curl py3-pip python3-dev libffi-dev openssl-dev gcc libc-dev make
+    - pip3 install docker-compose
   script:
     - ./run_tests.sh -d -e
 
