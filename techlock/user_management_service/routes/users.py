@@ -19,6 +19,7 @@ from techlock.common.api.jwt_authorization import (
 from techlock.common.config import AuthInfo
 from techlock.common.messaging import UserNotification, Level, publish_sns
 from techlock.common.orm.sqlalchemy import BaseModel
+from techlock.common.util.helper import suppress_with_log
 
 from ..services import get_idp
 from ..models import (
@@ -251,12 +252,15 @@ class UserChangePassword(MethodView):
 
         self.idp.change_password(current_user, user, data.get('new_password'))
 
-        publish_sns(UserNotification(
-            subject='Password Changed',
-            message=json.dumps({
-                'changed_by': current_user.user_id
-            }),
-            created_by='user-management-service',
-            tenant_id=current_user.tenant_id,
-            level=Level.warning,
-        ))
+        # Password was successfully changed, log any errors that occur in the post processing
+        # But don't raise it, we need to prevent the request itself from returning an error code.
+        with suppress_with_log(logger):
+            publish_sns(UserNotification(
+                subject='Password Changed',
+                message=json.dumps({
+                    'changed_by': current_user.user_id
+                }),
+                created_by='user-management-service',
+                tenant_id=current_user.tenant_id,
+                level=Level.warning,
+            ))
