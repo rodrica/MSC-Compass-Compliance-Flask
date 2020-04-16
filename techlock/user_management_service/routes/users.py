@@ -36,7 +36,6 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('users', __name__, url_prefix='/users')
 
 idp_attribute_keys = [
-    'endgame_role',
 ]
 
 

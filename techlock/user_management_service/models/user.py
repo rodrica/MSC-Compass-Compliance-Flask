@@ -60,17 +60,22 @@ USER_CLAIM_SPEC = ClaimSpec(
 )
 
 
-class EndgameRoles(Enum):
-    alert_triage = 'alert_triage'
-    hunter = 'hunter'
-    gatherer = 'gatherer'
-    admin = 'admin'
+class Email(mf.Email):
+    '''
+        Convert Email address to lowercase.
+    '''
+    def _serialize(self, value, attr, obj, **kwargs):
+        value = super()._serialize(value, attr, obj, **kwargs)
+        return value.lower()
+
+    def _deserialize(self, value, attr, obj, **kwargs):
+        value = super()._deserialize(value, attr, obj, **kwargs)
+        return value.lower()
 
 
 class UserSchema(BaseModelSchema):
-    email = mf.Email(required=True)
+    email = Email(required=True)
     family_name = mf.String()
-    endgame_role = EnumField(EndgameRoles)
 
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
@@ -84,11 +89,10 @@ class UserSchema(BaseModelSchema):
 
 
 class UpdateUserSchema(ma.Schema):
-    email = mf.Email(required=True)
+    email = Email(required=True)
     name = mf.String(required=True)
     family_name = mf.String(required=True)
     description = mf.String()
-    endgame_role = EnumField(EndgameRoles, allow_none=True)
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
@@ -178,14 +182,6 @@ class User(BaseModel):
     def _fetch_idp_attrs(self):
         idp = get_idp()
         self._idp_attrs = idp.get_user_attributes(self)
-
-    @property
-    def endgame_role(self):
-        if self._idp_attrs is None:
-            self._fetch_idp_attrs()
-
-        role_name = self._idp_attrs.get('endgame_role')
-        return EndgameRoles[role_name] if role_name else None
 
 
 @dataclass

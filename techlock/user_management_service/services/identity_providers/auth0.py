@@ -15,7 +15,6 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 _app_metadata_keys = [
-    'endgame_role',
 ]
 
 
@@ -39,7 +38,7 @@ class Auth0Idp(IdpProvider):
         found_users = self.auth0.users.list(q=f'identities.connection: "{self.connection_id}" AND email: "{user.email}"')
         total_found_users = found_users['total']
         if not total_found_users:
-            logger.error('User not found', extra={'user', user.entity_id})
+            logger.error('User not found', extra={'user': user.entity_id})
             raise NotFoundException('User not found')
         elif total_found_users > 1:
             logger.warn('Found multiple users, expected one. Will use first one.', extra={
