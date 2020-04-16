@@ -41,26 +41,8 @@ services:
       - cognito
       - jwt
       - psql
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_DB: 0
-      REDIS_SOCKET_CONNECT_TIMEOUT: 30
-      REDIS_IS_CLUSTER: 'false'
-      REDIS_SKIP_FULL_COVERAGE_CHECK: 'false'
-      DYNAMODB_ENDPOINT_URL: http://dynamodb:8000
-      COGNITO_IDP_ENDPOINT_URL: http://cognito:5000
-      AWS_ACCESS_KEY_ID: fake
-      AWS_SECRET_ACCESS_KEY: fake
-      AWS_DEFAULT_REGION: us-east-1
-      STAGE: test
-      # LOG_LEVEL: debug
-      TENANT_ID: test
-      NO_CACHE: ${NO_CACHE:-true}
-      FLASK_APP: techlock/user_management_service/app.py
-      FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
-      FLASK_JWT_ALGORITHM: RS256
-      JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'
+    env_file:
+      - .env
     ports:
       - 5000
 
@@ -78,22 +60,9 @@ services:
       - cognito
       - jwt
       - psql
+    env_file:
+      - .env
     environment:
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_DB: 0
-      REDIS_SOCKET_CONNECT_TIMEOUT: 30
-      REDIS_IS_CLUSTER: 'false'
-      REDIS_SKIP_FULL_COVERAGE_CHECK: 'false'
-      DYNAMODB_ENDPOINT_URL: http://dynamodb:8000
-      COGNITO_IDP_ENDPOINT_URL: http://cognito:5000
-      AWS_ACCESS_KEY_ID: fake
-      AWS_SECRET_ACCESS_KEY: fake
-      AWS_DEFAULT_REGION: us-east-1
-      STAGE: test
-      TENANT_ID: test
-      FLASK_APP: techlock/user_management_service/app.py
-      FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       PYTHONDONTWRITEBYTECODE: 1
     entrypoint:
       - "/app/run_tests.sh"

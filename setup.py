@@ -41,5 +41,6 @@ setup(
     install_requires=[
         'tl-msc-common==1.0.0.dev0+master.7647bd8e0296615024c69972216f4e45c0fcec29',
         'Flask-HTTPAuth==3.3.0',
+        'flask-smorest==0.19.2',
     ],
 )

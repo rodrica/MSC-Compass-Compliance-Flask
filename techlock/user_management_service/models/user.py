@@ -1,8 +1,6 @@
 import marshmallow as ma
 import marshmallow.fields as mf
 from dataclasses import dataclass
-from enum import Enum
-from marshmallow_enum import EnumField
 from sqlalchemy import func as sa_fn
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 
