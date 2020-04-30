@@ -46,6 +46,10 @@ from .user import (
     USER_CLAIM_SPEC,
 )
 
+from .ui_data import (
+    DashboardDataSchema,
+)
+
 ALL_CLAIM_SPECS = [
     DEPARTMENT_CLAIM_SPEC,
     OFFICE_CLAIM_SPEC,

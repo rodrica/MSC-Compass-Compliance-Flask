@@ -9,7 +9,14 @@ if TYPE_CHECKING:
 
 class IdpProvider():
 
-    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False, **kwargs):
+    def create_user(
+        self,
+        current_user: AuthInfo,
+        user: User,
+        password: str,
+        email_verified=False,
+        **kwargs
+    ):
         pass
 
     def update_user_attributes(
