@@ -1,12 +1,18 @@
-FROM python:3.7-alpine3.10
+FROM python:3.7-slim-stretch
 LABEL maintainer_name="Michiel Vanderlee" maintainer_email="mvanderlee@techlockinc.com"
 
 # Install packages that must be present at runtime
-RUN apk add --no-cache \
-  git \
-  libpq \
-  libstdc++ \
-  bash
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+      git \
+      libpq5 \
+      libstdc++ \
+      bash \
+      wait-for-it \
+    && rm -rf /var/lib/apt/lists/
+
+ENV prometheus_multiproc_dir=/app/multiproc-tmp
+RUN mkdir -p /app/multiproc-tmp
 
 EXPOSE 5000
 
@@ -20,22 +26,20 @@ COPY requirements.txt /requirements.txt
 
 # Install package.
 # This also installs build dependency packages needed for techlock-common, but removes them at the end to keep image size to a minimum.
-RUN apk add --no-cache --virtual .build-deps \
-    postgresql-dev \
-    gcc \
-    g++ \
-    musl-dev \
-    libffi-dev \
-    libressl-dev \
-  && pip install -r requirements.txt \
-    --no-cache-dir \
-    --extra-index-url "https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple/" \
-  && pip install \
-    --no-cache-dir \
-    'flake8>=3.7.7<4' \
-    'tavern>=0.30,<1' \
-    'moto>=1.3.13,<2' \
-  && apk del .build-deps
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+      libpq-dev \
+      gcc \
+      g++ \
+    && pip install -r requirements.txt \
+      --no-cache-dir \
+      --extra-index-url "https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple/" \
+    && apt-get purge -y \
+      libpq-dev \
+      gcc \
+      g++ \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/
 
 # Copy the app code, and install it without dependencies.
 COPY . /app
