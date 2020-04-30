@@ -30,7 +30,7 @@ class ConfigUrls(MethodView):
         kenna_url = cm.get(current_user, 'ui_config.kenna_url')
         superadmin_kenna_url = cm.get(current_user, 'ui_config.superadmin_kenna_url')
         feature_flags = cm.get(current_user, 'ui_config.feature_flags', default=dict())
-        dashboard_data = DashboardDataSchema.load(cm.get(current_user, 'ui_config.dashboard'), many=True)
+        dashboard_data = DashboardDataSchema(many=True).load(cm.get(current_user, 'ui_config.dashboard'))
 
         return {
             "ensilo_url": ensilo_url,
