@@ -47,5 +47,11 @@ RUN chmod +x /app/*.sh
 WORKDIR /app
 RUN pip install --no-cache-dir --no-dependencies .
 
+# Test dependencies
+RUN pip install \
+    --no-cache-dir \
+    'flake8>=3.7.7<4' \
+    'tavern>=0.30,<1' \
+    'moto>=1.3.13,<2'
 
 ENTRYPOINT ["/app/entrypoint.sh"]
