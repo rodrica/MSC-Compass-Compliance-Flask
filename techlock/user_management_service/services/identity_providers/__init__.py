@@ -4,6 +4,7 @@ from redis.connection import to_bool, URL_QUERY_ARGUMENT_PARSERS
 from urllib.parse import parse_qs, urlparse
 from techlock.common import ConfigManager
 from techlock.common.caches import RedisStore
+from techlock.common.instance_manager import InstanceManager, INSTANCE_TYPES
 
 from .auth0 import Auth0Idp
 from .base import IdpProvider
@@ -42,28 +43,15 @@ def _get_cache(cache_url, idp_instance):
     cache = dict()
     if cache_url:
         url = urlparse(cache_url)
-        if url.scheme == 'tl-redis-store':
+        if url.scheme == 'redis':
             logger.info('Creating RedisStore.')
-            # Get query params as dict from query string
-            url_options = {k: v[0] for k, v in parse_qs(url.query).items()}
-            # Get all redis kwargs, and convert if needed. Get with lambda is more readable than if else.
-            redis_kwargs = {
-                k: URL_QUERY_ARGUMENT_PARSERS.get(k, lambda x: x)(v)
-                for k, v in url_options
-                if k not in ('key_prefix', 'ttl')
-            }
-            redis = Redis(
-                host=url.hostname,
-                port=int(url.port or 6379),
-                password=url.password,
-                db=int(url.path.replace('/', '') or 0),
-                **redis_kwargs
-            )
+            cache_ttl = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_ttl', 3600)
+            redis = InstanceManager().get_instance(instance_type=INSTANCE_TYPES.REDIS)
 
             cache = RedisStore(
                 redis,
-                key_prefix=url_options.get('key_prefix', idp_instance.__class__.__name__),
-                ttl=url_options.get('ttl', 3600),
+                key_prefix=idp_instance.__class__.__name__,
+                ttl=cache_ttl,
             )
         else:
             raise ValueError(f'Invalid scheme provided: {url.scheme}')
