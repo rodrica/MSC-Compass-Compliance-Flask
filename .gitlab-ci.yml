@@ -18,6 +18,7 @@ e2e-test:
     - apk update
     - apk add bash curl py3-pip python3-dev libffi-dev openssl-dev gcc libc-dev make
     - pip3 install docker-compose
+    - docker pull "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_latest" || true
   script:
     - ./run_tests.sh -d -e
 
@@ -29,7 +30,7 @@ deploy-docker:
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
   script:
-    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker pull "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_latest" || true
     - docker build --build-arg NEXUS_HOST=${NEXUS_HOST} --build-arg NEXUS_USERNAME=${NEXUS_USERNAME} --build-arg NEXUS_PASSWORD=${NEXUS_PASSWORD}  --pull -t "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}" .
     - docker push "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}"
     - docker tag "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}" "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_latest"
