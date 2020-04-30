@@ -5,6 +5,7 @@ LABEL maintainer_name="Michiel Vanderlee" maintainer_email="mvanderlee@techlocki
 RUN apk add --no-cache \
   git \
   libpq \
+  libstdc++ \
   bash
 
 EXPOSE 5000
@@ -22,6 +23,7 @@ COPY requirements.txt /requirements.txt
 RUN apk add --no-cache --virtual .build-deps \
     postgresql-dev \
     gcc \
+    g++ \
     musl-dev \
     libffi-dev \
     libressl-dev \

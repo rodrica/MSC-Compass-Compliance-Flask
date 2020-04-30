@@ -6,6 +6,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       git \
       libpq5 \
+      libstdc++ \
       bash \
       wait-for-it \
     && rm -rf /var/lib/apt/lists/
@@ -29,12 +30,14 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       libpq-dev \
       gcc \
+      g++ \
     && pip install -r requirements.txt \
       --no-cache-dir \
       --extra-index-url "https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple/" \
     && apt-get purge -y \
       libpq-dev \
       gcc \
+      g++ \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/
 

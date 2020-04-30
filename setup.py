@@ -40,7 +40,7 @@ setup(
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[
         # 'tl-msc-common==1.0.0.dev0+master.f675c8a39b0b8e7fe3b4e7bb0d644b05e9e436e6',
-        'tl_msc_common==1.0.0.dev0+celery.62b94a933612736266b1e85723bd2d7550ea5c46',
+        'tl_msc_common==1.0.0.dev0+celery.9417bef51c73834c6735f699f9375c0ec2ba1e53',
         'Flask-HTTPAuth==3.3.0',
         'flask-smorest==0.19.2',
     ],
