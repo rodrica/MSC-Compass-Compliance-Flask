@@ -1,5 +1,7 @@
 from __future__ import annotations
+import jwt
 import logging
+import time
 from typing import Dict, TYPE_CHECKING
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
@@ -21,20 +23,39 @@ _app_metadata_keys = [
 class Auth0Idp(IdpProvider):
     def __init__(self):
         current_user = AuthInfo('Auth0Idp', ConfigManager._DEFAULT_TENANT_ID)
+        self.connection_id = ConfigManager().get(current_user, 'auth0.connection_id', raise_if_not_found=True)
+
+        self._refresh_token()
+
+    def _refresh_token(self):
+        current_user = AuthInfo('Auth0Idp', ConfigManager._DEFAULT_TENANT_ID)
         domain = ConfigManager().get(current_user, 'auth0.domain', raise_if_not_found=True)
         client_id = ConfigManager().get(current_user, 'auth0.client_id', raise_if_not_found=True)
         client_secret = ConfigManager().get(current_user, 'auth0.client_secret', raise_if_not_found=True)
         audience = ConfigManager().get(current_user, 'auth0.audience', raise_if_not_found=True)
 
-        self.connection_id = ConfigManager().get(current_user, 'auth0.connection_id', raise_if_not_found=True)
-
         get_token = GetToken(domain)
         token = get_token.client_credentials(client_id, client_secret, audience)
         mgmt_api_token = token['access_token']
 
+        # Keep track of expiration
+        # Note that we don't verify the token. We're only getting the expiration value.
+        #   Not concerned about tampering.
+        token_payload = jwt.decode(mgmt_api_token, verify=False)
+        self.token_expiration = token_payload['exp']
+
         self.auth0 = Auth0(domain, mgmt_api_token)
 
+    def _is_refresh_needed(self):
+        # Expire 10 second earlier - This prevents the scenario where the request expires after we checked.
+        return self.token_expiration - 10 >= int(time.time())
+
+    def _refresh_if_needed(self):
+        if self._is_refresh_needed():
+            self._refresh_token
+
     def _get_user(self, user: User):
+        self._refresh_if_needed()
         found_users = self.auth0.users.list(q=f'identities.connection: "{self.connection_id}" AND email: "{user.email}"')
         total_found_users = found_users['total']
         if not total_found_users:
@@ -61,6 +82,7 @@ class Auth0Idp(IdpProvider):
         }
         app_metadata.update(idp_attributes)
 
+        self._refresh_if_needed()
         self.auth0.users.create({
             'email': user.email,
             'email_verified': email_verified,
