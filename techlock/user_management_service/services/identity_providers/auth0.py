@@ -116,8 +116,12 @@ class Auth0Idp(IdpProvider):
         self.auth0.users.update(found_user['user_id'], user_attributes)
 
     def delete_user(self, current_user: AuthInfo, user: User, **kwargs):
-        found_user = self._get_user(user)
-        self.auth0.users.delete(found_user['user_id'])
+        try:
+            found_user = self._get_user(user)
+            self.auth0.users.delete(found_user['user_id'])
+        except NotFoundException:
+            # If not found don't raise an error
+            logger.info('User not found, skipping deletion')
 
     def change_password(self, current_user: AuthInfo, user: User, new_password: str, **kwargs):
         found_user = self._get_user(user)
