@@ -1,5 +1,5 @@
 # tl-msc-common==1.0.0.dev0+master.f675c8a39b0b8e7fe3b4e7bb0d644b05e9e436e6
-tl_msc_common==1.0.0.dev0+celery.cb110d22b9270b54e4869baf6f9aa05c1cd75d53
+tl_msc_common==1.0.0.dev0+celery.a5f4bed587f302b4dd94d18b2e88deab28b2bd11
 Flask-HTTPAuth==3.3.0
 flask-smorest==0.19.2
 
