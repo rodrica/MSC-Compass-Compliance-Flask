@@ -26,35 +26,34 @@ _idp_cache = dict()
 
 def _get_defaulted_cache_vars(
     cached: bool = None,
-    cache_url: str = None,
+    cache_type: str = None,
 ):
     if cached is None:
         cached = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cached')
-    if cache_url is None:
-        cache_url = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_url')
+    if cache_type is None:
+        cache_type = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_type')
     # If cached is not set, but the url is. Enable cache. This will honor cached = False.
-    if cached is None and cache_url:
+    if cached is None and cache_type:
         cached = True
 
-    return cached, cache_url
+    return cached, cache_type
 
 
-def _get_cache(cache_url, idp_instance):
+def _get_cache(cache_type, idp_instance):
     cache = dict()
-    if cache_url:
-        url = urlparse(cache_url)
-        if url.scheme == 'redis':
+    if cache_type:
+        if cache_type == 'redis':
             logger.info('Creating RedisStore.')
             cache_ttl = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_ttl', 3600)
-            redis = InstanceManager().get_instance(instance_type=INSTANCE_TYPES.REDIS)
+            redis = InstanceManager().get_instance(instance_type=INSTANCE_TYPES.REDIS, instance_name='idp')
 
             cache = RedisStore(
                 redis,
                 key_prefix=idp_instance.__class__.__name__,
                 ttl=cache_ttl,
             )
-        else:
-            raise ValueError(f'Invalid scheme provided: {url.scheme}')
+        elif cache_type != 'dict':
+            raise ValueError(f'Invalid scheme provided: {cache_type}')
 
     return cache
 
@@ -62,7 +61,7 @@ def _get_cache(cache_url, idp_instance):
 def get_idp(
     idp_name: str = None,
     cached: bool = None,
-    cache_url: str = None,
+    cache_type: str = None,
 ) -> IdpProvider:
     # Get the IDP name, default to MOCK
     if idp_name is None:
@@ -81,9 +80,9 @@ def get_idp(
     idp_instance = idp_class()
 
     # Cache the IDP if configured
-    cached, cache_url = _get_defaulted_cache_vars(cached, cache_url)
+    cached, cache_type = _get_defaulted_cache_vars(cached, cache_type)
     if cached:
-        cache = _get_cache(cache_url, idp_instance)
+        cache = _get_cache(cache_type, idp_instance)
         idp_instance = CachedIdp(idp_instance, cache=cache)
 
     _idp_cache[idp_name] = idp_instance
