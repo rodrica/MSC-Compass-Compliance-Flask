@@ -109,7 +109,7 @@ class Auth0Idp(IdpProvider):
                 'connection': self.connection_id,
             })
         except Auth0Error as e:
-            if e.error_code == 'PasswordStrengthError':
+            if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')
@@ -151,7 +151,7 @@ class Auth0Idp(IdpProvider):
                 'password': new_password,
             })
         except Auth0Error as e:
-            if e.error_code == 'PasswordStrengthError':
+            if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')
