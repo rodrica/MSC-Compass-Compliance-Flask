@@ -54,22 +54,19 @@ class Auth0Idp(IdpProvider):
         if self._is_refresh_needed():
             self._refresh_token
 
-    def _handle_auth0_exception(self, e):
-        if e.error_code == 'PasswordStrengthError':
-            conn_options = self.auth0.connections.get(self.connection_id)['options']
+    def _password_strength_error(self, e):
+        conn_options = self.auth0.connections.get(self.connection_id)['options']
 
-            raise BadRequestException('Password is too weak.', payload={
-                'rules': {
-                    'min_length': conn_options['password_complexity_options']['min_length'],
-                    'history_size': conn_options['password_history']['size'],
-                    'no_personal_info': conn_options['password_no_personal_info']['enabled'],
-                    'must_incl_number': conn_options['passwordPolicy'] in ('fair', 'good', 'excellent'),
-                    'must_incl_special': conn_options['passwordPolicy'] in ('good', 'excellent'),
-                    'no_consecutive': conn_options['passwordPolicy'] == 'excellent',
-                }
-            })
-        else:
-            raise BadRequestException(f'{e.error_code}: {e.message}')
+        raise BadRequestException('Password is too weak.', payload={
+            'rules': {
+                'min_length': conn_options['password_complexity_options']['min_length'],
+                'history_size': conn_options['password_history']['size'],
+                'no_personal_info': conn_options['password_no_personal_info']['enabled'],
+                'must_incl_number': conn_options['passwordPolicy'] in ('fair', 'good', 'excellent'),
+                'must_incl_special': conn_options['passwordPolicy'] in ('good', 'excellent'),
+                'no_consecutive': conn_options['passwordPolicy'] == 'excellent',
+            }
+        })
 
     def _get_user(self, user: User):
         self._refresh_if_needed()
@@ -112,7 +109,10 @@ class Auth0Idp(IdpProvider):
                 'connection': self.connection_id,
             })
         except Auth0Error as e:
-            self._handle_auth0_exception(e)
+            if e.error_code == 'PasswordStrengthError':
+                self._password_strength_error(e)
+            else:
+                raise BadRequestException(f'{e.error_code}: {e.message}')
 
     def update_user_attributes(
         self,
@@ -151,7 +151,10 @@ class Auth0Idp(IdpProvider):
                 'password': new_password,
             })
         except Auth0Error as e:
-            self._handle_auth0_exception(e)
+            if e.error_code == 'PasswordStrengthError':
+                self._password_strength_error(e)
+            else:
+                raise BadRequestException(f'{e.error_code}: {e.message}')
 
     def get_user_attributes(self, user: User, **kwargs):
         found_user = self._get_user(user)
