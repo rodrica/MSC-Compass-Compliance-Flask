@@ -51,8 +51,11 @@ class Auth0Idp(IdpProvider):
         return self.token_expiration - 10 >= int(time.time())
 
     def _refresh_if_needed(self):
-        if self._is_refresh_needed():
-            self._refresh_token
+        try:
+            if self._is_refresh_needed():
+                self._refresh_token()
+        except Exception as e:
+            logger.error(f'Failed to refresh token. Error={e}')
 
     def _password_strength_error(self, e):
         conn_options = self.auth0.connections.get(self.connection_id)['options']
@@ -109,6 +112,7 @@ class Auth0Idp(IdpProvider):
                 'connection': self.connection_id,
             })
         except Auth0Error as e:
+            logger.error(f'Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
             else:
