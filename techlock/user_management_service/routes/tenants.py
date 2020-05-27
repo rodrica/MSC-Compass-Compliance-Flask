@@ -108,12 +108,18 @@ class TenantById(MethodView):
 
         tenant = self.get_tenant(current_user, tenant_id)
 
+        is_name_updated = 'name' in data and data['name'] != tenant.name
         for k, v in data.items():
             if hasattr(tenant, k):
                 setattr(tenant, k, v)
             else:
                 raise BadRequestException('Tenant has no attribute: %s' % k)
         tenant.save(current_user)
+
+        if is_name_updated:
+            cm = ConfigManager()
+            cm.set(tenant.entity_id, 'name', tenant.name)
+
         return tenant
 
     @blp.response(TenantSchema, code=204)
