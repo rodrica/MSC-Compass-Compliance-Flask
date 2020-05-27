@@ -7,7 +7,7 @@ from flask_smorest import Blueprint
 from techlock.common.api import (
     BadRequestException, NotFoundException,
 )
-from techlock.common.config import AuthInfo
+from techlock.common import AuthInfo, ConfigManager
 from techlock.common.api.jwt_authorization import (
     access_required,
     get_request_claims,
@@ -63,6 +63,10 @@ class Tenants(MethodView):
         # Tenant.validate(data)
         tenant = Tenant(**data)
         tenant.save(current_user)
+
+        # Create initial config item in DynamoDB
+        cm = ConfigManager()
+        cm.set(tenant.entity_id, 'name', tenant.name)
 
         return tenant
 
