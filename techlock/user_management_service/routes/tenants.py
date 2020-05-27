@@ -66,7 +66,7 @@ class Tenants(MethodView):
 
         # Create initial config item in DynamoDB
         cm = ConfigManager()
-        cm.set(tenant.entity_id, 'name', tenant.name)
+        cm.set(str(tenant.entity_id), 'name', tenant.name)
 
         return tenant
 
@@ -118,7 +118,7 @@ class TenantById(MethodView):
 
         if is_name_updated:
             cm = ConfigManager()
-            cm.set(tenant.entity_id, 'name', tenant.name)
+            cm.set(str(tenant.entity_id), 'name', tenant.name)
 
         return tenant
 
