@@ -134,7 +134,8 @@ class Auth0Idp(IdpProvider):
                     'email_verified': email_verified,
                     'name': user.name,
                     'given_name': user.name,
-                    'family_name': user.family_name,
+                    # Auth0 doesn't allow empty family_name
+                    'family_name': user.family_name or 'na',
                     'app_metadata': app_metadata,
                     'password': password,
                     'connection': self.connection_id,
@@ -159,6 +160,9 @@ class Auth0Idp(IdpProvider):
         for k, v in attributes.items():
             if k.startswith('custom:') or k in (_app_metadata_keys):
                 custom_attributes[k] = v
+            elif k == 'family_name':
+                # Auth0 doesn't allow empty family_name
+                user_attributes[k] = v or 'na'
             else:
                 user_attributes[k] = v
 
