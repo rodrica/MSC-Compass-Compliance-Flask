@@ -47,8 +47,18 @@ class Auth0Idp(IdpProvider):
         self.auth0 = Auth0(domain, mgmt_api_token)
 
     def _is_refresh_needed(self):
-        # Expire 10 second earlier - This prevents the scenario where the request expires after we checked.
-        return self.token_expiration - 10 >= int(time.time())
+        # Expire 60 second earlier - This prevents the scenario where the request expires after we checked.
+        now = int(time.time())
+        # Is
+        is_refresh_needed = self.token_expiration - 60 < now
+
+        logger.debug('Checking if Auth0 token refresh is needed.', extra={
+            'token_expiration': self.token_expiration,
+            'time': now,
+            'is_needed': is_refresh_needed
+        })
+
+        return is_refresh_needed
 
     def _refresh_if_needed(self):
         try:
@@ -56,6 +66,21 @@ class Auth0Idp(IdpProvider):
                 self._refresh_token()
         except Exception as e:
             logger.error(f'Failed to refresh token. Error={e}')
+
+    def _handle_token_error(self, callback):
+        '''
+            Handle token expired error and refresh.
+            While calling `self._refresh_if_needed()` before should fix it. This just handles the odd case that it didn't.
+        '''
+        try:
+            return callback()
+        except Auth0Error as e:
+            if 'expired token' in e.message.lower():
+                logger.error('Token expired, refreshing and trying again.')
+                self._refresh_token()
+                return callback()
+            else:
+                raise
 
     def _password_strength_error(self, e):
         conn_options = self.auth0.connections.get(self.connection_id)['options']
@@ -73,7 +98,9 @@ class Auth0Idp(IdpProvider):
 
     def _get_user(self, user: User):
         self._refresh_if_needed()
-        found_users = self.auth0.users.list(q=f'identities.connection: "{self.connection_id}" AND email: "{user.email}"')
+        found_users = self._handle_token_error(lambda: self.auth0.users.list(
+            q=f'identities.connection: "{self.connection_id}" AND email: "{user.email}"'
+        ))
         total_found_users = found_users['total']
         if not total_found_users:
             logger.error('User not found', extra={'user': user.entity_id})
@@ -101,16 +128,18 @@ class Auth0Idp(IdpProvider):
 
         self._refresh_if_needed()
         try:
-            self.auth0.users.create({
-                'email': user.email,
-                'email_verified': email_verified,
-                'name': user.name,
-                'given_name': user.name,
-                'family_name': user.family_name,
-                'app_metadata': app_metadata,
-                'password': password,
-                'connection': self.connection_id,
-            })
+            self._handle_token_error(
+                lambda: self.auth0.users.create({
+                    'email': user.email,
+                    'email_verified': email_verified,
+                    'name': user.name,
+                    'given_name': user.name,
+                    'family_name': user.family_name,
+                    'app_metadata': app_metadata,
+                    'password': password,
+                    'connection': self.connection_id,
+                })
+            )
         except Auth0Error as e:
             logger.error(f'Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
@@ -137,12 +166,12 @@ class Auth0Idp(IdpProvider):
             user_attributes['app_metadata'] = custom_attributes
 
         found_user = self._get_user(user)
-        self.auth0.users.update(found_user['user_id'], user_attributes)
+        self._handle_token_error(lambda: self.auth0.users.update(found_user['user_id'], user_attributes))
 
     def delete_user(self, current_user: AuthInfo, user: User, **kwargs):
         try:
             found_user = self._get_user(user)
-            self.auth0.users.delete(found_user['user_id'])
+            self._handle_token_error(lambda: self.auth0.users.delete(found_user['user_id']))
         except NotFoundException:
             # If not found don't raise an error
             logger.info('User not found, skipping deletion')
@@ -151,9 +180,9 @@ class Auth0Idp(IdpProvider):
         found_user = self._get_user(user)
 
         try:
-            self.auth0.users.update(found_user['user_id'], {
+            self._handle_token_error(lambda: self.auth0.users.update(found_user['user_id'], {
                 'password': new_password,
-            })
+            }))
         except Auth0Error as e:
             if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
