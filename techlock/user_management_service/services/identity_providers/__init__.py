@@ -31,7 +31,7 @@ def _get_defaulted_cache_vars(
     if cached is None:
         cached = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cached')
     if cache_type is None:
-        cache_type = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_type')
+        cache_type = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_type').lower()
     # If cached is not set, but the url is. Enable cache. This will honor cached = False.
     if cached is None and cache_type:
         cached = True

@@ -93,7 +93,8 @@ class CachedIdp(IdpProvider):
 
         # If not cached, get actual value and cache it.
         if attributes is None:
-            attributes = self._wrapped_idp(user, **kwargs)
+            logger.info('User attributes not cached, getting raw data.', extra={'user_id': user.entity_id})
+            attributes = self._wrapped_idp.get_user_attributes(user, **kwargs)
             self._cache[user.entity_id] = attributes
 
         return attributes
