@@ -31,7 +31,7 @@ def _get_defaulted_cache_vars(
     if cached is None:
         cached = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cached')
     if cache_type is None:
-        cache_type = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_type').lower()
+        cache_type = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_type')
     # If cached is not set, but the url is. Enable cache. This will honor cached = False.
     if cached is None and cache_type:
         cached = True
@@ -42,7 +42,7 @@ def _get_defaulted_cache_vars(
 def _get_cache(cache_type, idp_instance):
     cache = dict()
     if cache_type:
-        if cache_type == 'redis':
+        if cache_type.lower() == 'redis':
             logger.info('Creating RedisStore.')
             cache_ttl = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_ttl', 300)
             redis = InstanceManager().get_instance(instance_type=INSTANCE_TYPES.REDIS, instance_name='idp')
@@ -52,7 +52,7 @@ def _get_cache(cache_type, idp_instance):
                 key_prefix=idp_instance.__class__.__name__,
                 ttl=cache_ttl,
             )
-        elif cache_type != 'dict':
+        elif cache_type.lower() != 'dict':
             raise ValueError(f'Invalid scheme provided: {cache_type}')
 
     return cache
