@@ -196,4 +196,10 @@ class Auth0Idp(IdpProvider):
     def get_user_attributes(self, user: User, **kwargs):
         found_user = self._get_user(user)
 
-        return found_user.get('app_metadata', dict())
+        attrs = found_user.get('app_metadata', dict())
+        attrs['login_info'] = {
+            'last_ip': found_user.get('last_ip'),
+            'last_login': found_user.get('last_login'),
+            'logins_count': found_user.get('logins_count')
+        }
+        return attrs

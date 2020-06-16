@@ -74,6 +74,7 @@ class Email(mf.Email):
 class UserSchema(BaseModelSchema):
     email = Email(required=True)
     family_name = mf.String()
+    login_info = mf.Dict(mf.String(), mf.String(), dump_only=True)
 
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
@@ -180,6 +181,14 @@ class User(BaseModel):
     def _fetch_idp_attrs(self):
         idp = get_idp()
         self._idp_attrs = idp.get_user_attributes(self)
+
+    @property
+    def login_info(self):
+        if self._idp_attrs is None:
+            self._fetch_idp_attrs()
+
+        return self._idp_attrs.get('login_info')
+
 
 
 @dataclass
