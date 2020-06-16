@@ -190,7 +190,6 @@ class User(BaseModel):
         return self._idp_attrs.get('login_info')
 
 
-
 @dataclass
 class UserListQueryParameters(BaseOffsetListQueryParams):
     __db_model__ = User
