@@ -44,7 +44,7 @@ def _get_cache(cache_type, idp_instance):
     if cache_type:
         if cache_type == 'redis':
             logger.info('Creating RedisStore.')
-            cache_ttl = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_ttl', 3600)
+            cache_ttl = ConfigManager().get(ConfigManager._DEFAULT_TENANT_ID, 'idp.cache_ttl', 300)
             redis = InstanceManager().get_instance(instance_type=INSTANCE_TYPES.REDIS, instance_name='idp')
 
             cache = RedisStore(

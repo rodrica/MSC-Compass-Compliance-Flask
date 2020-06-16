@@ -88,19 +88,12 @@ class CachedIdp(IdpProvider):
         user: User,
         **kwargs
     ):
-        attributes = self._wrapped_idp(user, **kwargs)
+        # Attempt to get from cache
+        attributes = self._cache.get(user.entity_id)
 
-        ########
-        # Getting last login info requires that we don't cache.
-        # Not sure if we can do anything about this. (how current do we need to be, can we ratelimit this?)
-        ########
-
-        # # Attempt to get from cache
-        # attributes = self._cache.get(user.entity_id)
-
-        # # If not cached, get actual value and cache it.
-        # if attributes is None:
-        #     attributes = self._wrapped_idp(user, **kwargs)
-        #     self._cache[user.entity_id] = attributes
+        # If not cached, get actual value and cache it.
+        if attributes is None:
+            attributes = self._wrapped_idp(user, **kwargs)
+            self._cache[user.entity_id] = attributes
 
         return attributes
