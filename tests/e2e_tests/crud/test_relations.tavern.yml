@@ -178,6 +178,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
+              ftp_user_name: null
               email: test2@test.com
               description: null
               claims_by_audience: null
@@ -316,6 +317,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
+              ftp_user_name: null
               email: test2@test.com
               description: null
               claims_by_audience: null

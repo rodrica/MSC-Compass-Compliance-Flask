@@ -60,6 +60,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
+              ftp_user_name: null
               email: test2@test.com
               departments: []
               offices: []
@@ -91,6 +92,7 @@ stages:
               entity_id: "{created_id}"
               name: Test
               family_name: e2e
+              ftp_user_name: null
               email: test2@test.com
               departments: []
               offices: []
@@ -123,6 +125,7 @@ stages:
               entity_id: "{created_id}"
               name: Test
               family_name: e2e_new
+              ftp_user_name: null
               email: test2@test.com
               departments: []
               offices: []
@@ -306,6 +309,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
+                  ftp_user_name: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -319,6 +323,7 @@ stages:
                 - entity_id: "{user2}"
                   name: Beta
                   family_name: Bar
+                  ftp_user_name: null
                   email: bbar@example.com
                   departments: []
                   offices: []
@@ -350,6 +355,7 @@ stages:
                 - entity_id: "{user3}"
                   name: Zeta
                   family_name: Bar
+                  ftp_user_name: null
                   email: zbar@example.com
                   departments: []
                   offices: []
@@ -383,6 +389,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
+                  ftp_user_name: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -416,6 +423,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
+                  ftp_user_name: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -449,6 +457,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
+                  ftp_user_name: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -483,6 +492,7 @@ stages:
                 - entity_id: "{user2}"
                   name: Beta
                   family_name: Bar
+                  ftp_user_name: null
                   email: bbar@example.com
                   departments: []
                   offices: []
@@ -496,6 +506,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
+                  ftp_user_name: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -526,6 +537,7 @@ stages:
               entity_id: "{user1}"
               name: Alpha
               family_name: Foo
+              ftp_user_name: null
               email: afoo@test.com
               departments: []
               offices: []
@@ -574,6 +586,7 @@ stages:
               entity_id: "{user3}"
               name: Zeta
               family_name: Bar
+              ftp_user_name: null
               email: zbar@example.com
               departments: []
               offices: []
@@ -647,6 +660,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
+              ftp_user_name: null
               email: test2@test.com
               departments: []
               offices: []
@@ -793,6 +807,7 @@ stages:
               entity_id: "{user_id}"
               name: Test
               family_name: e2e_new
+              ftp_user_name: null
               email: test2@test.com
               departments: []
               offices: []

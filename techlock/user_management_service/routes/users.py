@@ -135,6 +135,7 @@ class Users(MethodView):
             email=data.get('email'),
             name=data.get('name'),
             family_name=data.get('family_name'),
+            ftp_user_name=data.get('ftp_user_name'),
             description=data.get('description'),
             claims_by_audience=set_claims_default_tenant(data, current_user.tenant_id),
             tags=data.get('tags'),

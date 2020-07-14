@@ -1,5 +1,6 @@
 import marshmallow as ma
 import marshmallow.fields as mf
+import marshmallow.validate as mv
 from dataclasses import dataclass
 from sqlalchemy import func as sa_fn
 from sqlalchemy.dialects.postgresql import JSONB, UUID
@@ -74,6 +75,7 @@ class Email(mf.Email):
 class UserSchema(BaseModelSchema):
     email = Email(required=True)
     family_name = mf.String()
+    ftp_user_name = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$'), allow_none=True)
     login_info = mf.Dict(mf.String(), mf.String(), dump_only=True)
 
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
@@ -92,6 +94,7 @@ class UpdateUserSchema(ma.Schema):
     name = mf.String(required=True)
     family_name = mf.String(required=True)
     description = mf.String()
+    ftp_user_name = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$'), allow_none=True)
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
@@ -117,6 +120,7 @@ class PostUserChangePasswordSchema(ma.Schema):
 class UserListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     email = mf.String(allow_none=True, description='Used to filter users by email prefix.')
     family_name = mf.String(allow_none=True, description='Used to filter users by family_name prefix.')
+    ftp_user_name = mf.String(allow_none=True, description='Used to filter users by ftp_user_name prefix.')
 
     role_ids = mf.UUID(allow_none=True, description='Used to filter users by role_ids. Comma delimited list of exact ids.')
     department_ids = mf.UUID(allow_none=True, description='Used to filter users by department_ids. Comma delimited list of exact ids.')
@@ -154,6 +158,7 @@ class User(BaseModel):
     entity_id = db.Column('id', db.String, primary_key=True)
     email = db.Column(db.String, unique=False, nullable=False)
     family_name = db.Column(db.String, unique=False, nullable=False)
+    ftp_user_name = db.Column(db.String, unique=False, nullable=True)
 
     roles = db.relationship(
         'Role',
@@ -197,6 +202,7 @@ class UserListQueryParameters(BaseOffsetListQueryParams):
 
     email: str = None
     family_name: str = None
+    ftp_user_name: str = None
 
     role_id: str = None
     department_id: str = None
