@@ -75,7 +75,7 @@ class Email(mf.Email):
 class UserSchema(BaseModelSchema):
     email = Email(required=True)
     family_name = mf.String()
-    ftp_user_name = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$'), allow_none=True)
+    ftp_user_name = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$', error='String does not match expected pattern: {regex}.'), allow_none=True)
     login_info = mf.Dict(mf.String(), mf.String(), dump_only=True)
 
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
@@ -94,7 +94,7 @@ class UpdateUserSchema(ma.Schema):
     name = mf.String(required=True)
     family_name = mf.String(required=True)
     description = mf.String()
-    ftp_user_name = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$'), allow_none=True)
+    ftp_user_name = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$', error='String does not match expected pattern: {regex}.'), allow_none=True)
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
