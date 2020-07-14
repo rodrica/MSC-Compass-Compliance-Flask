@@ -6,7 +6,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       git \
       libpq5 \
-      libstdc++ \
       bash \
       wait-for-it \
     && rm -rf /var/lib/apt/lists/
