@@ -7,7 +7,7 @@ from techlock.common.config import AuthInfo
 
 from .base import IdpProvider
 if TYPE_CHECKING:
-    from ...models import User
+    from ...models import User, Role
 
 logger = logging.getLogger(__name__)
 
@@ -98,3 +98,44 @@ class CachedIdp(IdpProvider):
             self._cache[user.entity_id] = attributes
 
         return attributes
+
+    def update_or_create_role(
+        self,
+        current_user: AuthInfo,
+        role: Role,
+        **kwargs,
+    ):
+        # Nothing to do with cache. Pass through
+        self._wrapped_idp.update_or_create_role(
+            current_user,
+            role,
+            **kwargs,
+        )
+
+    def delete_role(
+        self,
+        current_user: AuthInfo,
+        role: Role,
+        **kwargs,
+    ):
+        # Nothing to do with cache. Pass through
+        self._wrapped_idp.delete_role(
+            current_user,
+            role,
+            **kwargs,
+        )
+
+    def update_user_roles(
+        self,
+        current_user: AuthInfo,
+        user: User,
+        roles: list,
+        **kwargs,
+    ):
+        # Nothing to do with cache. Pass through
+        self.update_user_roles.delete_role(
+            current_user,
+            user,
+            roles,
+            **kwargs,
+        )

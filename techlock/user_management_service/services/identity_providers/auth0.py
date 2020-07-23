@@ -113,6 +113,7 @@ class Auth0Idp(IdpProvider):
         return found_users['users'][0]
 
     def _get_role(self, role_name: str, throw_if_not_found: bool = True):
+        self._refresh_if_needed()
         roles = self.auth0.roles.list(name_filter=role_name)['roles']
         if len(roles) > 1:
             logger.warn('Found multiple roles, expected one. Will use first one.', extra={
