@@ -222,18 +222,18 @@ class Auth0Idp(IdpProvider):
         }
         return attrs
 
-    def update_or_create_role(self, current_user: AuthInfo, role: Role, role_name: str):
+    def update_or_create_role(self, current_user: AuthInfo, role: Role, **kwargs):
         auth0_role = self._get_role(role.name, False)
         if auth0_role is None:
             self.auth0.roles.create(body={'name': role.idp_name})
         else:
             self.auth0.roles.update(auth0_role['id'], body={'name': role.idp_name})
 
-    def delete_role(self, current_user: AuthInfo, role: Role):
+    def delete_role(self, current_user: AuthInfo, role: Role, **kwargs):
         auth0_role = self._get_role(role.name)
         self.auth0.roles.delete(auth0_role['id'])
 
-    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list):
+    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list, **kwargs):
         auth0_user = self._get_user(user)
         auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'])['roles']
         all_roles = self.auth0.roles.list()['roles']
