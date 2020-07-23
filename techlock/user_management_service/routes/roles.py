@@ -155,7 +155,10 @@ class RoleById(MethodView):
         current_user = get_current_user()
         role = self.get_role(current_user, role_id)
 
-        self.idp.delete_role(current_user, role)
+        try:
+            self.idp.delete_role(current_user, role)
+        except NotFoundException:
+            logger.warning('Role does not exist in IDP, skipping IDP deletion...', extra={'role_idp_name': role.idp_name})
 
         role.delete(current_user)
         return role
