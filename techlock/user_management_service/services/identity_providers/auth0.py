@@ -223,14 +223,14 @@ class Auth0Idp(IdpProvider):
         return attrs
 
     def update_or_create_role(self, current_user: AuthInfo, role: Role, **kwargs):
-        auth0_role = self._get_role(role.name, False)
+        auth0_role = self._get_role(role.idp_name, False)
         if auth0_role is None:
             self.auth0.roles.create(body={'name': role.idp_name})
         else:
             self.auth0.roles.update(auth0_role['id'], body={'name': role.idp_name})
 
     def delete_role(self, current_user: AuthInfo, role: Role, **kwargs):
-        auth0_role = self._get_role(role.name)
+        auth0_role = self._get_role(role.idp_name)
         self.auth0.roles.delete(auth0_role['id'])
 
     def update_user_roles(self, current_user: AuthInfo, user: User, roles: list, **kwargs):
@@ -241,9 +241,9 @@ class Auth0Idp(IdpProvider):
         add_roles = []
         del_roles = []
         for role in roles:
-            role_exists = next((x for x in auth0_roles if x['name'] == f'{role.tenant_id}_{role.name}'), None)
+            role_exists = next((x for x in auth0_roles if x['name'] == f'{role.idp_name}'), None)
             if role_exists is None:
-                auth0_role = next((x for x in all_roles if x['name'] == f'{role.tenant_id}_{role.name}'), None)
+                auth0_role = next((x for x in all_roles if x['name'] == f'{role.idp_name}'), None)
                 if auth0_role is not None:
                     add_roles += [auth0_role['id']]
 
