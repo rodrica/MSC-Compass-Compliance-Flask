@@ -60,7 +60,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
-              ftp_user_name: null
+              ftp_username: null
               email: test2@test.com
               departments: []
               offices: []
@@ -92,7 +92,7 @@ stages:
               entity_id: "{created_id}"
               name: Test
               family_name: e2e
-              ftp_user_name: null
+              ftp_username: null
               email: test2@test.com
               departments: []
               offices: []
@@ -125,7 +125,7 @@ stages:
               entity_id: "{created_id}"
               name: Test
               family_name: e2e_new
-              ftp_user_name: null
+              ftp_username: null
               email: test2@test.com
               departments: []
               offices: []
@@ -171,7 +171,7 @@ stages:
       json:
         name: Test
         family_name: e2e
-        ftp_user_name: test
+        ftp_username: test
         email: test2@test.com
         temporary_password: changeme
     response:
@@ -183,7 +183,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
-              ftp_user_name: test
+              ftp_username: test
               email: test2@test.com
               departments: []
               offices: []
@@ -346,7 +346,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
-                  ftp_user_name: null
+                  ftp_username: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -360,7 +360,7 @@ stages:
                 - entity_id: "{user2}"
                   name: Beta
                   family_name: Bar
-                  ftp_user_name: null
+                  ftp_username: null
                   email: bbar@example.com
                   departments: []
                   offices: []
@@ -392,7 +392,7 @@ stages:
                 - entity_id: "{user3}"
                   name: Zeta
                   family_name: Bar
-                  ftp_user_name: null
+                  ftp_username: null
                   email: zbar@example.com
                   departments: []
                   offices: []
@@ -426,7 +426,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
-                  ftp_user_name: null
+                  ftp_username: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -460,7 +460,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
-                  ftp_user_name: null
+                  ftp_username: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -494,7 +494,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
-                  ftp_user_name: null
+                  ftp_username: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -529,7 +529,7 @@ stages:
                 - entity_id: "{user2}"
                   name: Beta
                   family_name: Bar
-                  ftp_user_name: null
+                  ftp_username: null
                   email: bbar@example.com
                   departments: []
                   offices: []
@@ -543,7 +543,7 @@ stages:
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
-                  ftp_user_name: null
+                  ftp_username: null
                   email: afoo@test.com
                   departments: []
                   offices: []
@@ -574,7 +574,7 @@ stages:
               entity_id: "{user1}"
               name: Alpha
               family_name: Foo
-              ftp_user_name: null
+              ftp_username: null
               email: afoo@test.com
               departments: []
               offices: []
@@ -623,7 +623,7 @@ stages:
               entity_id: "{user3}"
               name: Zeta
               family_name: Bar
-              ftp_user_name: null
+              ftp_username: null
               email: zbar@example.com
               departments: []
               offices: []
@@ -686,7 +686,7 @@ stages:
       json:
         name: Test
         family_name: e2e
-        ftp_user_name: test
+        ftp_username: test
         email: test2@test.com
         temporary_password: changeme
     response:
@@ -698,7 +698,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
-              ftp_user_name: test
+              ftp_username: test
               email: test2@test.com
               departments: []
               offices: []
@@ -723,7 +723,7 @@ stages:
       json:
         name: Test2
         family_name: e2e
-        ftp_user_name: test2
+        ftp_username: test2
         email: test3@test.com
         temporary_password: changeme
     response:
@@ -735,7 +735,7 @@ stages:
             expected:
               name: Test2
               family_name: e2e
-              ftp_user_name: test2
+              ftp_username: test2
               email: test3@test.com
               departments: []
               offices: []
@@ -868,14 +868,14 @@ stages:
       json:
         name: Test2
         family_name: e2e
-        ftp_user_name: test
+        ftp_username: test
         email: test4@test.com
         temporary_password: changeme
     response:
       status_code: 409
       body:
         error: True
-        msg: ftp_user_name 'test' already exists.
+        msg: ftp_username 'test' already exists.
 
   # TODO - update validation
   - name: Update User
@@ -899,7 +899,7 @@ stages:
               entity_id: "{user_id}"
               name: Test
               family_name: e2e_new
-              ftp_user_name: test
+              ftp_username: test
               email: test2@test.com
               departments: []
               offices: []
@@ -921,10 +921,10 @@ stages:
       json:
         name: Test
         family_name: e2e_new
-        ftp_user_name: test2
+        ftp_username: test2
         email: test2@test.com
     response:
       status_code: 409
       body:
         error: True
-        msg: ftp_user_name 'test2' already exists.
+        msg: ftp_username 'test2' already exists.

@@ -66,7 +66,7 @@ def _is_ftp_username_unique(current_user: AuthInfo, ftp_username: str):
     ftp_user_count_for_tenant = User.query.filter(sql_and_(
         User.tenant_id == current_user.tenant_id,
         User.is_active.is_(True),
-        User.ftp_user_name == ftp_username
+        User.ftp_username == ftp_username
     )).count()
     logger.info(f'ftp_user_count_for_tenant: {ftp_user_count_for_tenant}')
 
@@ -137,10 +137,10 @@ class Users(MethodView):
         if user is not None:
             raise ConflictException('User with email = {} already exists.'.format(data['email']))
 
-        ftp_username = data.get('ftp_user_name')
+        ftp_username = data.get('ftp_username')
         if ftp_username and not _is_ftp_username_unique(current_user, ftp_username):
             # Validate that ftp_username is unique to the tenant
-            raise ConflictException(f"ftp_user_name '{ftp_username}' already exists.")
+            raise ConflictException(f"ftp_username '{ftp_username}' already exists.")
 
         # Validate that items exist and get actual items
         roles = _get_items_from_id_list(current_user, data.get('role_ids'), Role)
@@ -152,7 +152,7 @@ class Users(MethodView):
             email=data.get('email'),
             name=data.get('name'),
             family_name=data.get('family_name'),
-            ftp_user_name=ftp_username,
+            ftp_username=ftp_username,
             description=data.get('description'),
             claims_by_audience=set_claims_default_tenant(data, current_user.tenant_id),
             tags=data.get('tags'),
@@ -211,10 +211,10 @@ class UserById(MethodView):
         data['departments'] = _get_items_from_id_list(current_user, data.pop('department_ids', None), Department)
         data['offices'] = _get_items_from_id_list(current_user, data.pop('office_ids', None), Office)
 
-        ftp_username = data.get('ftp_user_name')
-        if ftp_username and ftp_username != user.ftp_user_name and not _is_ftp_username_unique(current_user, ftp_username):
+        ftp_username = data.get('ftp_username')
+        if ftp_username and ftp_username != user.ftp_username and not _is_ftp_username_unique(current_user, ftp_username):
             # Validate that ftp_username is unique to the tenant
-            raise ConflictException(f"ftp_user_name '{ftp_username}' already exists.")
+            raise ConflictException(f"ftp_username '{ftp_username}' already exists.")
 
         attributes_to_update = dict()
         for k, v in data.items():

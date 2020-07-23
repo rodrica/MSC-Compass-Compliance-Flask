@@ -49,7 +49,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
-              ftp_user_name: null
+              ftp_username: null
               email: test2@test.com
               departments: []
               offices: []
@@ -92,7 +92,7 @@ stages:
               entity_id: "{created_id}"
               name: Test
               family_name: e2e_new
-              ftp_user_name: null
+              ftp_username: null
               email: test2@test.com
               departments: []
               offices: []
