@@ -155,7 +155,7 @@ class RoleById(MethodView):
         current_user = get_current_user()
         role = self.get_role(current_user, role_id)
 
-        self.idp.delete_role(current_user, role.idp_name)
+        self.idp.delete_role(current_user, role)
 
         role.delete(current_user)
         return role
