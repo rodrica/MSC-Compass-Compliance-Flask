@@ -4,6 +4,7 @@ import logging
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
+from sqlalchemy import and_ as sql_and_  # diffentiate from operators.and_
 from typing import List, Union
 from uuid import UUID
 
@@ -59,6 +60,17 @@ def _get_user(current_user: AuthInfo, user_id: str):
         raise NotFoundException('No user found for id = {}'.format(user_id))
 
     return user
+
+
+def _is_ftp_username_unique(current_user: AuthInfo, ftp_username: str):
+    ftp_user_count_for_tenant = User.query.filter(sql_and_(
+        User.tenant_id == current_user.tenant_id,
+        User.is_active.is_(True),
+        User.ftp_user_name == ftp_username
+    )).count()
+    logger.info(f'ftp_user_count_for_tenant: {ftp_user_count_for_tenant}')
+
+    return ftp_user_count_for_tenant == 0
 
 
 def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
@@ -125,6 +137,11 @@ class Users(MethodView):
         if user is not None:
             raise ConflictException('User with email = {} already exists.'.format(data['email']))
 
+        ftp_username = data.get('ftp_user_name')
+        if ftp_username and not _is_ftp_username_unique(current_user, ftp_username):
+            # Validate that ftp_username is unique to the tenant
+            raise ConflictException(f"ftp_user_name '{ftp_username}' already exists.")
+
         # Validate that items exist and get actual items
         roles = _get_items_from_id_list(current_user, data.get('role_ids'), Role)
         departments = _get_items_from_id_list(current_user, data.get('department_ids'), Department)
@@ -135,7 +152,7 @@ class Users(MethodView):
             email=data.get('email'),
             name=data.get('name'),
             family_name=data.get('family_name'),
-            ftp_user_name=data.get('ftp_user_name'),
+            ftp_user_name=ftp_username,
             description=data.get('description'),
             claims_by_audience=set_claims_default_tenant(data, current_user.tenant_id),
             tags=data.get('tags'),
@@ -193,6 +210,11 @@ class UserById(MethodView):
         data['roles'] = _get_items_from_id_list(current_user, data.pop('role_ids', None), Role)
         data['departments'] = _get_items_from_id_list(current_user, data.pop('department_ids', None), Department)
         data['offices'] = _get_items_from_id_list(current_user, data.pop('office_ids', None), Office)
+
+        ftp_username = data.get('ftp_user_name')
+        if ftp_username and ftp_username != user.ftp_user_name and not _is_ftp_username_unique(current_user, ftp_username):
+            # Validate that ftp_username is unique to the tenant
+            raise ConflictException(f"ftp_user_name '{ftp_username}' already exists.")
 
         attributes_to_update = dict()
         for k, v in data.items():

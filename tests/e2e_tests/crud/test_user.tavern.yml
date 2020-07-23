@@ -161,6 +161,43 @@ stages:
         num_items: 0
         total_items: 0
 
+  - name: Create User with ftp username
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e
+        ftp_user_name: test
+        email: test2@test.com
+        temporary_password: changeme
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Test
+              family_name: e2e
+              ftp_user_name: test
+              email: test2@test.com
+              departments: []
+              offices: []
+              roles: []
+              description: null
+              claims_by_audience: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+      save:
+        body:
+          created_id: entity_id
+
 ---
 test_name: Users API GET Happy
 marks:
@@ -649,6 +686,7 @@ stages:
       json:
         name: Test
         family_name: e2e
+        ftp_user_name: test
         email: test2@test.com
         temporary_password: changeme
     response:
@@ -660,7 +698,7 @@ stages:
             expected:
               name: Test
               family_name: e2e
-              ftp_user_name: null
+              ftp_user_name: test
               email: test2@test.com
               departments: []
               offices: []
@@ -674,6 +712,41 @@ stages:
       save:
         body:
           user_id: entity_id
+
+  - name: Create User 2
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test2
+        family_name: e2e
+        ftp_user_name: test2
+        email: test3@test.com
+        temporary_password: changeme
+    response:
+      status_code: 201
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              name: Test2
+              family_name: e2e
+              ftp_user_name: test2
+              email: test3@test.com
+              departments: []
+              offices: []
+              roles: []
+              description: null
+              claims_by_audience: null
+              tenant_id: tenant1
+              created_by: test@test.com
+              changed_by: test@test.com
+              tags: null
+
 
   - name: Create User - with empty body
     request:
@@ -785,6 +858,25 @@ stages:
           claims_by_audience: {"a": {"value": {"0": ["Claim has too few parts, expected 6 or 7, found 2."]}}}
         status: Unprocessable Entity
 
+  - name: Create User - with duplicate ftp_username
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test2
+        family_name: e2e
+        ftp_user_name: test
+        email: test4@test.com
+        temporary_password: changeme
+    response:
+      status_code: 409
+      body:
+        error: True
+        msg: ftp_user_name 'test' already exists.
+
   # TODO - update validation
   - name: Update User
     request:
@@ -807,7 +899,7 @@ stages:
               entity_id: "{user_id}"
               name: Test
               family_name: e2e_new
-              ftp_user_name: null
+              ftp_user_name: test
               email: test2@test.com
               departments: []
               offices: []
@@ -818,3 +910,21 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+
+  - name: Update User - with existing ftp username
+    request:
+      url: http://app:5000/users/{created_id}
+      method: PUT
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+      json:
+        name: Test
+        family_name: e2e_new
+        ftp_user_name: test2
+        email: test2@test.com
+    response:
+      status_code: 409
+      body:
+        error: True
+        msg: ftp_user_name 'test2' already exists.
