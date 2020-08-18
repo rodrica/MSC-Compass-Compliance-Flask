@@ -63,14 +63,13 @@ def _get_user(current_user: AuthInfo, user_id: str):
 
 
 def _is_ftp_username_unique(current_user: AuthInfo, ftp_username: str):
-    ftp_user_count_for_tenant = User.query.filter(sql_and_(
-        User.tenant_id == current_user.tenant_id,
+    ftp_user_count = User.query.filter(sql_and_(
         User.is_active.is_(True),
         User.ftp_username == ftp_username
     )).count()
-    logger.info(f'ftp_user_count_for_tenant: {ftp_user_count_for_tenant}')
+    logger.debug(f'ftp_user_count: {ftp_user_count}')
 
-    return ftp_user_count_for_tenant == 0
+    return ftp_user_count == 0
 
 
 def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
@@ -164,8 +163,9 @@ class Users(MethodView):
         logger.info('Adding user to idp')
         idp_attributes = {k: v for k, v in data.items() if k in idp_attribute_keys}
         self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
-        logger.info('User added to idp, storing internally')
+        self.idp.update_user_roles(current_user, user, user.roles)
 
+        logger.info('User added to idp, storing internally')
         user.save(current_user)
         logger.info('User created')
 
@@ -230,7 +230,9 @@ class UserById(MethodView):
         user.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         user.save(current_user)
+
         self.idp.update_user_attributes(current_user, user, attributes_to_update)
+        self.idp.update_user_roles(current_user, user, data['roles'])
 
         return user
 

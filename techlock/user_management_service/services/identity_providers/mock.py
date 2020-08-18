@@ -7,7 +7,7 @@ from techlock.common.config import AuthInfo
 from .base import IdpProvider
 
 if TYPE_CHECKING:
-    from ...models import User
+    from ...models import User, Role
 
 logger = logging.getLogger(__name__)
 
@@ -35,3 +35,12 @@ class MockIdp(IdpProvider):
 
     def get_user_attributes(self, user: User, **kwargs):
         logger.info("get_user_attributes")
+
+    def update_or_create_role(self, current_user: AuthInfo, role: Role):
+        logger.info("update_or_create_role")
+
+    def delete_role(self, current_user: AuthInfo, role: Role):
+        logger.info("delete_role")
+
+    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list):
+        logger.info("update_user_roles")

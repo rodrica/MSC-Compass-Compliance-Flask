@@ -16,6 +16,7 @@ from techlock.common.api.jwt_authorization import (
     can_access,
 )
 
+from ..services import get_idp
 from ..models import (
     Role, RoleSchema, RolePageableSchema,
     RoleListQueryParameters, RoleListQueryParametersSchema,
@@ -43,6 +44,10 @@ def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
 
 @blp.route('')
 class Roles(MethodView):
+
+    def __init__(self, *args, **kwargs):
+        MethodView.__init__(self, *args, **kwargs)
+        self.idp = get_idp()
 
     @blp.arguments(RoleListQueryParametersSchema, location='query')
     @blp.response(RolePageableSchema)
@@ -82,11 +87,17 @@ class Roles(MethodView):
 
         role.save(current_user)
 
+        self.idp.update_or_create_role(current_user, role)
+
         return role
 
 
 @blp.route('/<role_id>')
 class RoleById(MethodView):
+
+    def __init__(self, *args, **kwargs):
+        MethodView.__init__(self, *args, **kwargs)
+        self.idp = get_idp()
 
     def get_role(self, current_user: AuthInfo, role_id: str):
         claims = get_request_claims()
@@ -121,6 +132,7 @@ class RoleById(MethodView):
         logger.debug('Updating Role', extra={'data': data})
 
         role = self.get_role(current_user, role_id)
+
         for k, v in data.items():
             if hasattr(role, k):
                 setattr(role, k, v)
@@ -130,6 +142,8 @@ class RoleById(MethodView):
         role.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         role.save(current_user)
+        self.idp.update_or_create_role(current_user, role)
+
         return role
 
     @blp.response(RoleSchema, code=204)
@@ -139,8 +153,12 @@ class RoleById(MethodView):
     )
     def delete(self, role_id):
         current_user = get_current_user()
-
         role = self.get_role(current_user, role_id)
+
+        try:
+            self.idp.delete_role(current_user, role)
+        except NotFoundException:
+            logger.warning('Role does not exist in IDP, skipping IDP deletion...', extra={'role_idp_name': role.idp_name})
 
         role.delete(current_user)
         return role

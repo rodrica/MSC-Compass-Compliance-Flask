@@ -12,7 +12,7 @@ from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
 if TYPE_CHECKING:
-    from ...models import User
+    from ...models import User, Role
 
 logger = logging.getLogger(__name__)
 
@@ -112,6 +112,24 @@ class Auth0Idp(IdpProvider):
 
         return found_users['users'][0]
 
+    def _get_role(self, role_name: str, throw_if_not_found: bool = True):
+        self._refresh_if_needed()
+        roles = self.auth0.roles.list(name_filter=role_name)['roles']
+        if len(roles) > 1:
+            logger.warn('Found multiple roles, expected one. Will use first one.', extra={
+                'roles': roles
+            })
+
+        for role in roles:
+            if role['name'] == role_name:
+                return role
+
+        if throw_if_not_found:
+            logger.error(f'Role {role_name} not found')
+            raise NotFoundException('Role not found')
+        else:
+            return None
+
     def create_user(
         self,
         current_user: AuthInfo,
@@ -121,6 +139,7 @@ class Auth0Idp(IdpProvider):
         idp_attributes: dict = None,
         **kwargs,
     ):
+        logger.info('Auth0: Creating user', extra={'user': user.entity_id})
         app_metadata = {
             'tenant_id': user.tenant_id,
         }
@@ -141,6 +160,7 @@ class Auth0Idp(IdpProvider):
                     'connection': self.connection_id,
                 })
             )
+            logger.info('Auth0: User created', extra={'user': user.entity_id})
         except Auth0Error as e:
             logger.error(f'Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
@@ -155,6 +175,7 @@ class Auth0Idp(IdpProvider):
         attributes: Dict[str, str],
         **kwargs
     ):
+        logger.info('Auth0: Updating user attributes', extra={'user': user.entity_id})
         user_attributes = dict()
         custom_attributes = dict()
         for k, v in attributes.items():
@@ -173,6 +194,7 @@ class Auth0Idp(IdpProvider):
         self._handle_token_error(lambda: self.auth0.users.update(found_user['user_id'], user_attributes))
 
     def delete_user(self, current_user: AuthInfo, user: User, **kwargs):
+        logger.info('Auth0: Deleting user', extra={'user': user.entity_id})
         try:
             found_user = self._get_user(user)
             self._handle_token_error(lambda: self.auth0.users.delete(found_user['user_id']))
@@ -181,12 +203,14 @@ class Auth0Idp(IdpProvider):
             logger.info('User not found, skipping deletion')
 
     def change_password(self, current_user: AuthInfo, user: User, new_password: str, **kwargs):
+        logger.info('Auth0: Changing password', extra={'user': user.entity_id})
         found_user = self._get_user(user)
 
         try:
             self._handle_token_error(lambda: self.auth0.users.update(found_user['user_id'], {
                 'password': new_password,
             }))
+            logger.info('Auth0: Changed password', extra={'user': user.entity_id})
         except Auth0Error as e:
             if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
@@ -203,3 +227,50 @@ class Auth0Idp(IdpProvider):
             'logins_count': found_user.get('logins_count')
         }
         return attrs
+
+    def update_or_create_role(self, current_user: AuthInfo, role: Role, **kwargs):
+        auth0_role = self._get_role(role.idp_name, False)
+        if auth0_role is None:
+            logger.info('Auth0: Creating role', extra={'role': role.idp_name})
+            self.auth0.roles.create(body={'name': role.idp_name})
+            logger.info('Auth0: Created role', extra={'role': role.idp_name})
+        else:
+            logger.info('Auth0: Updating role', extra={'role': role.idp_name})
+            self.auth0.roles.update(auth0_role['id'], body={'name': role.idp_name})
+            logger.info('Auth0: Updated role', extra={'role': role.idp_name})
+
+    def delete_role(self, current_user: AuthInfo, role: Role, **kwargs):
+        logger.info('Auth0: Deleting role', extra={'role': role.idp_name})
+
+        auth0_role = self._get_role(role.idp_name)
+        self.auth0.roles.delete(auth0_role['id'])
+
+        logger.info('Auth0: Deleted role', extra={'role': role.idp_name})
+
+    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list, **kwargs):
+        logger.info('Auth0: Updating user roles', extra={'user': user.entity_id})
+        auth0_user = self._get_user(user)
+        auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'])['roles']
+        all_roles = self.auth0.roles.list()['roles']
+
+        add_roles = []
+        del_roles = []
+        for role in roles:
+            role_exists = next((x for x in auth0_roles if x['name'] == f'{role.idp_name}'), None)
+            if role_exists is None:
+                auth0_role = next((x for x in all_roles if x['name'] == f'{role.idp_name}'), None)
+                if auth0_role is not None:
+                    add_roles += [auth0_role['id']]
+
+        for auth0_role in auth0_roles:
+            role_exists = next((x for x in user.roles if f'{x.tenant_id}_{x.name}' == auth0_role['name']), None)
+            if role_exists is None:
+                del_roles += [auth0_role['id']]
+
+        if len(add_roles) > 0:
+            self.auth0.users.add_roles(auth0_user['user_id'], add_roles)
+
+        if len(del_roles) > 0:
+            self.auth0.users.remove_roles(auth0_user['user_id'], del_roles)
+
+        logger.info('Auth0: Updated user roles', extra={'user': user.entity_id})

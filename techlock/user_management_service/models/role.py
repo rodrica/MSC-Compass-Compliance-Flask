@@ -1,5 +1,6 @@
 import marshmallow as ma
 import marshmallow.fields as mf
+import os
 from dataclasses import dataclass
 from sqlalchemy.dialects.postgresql import JSONB
 
@@ -33,6 +34,7 @@ ROLE_CLAIM_SPEC = ClaimSpec(
     resource_name='roles',
     filter_fields=[]
 )
+STAGE = os.environ.get('STAGE', 'dev').upper()
 
 
 class RoleSchema(BaseModelSchema):
@@ -59,6 +61,10 @@ class Role(BaseModel):
     __tablename__ = 'roles'
 
     claims_by_audience = db.Column(JSONB, nullable=True)
+
+    @property
+    def idp_name(self):
+        return f'{self.tenant_id}_{STAGE}_{self.name}'
 
 
 @dataclass
