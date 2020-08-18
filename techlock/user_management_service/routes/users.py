@@ -162,12 +162,22 @@ class Users(MethodView):
 
         logger.info('Adding user to idp')
         idp_attributes = {k: v for k, v in data.items() if k in idp_attribute_keys}
-        self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
-        self.idp.update_user_roles(current_user, user, user.roles)
+        try:
+            self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
+            self.idp.update_user_roles(current_user, user, user.roles)
 
-        logger.info('User added to idp, storing internally')
-        user.save(current_user)
-        logger.info('User created')
+            logger.info('User added to idp, storing internally')
+            user.save(current_user)
+            logger.info('User created')
+        except Exception:
+            # Clean up silently. We expect part of this to fail, because if everything was created properly, we wouldn't be here.
+            # Bit of a lazy approach :)
+            with suppress_with_log(logger, Exception, log_level=logging.DEBUG):
+                self.idp.delete_user(current_user, user)
+
+            with suppress_with_log(logger, Exception, log_level=logging.DEBUG):
+                user = _get_user(current_user, data['email'])
+                user.delete(current_user)
 
         return user
 

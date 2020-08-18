@@ -133,7 +133,7 @@ class CachedIdp(IdpProvider):
         **kwargs,
     ):
         # Nothing to do with cache. Pass through
-        self.update_user_roles.delete_role(
+        self._wrapped_idp.update_user_roles(
             current_user,
             user,
             roles,
