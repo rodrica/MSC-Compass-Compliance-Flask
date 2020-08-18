@@ -63,14 +63,13 @@ def _get_user(current_user: AuthInfo, user_id: str):
 
 
 def _is_ftp_username_unique(current_user: AuthInfo, ftp_username: str):
-    ftp_user_count_for_tenant = User.query.filter(sql_and_(
-        User.tenant_id == current_user.tenant_id,
+    ftp_user_count = User.query.filter(sql_and_(
         User.is_active.is_(True),
         User.ftp_username == ftp_username
     )).count()
-    logger.info(f'ftp_user_count_for_tenant: {ftp_user_count_for_tenant}')
+    logger.debug(f'ftp_user_count: {ftp_user_count}')
 
-    return ftp_user_count_for_tenant == 0
+    return ftp_user_count == 0
 
 
 def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
