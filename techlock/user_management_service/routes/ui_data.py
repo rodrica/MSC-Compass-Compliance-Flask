@@ -31,6 +31,7 @@ class ConfigUrls(MethodView):
         superadmin_kenna_url = cm.get(current_user, 'ui_config.superadmin_kenna_url')
         feature_flags = cm.get(current_user, 'ui_config.feature_flags', default=dict())
         dashboard_data = DashboardDataSchema(many=True).load(cm.get(current_user, 'ui_config.dashboard', list()))
+        vigitrust_url = cm.get(current_user, 'ui_config.vigitrust_url')
 
         return {
             "ensilo_url": ensilo_url,
@@ -39,4 +40,5 @@ class ConfigUrls(MethodView):
             "superadmin_kenna_url": superadmin_kenna_url,
             "feature_flags": feature_flags,
             "dashboard_data": dashboard_data,
+            "vigitrust_url": vigitrust_url,
         }
