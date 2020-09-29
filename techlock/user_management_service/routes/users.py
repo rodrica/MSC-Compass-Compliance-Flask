@@ -179,6 +179,8 @@ class Users(MethodView):
                 user = _get_user(current_user, data['email'])
                 user.delete(current_user)
 
+            raise
+
         return user
 
 
