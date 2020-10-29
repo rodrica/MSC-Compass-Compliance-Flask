@@ -7,6 +7,7 @@ from typing import Dict, TYPE_CHECKING
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
+from typing import List
 
 from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.config import AuthInfo, ConfigManager
@@ -249,23 +250,25 @@ class Auth0Idp(IdpProvider):
 
         logger.info('Auth0: Deleted role', extra={'role': role.idp_name})
 
-    def update_user_roles(self, current_user: AuthInfo, user: User, roles: list, **kwargs):
-        logger.info('Auth0: Updating user roles', extra={'user': user.entity_id, 'roles': roles})
+    def update_user_roles(self, current_user: AuthInfo, user: User, roles: List[Role], **kwargs):
+        logger.info('Auth0: Updating user roles', extra={'user': user.entity_id, 'roles': [{'id': r.entity_id, 'name': r.name} for r in roles]})
         auth0_user = self._get_user(user)
-        auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'])['roles']
-        all_roles = self.auth0.roles.list()['roles']
+        # todo add paging for when total results exceeds page size
+        auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'], per_page=200)['roles']
+        # Filter roles by the "{tenant}_{stage}_" prefix
+        all_roles = self.auth0.roles.list(per_page=200, name_filter=f'{current_user.tenant_id}_{STAGE}_')['roles']
 
         add_roles = []
         del_roles = []
         for role in roles:
-            role_exists = next((x for x in auth0_roles if x['name'] == f'{role.idp_name}'), None)
+            role_exists = next((r for r in auth0_roles if r['name'] == f'{role.idp_name}'), None)
             if role_exists is None:
-                auth0_role = next((x for x in all_roles if x['name'] == f'{role.idp_name}'), None)
+                auth0_role = next((r for r in all_roles if r['name'] == f'{role.idp_name}'), None)
                 if auth0_role is not None:
                     add_roles += [auth0_role['id']]
 
         for auth0_role in auth0_roles:
-            role_exists = next((x for x in user.roles if f'{x.tenant_id}_{STAGE}_{x.name}' == auth0_role['name']), None)
+            role_exists = next((r for r in user.roles if r.idp_name == auth0_role['name']), None)
             if role_exists is None:
                 del_roles += [auth0_role['id']]
 
