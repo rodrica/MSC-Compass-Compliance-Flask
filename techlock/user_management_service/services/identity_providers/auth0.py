@@ -1,6 +1,7 @@
 from __future__ import annotations
 import jwt
 import logging
+import os
 import time
 from typing import Dict, TYPE_CHECKING
 from auth0.v3.authentication import GetToken
@@ -15,6 +16,7 @@ if TYPE_CHECKING:
     from ...models import User, Role
 
 logger = logging.getLogger(__name__)
+STAGE = os.environ.get('STAGE', 'dev').upper()
 
 _app_metadata_keys = [
 ]
@@ -248,7 +250,7 @@ class Auth0Idp(IdpProvider):
         logger.info('Auth0: Deleted role', extra={'role': role.idp_name})
 
     def update_user_roles(self, current_user: AuthInfo, user: User, roles: list, **kwargs):
-        logger.info('Auth0: Updating user roles', extra={'user': user.entity_id})
+        logger.info('Auth0: Updating user roles', extra={'user': user.entity_id, 'roles': roles})
         auth0_user = self._get_user(user)
         auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'])['roles']
         all_roles = self.auth0.roles.list()['roles']
@@ -263,14 +265,16 @@ class Auth0Idp(IdpProvider):
                     add_roles += [auth0_role['id']]
 
         for auth0_role in auth0_roles:
-            role_exists = next((x for x in user.roles if f'{x.tenant_id}_{x.name}' == auth0_role['name']), None)
+            role_exists = next((x for x in user.roles if f'{x.tenant_id}_{STAGE}_{x.name}' == auth0_role['name']), None)
             if role_exists is None:
                 del_roles += [auth0_role['id']]
 
         if len(add_roles) > 0:
+            logger.info('Auth0: Adding roles to user', extra={'user': user.entity_id, 'add_roles': add_roles})
             self.auth0.users.add_roles(auth0_user['user_id'], add_roles)
 
         if len(del_roles) > 0:
+            logger.info('Auth0: Removing roles from user', extra={'user': user.entity_id, 'del_roles': del_roles})
             self.auth0.users.remove_roles(auth0_user['user_id'], del_roles)
 
         logger.info('Auth0: Updated user roles', extra={'user': user.entity_id})
