@@ -19,6 +19,8 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 STAGE = os.environ.get('STAGE', 'dev').upper()
 
+TENANT_BASE_ROLE_NAME = '_BASE_'
+
 _app_metadata_keys = [
 ]
 
@@ -258,6 +260,8 @@ class Auth0Idp(IdpProvider):
         # Filter roles by the "{tenant}_{stage}_" prefix
         all_roles = self.auth0.roles.list(per_page=100, name_filter=f'{current_user.tenant_id}_{STAGE}_')['roles']
 
+        user_base_role = f'{user.tenant_id}_{STAGE}_{TENANT_BASE_ROLE_NAME}'
+
         add_roles = []
         del_roles = []
         for role in roles:
@@ -267,7 +271,19 @@ class Auth0Idp(IdpProvider):
                 if auth0_role is not None:
                     add_roles += [auth0_role['id']]
 
+        # if base role exists, and is not assigned, assign it.
+        base_role = next((r for r in all_roles if r['name'] == user_base_role), None)
+        if (
+            base_role is not None
+            and next((r for r in auth0_roles if r['name'] == user_base_role), None) is None
+        ):
+            add_roles += [base_role['id']]
+
         for auth0_role in auth0_roles:
+            # Never delete the base role
+            if auth0_role['name'] == user_base_role:
+                continue
+
             role_exists = next((r for r in user.roles if r.idp_name == auth0_role['name']), None)
             if role_exists is None:
                 del_roles += [auth0_role['id']]
