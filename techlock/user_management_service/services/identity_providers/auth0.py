@@ -254,9 +254,9 @@ class Auth0Idp(IdpProvider):
         logger.info('Auth0: Updating user roles', extra={'user': user.entity_id, 'roles': [{'id': r.entity_id, 'name': r.name} for r in roles]})
         auth0_user = self._get_user(user)
         # todo add paging for when total results exceeds page size
-        auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'], per_page=200)['roles']
+        auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'], per_page=100)['roles']
         # Filter roles by the "{tenant}_{stage}_" prefix
-        all_roles = self.auth0.roles.list(per_page=200, name_filter=f'{current_user.tenant_id}_{STAGE}_')['roles']
+        all_roles = self.auth0.roles.list(per_page=100, name_filter=f'{current_user.tenant_id}_{STAGE}_')['roles']
 
         add_roles = []
         del_roles = []
