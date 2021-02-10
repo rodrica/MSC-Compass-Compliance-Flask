@@ -3,9 +3,10 @@
 """
   TODO: Add Copyright and license info
 """
-import os
 import datetime
-from setuptools import setup, find_packages
+import os
+
+from setuptools import find_packages, setup
 
 
 def get_version():
@@ -39,8 +40,7 @@ setup(
     author_email='jmt.vanderlee@gmail.com',
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[
-        # 'tl-msc-common==1.0.0.dev0+master.f675c8a39b0b8e7fe3b4e7bb0d644b05e9e436e6',
-        'tl_msc_common==1.0.0.dev0+celery.d92dceeb9529647dfb1e9c67bd5252923c67ce48',
+        'tl_msc_common==1.0.0.dev0+master.15170e44893ec4be9d5edd4df86b0b2af7ce3ac3',
         'Flask-HTTPAuth==3.3.0',
         'flask-smorest==0.19.2',
     ],
