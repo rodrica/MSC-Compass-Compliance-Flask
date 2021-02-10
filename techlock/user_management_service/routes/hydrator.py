@@ -1,22 +1,21 @@
 import logging
 import os
+from typing import Dict
 
 from flask import request
 from flask.views import MethodView
 from flask_httpauth import HTTPBasicAuth
-from typing import Dict
-from werkzeug.security import generate_password_hash, check_password_hash
-
 from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.api.blueprint import Blueprint
 from techlock.common.api.jwt_authorization import Claim, tenant_header_key
 from techlock.common.util.helper import parse_boolean
+from werkzeug.security import check_password_hash, generate_password_hash
+
 from techlock.user_management_service.models import (
     HydratorPostSchema,
-    User,
     Tenant,
+    User,
 )
-
 
 logger = logging.getLogger(__name__)
 

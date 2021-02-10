@@ -3,22 +3,21 @@ import logging
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
-
-from techlock.common.api import (
-    BadRequestException, NotFoundException,
-)
-from techlock.common.config import AuthInfo
+from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.api.jwt_authorization import (
     access_required,
-    get_request_claims,
     can_access,
+    get_request_claims,
 )
+from techlock.common.config import AuthInfo
 
 from ..models import (
-    Department, DepartmentSchema,
-    DepartmentPageableSchema,
-    DepartmentListQueryParameters, DepartmentListQueryParametersSchema,
     DEPARTMENT_CLAIM_SPEC,
+    Department,
+    DepartmentListQueryParameters,
+    DepartmentListQueryParametersSchema,
+    DepartmentPageableSchema,
+    DepartmentSchema,
 )
 
 logger = logging.getLogger(__name__)

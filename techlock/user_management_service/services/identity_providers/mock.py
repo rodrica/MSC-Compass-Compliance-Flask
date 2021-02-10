@@ -1,13 +1,14 @@
 from __future__ import annotations
+
 import logging
-from typing import Dict, TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict
 
 from techlock.common.config import AuthInfo
 
 from .base import IdpProvider
 
 if TYPE_CHECKING:
-    from ...models import User, Role
+    from ...models import Role, User
 
 logger = logging.getLogger(__name__)
 

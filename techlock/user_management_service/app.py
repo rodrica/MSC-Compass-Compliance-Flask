@@ -3,7 +3,6 @@ import logging
 
 import flask
 from flask_smorest import Blueprint
-
 from techlock.common import ConfigManager
 from techlock.common.api.flask import create_flask
 from techlock.common.util.log import init_logging

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import logging
 from collections import MutableMapping
 from typing import TYPE_CHECKING
@@ -6,8 +7,9 @@ from typing import TYPE_CHECKING
 from techlock.common.config import AuthInfo
 
 from .base import IdpProvider
+
 if TYPE_CHECKING:
-    from ...models import User, Role
+    from ...models import Role, User
 
 logger = logging.getLogger(__name__)
 

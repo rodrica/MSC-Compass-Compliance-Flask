@@ -1,27 +1,27 @@
 import logging
+from typing import List, Union
+from uuid import UUID
 
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
-from typing import List, Union
-from uuid import UUID
-
-from techlock.common.api import (
-    BadRequestException, NotFoundException,
-)
-from techlock.common.config import AuthInfo
+from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.api.jwt_authorization import (
     access_required,
-    get_request_claims,
     can_access,
+    get_request_claims,
 )
+from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import BaseModel
 
 from ..models import (
-    Department,
-    Office, OfficeSchema, OfficePageableSchema,
-    OfficeListQueryParameters, OfficeListQueryParametersSchema,
     OFFICE_CLAIM_SPEC,
+    Department,
+    Office,
+    OfficeListQueryParameters,
+    OfficeListQueryParametersSchema,
+    OfficePageableSchema,
+    OfficeSchema,
 )
 
 logger = logging.getLogger(__name__)

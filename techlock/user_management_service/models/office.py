@@ -1,18 +1,20 @@
+from dataclasses import dataclass
+
 import marshmallow as ma
 import marshmallow.fields as mf
-from dataclasses import dataclass
 from sqlalchemy import func as sa_fn
 from sqlalchemy.dialects.postgresql import UUID
-
 from techlock.common.api import (
+    BaseOffsetListQueryParams,
+    BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
-    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
+    BaseModel,
+    BaseModelSchema,
     db,
-    BaseModel, BaseModelSchema,
     get_string_filter,
 )
 

@@ -1,26 +1,29 @@
+from dataclasses import dataclass
+
 import marshmallow as ma
 import marshmallow.fields as mf
 import marshmallow.validate as mv
-from dataclasses import dataclass
 from sqlalchemy import func as sa_fn
 from sqlalchemy.dialects.postgresql import JSONB, UUID
-
 from techlock.common.api import (
-    Claim, ClaimSpec,
+    BaseOffsetListQueryParams,
+    BaseOffsetListQueryParamsSchema,
+    Claim,
+    ClaimSpec,
     OffsetPageableResponseBaseSchema,
-    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
+    BaseModel,
+    BaseModelSchema,
     db,
-    BaseModel, BaseModelSchema,
     get_string_filter,
 )
 
+from ..services import get_idp
 from .department import Department, DepartmentSchema
 from .office import Office, OfficeSchema
 from .role import Role, RoleSchema
-from ..services import get_idp
 
 __all__ = [
     'User',

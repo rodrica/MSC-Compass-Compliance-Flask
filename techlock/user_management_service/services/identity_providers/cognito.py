@@ -1,5 +1,6 @@
 from __future__ import annotations
-from typing import Dict, TYPE_CHECKING
+
+from typing import TYPE_CHECKING, Dict
 
 from techlock.common.config import AuthInfo, ConfigManager
 from techlock.common.util.aws import get_client
@@ -7,7 +8,7 @@ from techlock.common.util.aws import get_client
 from .base import IdpProvider
 
 if TYPE_CHECKING:
-    from ...models import User, Role
+    from ...models import Role, User
 
 
 class CognitoIdp(IdpProvider):

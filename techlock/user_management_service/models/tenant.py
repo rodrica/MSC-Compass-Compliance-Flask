@@ -1,16 +1,14 @@
-import marshmallow as ma
-import marshmallow.fields as mf
 from dataclasses import dataclass
 
+import marshmallow as ma
+import marshmallow.fields as mf
 from techlock.common.api import (
+    BaseOffsetListQueryParams,
+    BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
-    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
-from techlock.common.orm.sqlalchemy import (
-    db,
-    BaseModel, BaseModelSchema,
-)
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
 __all__ = [
     'Tenant',

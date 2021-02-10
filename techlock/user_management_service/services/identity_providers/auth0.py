@@ -1,20 +1,21 @@
 from __future__ import annotations
-import jwt
+
 import logging
 import os
 import time
-from typing import Dict, TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict, List
+
+import jwt
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
-from typing import List
-
 from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
+
 if TYPE_CHECKING:
-    from ...models import User, Role
+    from ...models import Role, User
 
 logger = logging.getLogger(__name__)
 STAGE = os.environ.get('STAGE', 'dev').upper()

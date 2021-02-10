@@ -1,10 +1,11 @@
 import logging
-from redis import Redis
-from redis.connection import to_bool, URL_QUERY_ARGUMENT_PARSERS
 from urllib.parse import parse_qs, urlparse
+
+from redis import Redis
+from redis.connection import URL_QUERY_ARGUMENT_PARSERS, to_bool
 from techlock.common import ConfigManager
 from techlock.common.caches import RedisStore
-from techlock.common.instance_manager import InstanceManager, INSTANCE_TYPES
+from techlock.common.instance_manager import INSTANCE_TYPES, InstanceManager
 
 from .auth0 import Auth0Idp
 from .base import IdpProvider

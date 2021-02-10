@@ -1,18 +1,17 @@
-import marshmallow as ma
-import marshmallow.fields as mf
 import os
 from dataclasses import dataclass
-from sqlalchemy.dialects.postgresql import JSONB
 
+import marshmallow as ma
+import marshmallow.fields as mf
+from sqlalchemy.dialects.postgresql import JSONB
 from techlock.common.api import (
-    Claim, ClaimSpec,
+    BaseOffsetListQueryParams,
+    BaseOffsetListQueryParamsSchema,
+    Claim,
+    ClaimSpec,
     OffsetPageableResponseBaseSchema,
-    BaseOffsetListQueryParams, BaseOffsetListQueryParamsSchema,
 )
-from techlock.common.orm.sqlalchemy import (
-    db,
-    BaseModel, BaseModelSchema,
-)
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
 __all__ = [
     'Role',

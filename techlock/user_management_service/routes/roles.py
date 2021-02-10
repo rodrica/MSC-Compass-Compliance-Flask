@@ -1,27 +1,26 @@
 import logging
+from uuid import UUID
 
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
-from uuid import UUID
-
-from techlock.common.api import (
-    BadRequestException, NotFoundException,
-    Claim
-)
-from techlock.common.config import AuthInfo
+from techlock.common.api import BadRequestException, Claim, NotFoundException
 from techlock.common.api.jwt_authorization import (
     access_required,
-    get_request_claims,
     can_access,
+    get_request_claims,
 )
+from techlock.common.config import AuthInfo
 
-from ..services import get_idp
 from ..models import (
-    Role, RoleSchema, RolePageableSchema,
-    RoleListQueryParameters, RoleListQueryParametersSchema,
     ROLE_CLAIM_SPEC,
+    Role,
+    RoleListQueryParameters,
+    RoleListQueryParametersSchema,
+    RolePageableSchema,
+    RoleSchema,
 )
+from ..services import get_idp
 
 logger = logging.getLogger(__name__)
 

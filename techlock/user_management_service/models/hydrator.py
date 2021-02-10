@@ -1,7 +1,6 @@
 import marshmallow as ma
 import marshmallow.fields as mf
 
-
 __all__ = [
     'HydratorPostSchema',
 ]

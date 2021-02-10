@@ -1,37 +1,43 @@
 import json
 import logging
+from typing import List, Union
+from uuid import UUID
 
 from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from sqlalchemy import and_ as sql_and_  # diffentiate from operators.and_
-from typing import List, Union
-from uuid import UUID
-
 from techlock.common.api import (
-    BadRequestException, ConflictException, NotFoundException,
+    BadRequestException,
+    ConflictException,
+    NotFoundException,
 )
 from techlock.common.api.jwt_authorization import (
     Claim,
     access_required,
-    get_request_claims,
     can_access,
+    get_request_claims,
 )
 from techlock.common.config import AuthInfo
-from techlock.common.messaging import UserNotification, Level, publish_sns
+from techlock.common.messaging import Level, UserNotification, publish_sns
 from techlock.common.orm.sqlalchemy import BaseModel
 from techlock.common.util.helper import suppress_with_log
 
-from ..services import get_idp
 from ..models import (
-    User, UserSchema, UserPageableSchema,
-    Department, Office, Role,
-    UserListQueryParameters, UserListQueryParametersSchema,
-    PostUserSchema,
-    UpdateUserSchema,
-    PostUserChangePasswordSchema,
     USER_CLAIM_SPEC,
+    Department,
+    Office,
+    PostUserChangePasswordSchema,
+    PostUserSchema,
+    Role,
+    UpdateUserSchema,
+    User,
+    UserListQueryParameters,
+    UserListQueryParametersSchema,
+    UserPageableSchema,
+    UserSchema,
 )
+from ..services import get_idp
 
 logger = logging.getLogger(__name__)
 

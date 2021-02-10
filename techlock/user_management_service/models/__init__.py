@@ -1,53 +1,47 @@
-from .hydrator import (
-    HydratorPostSchema,
-)
-
 from .department import (
+    DEPARTMENT_CLAIM_SPEC,
     Department,
-    DepartmentSchema,
-    DepartmentPageableSchema,
     DepartmentListQueryParameters,
     DepartmentListQueryParametersSchema,
-    DEPARTMENT_CLAIM_SPEC,
+    DepartmentPageableSchema,
+    DepartmentSchema,
 )
+from .hydrator import HydratorPostSchema
 from .office import (
+    OFFICE_CLAIM_SPEC,
     Office,
-    OfficeSchema,
-    OfficePageableSchema,
     OfficeListQueryParameters,
     OfficeListQueryParametersSchema,
-    OFFICE_CLAIM_SPEC,
+    OfficePageableSchema,
+    OfficeSchema,
 )
 from .role import (
+    ROLE_CLAIM_SPEC,
     Role,
-    RoleSchema,
-    RolePageableSchema,
     RoleListQueryParameters,
     RoleListQueryParametersSchema,
-    ROLE_CLAIM_SPEC,
+    RolePageableSchema,
+    RoleSchema,
 )
 from .tenant import (
+    TENANT_CLAIM_SPEC,
     Tenant,
-    TenantSchema,
-    TenantPageableSchema,
     TenantListQueryParameters,
     TenantListQueryParametersSchema,
-    TENANT_CLAIM_SPEC,
+    TenantPageableSchema,
+    TenantSchema,
 )
+from .ui_data import DashboardDataSchema
 from .user import (
+    USER_CLAIM_SPEC,
+    PostUserChangePasswordSchema,
+    PostUserSchema,
+    UpdateUserSchema,
     User,
-    UserSchema,
-    UserPageableSchema,
     UserListQueryParameters,
     UserListQueryParametersSchema,
-    PostUserSchema,
-    PostUserChangePasswordSchema,
-    UpdateUserSchema,
-    USER_CLAIM_SPEC,
-)
-
-from .ui_data import (
-    DashboardDataSchema,
+    UserPageableSchema,
+    UserSchema,
 )
 
 ALL_CLAIM_SPECS = [
