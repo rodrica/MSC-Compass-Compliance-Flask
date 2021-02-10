@@ -18,8 +18,9 @@ from techlock.common.api.jwt_authorization import (
     can_access,
     get_request_claims,
 )
-from techlock.common.config import AuthInfo
-from techlock.common.messaging import Level, UserNotification, publish_sns
+from techlock.common.config import AuthInfo, ConfigManager
+from techlock.common.messaging.sns import Envelope
+from techlock.common.messaging.sns import publish as publish_sns
 from techlock.common.orm.sqlalchemy import BaseModel
 from techlock.common.util.helper import suppress_with_log
 
@@ -295,15 +296,18 @@ class UserChangePassword(MethodView):
 
         self.idp.change_password(current_user, user, data.get('new_password'))
 
+        cm = ConfigManager()
         # Password was successfully changed, log any errors that occur in the post processing
         # But don't raise it, we need to prevent the request itself from returning an error code.
         with suppress_with_log(logger):
-            publish_sns(UserNotification(
+            publish_sns(Envelope(
+                topic_arn=cm.get('sns.topics.UserNotification'),
                 subject='Password Changed',
-                message=json.dumps({
+                message={
+                    'user_id': user_id,
                     'changed_by': current_user.user_id
-                }),
-                created_by='user-management-service',
+                },
                 tenant_id=current_user.tenant_id,
-                level=Level.warning,
+                source='user-management-service',
+                severity='INFO',
             ))
