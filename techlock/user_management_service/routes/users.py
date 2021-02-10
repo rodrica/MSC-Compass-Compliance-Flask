@@ -143,6 +143,8 @@ class Users(MethodView):
             raise ConflictException('User with email = {} already exists.'.format(data['email']))
 
         ftp_username = data.get('ftp_username')
+        if ftp_username == '':
+            ftp_username = None
         if ftp_username and not _is_ftp_username_unique(current_user, ftp_username):
             # Validate that ftp_username is unique to the tenant
             raise ConflictException(f"ftp_username '{ftp_username}' already exists.")
@@ -230,6 +232,8 @@ class UserById(MethodView):
         data['offices'] = _get_items_from_id_list(current_user, data.pop('office_ids', None), Office)
 
         ftp_username = data.get('ftp_username')
+        if ftp_username == '':
+            ftp_username = None
         if ftp_username and ftp_username != user.ftp_username and not _is_ftp_username_unique(current_user, ftp_username):
             # Validate that ftp_username is unique to the tenant
             raise ConflictException(f"ftp_username '{ftp_username}' already exists.")

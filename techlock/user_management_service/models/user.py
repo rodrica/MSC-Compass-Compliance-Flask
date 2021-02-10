@@ -97,7 +97,7 @@ class UpdateUserSchema(ma.Schema):
     name = mf.String(required=True)
     family_name = mf.String(required=True)
     description = mf.String()
-    ftp_username = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$', error='String does not match expected pattern: {regex}.'), allow_none=True)
+    ftp_username = mf.String(validate=mv.Regexp(r'^$|^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$', error='String does not match expected pattern: {regex}.'), allow_none=True)
 
     claims_by_audience = mf.Dict(
         keys=mf.String(),
