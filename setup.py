@@ -40,7 +40,7 @@ setup(
     author_email='jmt.vanderlee@gmail.com',
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[
-        'tl_msc_common==1.0.0.dev0+master.7560c6db82a32987ca2b6cbafa3efde3844df3c4',
+        'tl_msc_common==1.0.0.dev0+master.64b6925291ac922eae10448ee74bc345c2ab6862',
         'Flask-HTTPAuth==3.3.0',
         'flask-smorest==0.19.2',
     ],
