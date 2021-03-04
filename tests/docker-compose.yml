@@ -35,9 +35,6 @@ services:
         NEXUS_HOST: ${NEXUS_HOST}
         NEXUS_USERNAME: ${NEXUS_USERNAME}
         NEXUS_PASSWORD: ${NEXUS_PASSWORD}
-      cache_from:
-        - python:3.7-slim-stretch
-        - registry.gitlab.com/techlock/msc-user-management-service:${CI_COMMIT_REF_SLUG:-master}_latest
     depends_on:
       - redis
       - dynamodb
@@ -57,9 +54,6 @@ services:
         NEXUS_HOST: ${NEXUS_HOST}
         NEXUS_USERNAME: ${NEXUS_USERNAME}
         NEXUS_PASSWORD: ${NEXUS_PASSWORD}
-      cache_from:
-        - python:3.7-slim-stretch
-        - registry.gitlab.com/techlock/msc-user-management-service:${CI_COMMIT_REF_SLUG:-master}_latest
     depends_on:
       - redis
       - dynamodb
