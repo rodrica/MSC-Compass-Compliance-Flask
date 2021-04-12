@@ -16,8 +16,6 @@ RUN mkdir -p /app/multiproc-tmp
 EXPOSE 5000
 
 ARG NEXUS_HOST
-ARG NEXUS_USERNAME
-ARG NEXUS_PASSWORD
 
 # Copy only requirements.txt so that we only execute the expensive dependency install when the dependencies actually change.
 # This results in much faster build time, and we're not constantly pulling down packages.
@@ -32,7 +30,7 @@ RUN apt-get update \
       g++ \
     && pip install -r requirements.txt \
       --no-cache-dir \
-      --extra-index-url "https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple/" \
+      --extra-index-url "https://${NEXUS_HOST}/repository/pypi-hosted/simple/" \
     && apt-get purge -y \
       libpq-dev \
       gcc \
