@@ -171,7 +171,7 @@ class Auth0Idp(IdpProvider):
             logger.error(f'Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
-            elif '409' == e.status_code:
+            elif 409 == e.status_code:
                 raise ConflictException(f'Auth0 user already exists with email: {user.email}')
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')

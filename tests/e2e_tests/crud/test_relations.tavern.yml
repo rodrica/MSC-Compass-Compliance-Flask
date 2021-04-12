@@ -236,6 +236,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
       save:
         body:
           user_id: entity_id
@@ -328,3 +329,4 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null

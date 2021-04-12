@@ -62,6 +62,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
       save:
         body:
           created_id: entity_id
@@ -107,6 +108,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
 
 ---
 test_name: Test creating/updating role with empty tenant in claims_by_audience
