@@ -9,7 +9,7 @@ import jwt
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
-from techlock.common.api import BadRequestException, NotFoundException
+from techlock.common.api import BadRequestException, NotFoundException, ConflictException
 from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
@@ -171,6 +171,8 @@ class Auth0Idp(IdpProvider):
             logger.error(f'Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
+            elif 409 == e.status_code:
+                raise ConflictException(f'Auth0 user already exists with email: {user.email}')
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')
 

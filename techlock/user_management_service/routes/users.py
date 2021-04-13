@@ -138,7 +138,12 @@ class Users(MethodView):
         # Get the password and remove it from the data. It is not part of the User object
         temporary_password = data.pop('temporary_password')
         # User.validate(data)
-        user = User.get(current_user, data['email'])
+
+        # Since users are to be unique across all tenants by email address, we must
+        # get the full list of users, even ones from other tenants. Therefore we use
+        # _unsecure_get() to get a list of users, even ones the requesting user does not
+        # have authorization to see.
+        user = User._unsecure_get(data['email'])
         if user is not None:
             raise ConflictException('User with email = {} already exists.'.format(data['email']))
 
@@ -170,8 +175,10 @@ class Users(MethodView):
 
         logger.info('Adding user to idp')
         idp_attributes = {k: v for k, v in data.items() if k in idp_attribute_keys}
+
+        self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
+
         try:
-            self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
             self.idp.update_user_roles(current_user, user, user.roles)
 
             logger.info('User added to idp, storing internally')

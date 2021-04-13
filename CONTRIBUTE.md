@@ -57,8 +57,6 @@ Only PRs were the CI pipeline succeeds will be merged.
 
     ```conf
     NEXUS_HOST=nexus.techlockinc.com
-    NEXUS_USERNAME=will_be_provided
-    NEXUS_PASSWORD=will_be_provided
 
     AUDIENCE=user-management
 

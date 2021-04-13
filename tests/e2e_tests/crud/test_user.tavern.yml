@@ -71,6 +71,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
       save:
         body:
           created_id: entity_id
@@ -103,6 +104,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
 
   - name: Update User
     request:
@@ -136,6 +138,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
 
   - name: Delete User
     request:
@@ -194,6 +197,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
       save:
         body:
           created_id: entity_id
@@ -357,6 +361,7 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
+                  login_info: null
                 - entity_id: "{user2}"
                   name: Beta
                   family_name: Bar
@@ -371,6 +376,7 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
+                  login_info: null
               num_items: 2
               total_items: 2
 
@@ -403,6 +409,7 @@ stages:
                   created_by: test2@test.com
                   changed_by: test2@test.com
                   tags: null
+                  login_info: null
               num_items: 1
               total_items: 1
 
@@ -437,6 +444,7 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
+                  login_info: null
               num_items: 1
               total_items: 1
 
@@ -471,6 +479,7 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
+                  login_info: null
               num_items: 1
               total_items: 1
 
@@ -505,6 +514,7 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
+                  login_info: null
               num_items: 1
               total_items: 1
 
@@ -540,6 +550,7 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
+                  login_info: null
                 - entity_id: "{user1}"
                   name: Alpha
                   family_name: Foo
@@ -554,6 +565,7 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
+                  login_info: null
               num_items: 2
               total_items: 2
 
@@ -585,6 +597,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
 
   - name: Get User3 - tenant1
     request:
@@ -634,6 +647,7 @@ stages:
               created_by: test2@test.com
               changed_by: test2@test.com
               tags: null
+              login_info: null
 
 ---
 test_name: Users API create and update validation
@@ -709,6 +723,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
       save:
         body:
           user_id: entity_id
@@ -746,6 +761,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
 
 
   - name: Create User - with empty body
@@ -910,6 +926,7 @@ stages:
               created_by: test@test.com
               changed_by: test@test.com
               tags: null
+              login_info: null
 
   - name: Update User - with existing ftp username
     request:

@@ -10,13 +10,13 @@ dev-setup:
 # 	Installs development dependencies
 	@echo "Installing pip requirements"
 	@pip3 install -r requirements.txt \
-		--extra-index-url https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple
+		--extra-index-url https://${NEXUS_HOST}/repository/pypi-hosted/simple
 
 install:
 # 	Installs the project to your python installation
 	@echo "Installing"
 	@pip3 install \
-		--extra-index-url https://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@${NEXUS_HOST}/repository/pypi-hosted/simple \
+		--extra-index-url https://${NEXUS_HOST}/repository/pypi-hosted/simple \
 		.
 
 build-docker:
@@ -24,8 +24,6 @@ build-docker:
 	@echo "Building docker image"
 	@docker build \
 		--build-arg NEXUS_HOST=${NEXUS_HOST} \
-		--build-arg NEXUS_USERNAME=${NEXUS_USERNAME} \
-		--build-arg NEXUS_PASSWORD=${NEXUS_PASSWORD} \
 		-t registry.gitlab.com/techlock/msc-user-management-service:local .
 
 run:

@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+import logging
+
 import marshmallow as ma
 import marshmallow.fields as mf
 import marshmallow.validate as mv
@@ -11,6 +13,7 @@ from techlock.common.api import (
     Claim,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
+    NotFoundException,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -24,6 +27,8 @@ from ..services import get_idp
 from .department import Department, DepartmentSchema
 from .office import Office, OfficeSchema
 from .role import Role, RoleSchema
+
+logger = logging.getLogger(__name__)
 
 __all__ = [
     'User',
@@ -192,10 +197,14 @@ class User(BaseModel):
 
     @property
     def login_info(self):
-        if self._idp_attrs is None:
-            self._fetch_idp_attrs()
+        try:
+            if self._idp_attrs is None:
+                self._fetch_idp_attrs()
+        except NotFoundException:
+            # Exception is logged in the IDP code
+            return None
 
-        return self._idp_attrs.get('login_info')
+        return (self._idp_attrs or {}).get('login_info')
 
 
 @dataclass
