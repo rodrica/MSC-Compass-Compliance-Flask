@@ -52,7 +52,13 @@ class CachedIdp(IdpProvider):
         )
 
         # Cache the user attributes
-        self._cache[user.entity_id] = self._wrapped_idp.get_user_attributes(user)
+        try:
+            self._cache[user.entity_id] = self._wrapped_idp.get_user_attributes(user)
+        except Exception:
+            # Potential for race conditions.
+            # Since we're only prepopulating cache, it doesn't really matter if this fails.
+            # I just means that it'll have to get if next time
+            logger.debug('Cached: Failed to get user attributes after creation. Skipping...')
 
     def delete_user(
         self,

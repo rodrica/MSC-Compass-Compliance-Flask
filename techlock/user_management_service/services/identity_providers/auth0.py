@@ -9,7 +9,11 @@ import jwt
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
-from techlock.common.api import BadRequestException, NotFoundException, ConflictException
+from techlock.common.api import (
+    BadRequestException,
+    ConflictException,
+    NotFoundException,
+)
 from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
@@ -58,7 +62,7 @@ class Auth0Idp(IdpProvider):
         # Is
         is_refresh_needed = self.token_expiration - 60 < now
 
-        logger.debug('Checking if Auth0 token refresh is needed.', extra={
+        logger.debug('Auth0: Checking if Auth0 token refresh is needed.', extra={
             'token_expiration': self.token_expiration,
             'time': now,
             'is_needed': is_refresh_needed
@@ -71,7 +75,7 @@ class Auth0Idp(IdpProvider):
             if self._is_refresh_needed():
                 self._refresh_token()
         except Exception as e:
-            logger.error(f'Failed to refresh token. Error={e}')
+            logger.error(f'Auth0: Failed to refresh token. Error={e}')
 
     def _handle_token_error(self, callback):
         '''
@@ -82,7 +86,7 @@ class Auth0Idp(IdpProvider):
             return callback()
         except Auth0Error as e:
             if 'expired token' in e.message.lower():
-                logger.error('Token expired, refreshing and trying again.')
+                logger.error('Auth0: Token expired, refreshing and trying again.')
                 self._refresh_token()
                 return callback()
             else:
@@ -109,10 +113,10 @@ class Auth0Idp(IdpProvider):
         ))
         total_found_users = found_users['total']
         if not total_found_users:
-            logger.error('User not found', extra={'user': user.entity_id})
+            logger.error('Auth0: User not found', extra={'user': user.entity_id})
             raise NotFoundException('User not found')
         elif total_found_users > 1:
-            logger.warn('Found multiple users, expected one. Will use first one.', extra={
+            logger.warn('Auth0: Found multiple users, expected one. Will use first one.', extra={
                 'found_users': found_users
             })
 
@@ -168,7 +172,7 @@ class Auth0Idp(IdpProvider):
             )
             logger.info('Auth0: User created', extra={'user': user.entity_id})
         except Auth0Error as e:
-            logger.error(f'Failed to create user in Auth0: {e}')
+            logger.error(f'Auth0: Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
                 self._password_strength_error(e)
             elif 409 == e.status_code:
@@ -208,7 +212,7 @@ class Auth0Idp(IdpProvider):
             self._handle_token_error(lambda: self.auth0.users.delete(found_user['user_id']))
         except NotFoundException:
             # If not found don't raise an error
-            logger.info('User not found, skipping deletion')
+            logger.info('Auth0: User not found, skipping deletion')
 
     def change_password(self, current_user: AuthInfo, user: User, new_password: str, **kwargs):
         logger.info('Auth0: Changing password', extra={'user': user.entity_id})
