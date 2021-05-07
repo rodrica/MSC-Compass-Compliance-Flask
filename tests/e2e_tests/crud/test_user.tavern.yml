@@ -676,6 +676,27 @@ stages:
         body:
           access_token: access_token
 
+  - name: Get JWT2
+    request:
+      url: http://jwt:5000/login
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        sub: auth0|foobar2
+        user_id: test2@test.com
+        tenant_id: tenant2
+        roles:
+          - tenant2
+          - tenant2:admin
+        claims:
+          - allow:tenant2:user-management:*:users:*
+    response:
+      status_code: 200
+      save:
+        body:
+          access_token2: access_token
+
   - name: Get all Users
     request:
       url: http://app:5000/users
@@ -763,6 +784,25 @@ stages:
               tags: null
               login_info: null
 
+  - name: Create User in different tenant
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token2}"
+        TL-Tenant-ID: tenant1
+      json:
+        name: Test5
+        family_name: e2e
+        ftp_username: test5
+        email: test5@test.com
+        temporary_password: changeme
+    response:
+      status_code: 403
+      body:
+        error: true
+        msg: Not authorized.
 
   - name: Create User - with empty body
     request:
@@ -777,11 +817,12 @@ stages:
       body:
         code: 422
         errors:
-          email:
-            - Missing data for required field.
-          name:
-            - Missing data for required field.
-          temporary_password:
+          json:
+            email:
+              - Missing data for required field.
+            name:
+              - Missing data for required field.
+            temporary_password:
             - Missing data for required field.
         status: Unprocessable Entity
 
@@ -801,8 +842,9 @@ stages:
       body:
         code: 422
         errors:
-          temporary_password:
-            - Missing data for required field.
+          json:
+            temporary_password:
+              - Missing data for required field.
         status: Unprocessable Entity
 
   - name: Create User - with invalid email and numeric name
@@ -822,9 +864,10 @@ stages:
       body:
         code: 422
         errors:
-          email:
-            - Not a valid email address.
-          name:
+          json:
+            email:
+              - Not a valid email address.
+            name:
             - Not a valid string.
         status: Unprocessable Entity
 
@@ -848,9 +891,10 @@ stages:
       body:
         code: 422
         errors:
-          department_ids: {"0": ["Not a valid UUID."]}
-          office_ids: {"0": ["Not a valid UUID."]}
-          role_ids: {"0": ["Not a valid UUID."]}
+          json:
+            department_ids: {"0": ["Not a valid UUID."]}
+            office_ids: {"0": ["Not a valid UUID."]}
+            role_ids: {"0": ["Not a valid UUID."]}
         status: Unprocessable Entity
 
   - name: Create User - with invalid claim
@@ -871,7 +915,8 @@ stages:
       body:
         code: 422
         errors:
-          claims_by_audience: {"a": {"value": {"0": ["Claim has too few parts, expected 6 or 7, found 2."]}}}
+          json:
+            claims_by_audience: {"a": {"value": {"0": ["Claim has too few parts, expected 6 or 7, found 2."]}}}
         status: Unprocessable Entity
 
   - name: Create User - with duplicate ftp_username

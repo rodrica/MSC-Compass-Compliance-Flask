@@ -55,6 +55,7 @@ services:
         NEXUS_USERNAME: ${NEXUS_USERNAME}
         NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
+      - app
       - redis
       - dynamodb
       - cognito

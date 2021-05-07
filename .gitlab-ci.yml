@@ -10,25 +10,19 @@ unittest:
 
 e2e-test:
   stage: test
-  image: docker:latest
+  image: registry.gitlab.com/techlock/ci-images:py-test_master_3ff1e612306cc9c20eb56fbaa1ff1ef3a457c1a8
   services:
-    - docker:19.03.5-dind  # https://gitlab.com/gitlab-com/support-forum/issues/5202
+    - docker:dind
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
-    - apk update
-    - apk add bash curl py3-pip python3-dev libffi-dev openssl-dev gcc libc-dev make
-    - python3 -m pip install install -U pip
-    # https://github.com/pyca/cryptography/issues/5806
-    - pip3 install docker-compose 'cryptography==3.3.2'
-    - docker pull "$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_SLUG}_latest" || true
   script:
     - ./run_tests.sh -d -e
 
 deploy-docker:
   stage: deploy
-  image: docker:latest
+  image: registry.gitlab.com/techlock/ci-images:py-test_master_3ff1e612306cc9c20eb56fbaa1ff1ef3a457c1a8
   services:
-    - docker:19.03.5-dind  # https://gitlab.com/gitlab-com/support-forum/issues/5202
+    - docker:dind
   before_script:
     - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
   script:

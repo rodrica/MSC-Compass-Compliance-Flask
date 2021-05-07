@@ -6,8 +6,9 @@ from flask import request
 from flask.views import MethodView
 from flask_httpauth import HTTPBasicAuth
 from techlock.common.api import BadRequestException, NotFoundException
+from techlock.common.api.auth import Claim
+from techlock.common.api.auth.jwt import tenant_header_key
 from techlock.common.api.blueprint import Blueprint
-from techlock.common.api.jwt_authorization import Claim, tenant_header_key
 from techlock.common.util.helper import parse_boolean
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -60,8 +61,8 @@ class Hydrator(MethodView):
 
         return claims
 
-    @blp.arguments(HydratorPostSchema)
-    @blp.response(HydratorPostSchema)
+    @blp.arguments(schema=HydratorPostSchema)
+    @blp.response(status_code=200, schema=HydratorPostSchema)
     @auth.login_required
     def post(self, data):
         audience = data.get('header').get('X-Audience')

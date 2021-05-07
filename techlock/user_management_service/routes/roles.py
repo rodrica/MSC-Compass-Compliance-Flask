@@ -5,11 +5,7 @@ from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim, NotFoundException
-from techlock.common.api.jwt_authorization import (
-    access_required,
-    can_access,
-    get_request_claims,
-)
+from techlock.common.api.auth import access_required, get_request_claims
 from techlock.common.config import AuthInfo
 
 from ..models import (
@@ -48,8 +44,8 @@ class Roles(MethodView):
         MethodView.__init__(self, *args, **kwargs)
         self.idp = get_idp()
 
-    @blp.arguments(RoleListQueryParametersSchema, location='query')
-    @blp.response(RolePageableSchema)
+    @blp.arguments(schema=RoleListQueryParametersSchema, location='query')
+    @blp.response(status_code=200, schema=RolePageableSchema)
     @access_required(
         'read', 'roles',
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
@@ -73,18 +69,19 @@ class Roles(MethodView):
 
         return pageable_resp
 
-    @blp.arguments(RoleSchema)
-    @blp.response(RoleSchema, code=201)
+    @blp.arguments(schema=RoleSchema)
+    @blp.response(status_code=201, schema=RoleSchema)
     @access_required('create', 'roles')
     def post(self, data):
         current_user = get_current_user()
+        claims = get_request_claims()
         logger.info('Creating Role', extra={'data': data})
 
         # Role.validate(data)
         role = Role(**data)
         role.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
-        role.save(current_user)
+        role.save(current_user, claims=claims)
 
         self.idp.update_or_create_role(current_user, role)
 
@@ -101,14 +98,11 @@ class RoleById(MethodView):
     def get_role(self, current_user: AuthInfo, role_id: str):
         claims = get_request_claims()
 
-        role = Role.get(current_user, role_id)
-        # If no access, return 404
-        if role is None or not can_access(role, claims):
-            raise NotFoundException('No role found for id = {}'.format(role_id))
+        role = Role.get(current_user, role_id, claims=claims, raise_if_not_found=True)
 
         return role
 
-    @blp.response(RoleSchema)
+    @blp.response(status_code=200, schema=RoleSchema)
     @access_required(
         'read', 'roles',
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
@@ -120,14 +114,15 @@ class RoleById(MethodView):
 
         return role
 
-    @blp.arguments(RoleSchema)
-    @blp.response(RoleSchema)
+    @blp.arguments(schema=RoleSchema)
+    @blp.response(status_code=200, schema=RoleSchema)
     @access_required(
         'update', 'roles',
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
     )
     def put(self, data, role_id):
         current_user = get_current_user()
+        claims = get_request_claims()
         logger.debug('Updating Role', extra={'data': data})
 
         role = self.get_role(current_user, role_id)
@@ -140,12 +135,12 @@ class RoleById(MethodView):
 
         role.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
-        role.save(current_user)
+        role.save(current_user, claims=claims)
         self.idp.update_or_create_role(current_user, role)
 
         return role
 
-    @blp.response(RoleSchema, code=204)
+    @blp.response(status_code=204, schema=RoleSchema)
     @access_required(
         'delete', 'roles',
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields

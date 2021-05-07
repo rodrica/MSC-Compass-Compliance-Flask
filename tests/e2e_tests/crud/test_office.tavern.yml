@@ -669,8 +669,9 @@ stages:
       body:
         code: 422
         errors:
-          name:
-            - Missing data for required field.
+          json:
+            name:
+              - Missing data for required field.
         status: Unprocessable Entity
 
   # TODO - update validation

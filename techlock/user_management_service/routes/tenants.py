@@ -4,12 +4,8 @@ from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from techlock.common import AuthInfo, ConfigManager
-from techlock.common.api import BadRequestException, NotFoundException
-from techlock.common.api.jwt_authorization import (
-    access_required,
-    can_access,
-    get_request_claims,
-)
+from techlock.common.api import BadRequestException
+from techlock.common.api.auth import access_required, get_request_claims
 
 from ..models import (
     TENANT_CLAIM_SPEC,
@@ -28,8 +24,8 @@ blp = Blueprint('tenants', __name__, url_prefix='/tenants')
 @blp.route('')
 class Tenants(MethodView):
 
-    @blp.arguments(TenantListQueryParametersSchema, location='query')
-    @blp.response(TenantPageableSchema)
+    @blp.arguments(schema=TenantListQueryParametersSchema, location='query')
+    @blp.response(status_code=200, schema=TenantPageableSchema)
     @access_required(
         'read', 'tenants',
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
@@ -53,16 +49,17 @@ class Tenants(MethodView):
 
         return pageable_resp
 
-    @blp.arguments(TenantSchema)
-    @blp.response(TenantSchema, code=201)
+    @blp.arguments(schema=TenantSchema)
+    @blp.response(status_code=201, schema=TenantSchema)
     @access_required('create', 'tenants')
     def post(self, data):
         current_user = get_current_user()
+        claims = get_request_claims()
         logger.info('Creating Tenant', extra={'data': data})
 
         # Tenant.validate(data)
         tenant = Tenant(**data)
-        tenant.save(current_user)
+        tenant.save(current_user, claims=claims)
 
         # Create initial config item in DynamoDB
         cm = ConfigManager()
@@ -77,14 +74,11 @@ class TenantById(MethodView):
     def get_tenant(self, current_user: AuthInfo, tenant_id: str):
         claims = get_request_claims()
 
-        tenant = Tenant.get(current_user, tenant_id)
-        # If no access, return 404
-        if tenant is None or not can_access(tenant, claims):
-            raise NotFoundException('No tenant found for id = {}'.format(tenant_id))
+        tenant = Tenant.get(current_user, tenant_id, claims=claims)
 
         return tenant
 
-    @blp.response(TenantSchema)
+    @blp.response(status_code=200, schema=TenantSchema)
     @access_required(
         'read', 'tenants',
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
@@ -96,14 +90,15 @@ class TenantById(MethodView):
 
         return tenant
 
-    @blp.arguments(TenantSchema)
-    @blp.response(TenantSchema)
+    @blp.arguments(schema=TenantSchema)
+    @blp.response(status_code=200, schema=TenantSchema)
     @access_required(
         'update', 'tenants',
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
     )
     def put(self, data, tenant_id):
         current_user = get_current_user()
+        claims = get_request_claims()
         logger.debug('Updating Tenant', extra={'data': data})
 
         tenant = self.get_tenant(current_user, tenant_id)
@@ -114,7 +109,7 @@ class TenantById(MethodView):
                 setattr(tenant, k, v)
             else:
                 raise BadRequestException('Tenant has no attribute: %s' % k)
-        tenant.save(current_user)
+        tenant.save(current_user, claims=claims)
 
         if is_name_updated:
             cm = ConfigManager()
@@ -122,7 +117,7 @@ class TenantById(MethodView):
 
         return tenant
 
-    @blp.response(TenantSchema, code=204)
+    @blp.response(status_code=204, schema=TenantSchema)
     @access_required(
         'delete', 'tenants',
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
