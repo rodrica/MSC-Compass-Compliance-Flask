@@ -28,7 +28,10 @@ TENANT_CLAIM_SPEC = ClaimSpec(
         'delete'
     ],
     resource_name='tenants',
-    filter_fields=[]
+    filter_fields=[
+        'name',
+        'created_by',
+    ]
 )
 
 

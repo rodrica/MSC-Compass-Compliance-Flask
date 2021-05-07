@@ -38,7 +38,10 @@ OFFICE_CLAIM_SPEC = ClaimSpec(
         'delete'
     ],
     resource_name='offices',
-    filter_fields=[]
+    filter_fields=[
+        'name',
+        'created_by',
+    ]
 )
 
 

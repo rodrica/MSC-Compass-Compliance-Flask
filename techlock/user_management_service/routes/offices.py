@@ -3,10 +3,12 @@ from typing import List, Union
 from uuid import UUID
 
 from flask.views import MethodView
-from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException
-from techlock.common.api.auth import access_required, get_request_claims
+from techlock.common.api.auth import (
+    access_required,
+    get_current_user_with_claims,
+)
 from techlock.common.api.auth.claim import Claim
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import BaseModel
@@ -52,8 +54,7 @@ class Offices(MethodView):
         allowed_filter_fields=OFFICE_CLAIM_SPEC.filter_fields
     )
     def get(self, query_params: OfficeListQueryParameters):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
 
         pageable_resp = Office.get_all(
             current_user,
@@ -74,8 +75,7 @@ class Offices(MethodView):
     @blp.response(status_code=201, schema=OfficeSchema)
     @access_required('create', 'offices')
     def post(self, data):
-        current_user: AuthInfo = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.info('Creating Office', extra={'data': data})
 
         data['departments'] = _get_items_from_id_list(current_user, claims=claims, id_list=data.pop('department_ids', None), orm_class=Department)
@@ -89,9 +89,7 @@ class Offices(MethodView):
 @blp.route('/<office_id>')
 class OfficeById(MethodView):
 
-    def get_office(self, current_user: AuthInfo, office_id: str):
-        claims = get_request_claims()
-
+    def get_office(self, current_user: AuthInfo, claims: List[Claim], office_id: str):
         office = Office.get(current_user, office_id, claims=claims, raise_if_not_found=True)
 
         return office
@@ -102,9 +100,9 @@ class OfficeById(MethodView):
         allowed_filter_fields=OFFICE_CLAIM_SPEC.filter_fields
     )
     def get(self, office_id):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
-        office = self.get_office(current_user, office_id)
+        office = self.get_office(current_user, claims, office_id)
 
         return office
 
@@ -115,11 +113,10 @@ class OfficeById(MethodView):
         allowed_filter_fields=OFFICE_CLAIM_SPEC.filter_fields
     )
     def put(self, data, office_id):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.debug('Updating Office', extra={'data': data})
 
-        office = self.get_office(current_user, office_id)
+        office = self.get_office(current_user, claims, office_id)
 
         # Validate that items exist and get actual items
         data['departments'] = _get_items_from_id_list(current_user, claims=claims, id_list=data.pop('department_ids', None), orm_class=Department)
@@ -138,9 +135,9 @@ class OfficeById(MethodView):
         allowed_filter_fields=OFFICE_CLAIM_SPEC.filter_fields
     )
     def delete(self, office_id):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
-        office = self.get_office(current_user, office_id)
+        office = self.get_office(current_user, claims, office_id)
 
         office.delete(current_user)
         return office

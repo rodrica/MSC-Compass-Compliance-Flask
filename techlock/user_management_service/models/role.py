@@ -31,7 +31,10 @@ ROLE_CLAIM_SPEC = ClaimSpec(
         'delete'
     ],
     resource_name='roles',
-    filter_fields=[]
+    filter_fields=[
+        'name',
+        'created_by',
+    ]
 )
 STAGE = os.environ.get('STAGE', 'dev').upper()
 

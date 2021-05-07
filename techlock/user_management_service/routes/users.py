@@ -3,7 +3,6 @@ from typing import List, Union
 from uuid import UUID
 
 from flask.views import MethodView
-from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from sqlalchemy import and_ as sql_and_  # diffentiate from operators.and_
 from techlock.common.api import (
@@ -15,7 +14,7 @@ from techlock.common.api.auth import (
     Claim,
     access_required,
     can_access,
-    get_request_claims,
+    get_current_user_with_claims,
 )
 from techlock.common.config import AuthInfo, ConfigManager
 from techlock.common.messaging.sns import Envelope
@@ -58,9 +57,7 @@ def _get_items_from_id_list(current_user: AuthInfo, claims: List[Claim], id_list
     return items
 
 
-def _get_user(current_user: AuthInfo, user_id: str):
-    claims = get_request_claims()
-
+def _get_user(current_user: AuthInfo, claims: List[Claim], user_id: str):
     user = User.get(current_user, user_id, claims=claims)
     if user is None or (current_user.user_id != user_id and not can_access(user, claims)):
         raise NotFoundException('No user found for id = {}'.format(user_id))
@@ -106,9 +103,7 @@ class Users(MethodView):
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
     def get(self, query_params: UserListQueryParameters):
-        current_user = get_current_user()
-        claims = get_request_claims()
-
+        current_user, claims = get_current_user_with_claims()
         if not claims:
             # if no claims, add one that allows the user to see himself
             claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', id=current_user.user_id, filter_field=None, filter_value=None)]
@@ -132,8 +127,7 @@ class Users(MethodView):
     @blp.response(status_code=201, schema=UserSchema)
     @access_required('create', 'users')
     def post(self, data: dict):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.info('Creating User', extra={'data': data})
 
         # Get the password and remove it from the data. It is not part of the User object
@@ -213,8 +207,8 @@ class UserById(MethodView):
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
     def get(self, user_id: str):
-        current_user = get_current_user()
-        user = _get_user(current_user, user_id)
+        current_user, claims = get_current_user_with_claims()
+        user = _get_user(current_user, claims, user_id)
 
         return user
 
@@ -225,12 +219,11 @@ class UserById(MethodView):
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
     def put(self, data: dict, user_id: str):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.debug('Updating User', extra={'data': data})
 
         # User.validate(data, validate_required_fields=False)
-        user = _get_user(current_user, user_id)
+        user = _get_user(current_user, claims, user_id)
 
         if user.email != data.get('email'):
             raise BadRequestException('Email can not be changed.')
@@ -273,12 +266,12 @@ class UserById(MethodView):
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
     def delete(self, user_id: str):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
         if current_user.user_id == user_id:
             return BadRequestException('Can not delete yourself.')
 
-        user = _get_user(current_user, user_id)
+        user = _get_user(current_user, claims, user_id)
 
         self.idp.delete_user(current_user, user)
         logger.info('Deleted user from userpool')
@@ -303,8 +296,8 @@ class UserChangePassword(MethodView):
         allowed_filter_fields=USER_CLAIM_SPEC.filter_fields
     )
     def post(self, data: dict, user_id: str):
-        current_user = get_current_user()
-        user = _get_user(current_user, user_id)
+        current_user, claims = get_current_user_with_claims()
+        user = _get_user(current_user, claims, user_id)
 
         self.idp.change_password(current_user, user, data.get('new_password'))
 

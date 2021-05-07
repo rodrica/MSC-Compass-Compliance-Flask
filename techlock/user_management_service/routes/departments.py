@@ -1,10 +1,14 @@
 import logging
+from typing import List
 
 from flask.views import MethodView
-from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException
-from techlock.common.api.auth import access_required, get_request_claims
+from techlock.common.api.auth import (
+    access_required,
+    get_current_user_with_claims,
+)
+from techlock.common.api.auth.claim import Claim
 from techlock.common.config import AuthInfo
 
 from ..models import (
@@ -31,8 +35,7 @@ class Departments(MethodView):
         allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
     )
     def get(self, query_params: DepartmentListQueryParameters):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
 
         pageable_resp = Department.get_all(
             current_user,
@@ -53,8 +56,7 @@ class Departments(MethodView):
     @blp.response(status_code=201, schema=DepartmentSchema)
     @access_required('create', 'departments')
     def post(self, data):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
 
         logger.info('Creating Department', extra={'data': data})
 
@@ -67,9 +69,7 @@ class Departments(MethodView):
 @blp.route('/<department_id>')
 class DepartmentById(MethodView):
 
-    def get_department(self, current_user: AuthInfo, department_id: str):
-        claims = get_request_claims()
-
+    def get_department(self, current_user: AuthInfo, claims: List[Claim], department_id: str):
         department = Department.get(current_user, department_id, claims=claims, raise_if_not_found=True)
 
         return department
@@ -80,9 +80,9 @@ class DepartmentById(MethodView):
         allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
     )
     def get(self, department_id):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
-        department = self.get_department(current_user, department_id)
+        department = self.get_department(current_user, claims, department_id)
 
         return department
 
@@ -93,12 +93,11 @@ class DepartmentById(MethodView):
         allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
     )
     def put(self, data, department_id):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
 
         logger.debug('Updating Department', extra={'data': data})
 
-        department = self.get_department(current_user, department_id)
+        department = self.get_department(current_user, claims, department_id)
 
         for k, v in data.items():
             if hasattr(department, k):
@@ -114,9 +113,9 @@ class DepartmentById(MethodView):
         allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
     )
     def delete(self, department_id):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
-        department = self.get_department(current_user, department_id)
+        department = self.get_department(current_user, claims, department_id)
 
         department.delete(current_user)
         return department

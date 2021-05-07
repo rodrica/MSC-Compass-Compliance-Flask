@@ -1,11 +1,14 @@
 import logging
+from typing import List
 from uuid import UUID
 
 from flask.views import MethodView
-from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim, NotFoundException
-from techlock.common.api.auth import access_required, get_request_claims
+from techlock.common.api.auth import (
+    access_required,
+    get_current_user_with_claims,
+)
 from techlock.common.config import AuthInfo
 
 from ..models import (
@@ -51,8 +54,7 @@ class Roles(MethodView):
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
     )
     def get(self, query_params: RoleListQueryParameters):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
 
         pageable_resp = Role.get_all(
             current_user,
@@ -73,8 +75,7 @@ class Roles(MethodView):
     @blp.response(status_code=201, schema=RoleSchema)
     @access_required('create', 'roles')
     def post(self, data):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.info('Creating Role', extra={'data': data})
 
         # Role.validate(data)
@@ -95,9 +96,7 @@ class RoleById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
         self.idp = get_idp()
 
-    def get_role(self, current_user: AuthInfo, role_id: str):
-        claims = get_request_claims()
-
+    def get_role(self, current_user: AuthInfo, claims: List[Claim], role_id: str):
         role = Role.get(current_user, role_id, claims=claims, raise_if_not_found=True)
 
         return role
@@ -108,9 +107,9 @@ class RoleById(MethodView):
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
     )
     def get(self, role_id):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
-        role = self.get_role(current_user, role_id)
+        role = self.get_role(current_user, claims, role_id)
 
         return role
 
@@ -121,11 +120,10 @@ class RoleById(MethodView):
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
     )
     def put(self, data, role_id):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.debug('Updating Role', extra={'data': data})
 
-        role = self.get_role(current_user, role_id)
+        role = self.get_role(current_user, claims, role_id)
 
         for k, v in data.items():
             if hasattr(role, k):
@@ -146,8 +144,8 @@ class RoleById(MethodView):
         allowed_filter_fields=ROLE_CLAIM_SPEC.filter_fields
     )
     def delete(self, role_id):
-        current_user = get_current_user()
-        role = self.get_role(current_user, role_id)
+        current_user, claims = get_current_user_with_claims()
+        role = self.get_role(current_user, claims, role_id)
 
         try:
             self.idp.delete_role(current_user, role)

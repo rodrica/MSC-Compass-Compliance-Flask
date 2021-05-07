@@ -121,14 +121,14 @@ main() {
                 exit $ret
             fi
         fi
-        if [ "$ALL" == true ] || [ "$INTEGRATION" == true ]; then
-            info "Running Integration Tests"
-            run_tests "tests/integration_tests"
-            ret=$?
-            if [ $ret -ne 0 ]; then
-                exit $ret
-            fi
-        fi
+        # if [ "$ALL" == true ] || [ "$INTEGRATION" == true ]; then
+        #     info "Running Integration Tests"
+        #     run_tests "tests/integration_tests"
+        #     ret=$?
+        #     if [ $ret -ne 0 ]; then
+        #         exit $ret
+        #     fi
+        # fi
         if [ "$ALL" == true ] || [ "$E2E" == true ]; then
             info "Running E2E Tests"
             # sleep for 10 seconds to allow services to start before we start testing
@@ -181,10 +181,10 @@ while (("$#")); do
       INIT=true
       shift
       ;;
-    -i|--integration)
-      INTEGRATION=true
-      shift
-      ;;
+    # -i|--integration)
+    #   INTEGRATION=true
+    #   shift
+    #   ;;
     -e|--end-to-end)
       E2E=true
       shift

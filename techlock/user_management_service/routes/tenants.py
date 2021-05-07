@@ -1,11 +1,15 @@
 import logging
+from typing import List
 
 from flask.views import MethodView
-from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from techlock.common import AuthInfo, ConfigManager
 from techlock.common.api import BadRequestException
-from techlock.common.api.auth import access_required, get_request_claims
+from techlock.common.api.auth import (
+    access_required,
+    get_current_user_with_claims,
+)
+from techlock.common.api.auth.claim import Claim
 
 from ..models import (
     TENANT_CLAIM_SPEC,
@@ -31,8 +35,7 @@ class Tenants(MethodView):
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
     )
     def get(self, query_params: TenantListQueryParameters):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
 
         pageable_resp = Tenant.get_all(
             current_user,
@@ -53,8 +56,7 @@ class Tenants(MethodView):
     @blp.response(status_code=201, schema=TenantSchema)
     @access_required('create', 'tenants')
     def post(self, data):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.info('Creating Tenant', extra={'data': data})
 
         # Tenant.validate(data)
@@ -71,9 +73,7 @@ class Tenants(MethodView):
 @blp.route('/<tenant_id>')
 class TenantById(MethodView):
 
-    def get_tenant(self, current_user: AuthInfo, tenant_id: str):
-        claims = get_request_claims()
-
+    def get_tenant(self, current_user: AuthInfo, claims: List[Claim], tenant_id: str):
         tenant = Tenant.get(current_user, tenant_id, claims=claims)
 
         return tenant
@@ -84,9 +84,9 @@ class TenantById(MethodView):
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
     )
     def get(self, tenant_id):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
-        tenant = self.get_tenant(current_user, tenant_id)
+        tenant = self.get_tenant(current_user, claims, tenant_id)
 
         return tenant
 
@@ -97,11 +97,10 @@ class TenantById(MethodView):
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
     )
     def put(self, data, tenant_id):
-        current_user = get_current_user()
-        claims = get_request_claims()
+        current_user, claims = get_current_user_with_claims()
         logger.debug('Updating Tenant', extra={'data': data})
 
-        tenant = self.get_tenant(current_user, tenant_id)
+        tenant = self.get_tenant(current_user, claims, tenant_id)
 
         is_name_updated = 'name' in data and data['name'] != tenant.name
         for k, v in data.items():
@@ -123,9 +122,9 @@ class TenantById(MethodView):
         allowed_filter_fields=TENANT_CLAIM_SPEC.filter_fields
     )
     def delete(self, tenant_id):
-        current_user = get_current_user()
+        current_user, claims = get_current_user_with_claims()
 
-        tenant = self.get_tenant(current_user, tenant_id)
+        tenant = self.get_tenant(current_user, claims, tenant_id)
 
         tenant.delete(current_user)
         return tenant

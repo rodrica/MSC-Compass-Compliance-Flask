@@ -1,6 +1,5 @@
-from dataclasses import dataclass
-
 import logging
+from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
@@ -12,8 +11,8 @@ from techlock.common.api import (
     BaseOffsetListQueryParamsSchema,
     Claim,
     ClaimSpec,
-    OffsetPageableResponseBaseSchema,
     NotFoundException,
+    OffsetPageableResponseBaseSchema,
 )
 from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import (
@@ -50,6 +49,7 @@ USER_CLAIM_SPEC = ClaimSpec(
     ],
     resource_name='users',
     filter_fields=[
+        'created_by',
         'email',
 
         # Really want these, but not sure how to handle it yet.
@@ -59,6 +59,9 @@ USER_CLAIM_SPEC = ClaimSpec(
         #  'role': {'field': 'role_ids', 'type': 'list'}
         # Or tie it to the Schema:
         #  'role': 'role_ids' (and figure out it's a list via reflection)
+
+        # I.e.: You can only see users in a particular office or department
+        # For example, a department head can only view it's sub-ordinates
 
         # 'office',
         # 'department',
