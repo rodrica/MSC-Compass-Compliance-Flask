@@ -16,6 +16,7 @@ from techlock.common.api.auth import (
     can_access,
     get_current_user_with_claims,
 )
+from techlock.common.api.auth.utils import SYSTEM_TENANT_ID
 from techlock.common.config import AuthInfo, ConfigManager
 from techlock.common.messaging.sns import Envelope
 from techlock.common.messaging.sns import publish as publish_sns
@@ -129,6 +130,8 @@ class Users(MethodView):
     def post(self, data: dict):
         current_user, claims = get_current_user_with_claims()
         logger.info('Creating User', extra={'data': data})
+        if current_user.tenant_id == SYSTEM_TENANT_ID:
+            raise BadRequestException('Can not create system users.')
 
         # Get the password and remove it from the data. It is not part of the User object
         temporary_password = data.pop('temporary_password')
