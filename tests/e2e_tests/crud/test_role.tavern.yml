@@ -19,6 +19,7 @@ stages:
           - tenant1:admin
         claims:
           - allow:tenant1:user-management:*:roles:*
+          - allow:system:user-management:*:roles:*
     response:
       status_code: 200
       save:
@@ -180,11 +181,34 @@ stages:
           - tenant2:admin
         claims:
           - allow:tenant2:user-management:*:roles:*
+          - deny:SYSTEM:user-management:*:roles:*
     response:
       status_code: 200
       save:
         body:
           access_token2: access_token
+
+  - name: Get system JWT
+    request:
+      url: http://jwt:5000/login
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        sub: auth0|system_foobar
+        user_id: system_test@test.com
+        tenant_id: tenant1
+        roles:
+          - system
+          - system:admin
+        claims:
+          - allow:tenant1:user-management:*:roles:*
+          - allow:SYSTEM:user-management:*:roles:*
+    response:
+      status_code: 200
+      save:
+        body:
+          system_access_token: access_token
 
   - name: Get all Roles - tenant1
     request:
@@ -259,6 +283,22 @@ stages:
         body:
           role3: entity_id
 
+  - name: Create system Role - system tenant
+    request:
+      url: http://app:5000/roles
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {system_access_token}"
+        TL-Tenant-ID: SYSTEM
+      json:
+        name: System Role
+    response:
+      status_code: 201
+      save:
+        body:
+          system_role: entity_id
+
   - name: Get all Roles - tenant1 - no filters
     request:
       url: http://app:5000/roles
@@ -290,8 +330,16 @@ stages:
                   created_by: test@test.com
                   changed_by: test@test.com
                   tags: null
-              num_items: 2
-              total_items: 2
+                - entity_id: "{system_role}"
+                  name: System Role
+                  description: null
+                  claims_by_audience: null
+                  tenant_id: SYSTEM
+                  created_by: system_test@test.com
+                  changed_by: system_test@test.com
+                  tags: null
+              num_items: 3
+              total_items: 3
 
   - name: Get all Roles - tenant2 - no filters
     request:
@@ -417,6 +465,29 @@ stages:
     response:
       status_code: 404
 
+  - name: Get System Role - tenant1
+    request:
+      url: http://app:5000/roles/{system_role}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token}"
+    response:
+      status_code: 200
+      body:
+        $ext:
+          function: techlock.common.unittest.tavern_validators:validate_base_model
+          extra_kwargs:
+            expected:
+              entity_id: "{system_role}"
+              name: System Role
+              description: null
+              claims_by_audience: null
+              tenant_id: SYSTEM
+              created_by: system_test@test.com
+              changed_by: system_test@test.com
+              tags: null
+
   - name: Get Role1 - tenant2
     request:
       url: http://app:5000/roles/{role1}
@@ -449,6 +520,17 @@ stages:
               created_by: test2@test.com
               changed_by: test2@test.com
               tags: null
+
+  - name: Get Role3 - tenant2
+    request:
+      url: http://app:5000/roles/{system_role}
+      method: GET
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token2}"
+    response:
+      status_code: 404
+
 
 ---
 test_name: Roles API create and update validation

@@ -697,6 +697,28 @@ stages:
         body:
           access_token2: access_token
 
+  - name: Get system JWT
+    request:
+      url: http://jwt:5000/login
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        sub: auth0|system_foobar
+        user_id: system_test@test.com
+        tenant_id: tenant1
+        roles:
+          - system
+          - system:admin
+        claims:
+          - allow:tenant1:user-management:*:users:*
+          - allow:SYSTEM:user-management:*:users:*
+    response:
+      status_code: 200
+      save:
+        body:
+          system_access_token: access_token
+
   - name: Get all Users
     request:
       url: http://app:5000/users
@@ -803,6 +825,46 @@ stages:
       body:
         error: true
         msg: Not authorized.
+
+  - name: Create system User as unauthorized user
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {access_token2}"
+        TL-Tenant-ID: SYSTEM
+      json:
+        name: Test5
+        family_name: e2e
+        ftp_username: test5
+        email: test5@test.com
+        temporary_password: changeme
+    response:
+      status_code: 403
+      body:
+        error: true
+        msg: Not authorized.
+
+  - name: Create system User as authorized user
+    request:
+      url: http://app:5000/users
+      method: POST
+      headers:
+        content-type: application/json
+        Authorization: "Bearer {system_access_token}"
+        TL-Tenant-ID: SYSTEM
+      json:
+        name: Test5
+        family_name: e2e
+        ftp_username: test5
+        email: test5@test.com
+        temporary_password: changeme
+    response:
+      status_code: 400
+      body:
+        error: true
+        msg: Can not create system users.
 
   - name: Create User - with empty body
     request:
