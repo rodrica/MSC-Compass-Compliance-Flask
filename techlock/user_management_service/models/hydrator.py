@@ -12,7 +12,7 @@ class HydratorPostSchema(ma.Schema):
         https://www.ory.sh/oathkeeper/docs/pipeline/mutator/#hydrator
     '''
     class Meta:
-        ordered = True,
+        ordered = True
         unknown = EXCLUDE
 
     subject = mf.String(allow_none=True)

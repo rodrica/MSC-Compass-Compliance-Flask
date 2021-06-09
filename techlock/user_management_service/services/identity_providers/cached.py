@@ -94,7 +94,7 @@ class CachedIdp(IdpProvider):
     def get_user_attributes(
         self,
         user: User,
-        **kwargs
+        **kwargs,
     ):
         # Attempt to get from cache
         attributes = self._cache.get(user.entity_id)

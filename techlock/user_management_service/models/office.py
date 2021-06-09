@@ -11,12 +11,7 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.config import AuthInfo
-from techlock.common.orm.sqlalchemy import (
-    BaseModel,
-    BaseModelSchema,
-    db,
-    get_string_filter,
-)
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db, get_string_filter
 
 from .department import Department, DepartmentSchema
 
@@ -90,7 +85,7 @@ class OfficePageableSchema(OffsetPageableResponseBaseSchema):
 offices_to_departments = db.Table(
     'offices_to_departments',
     db.Column('office_id', UUID(as_uuid=True), db.ForeignKey('offices.id'), primary_key=True),
-    db.Column('department_id', UUID(as_uuid=True), db.ForeignKey('departments.id'), primary_key=True)
+    db.Column('department_id', UUID(as_uuid=True), db.ForeignKey('departments.id'), primary_key=True),
 )
 
 

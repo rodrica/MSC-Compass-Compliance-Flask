@@ -47,18 +47,22 @@ merged_claim_spec = ClaimSpec(
         OFFICE_CLAIM_SPEC.resource_name,
         ROLE_CLAIM_SPEC.resource_name,
     ],
-    filter_fields=list(set(
-        claim_spec.filter_fields
-        + DEPARTMENT_CLAIM_SPEC.filter_fields
-        + OFFICE_CLAIM_SPEC.filter_fields
-        + ROLE_CLAIM_SPEC.filter_fields  # noqa: C812
-    )),
-    default_actions=list(set(
-        claim_spec.default_actions
-        + DEPARTMENT_CLAIM_SPEC.default_actions
-        + OFFICE_CLAIM_SPEC.default_actions
-        + ROLE_CLAIM_SPEC.default_actions  # noqa: C812
-    )),
+    filter_fields=list(
+        set(
+            claim_spec.filter_fields
+            + DEPARTMENT_CLAIM_SPEC.filter_fields
+            + OFFICE_CLAIM_SPEC.filter_fields
+            + ROLE_CLAIM_SPEC.filter_fields,  # noqa: C812
+        ),
+    ),
+    default_actions=list(
+        set(
+            claim_spec.default_actions
+            + DEPARTMENT_CLAIM_SPEC.default_actions
+            + OFFICE_CLAIM_SPEC.default_actions
+            + ROLE_CLAIM_SPEC.default_actions,  # noqa: C812
+        ),
+    ),
 )
 
 
@@ -86,10 +90,12 @@ def _get_user(current_user: AuthInfo, claims: ClaimSet, user_id: str) -> User:
 
 
 def _is_ftp_username_unique(current_user: AuthInfo, ftp_username: str):
-    ftp_user_count = User.query.filter(sql_and_(
-        User.is_active.is_(True),
-        User.ftp_username == ftp_username
-    )).count()
+    ftp_user_count = User.query.filter(
+        sql_and_(
+            User.is_active.is_(True),
+            User.ftp_username == ftp_username,
+        ),
+    ).count()
     logger.debug(f'ftp_user_count: {ftp_user_count}')
 
     return ftp_user_count == 0
@@ -343,15 +349,17 @@ class UserChangePassword(MethodView):
         # Password was successfully changed, log any errors that occur in the post processing
         # But don't raise it, we need to prevent the request itself from returning an error code.
         with suppress_with_log(logger):
-            publish_sns(Envelope(
-                topic_arn=cm.get('sns.topics.UserNotification'),
-                subject='Password Changed',
-                message={
-                    'user_id': user_id,
-                    'changed_by': current_user.user_id,
-                    'dry_run': dry_run,
-                },
-                tenant_id=current_user.tenant_id,
-                source='user-management-service',
-                severity='INFO',
-            ))
+            publish_sns(
+                Envelope(
+                    topic_arn=cm.get('sns.topics.UserNotification'),
+                    subject='Password Changed',
+                    message={
+                        'user_id': user_id,
+                        'changed_by': current_user.user_id,
+                        'dry_run': dry_run,
+                    },
+                    tenant_id=current_user.tenant_id,
+                    source='user-management-service',
+                    severity='INFO',
+                ),
+            )

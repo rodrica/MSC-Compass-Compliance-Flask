@@ -9,11 +9,7 @@ import jwt
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
-from techlock.common.api import (
-    BadRequestException,
-    ConflictException,
-    NotFoundException,
-)
+from techlock.common.api import BadRequestException, ConflictException, NotFoundException
 from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
@@ -62,11 +58,13 @@ class Auth0Idp(IdpProvider):
         # Is
         is_refresh_needed = self.token_expiration - 60 < now
 
-        logger.debug('Auth0: Checking if Auth0 token refresh is needed.', extra={
-            'token_expiration': self.token_expiration,
-            'time': now,
-            'is_needed': is_refresh_needed
-        })
+        logger.debug(
+            'Auth0: Checking if Auth0 token refresh is needed.', extra={
+                'token_expiration': self.token_expiration,
+                'time': now,
+                'is_needed': is_refresh_needed,
+            },
+        )
 
         return is_refresh_needed
 
@@ -95,30 +93,36 @@ class Auth0Idp(IdpProvider):
     def _password_strength_error(self, e):
         conn_options = self.auth0.connections.get(self.connection_id)['options']
 
-        raise BadRequestException('Password is too weak.', payload={
-            'rules': {
-                'min_length': conn_options['password_complexity_options']['min_length'],
-                'history_size': conn_options['password_history']['size'],
-                'no_personal_info': conn_options['password_no_personal_info']['enabled'],
-                'must_incl_number': conn_options['passwordPolicy'] in ('fair', 'good', 'excellent'),
-                'must_incl_special': conn_options['passwordPolicy'] in ('good', 'excellent'),
-                'no_consecutive': conn_options['passwordPolicy'] == 'excellent',
-            }
-        })
+        raise BadRequestException(
+            'Password is too weak.', payload={
+                'rules': {
+                    'min_length': conn_options['password_complexity_options']['min_length'],
+                    'history_size': conn_options['password_history']['size'],
+                    'no_personal_info': conn_options['password_no_personal_info']['enabled'],
+                    'must_incl_number': conn_options['passwordPolicy'] in ('fair', 'good', 'excellent'),
+                    'must_incl_special': conn_options['passwordPolicy'] in ('good', 'excellent'),
+                    'no_consecutive': conn_options['passwordPolicy'] == 'excellent',
+                },
+            },
+        )
 
     def _get_user(self, user: User):
         self._refresh_if_needed()
-        found_users = self._handle_token_error(lambda: self.auth0.users.list(
-            q=f'identities.connection: "{self.connection_id}" AND email: "{user.email}"'
-        ))
+        found_users = self._handle_token_error(
+            lambda: self.auth0.users.list(
+                q=f'identities.connection: "{self.connection_id}" AND email: "{user.email}"',
+            ),
+        )
         total_found_users = found_users['total']
         if not total_found_users:
             logger.error('Auth0: User not found', extra={'user': user.entity_id})
             raise NotFoundException('User not found')
         elif total_found_users > 1:
-            logger.warn('Auth0: Found multiple users, expected one. Will use first one.', extra={
-                'found_users': found_users
-            })
+            logger.warn(
+                'Auth0: Found multiple users, expected one. Will use first one.', extra={
+                    'found_users': found_users,
+                },
+            )
 
         return found_users['users'][0]
 
@@ -126,9 +130,11 @@ class Auth0Idp(IdpProvider):
         self._refresh_if_needed()
         roles = self.auth0.roles.list(name_filter=role_name)['roles']
         if len(roles) > 1:
-            logger.warn('Found multiple roles, expected one. Will use first one.', extra={
-                'roles': roles
-            })
+            logger.warn(
+                'Found multiple roles, expected one. Will use first one.', extra={
+                    'roles': roles,
+                },
+            )
 
         for role in roles:
             if role['name'] == role_name:
@@ -168,7 +174,7 @@ class Auth0Idp(IdpProvider):
                     'app_metadata': app_metadata,
                     'password': password,
                     'connection': self.connection_id,
-                })
+                }),
             )
             logger.info('Auth0: User created', extra={'user': user.entity_id})
         except Auth0Error as e:
@@ -185,7 +191,7 @@ class Auth0Idp(IdpProvider):
         current_user: AuthInfo,
         user: User,
         attributes: Dict[str, str],
-        **kwargs
+        **kwargs,
     ):
         logger.info('Auth0: Updating user attributes', extra={'user': user.entity_id})
         user_attributes = dict()
@@ -219,9 +225,13 @@ class Auth0Idp(IdpProvider):
         found_user = self._get_user(user)
 
         try:
-            self._handle_token_error(lambda: self.auth0.users.update(found_user['user_id'], {
-                'password': new_password,
-            }))
+            self._handle_token_error(
+                lambda: self.auth0.users.update(
+                    found_user['user_id'], {
+                        'password': new_password,
+                    },
+                ),
+            )
             logger.info('Auth0: Changed password', extra={'user': user.entity_id})
         except Auth0Error as e:
             if 'PasswordStrengthError' in e.error_code:
@@ -236,7 +246,7 @@ class Auth0Idp(IdpProvider):
         attrs['login_info'] = {
             'last_ip': found_user.get('last_ip'),
             'last_login': found_user.get('last_login'),
-            'logins_count': found_user.get('logins_count')
+            'logins_count': found_user.get('logins_count'),
         }
         return attrs
 

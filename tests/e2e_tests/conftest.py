@@ -1,22 +1,16 @@
-import boto3
 import os
-import pytest
 
+import boto3
+import pytest
 from techlock.common.api.flask import create_flask
 from techlock.common.config import AuthInfo, ConfigManager
-from techlock.common.instance_manager import InstanceManager, INSTANCE_TYPES
+from techlock.common.instance_manager import INSTANCE_TYPES, InstanceManager
 from techlock.common.orm.sqlalchemy import db
 from techlock.common.util.aws import get_client
 from techlock.common.util.helper import supress
 
 # import tables so that _flush_local_psql creates and drops their tables
-from techlock.user_management_service.models import (
-    Department,
-    Office,
-    Role,
-    Tenant,
-    User
-)
+from techlock.user_management_service.models import Department, Office, Role, Tenant, User
 
 flask_wrapper = create_flask(__name__, enable_jwt=False, audience='user-management')
 
@@ -45,16 +39,16 @@ def _flush_local_dynamodb(create=True):
                 TableName=table,
                 KeySchema=[
                     {'AttributeName': hash_key, 'KeyType': 'HASH'},
-                    {'AttributeName': 'version', 'KeyType': 'RANGE'}
+                    {'AttributeName': 'version', 'KeyType': 'RANGE'},
                 ],
                 AttributeDefinitions=[
                     {'AttributeName': hash_key, 'AttributeType': 'S'},
-                    {'AttributeName': 'version', 'AttributeType': 'S'}
+                    {'AttributeName': 'version', 'AttributeType': 'S'},
                 ],
                 ProvisionedThroughput={
                     'ReadCapacityUnits': 10,
-                    'WriteCapacityUnits': 10
-                }
+                    'WriteCapacityUnits': 10,
+                },
             )
 
 
@@ -80,7 +74,7 @@ def _create_cognito_user_pool():
     ConfigManager().set(
         ConfigManager._DEFAULT_TENANT_ID,
         key='user_pool_id',
-        value=pool_id
+        value=pool_id,
     )
 
 
@@ -127,15 +121,17 @@ def create_root():
         email='root@root.com',
         claims_by_audience={
             'user-management': [
-                '*:user-management:*:*:*'
-            ]
-        }
+                '*:user-management:*:*:*',
+            ],
+        },
     )
     user.save(auth)
-    print("Created root tenant and user. {}".format({
-        'tenant': tenant.entity_id,
-        'user': user.entity_id
-    }))
+    print(
+        "Created root tenant and user. {}".format({
+            'tenant': tenant.entity_id,
+            'user': user.entity_id,
+        }),
+    )
 
 
 def main():

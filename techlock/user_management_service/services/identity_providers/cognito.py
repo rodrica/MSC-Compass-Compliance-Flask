@@ -28,7 +28,7 @@ class CognitoIdp(IdpProvider):
                 {'Name': 'family_name', 'Value': user.family_name},
                 {'Name': 'custom:tenant_id', 'Value': user.tenant_id},
             ],
-            DesiredDeliveryMediums=['EMAIL']
+            DesiredDeliveryMediums=['EMAIL'],
         )
 
     def update_user_attributes(
@@ -36,7 +36,7 @@ class CognitoIdp(IdpProvider):
         current_user: AuthInfo,
         user: User,
         attributes: Dict[str, str],
-        **kwargs
+        **kwargs,
     ):
         user_pool_id = ConfigManager().get(current_user, 'user_pool_id', raise_if_not_found=True)
         self.cognito.admin_update_user_attributes(
@@ -45,7 +45,7 @@ class CognitoIdp(IdpProvider):
             UserAttributes=[
                 {'Name': k, 'Value': v}
                 for k, v in attributes.items()
-            ]
+            ],
         )
 
     def delete_user(self, current_user: AuthInfo, user: User, **kwargs):

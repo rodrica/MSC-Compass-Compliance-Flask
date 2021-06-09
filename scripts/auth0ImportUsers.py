@@ -4,12 +4,12 @@
 '''
 
 import argparse
-import coloredlogs
 import csv
-import dpath.util
 import json
 import logging
 
+import coloredlogs
+import dpath.util
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
 
@@ -61,7 +61,7 @@ def create_user(auth0, connection, mapping, row):
         'app_metadata': {},
         'user_metadata': {},
         'connection': connection,
-        'password': 'changeM3!'
+        'password': 'changeM3!',
     }
 
     for src_key, dest_key in mapping.items():

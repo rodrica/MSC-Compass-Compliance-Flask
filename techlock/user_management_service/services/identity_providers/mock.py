@@ -24,7 +24,7 @@ class MockIdp(IdpProvider):
         current_user: AuthInfo,
         user: User,
         attributes: Dict[str, str],
-        **kwargs
+        **kwargs,
     ):
         logger.info("update_user_attributes")
 

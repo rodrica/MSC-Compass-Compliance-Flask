@@ -12,11 +12,7 @@ from techlock.common.api.blueprint import Blueprint
 from techlock.common.util.helper import parse_boolean
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from techlock.user_management_service.models import (
-    HydratorPostSchema,
-    Tenant,
-    User,
-)
+from techlock.user_management_service.models import HydratorPostSchema, Tenant, User
 
 logger = logging.getLogger(__name__)
 
@@ -49,15 +45,19 @@ class Hydrator(MethodView):
         claims = set()
         if claims_by_audience:
             if claims_by_audience.get('*'):
-                claims.update(filter(
-                    lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
-                    claims_by_audience.get('*')
-                ))
+                claims.update(
+                    filter(
+                        lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
+                        claims_by_audience.get('*'),
+                    ),
+                )
             if claims_by_audience.get(audience):
-                claims.update(filter(
-                    lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
-                    claims_by_audience.get(audience)
-                ))
+                claims.update(
+                    filter(
+                        lambda x: Claim.from_string(x).tenant_id in ('*', tenant_id),
+                        claims_by_audience.get(audience),
+                    ),
+                )
 
         return claims
 
@@ -102,14 +102,16 @@ class Hydrator(MethodView):
                 'tenant_id': user.tenant_id,
                 'service_now_customer_id': tenant.service_now_id,
                 'claims': list(claims),
-                'roles': list(role_names)
+                'roles': list(role_names),
             },
-            'header': data['header']
+            'header': data['header'],
         }
 
-        logger.info('Hydrator data.', extra={
-            'data': data,
-            'request.headers': dict(request.headers),
-            'response': response,
-        })
+        logger.info(
+            'Hydrator data.', extra={
+                'data': data,
+                'request.headers': dict(request.headers),
+                'response': response,
+            },
+        )
         return response

@@ -3,10 +3,10 @@
     Simple script to import Auth0 roles to flask db
 '''
 import argparse
-import coloredlogs
-import psycopg2
 import logging
 
+import coloredlogs
+import psycopg2
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
 

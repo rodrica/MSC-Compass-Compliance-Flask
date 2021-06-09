@@ -16,7 +16,7 @@ class IdpProvider():
         user: User,
         password: str,
         email_verified=False,
-        **kwargs
+        **kwargs,
     ):
         pass
 
@@ -25,7 +25,7 @@ class IdpProvider():
         current_user: AuthInfo,
         user: User,
         attributes: Dict[str, str],
-        **kwargs
+        **kwargs,
     ):
         pass
 

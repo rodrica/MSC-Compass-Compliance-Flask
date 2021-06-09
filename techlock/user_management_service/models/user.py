@@ -15,12 +15,7 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.config import AuthInfo
-from techlock.common.orm.sqlalchemy import (
-    BaseModel,
-    BaseModelSchema,
-    db,
-    get_string_filter,
-)
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db, get_string_filter
 
 from ..services import get_idp
 from .department import Department, DepartmentSchema

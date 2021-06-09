@@ -233,7 +233,7 @@ stages:
                   changed_by: test@test.com
                   created_on: "{role_created_on}"
                   changed_on: "{role_changed_on}"
-                  tags: null              
+                  tags: null
               department_ids: ["{department_id}"]
               office_ids: ["{office_id}"]
               role_ids: ["{role_id}"]

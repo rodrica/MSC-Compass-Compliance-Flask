@@ -17,7 +17,7 @@ blp = Blueprint('ui_data', __name__, url_prefix='/ui-data')
 class ConfigUrls(MethodView):
 
     @access_required(
-        'read', 'ui_data'
+        'read', 'ui_data',
     )
     def get(self):
         current_user = get_current_user()
