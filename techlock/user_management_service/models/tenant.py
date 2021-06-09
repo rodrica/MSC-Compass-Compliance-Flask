@@ -25,13 +25,14 @@ TENANT_CLAIM_SPEC = ClaimSpec(
         'create',
         'read',
         'update',
-        'delete'
+        'delete',
     ],
     resource_name='tenants',
     filter_fields=[
         'name',
         'created_by',
-    ]
+    ],
+    default_actions=['read'],
 )
 
 

@@ -1,18 +1,16 @@
 import logging
-from typing import List
+from typing import Any, Dict
 
 from flask.views import MethodView
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException
-from techlock.common.api.auth import (
-    access_required,
-    get_current_user_with_claims,
-)
-from techlock.common.api.auth.claim import Claim
+from techlock.common.api.auth import access_required
+from techlock.common.api.auth.claim import ClaimSet
+from techlock.common.api.models.dry_run import DryRunSchema
 from techlock.common.config import AuthInfo
 
+from ..models import DEPARTMENT_CLAIM_SPEC as claim_spec
 from ..models import (
-    DEPARTMENT_CLAIM_SPEC,
     Department,
     DepartmentListQueryParameters,
     DepartmentListQueryParametersSchema,
@@ -28,15 +26,10 @@ blp = Blueprint('departments', __name__, url_prefix='/departments')
 @blp.route('')
 class Departments(MethodView):
 
+    @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=DepartmentListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=DepartmentPageableSchema)
-    @access_required(
-        'read', 'departments',
-        allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
-    )
-    def get(self, query_params: DepartmentListQueryParameters):
-        current_user, claims = get_current_user_with_claims()
-
+    def get(self, query_params: DepartmentListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         pageable_resp = Department.get_all(
             current_user,
             offset=query_params.offset,
@@ -46,22 +39,20 @@ class Departments(MethodView):
             claims=claims,
         )
 
-        logger.info('GET departments', extra={
-            'departments': pageable_resp.asdict()
-        })
+        logger.info('GET departments', extra={'departments': pageable_resp.asdict()})
 
         return pageable_resp
 
+    @access_required('create', claim_spec=claim_spec)
     @blp.arguments(schema=DepartmentSchema)
+    @blp.arguments(DryRunSchema, location='query', as_kwargs=True)
     @blp.response(status_code=201, schema=DepartmentSchema)
-    @access_required('create', 'departments')
-    def post(self, data):
-        current_user, claims = get_current_user_with_claims()
-
-        logger.info('Creating Department', extra={'data': data})
+    def post(self, data: Dict[str, Any], dry_run: bool, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('Creating department', extra={'data': data})
 
         department = Department(**data)
-        department.save(current_user, claims=claims)
+        # no need to rollback on dry-run, flask-sqlalchemy does this for us.
+        department.save(current_user, claims=claims, commit=not dry_run)
 
         return department
 
@@ -69,53 +60,45 @@ class Departments(MethodView):
 @blp.route('/<department_id>')
 class DepartmentById(MethodView):
 
-    def get_department(self, current_user: AuthInfo, claims: List[Claim], department_id: str):
+    def get_department(self, current_user: AuthInfo, claims: ClaimSet, department_id: str):
         department = Department.get(current_user, department_id, claims=claims, raise_if_not_found=True)
 
         return department
 
+    @access_required('read', claim_spec=claim_spec)
     @blp.response(status_code=200, schema=DepartmentSchema)
-    @access_required(
-        'read', 'departments',
-        allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
-    )
-    def get(self, department_id):
-        current_user, claims = get_current_user_with_claims()
-
+    def get(self, department_id: str, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('Getting department', extra={'id': department_id})
         department = self.get_department(current_user, claims, department_id)
 
         return department
 
+    @access_required(['read', 'update'], claim_spec=claim_spec)
     @blp.arguments(schema=DepartmentSchema)
+    @blp.arguments(DryRunSchema, location='query', as_kwargs=True)
     @blp.response(status_code=200, schema=DepartmentSchema)
-    @access_required(
-        'update', 'departments',
-        allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
-    )
-    def put(self, data, department_id):
-        current_user, claims = get_current_user_with_claims()
+    def put(self, data: Dict[str, Any], dry_run: bool, department_id: str, current_user: AuthInfo, claims: ClaimSet):
+        logger.debug('Updating department', extra={'data': data})
 
-        logger.debug('Updating Department', extra={'data': data})
-
-        department = self.get_department(current_user, claims, department_id)
+        department = self.get_department(current_user, claims.filter_by_action('read'), department_id)
 
         for k, v in data.items():
             if hasattr(department, k):
                 setattr(department, k, v)
             else:
-                raise BadRequestException('Department has no attribute: %s' % k)
-        department.save(current_user, claims=claims)
+                raise BadRequestException(f'Department has no attribute: {k}')
+
+        # no need to rollback on dry-run, flask-sqlalchemy does this for us.
+        department.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
         return department
 
-    @blp.response(status_code=204, schema=DepartmentSchema)
-    @access_required(
-        'delete', 'departments',
-        allowed_filter_fields=DEPARTMENT_CLAIM_SPEC.filter_fields
-    )
-    def delete(self, department_id):
-        current_user, claims = get_current_user_with_claims()
+    @access_required(['read', 'delete'], claim_spec=claim_spec)
+    @blp.arguments(DryRunSchema, location='query', as_kwargs=True)
+    @blp.response(status_code=204)
+    def delete(self, dry_run: bool, department_id: str, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('Deleting department', extra={'id': department_id})
+        department = self.get_department(current_user, claims.filter_by_action('read'), department_id)
 
-        department = self.get_department(current_user, claims, department_id)
-
-        department.delete(current_user)
-        return department
+        # no need to rollback on dry-run, flask-sqlalchemy does this for us.
+        department.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        return

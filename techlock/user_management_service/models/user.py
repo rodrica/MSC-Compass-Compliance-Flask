@@ -45,7 +45,7 @@ USER_CLAIM_SPEC = ClaimSpec(
         'create',
         'read',
         'update',
-        'delete'
+        'delete',
     ],
     resource_name='users',
     filter_fields=[
@@ -66,7 +66,9 @@ USER_CLAIM_SPEC = ClaimSpec(
         # 'office',
         # 'department',
         # 'role',
-    ]
+    ],
+    # There will be no system users, so no default actions.
+    default_actions=[],
 )
 
 
@@ -89,15 +91,37 @@ class UserSchema(BaseModelSchema):
     ftp_username = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$', error='String does not match expected pattern: {regex}.'), allow_none=True)
     login_info = mf.Dict(mf.String(), mf.String(), dump_only=True)
 
+    # DEPRECATED, need to remove this since it's problematic with permissions
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
     offices = mf.Nested(OfficeSchema, allow_none=True, many=True)
 
+    role_ids = mf.List(mf.UUID(), required=False, allow_none=True)
+    department_ids = mf.List(mf.UUID(), required=False, allow_none=True)
+    office_ids = mf.List(mf.UUID(), required=False, allow_none=True)
+
     claims_by_audience = mf.Dict(
         keys=mf.String(),
         values=mf.List(mf.String(validate=Claim.validate_claim_string)),
-        allow_none=True
+        allow_none=True,
     )
+
+    @ma.pre_dump
+    def pre_dump(self, data: 'User', **kwargs):
+        data.role_ids = []
+        data.department_ids = []
+        data.office_ids = []
+
+        if data.roles:
+            data.role_ids = [x.entity_id for x in data.roles]
+
+        if data.departments:
+            data.department_ids = [x.entity_id for x in data.departments]
+
+        if data.offices:
+            data.office_ids = [x.entity_id for x in data.offices]
+
+        return data
 
 
 class UpdateUserSchema(ma.Schema):
@@ -110,7 +134,7 @@ class UpdateUserSchema(ma.Schema):
     claims_by_audience = mf.Dict(
         keys=mf.String(),
         values=mf.List(mf.String(validate=Claim.validate_claim_string)),
-        allow_none=True
+        allow_none=True,
     )
 
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
@@ -149,17 +173,17 @@ class UserPageableSchema(OffsetPageableResponseBaseSchema):
 users_to_roles = db.Table(
     'users_to_roles',
     db.Column('user_id', db.String, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('role_id', UUID(as_uuid=True), db.ForeignKey('roles.id'), primary_key=True)
+    db.Column('role_id', UUID(as_uuid=True), db.ForeignKey('roles.id'), primary_key=True),
 )
 users_to_departments = db.Table(
     'users_to_departments',
     db.Column('user_id', db.String, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('department_id', UUID(as_uuid=True), db.ForeignKey('departments.id'), primary_key=True)
+    db.Column('department_id', UUID(as_uuid=True), db.ForeignKey('departments.id'), primary_key=True),
 )
 users_to_offices = db.Table(
     'users_to_offices',
     db.Column('user_id', db.String, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('office_id', UUID(as_uuid=True), db.ForeignKey('offices.id'), primary_key=True)
+    db.Column('office_id', UUID(as_uuid=True), db.ForeignKey('offices.id'), primary_key=True),
 )
 
 
@@ -175,19 +199,19 @@ class User(BaseModel):
         'Role',
         secondary=users_to_roles,
         lazy='subquery',
-        backref=db.backref('users', lazy=True)
+        backref=db.backref('users', lazy=True),
     )
     departments = db.relationship(
         'Department',
         secondary=users_to_departments,
         lazy='subquery',
-        backref=db.backref('users', lazy=True)
+        backref=db.backref('users', lazy=True),
     )
     offices = db.relationship(
         'Office',
         secondary=users_to_offices,
         lazy='subquery',
-        backref=db.backref('users', lazy=True)
+        backref=db.backref('users', lazy=True),
     )
 
     claims_by_audience = db.Column(JSONB, nullable=True)
@@ -224,7 +248,7 @@ class UserListQueryParameters(BaseOffsetListQueryParams):
     office_id: str = None
 
     def get_filters(self, auth_info: AuthInfo):
-        filters = list()
+        filters = []
 
         filters.extend(super(UserListQueryParameters, self).get_filters())
 

@@ -25,13 +25,14 @@ DEPARTMENT_CLAIM_SPEC = ClaimSpec(
         'create',
         'read',
         'update',
-        'delete'
+        'delete',
     ],
     resource_name='departments',
     filter_fields=[
         'name',
         'created_by',
-    ]
+    ],
+    default_actions=['read'],
 )
 
 

@@ -35,13 +35,14 @@ OFFICE_CLAIM_SPEC = ClaimSpec(
         'create',
         'read',
         'update',
-        'delete'
+        'delete',
     ],
     resource_name='offices',
     filter_fields=[
         'name',
         'created_by',
-    ]
+    ],
+    default_actions=['read'],
 )
 
 
@@ -56,8 +57,18 @@ class OfficeSchema(BaseModelSchema):
     latitude = mf.Decimal(allow_none=True)
     longitude = mf.Decimal(allow_none=True)
 
+    # DEPRECATED, need to remove this since it's problematic with permissions
     departments = mf.Nested(DepartmentSchema, allow_none=True, many=True, dump_only=True)
-    department_ids = mf.List(mf.UUID(), allow_none=True, required=False, load_only=True)
+
+    department_ids = mf.List(mf.UUID(), allow_none=True, required=False)
+
+    @ma.pre_dump
+    def pre_dump(self, data: 'Office', **kwargs):
+        data.department_ids = []
+        if data.departments:
+            data.department_ids = [x.entity_id for x in data.departments]
+
+        return data
 
 
 class OfficeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
@@ -100,7 +111,7 @@ class Office(BaseModel):
         'Department',
         secondary=offices_to_departments,
         lazy='subquery',
-        backref=db.backref('offices', lazy=True)
+        backref=db.backref('offices', lazy=True),
     )
 
 
@@ -116,7 +127,7 @@ class OfficeListQueryParameters(BaseOffsetListQueryParams):
     department_id: str = None
 
     def get_filters(self, auth_info: AuthInfo):
-        filters = list()
+        filters = []
 
         filters.extend(super(OfficeListQueryParameters, self).get_filters())
 

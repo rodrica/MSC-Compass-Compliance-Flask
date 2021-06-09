@@ -65,6 +65,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1
@@ -98,6 +101,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1
@@ -132,6 +138,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1
@@ -191,6 +200,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1
@@ -355,6 +367,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant1
@@ -370,6 +385,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant1
@@ -403,6 +421,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant2
@@ -438,6 +459,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant1
@@ -473,6 +497,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant1
@@ -508,6 +535,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant1
@@ -544,6 +574,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant1
@@ -559,6 +592,9 @@ stages:
                   departments: []
                   offices: []
                   roles: []
+                  department_ids: []
+                  office_ids: []
+                  role_ids: []
                   description: null
                   claims_by_audience: null
                   tenant_id: tenant1
@@ -591,6 +627,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1
@@ -641,6 +680,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant2
@@ -760,6 +802,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1
@@ -798,6 +843,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1
@@ -841,10 +889,10 @@ stages:
         email: test5@test.com
         temporary_password: changeme
     response:
-      status_code: 403
+      status_code: 400
       body:
         error: true
-        msg: Not authorized.
+        msg: Can not create system users.
 
   - name: Create system User as authorized user
     request:
@@ -1027,6 +1075,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience: null
               tenant_id: tenant1

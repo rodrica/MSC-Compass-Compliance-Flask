@@ -1,15 +1,20 @@
-tl-msc-common==1.0.0.dev0+master.b26a2ffad92f555d3831de79b7cac352c53f0903
+tl-msc-common==1.0.0.dev0+master.7685c9b52085692fc7506a06b9397a37dd406307
 Flask-HTTPAuth==3.3.0
 
 # dev only requirements
 attrs==20.3.0
-fakeredis<1
-flake8
-freezegun
-mock
-moto
-pytest
+colorama
+fakeredis>=1.5.1,<2
+flake8>=3.9.2<4
+flake8-commas
+flake8-comprehensions
+flake8-isort
+flake8-printf-formatting
+isort>=5.8.0,<6
+pre-commit
+pyclean
+pyflakes
 pytest-flake8
 pytest-cov
 pytest-sugar
-tavern>=1.11.1,<2
+tavern==1.14.2

@@ -72,6 +72,7 @@ stages:
               latitude: null
               longitude: null
               departments: []
+              department_ids: []
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
@@ -107,6 +108,7 @@ stages:
               latitude: null
               longitude: null
               departments: []
+              department_ids: []
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
@@ -146,6 +148,7 @@ stages:
               latitude: null
               longitude: null
               departments: []
+              department_ids: []
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
@@ -339,6 +342,7 @@ stages:
                   latitude: null
                   longitude: null
                   departments: []
+                  department_ids: []
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -356,6 +360,7 @@ stages:
                   latitude: null
                   longitude: null
                   departments: []
+                  department_ids: []
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -391,6 +396,7 @@ stages:
                   latitude: null
                   longitude: null
                   departments: []
+                  department_ids: []
                   tenant_id: tenant2
                   created_by: test2@test.com
                   changed_by: test2@test.com
@@ -428,6 +434,7 @@ stages:
                   latitude: null
                   longitude: null
                   departments: []
+                  department_ids: []
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -466,6 +473,7 @@ stages:
                   latitude: null
                   longitude: null
                   departments: []
+                  department_ids: []
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -483,6 +491,7 @@ stages:
                   latitude: null
                   longitude: null
                   departments: []
+                  department_ids: []
                   tenant_id: tenant1
                   created_by: test@test.com
                   changed_by: test@test.com
@@ -517,6 +526,7 @@ stages:
               latitude: null
               longitude: null
               departments: []
+              department_ids: []
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
@@ -569,6 +579,7 @@ stages:
               latitude: null
               longitude: null
               departments: []
+              department_ids: []
               tenant_id: tenant2
               created_by: test2@test.com
               changed_by: test2@test.com
@@ -648,6 +659,7 @@ stages:
               latitude: null
               longitude: null
               departments: []
+              department_ids: []
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com
@@ -704,6 +716,7 @@ stages:
               latitude: null
               longitude: null
               departments: []
+              department_ids: []
               tenant_id: tenant1
               created_by: test@test.com
               changed_by: test@test.com

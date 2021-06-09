@@ -54,6 +54,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience:
                 user_management:
@@ -98,6 +101,9 @@ stages:
               departments: []
               offices: []
               roles: []
+              department_ids: []
+              office_ids: []
+              role_ids: []
               description: null
               claims_by_audience:
                 user_management:

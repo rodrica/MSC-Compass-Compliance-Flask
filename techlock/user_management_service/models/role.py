@@ -28,13 +28,14 @@ ROLE_CLAIM_SPEC = ClaimSpec(
         'create',
         'read',
         'update',
-        'delete'
+        'delete',
     ],
     resource_name='roles',
     filter_fields=[
         'name',
         'created_by',
-    ]
+    ],
+    default_actions=['read'],
 )
 STAGE = os.environ.get('STAGE', 'dev').upper()
 
@@ -43,7 +44,7 @@ class RoleSchema(BaseModelSchema):
     claims_by_audience = mf.Dict(
         keys=mf.String(),
         values=mf.List(mf.String(validate=Claim.validate_claim_string)),
-        allow_none=True
+        allow_none=True,
     )
 
 
