@@ -51,6 +51,7 @@ class Roles(MethodView):
     @blp.arguments(schema=RoleListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=RolePageableSchema)
     def get(self, query_params: RoleListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('GET roles')
         pageable_resp = Role.get_all(
             current_user,
             offset=query_params.offset,
@@ -59,8 +60,6 @@ class Roles(MethodView):
             additional_filters=query_params.get_filters(),
             claims=claims,
         )
-
-        logger.info('GET roles', extra={'roles': pageable_resp.asdict()})
 
         return pageable_resp
 

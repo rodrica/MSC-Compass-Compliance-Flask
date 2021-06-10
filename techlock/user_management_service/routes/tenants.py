@@ -30,6 +30,7 @@ class Tenants(MethodView):
     @blp.arguments(schema=TenantListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=TenantPageableSchema)
     def get(self, query_params: TenantListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('GET tenants')
         pageable_resp = Tenant.get_all(
             current_user,
             offset=query_params.offset,
@@ -38,8 +39,6 @@ class Tenants(MethodView):
             additional_filters=query_params.get_filters(),
             claims=claims,
         )
-
-        logger.info('GET tenants', extra={'tenants': pageable_resp.asdict()})
 
         return pageable_resp
 

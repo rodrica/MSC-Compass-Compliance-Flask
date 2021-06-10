@@ -147,6 +147,7 @@ class Users(MethodView):
     @blp.arguments(schema=UserListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=UserPageableSchema)
     def get(self, query_params: UserListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('GET users')
         if not claims:
             # if no claims, add one that allows the user to see himself
             claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', id=current_user.user_id, filter_field=None, filter_value=None)]
@@ -159,8 +160,6 @@ class Users(MethodView):
             additional_filters=query_params.get_filters(current_user),
             claims=claims,
         )
-
-        logger.info('GET users', extra={'users': pageable_resp.asdict()})
 
         return pageable_resp
 

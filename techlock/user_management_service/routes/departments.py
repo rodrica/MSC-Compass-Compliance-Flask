@@ -30,6 +30,7 @@ class Departments(MethodView):
     @blp.arguments(schema=DepartmentListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=DepartmentPageableSchema)
     def get(self, query_params: DepartmentListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('GET departments')
         pageable_resp = Department.get_all(
             current_user,
             offset=query_params.offset,
@@ -38,8 +39,6 @@ class Departments(MethodView):
             additional_filters=query_params.get_filters(),
             claims=claims,
         )
-
-        logger.info('GET departments', extra={'departments': pageable_resp.asdict()})
 
         return pageable_resp
 

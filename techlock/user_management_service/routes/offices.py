@@ -70,6 +70,7 @@ class Offices(MethodView):
     @blp.arguments(schema=OfficeListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=OfficePageableSchema)
     def get(self, query_params: OfficeListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
+        logger.info('GET offices')
         pageable_resp = Office.get_all(
             current_user,
             offset=query_params.offset,
@@ -78,8 +79,6 @@ class Offices(MethodView):
             additional_filters=query_params.get_filters(current_user),
             claims=claims,
         )
-
-        logger.info('GET offices', extra={'offices': pageable_resp.asdict()})
 
         return pageable_resp
 
