@@ -8,6 +8,7 @@ from flask_httpauth import HTTPBasicAuth
 from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.api.auth import Claim
 from techlock.common.api.auth.jwt import tenant_header_key
+from techlock.common.api.auth.utils import SYSTEM_TENANT_ID
 from techlock.common.api.blueprint import Blueprint
 from techlock.common.util.helper import parse_boolean
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -79,7 +80,7 @@ class Hydrator(MethodView):
             logger.error('No username provided', extra={'data': data})
             raise BadRequestException('No username provided')
 
-        user = User._unsecure_get(email)
+        user: User = User._unsecure_get(email)
         if user is None:
             raise NotFoundException("User '{}' not found.".format(email))
 
@@ -93,14 +94,17 @@ class Hydrator(MethodView):
             claims.update(self._filter_claims(role.claims_by_audience, audience, tenant_id))
             role_names.add(role.name)
 
-        tenant = Tenant._unsecure_get(tenant_id)
+        sn_id = None
+        if tenant_id != SYSTEM_TENANT_ID:
+            tenant: Tenant = Tenant._unsecure_get(tenant_id)
+            sn_id = tenant.service_now_id
 
         response = {
             'subject': data['subject'],
             'extra': {
                 'user_id': user.entity_id,
                 'tenant_id': user.tenant_id,
-                'service_now_customer_id': tenant.service_now_id,
+                'service_now_customer_id': sn_id,
                 'claims': list(claims),
                 'roles': list(role_names),
             },
