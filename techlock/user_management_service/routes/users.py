@@ -218,7 +218,16 @@ class Users(MethodView):
             logger.info('Adding user to idp')
             idp_attributes = {k: v for k, v in data.items() if k in idp_attribute_keys}
 
-            self.idp.create_user(current_user, user, password=temporary_password, idp_attributes=idp_attributes)
+            self.idp.create_user(
+                current_user,
+                user,
+                password=temporary_password,
+                # Email filters can open links, Auth0 does not check if a human or robot accessed a link.
+                # This means that users would get an error since the email was already verified.
+                # https://community.auth0.com/t/email-verification-link-works-but-shows-error-page/32409/35
+                email_verified=True,
+                idp_attributes=idp_attributes,
+            )
 
             try:
                 self.idp.update_user_roles(current_user, user, user.roles)
