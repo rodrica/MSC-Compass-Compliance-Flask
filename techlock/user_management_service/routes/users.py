@@ -222,10 +222,6 @@ class Users(MethodView):
                 current_user,
                 user,
                 password=temporary_password,
-                # Email filters can open links, Auth0 does not check if a human or robot accessed a link.
-                # This means that users would get an error since the email was already verified.
-                # https://community.auth0.com/t/email-verification-link-works-but-shows-error-page/32409/35
-                email_verified=True,
                 idp_attributes=idp_attributes,
             )
 
