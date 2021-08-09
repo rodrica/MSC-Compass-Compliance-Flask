@@ -84,6 +84,10 @@ def _get_items_from_id_list(
 
 
 def _get_user(current_user: AuthInfo, claims: ClaimSet, user_id: str) -> User:
+    if not claims:
+        # if no claims, add one that allows the user to see himself
+        claims = [Claim(True, current_user.tenant_id, '*', '*', 'users', id=current_user.user_id, filter_field=None, filter_value=None)]
+
     user = User.get(current_user, user_id, claims=claims, raise_if_not_found=True)
 
     return user
