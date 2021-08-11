@@ -14,7 +14,6 @@ class IdpProvider():
         self,
         current_user: AuthInfo,
         user: User,
-        password: str,
         email_verified=False,
         **kwargs,
     ):
