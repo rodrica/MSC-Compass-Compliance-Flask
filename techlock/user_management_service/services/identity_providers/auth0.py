@@ -5,12 +5,13 @@ import os
 import time
 from typing import TYPE_CHECKING, Dict, List
 
+import jinja2
 import jwt
 from auth0.v3.authentication import GetToken
 from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
+from techlock.common import AuthInfo, AwsUtils, ConfigManager, read_file
 from techlock.common.api import BadRequestException, ConflictException, NotFoundException
-from techlock.common.config import AuthInfo, ConfigManager
 
 from .base import IdpProvider
 
@@ -21,6 +22,8 @@ logger = logging.getLogger(__name__)
 STAGE = os.environ.get('STAGE', 'dev').upper()
 
 TENANT_BASE_ROLE_NAME = '_BASE_'
+DEFAULT_EMAIL_TXT_URL = 'py://techlock.user_management_service.services.identity_providers.email_templates.invite_email.txt'
+DEFAULT_EMAIL_HTML_URL = 'py://techlock.user_management_service.services.identity_providers.email_templates.invite_email.html'
 
 _app_metadata_keys = [
 ]
@@ -34,11 +37,12 @@ class Auth0Idp(IdpProvider):
         self._refresh_token()
 
     def _refresh_token(self):
+        cm = ConfigManager()
         current_user = AuthInfo('Auth0Idp', ConfigManager._DEFAULT_TENANT_ID)
-        domain = ConfigManager().get(current_user, 'auth0.domain', raise_if_not_found=True)
-        client_id = ConfigManager().get(current_user, 'auth0.client_id', raise_if_not_found=True)
-        client_secret = ConfigManager().get(current_user, 'auth0.client_secret', raise_if_not_found=True)
-        audience = ConfigManager().get(current_user, 'auth0.audience', raise_if_not_found=True)
+        domain = cm.get(current_user, 'auth0.domain', raise_if_not_found=True)
+        client_id = cm.get(current_user, 'auth0.client_id', raise_if_not_found=True)
+        client_secret = cm.get(current_user, 'auth0.client_secret', raise_if_not_found=True)
+        audience = cm.get(current_user, 'auth0.audience', raise_if_not_found=True)
 
         get_token = GetToken(domain)
         token = get_token.client_credentials(client_id, client_secret, audience)
@@ -146,6 +150,66 @@ class Auth0Idp(IdpProvider):
         else:
             return None
 
+    def _generate_password_change_link(
+        self,
+        current_user: AuthInfo,
+        user: User,
+    ):
+        cm = ConfigManager()
+        client_id = cm.get(current_user, 'invite.client_id', raise_if_not_found=True)
+        connection_id = cm.get(current_user, 'invite.connection_id', raise_if_not_found=True)
+        ttl = cm.get(current_user, 'invite.ttl', 86400 * 3)  # 3 days
+        resp = self._handle_token_error(
+            lambda: self.auth0.tickets.create_pswd_change({
+                'client_id': client_id,
+                'connection_id': connection_id,
+                'email': user.email,
+                'ttl_sec': ttl,
+                'mark_email_as_verified': True,
+            }),
+        )
+
+        return resp['ticket']
+
+    def _send_invite_email(
+        self,
+        current_user: AuthInfo,
+        user: User,
+    ):
+        cm = ConfigManager()
+        src_email = cm.get(current_user, 'invite.src_email', 'Tech Lock Administrator <tl-admin@msc.techlockinc.com>')
+        subject = cm.get(current_user, 'invite.subject', 'Welcome to the Tech Lock NDR Portal!')
+        text_tmpl = read_file(cm.get(current_user, 'invite.text_url', DEFAULT_EMAIL_TXT_URL))
+        html_tmpl = read_file(cm.get(current_user, 'invite.html_url', DEFAULT_EMAIL_HTML_URL))
+
+        url = self._generate_password_change_link(current_user, user)
+        text = jinja2.Template(text_tmpl).render(url=url)
+        html = jinja2.Template(html_tmpl).render(url=url)
+
+        ses = AwsUtils.get_client('ses', region_name='us-east-1')
+        ses.send_email(
+            Source=src_email,
+            Destination={
+                'ToAddresses': [user.email],
+            },
+            Message={
+                'Subject': {
+                    'Data': subject,
+                    'Charset': 'UTF-8',
+                },
+                'Body': {
+                    'Text': {
+                        'Data': text,
+                        'Charset': 'UTF-8',
+                    },
+                    'Html': {
+                        'Data': html,
+                        'Charset': 'UTF-8',
+                    },
+                },
+            },
+        )
+
     def create_user(
         self,
         current_user: AuthInfo,
@@ -177,6 +241,9 @@ class Auth0Idp(IdpProvider):
                 }),
             )
             logger.info('Auth0: User created', extra={'user': user.entity_id})
+
+            self._send_invite_email(current_user, user)
+            logger.info('Auth0: Invite email sent', extra={'user': user.entity_id, 'email': user.email})
         except Auth0Error as e:
             logger.error(f'Auth0: Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
