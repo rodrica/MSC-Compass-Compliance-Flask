@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class MockIdp(IdpProvider):
 
-    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False, **kwargs):
+    def create_user(self, current_user: AuthInfo, user: User, email_verified=False, **kwargs):
         logger.info("create_user")
         pass
 

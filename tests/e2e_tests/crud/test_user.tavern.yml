@@ -50,7 +50,6 @@ stages:
         name: Test
         family_name: e2e
         email: test2@test.com
-        temporary_password: changeme
     response:
       status_code: 201
       body:
@@ -185,7 +184,6 @@ stages:
         family_name: e2e
         ftp_username: test
         email: test2@test.com
-        temporary_password: changeme
     response:
       status_code: 201
       body:
@@ -301,7 +299,6 @@ stages:
         name: Alpha
         family_name: Foo
         email: afoo@test.com
-        temporary_password: changeme
     response:
       status_code: 201
       save:
@@ -319,7 +316,6 @@ stages:
         name: Beta
         family_name: Bar
         email: bbar@example.com
-        temporary_password: changeme
     response:
       status_code: 201
       save:
@@ -337,7 +333,6 @@ stages:
         name: Zeta
         family_name: Bar
         email: zbar@example.com
-        temporary_password: changeme
     response:
       status_code: 201
       save:
@@ -787,7 +782,6 @@ stages:
         family_name: e2e
         ftp_username: test
         email: test2@test.com
-        temporary_password: changeme
     response:
       status_code: 201
       body:
@@ -828,7 +822,6 @@ stages:
         family_name: e2e
         ftp_username: test2
         email: test3@test.com
-        temporary_password: changeme
     response:
       status_code: 201
       body:
@@ -867,7 +860,6 @@ stages:
         family_name: e2e
         ftp_username: test5
         email: test5@test.com
-        temporary_password: changeme
     response:
       status_code: 403
       body:
@@ -887,7 +879,6 @@ stages:
         family_name: e2e
         ftp_username: test5
         email: test5@test.com
-        temporary_password: changeme
     response:
       status_code: 400
       body:
@@ -907,7 +898,6 @@ stages:
         family_name: e2e
         ftp_username: test5
         email: test5@test.com
-        temporary_password: changeme
     response:
       status_code: 400
       body:
@@ -932,29 +922,6 @@ stages:
               - Missing data for required field.
             name:
               - Missing data for required field.
-            temporary_password:
-            - Missing data for required field.
-        status: Unprocessable Entity
-
-  - name: Create User - without password
-    request:
-      url: http://app:5000/users
-      method: POST
-      headers:
-        content-type: application/json
-        Authorization: "Bearer {access_token}"
-      json:
-        name: Test
-        family_name: e2e
-        email: test2@test.com
-    response:
-      status_code: 422
-      body:
-        code: 422
-        errors:
-          json:
-            temporary_password:
-              - Missing data for required field.
         status: Unprocessable Entity
 
   - name: Create User - with invalid email and numeric name
@@ -968,7 +935,6 @@ stages:
         name: 123
         family_name: e2e
         email: testest.com
-        temporary_password: changeme
     response:
       status_code: 422
       body:
@@ -992,7 +958,6 @@ stages:
         name: Test
         family_name: e2e
         email: test2@test.com
-        temporary_password: changeme
         department_ids: ['not_a_uuid']
         office_ids: ['not_a_uuid']
         role_ids: ['not_a_uuid']
@@ -1018,7 +983,6 @@ stages:
         name: Test
         family_name: e2e
         email: test2@test.com
-        temporary_password: changeme
         claims_by_audience: {"a": ["a"]}
     response:
       status_code: 422
@@ -1041,7 +1005,6 @@ stages:
         family_name: e2e
         ftp_username: test
         email: test4@test.com
-        temporary_password: changeme
     response:
       status_code: 409
       body:

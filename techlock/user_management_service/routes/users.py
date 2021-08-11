@@ -23,7 +23,6 @@ from ..models import (
     Department,
     Office,
     PostUserChangePasswordSchema,
-    PostUserSchema,
     Role,
     UpdateUserSchema,
     User,
@@ -168,16 +167,13 @@ class Users(MethodView):
         return pageable_resp
 
     @access_required(['read', 'create'], claim_spec=merged_claim_spec)
-    @blp.arguments(schema=PostUserSchema)
+    @blp.arguments(schema=UpdateUserSchema)
     @blp.arguments(DryRunSchema, location='query', as_kwargs=True)
     @blp.response(status_code=201, schema=UserSchema)
     def post(self, data: Dict[str, Any], dry_run: bool, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Creating user', extra={'data': data})
         if current_user.tenant_id == SYSTEM_TENANT_ID:
             raise BadRequestException('Can not create system users.')
-
-        # Get the password and remove it from the data. It is not part of the User object
-        temporary_password = data.pop('temporary_password')
 
         # Since users are to be unique across all tenants by email address, we must
         # get the full list of users, even ones from other tenants. Therefore we use
@@ -225,7 +221,6 @@ class Users(MethodView):
             self.idp.create_user(
                 current_user,
                 user,
-                password=temporary_password,
                 idp_attributes=idp_attributes,
             )
 

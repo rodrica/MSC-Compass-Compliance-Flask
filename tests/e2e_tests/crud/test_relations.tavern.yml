@@ -163,7 +163,6 @@ stages:
         name: Test
         family_name: e2e
         email: test2@test.com
-        temporary_password: changeme
         department_ids:
           - "{department_id}"
         office_ids:

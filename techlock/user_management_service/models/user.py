@@ -29,7 +29,6 @@ __all__ = [
     'UserSchema',
     'UserPageableSchema',
     'UserListQueryParametersSchema',
-    'PostUserSchema',
     'PostUserChangePasswordSchema',
     'USER_CLAIM_SPEC',
 ]
@@ -82,6 +81,7 @@ class Email(mf.Email):
 
 class UserSchema(BaseModelSchema):
     email = Email(required=True)
+    name = mf.String()
     family_name = mf.String()
     ftp_username = mf.String(validate=mv.Regexp(r'^[a-zA-Z0-9_][a-zA-Z0-9_-]{2,31}$', error='String does not match expected pattern: {regex}.'), allow_none=True)
     login_info = mf.Dict(mf.String(), mf.String(), dump_only=True)
@@ -137,10 +137,6 @@ class UpdateUserSchema(ma.Schema):
     role_ids = mf.List(mf.UUID(), required=False, allow_none=True)
     department_ids = mf.List(mf.UUID(), required=False, allow_none=True)
     office_ids = mf.List(mf.UUID(), required=False, allow_none=True)
-
-
-class PostUserSchema(UpdateUserSchema):
-    temporary_password = mf.String(required=True)
 
 
 class PostUserChangePasswordSchema(ma.Schema):

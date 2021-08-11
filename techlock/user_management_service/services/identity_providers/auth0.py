@@ -214,7 +214,6 @@ class Auth0Idp(IdpProvider):
         self,
         current_user: AuthInfo,
         user: User,
-        password: str,
         email_verified: bool = False,
         idp_attributes: dict = None,
         **kwargs,
@@ -236,16 +235,13 @@ class Auth0Idp(IdpProvider):
                     # Auth0 doesn't allow empty family_name
                     'family_name': user.family_name or 'na',
                     'app_metadata': app_metadata,
-                    'password': password,
                     'connection': self.connection_id,
                 }),
             )
             logger.info('Auth0: User created', extra={'user': user.entity_id})
         except Auth0Error as e:
             logger.error(f'Auth0: Failed to create user in Auth0: {e}')
-            if 'PasswordStrengthError' in e.error_code:
-                self._password_strength_error(e)
-            elif 409 == e.status_code:
+            if 409 == e.status_code:
                 raise ConflictException(f'Auth0 user already exists with email: {user.email}')
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')

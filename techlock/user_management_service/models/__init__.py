@@ -35,7 +35,6 @@ from .ui_data import DashboardDataSchema
 from .user import (
     USER_CLAIM_SPEC,
     PostUserChangePasswordSchema,
-    PostUserSchema,
     UpdateUserSchema,
     User,
     UserListQueryParameters,

@@ -491,7 +491,6 @@ stages:
         name: Test
         family_name: e2e
         email: test2@test.com
-        temporary_password: changeme
     response:
       status_code: 201
       body:
