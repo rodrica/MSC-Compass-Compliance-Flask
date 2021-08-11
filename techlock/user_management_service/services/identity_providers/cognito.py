@@ -15,12 +15,12 @@ class CognitoIdp(IdpProvider):
     def __init__(self):
         self.cognito = get_client('cognito-idp')
 
-    def create_user(self, current_user: AuthInfo, user: User, password: str, email_verified=False, **kwargs):
+    def create_user(self, current_user: AuthInfo, user: User, email_verified=False, **kwargs):
         user_pool_id = ConfigManager().get(current_user, 'user_pool_id', raise_if_not_found=True)
         self.cognito.admin_create_user(
             UserPoolId=user_pool_id,
             Username=user.email,
-            TemporaryPassword=password,
+            # TemporaryPassword=password,
             UserAttributes=[
                 {'Name': 'email', 'Value': user.email},
                 {'Name': 'email_verified ', 'Value': email_verified},

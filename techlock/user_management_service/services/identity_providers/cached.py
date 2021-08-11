@@ -36,7 +36,6 @@ class CachedIdp(IdpProvider):
         self,
         current_user: AuthInfo,
         user: User,
-        password: str,
         email_verified: bool = False,
         idp_attributes: dict = None,
         **kwargs,
@@ -45,7 +44,6 @@ class CachedIdp(IdpProvider):
         self._wrapped_idp.create_user(
             current_user,
             user,
-            password,
             email_verified,
             idp_attributes,
             **kwargs,
