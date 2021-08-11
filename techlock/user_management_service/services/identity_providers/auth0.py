@@ -241,9 +241,6 @@ class Auth0Idp(IdpProvider):
                 }),
             )
             logger.info('Auth0: User created', extra={'user': user.entity_id})
-
-            self._send_invite_email(current_user, user)
-            logger.info('Auth0: Invite email sent', extra={'user': user.entity_id, 'email': user.email})
         except Auth0Error as e:
             logger.error(f'Auth0: Failed to create user in Auth0: {e}')
             if 'PasswordStrengthError' in e.error_code:
@@ -252,6 +249,14 @@ class Auth0Idp(IdpProvider):
                 raise ConflictException(f'Auth0 user already exists with email: {user.email}')
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')
+
+        try:
+            self._send_invite_email(current_user, user)
+            logger.info('Auth0: Invite email sent', extra={'user': user.entity_id, 'email': user.email})
+        except Exception as e:
+            logger.error(f'Auth0: Failed to invite user: {e}')
+            self.delete_user(current_user, user)
+            raise BadRequestException('Failed to create user')
 
     def update_user_attributes(
         self,
