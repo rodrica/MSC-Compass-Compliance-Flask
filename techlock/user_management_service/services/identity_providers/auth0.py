@@ -179,8 +179,8 @@ class Auth0Idp(IdpProvider):
         cm = ConfigManager()
         src_email = cm.get(current_user, 'invite.src_email', 'Tech Lock Administrator <tl-admin@msc.techlockinc.com>')
         subject = cm.get(current_user, 'invite.subject', 'Welcome to the Tech Lock NDR Portal!')
-        text_tmpl = read_file(cm.get(current_user, 'invite.text_url', DEFAULT_EMAIL_TXT_URL))
-        html_tmpl = read_file(cm.get(current_user, 'invite.html_url', DEFAULT_EMAIL_HTML_URL))
+        text_tmpl = read_file(cm.get(current_user, 'invite.text_url', DEFAULT_EMAIL_TXT_URL)).decode('utf8')
+        html_tmpl = read_file(cm.get(current_user, 'invite.html_url', DEFAULT_EMAIL_HTML_URL)).decode('utf8')
 
         url = self._generate_password_change_link(current_user, user)
         text = jinja2.Template(text_tmpl).render(url=url)
