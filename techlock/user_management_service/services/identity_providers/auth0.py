@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import logging
 import os
+import random
+import string
 import time
 from typing import TYPE_CHECKING, Dict, List
 
@@ -27,6 +29,12 @@ DEFAULT_EMAIL_HTML_URL = 'py://techlock/user_management_service/services/identit
 
 _app_metadata_keys = [
 ]
+
+
+def _generate_password() -> str:
+    charset = string.ascii_letters + string.digits + string.punctuation
+
+    return ''.join(random.sample(charset, 24))
 
 
 class Auth0Idp(IdpProvider):
@@ -235,13 +243,18 @@ class Auth0Idp(IdpProvider):
                     # Auth0 doesn't allow empty family_name
                     'family_name': user.family_name or 'na',
                     'app_metadata': app_metadata,
+                    # Generate random password and forget about it. First thing the user will do is reset the password.
+                    # Auth0 requires that we specify a password, hence we generate one.
+                    'password': _generate_password(),
                     'connection': self.connection_id,
                 }),
             )
             logger.info('Auth0: User created', extra={'user': user.entity_id})
         except Auth0Error as e:
             logger.error(f'Auth0: Failed to create user in Auth0: {e}')
-            if 409 == e.status_code:
+            if 'PasswordStrengthError' in e.error_code:
+                self._password_strength_error(e)
+            elif 409 == e.status_code:
                 raise ConflictException(f'Auth0 user already exists with email: {user.email}')
             else:
                 raise BadRequestException(f'{e.error_code}: {e.message}')
