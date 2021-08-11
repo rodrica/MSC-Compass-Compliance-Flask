@@ -22,8 +22,8 @@ logger = logging.getLogger(__name__)
 STAGE = os.environ.get('STAGE', 'dev').upper()
 
 TENANT_BASE_ROLE_NAME = '_BASE_'
-DEFAULT_EMAIL_TXT_URL = 'py://techlock.user_management_service.services.identity_providers.email_templates.invite_email.txt'
-DEFAULT_EMAIL_HTML_URL = 'py://techlock.user_management_service.services.identity_providers.email_templates.invite_email.html'
+DEFAULT_EMAIL_TXT_URL = 'py://techlock/user_management_service/services/identity_providers/email_templates/invite_email.txt'
+DEFAULT_EMAIL_HTML_URL = 'py://techlock/user_management_service/services/identity_providers/email_templates/invite_email.html'
 
 _app_metadata_keys = [
 ]
