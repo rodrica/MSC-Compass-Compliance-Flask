@@ -191,8 +191,8 @@ class Auth0Idp(IdpProvider):
         html_tmpl = read_file(cm.get(current_user, 'invite.html_url', DEFAULT_EMAIL_HTML_URL)).decode('utf8')
 
         url = self._generate_password_change_link(current_user, user)
-        text = jinja2.Template(text_tmpl).render(url=url)
-        html = jinja2.Template(html_tmpl).render(url=url)
+        text = jinja2.Template(text_tmpl).render(url=url, name=user.name, email=user.email)
+        html = jinja2.Template(html_tmpl).render(url=url, name=user.name, email=user.email)
 
         ses = AwsUtils.get_client('ses', region_name='us-east-1')
         ses.send_email(

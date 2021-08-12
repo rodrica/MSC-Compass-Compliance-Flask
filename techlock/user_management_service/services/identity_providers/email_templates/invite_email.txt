@@ -1,18 +1,29 @@
-Welcome to the Tech Lock NDR Portal!
+Welcome, {{ name }}
 
 Thank you for partnering with Tech Lock.
 
-Setup your account by clicking the following link:
+Your Tech Lock NDR Portal account is ready for setup
 
+Setup your account here
 {{ url }}
-
-If you are having any issues with your account or accessing the portal, please don’t hesitate to contact us via email to techlockinc@servicenowservices.com.
 
 
 Thanks!
 
 Tech Lock Managed Security and Compliance Team
 
-----------
+-----------------------------------
 
+Tech Lock Inc.
+https://www.techlockinc.com/
+
+Tech Lock NDR Portal
+https://ndr.techlockinc.com/
+
+Support
+mailto:techlockinc@servicenowservices.com
+
+-----------------------------------
+
+This email was sent to {{ email }}.
 If you did not make this request, please contact us via email to techlockinc@servicenowservices.com.

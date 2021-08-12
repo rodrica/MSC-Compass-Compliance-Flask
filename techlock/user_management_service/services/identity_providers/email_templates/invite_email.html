@@ -2,12 +2,15 @@
   <head>
     <style type="text/css">{% raw %}
       .ExternalClass,.ExternalClass div,.ExternalClass font,.ExternalClass p,.ExternalClass span,.ExternalClass td,img {line-height: 100%;}#outlook a {padding: 0;}.ExternalClass,.ReadMsgBody {width: 100%;}a,blockquote,body,li,p,table,td {-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}table,td {mso-table-lspace: 0;mso-table-rspace: 0;}img {-ms-interpolation-mode: bicubic;border: 0;height: auto;outline: 0;text-decoration: none;}table {border-collapse: collapse !important;}#bodyCell,#bodyTable,body {height: 100% !important;margin: 0;padding: 0;font-family: ProximaNova, sans-serif;}#bodyCell {padding: 20px;}#bodyTable {width: 600px;}@font-face {font-family: ProximaNova;src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot);src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.eot?#iefix)format("embedded-opentype"),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-regular-webfont-webfont.woff) format("woff");font-weight: 400;font-style: normal;}@font-face {font-family: ProximaNova;src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot);src: url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.eot?#iefix)format("embedded-opentype"),url(https://cdn.auth0.com/fonts/proxima-nova/proximanova-semibold-webfont-webfont.woff) format("woff");font-weight: 600;font-style: normal;}@media only screen and (max-width: 480px) {#bodyTable,body {width: 100% !important;}a,blockquote,body,li,p,table,td {-webkit-text-size-adjust: none !important;}body {min-width: 100% !important;}#bodyTable {max-width: 600px !important;}#signIn {max-width: 280px !important;}}
+      a.noline{text-decoration: none;}
+      button a{text-decoration: none; color: inherit}button a:hover{color:inherit}
+      button.primary{height: 40px;width: 200px;background-color: rgb(48,47,128);color: white;border: none; transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out;}button.primary:hover{background-color: rgb(38,37,118);}
     {% endraw %}</style>
   </head>
   <body>
     <center>
       <table
-        style='width: 600px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%; mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 0;font-family: "ProximaNova", sans-serif;border-collapse: collapse !important;height: 100% !important;'
+        style='width: 500px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%; mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 0;font-family: "ProximaNova", sans-serif;border-collapse: collapse !important;height: 100% !important;'
         align="center"
         border="0"
         cellpadding="0"
@@ -33,28 +36,40 @@
                 />
               </p>
 
-              <h1>Welcome to the Tech Lock NDR Portal!</h1>
+              <h1>Welcome, {{ name }}.</h1>
 
               <p>Thank you for partnering with Tech Lock.</p>
 
-              <p>Setup your account by clicking the following link:</p>
+              <p>Your Tech Lock NDR Portal account is ready for setup</p>
+              <br />
 
-              <p><a href="{{ url }}">Setup my account</a></p>
+              <button class='primary'>
+                <a href="{{ url }}">Setup my account</a>
+              </button>
 
+              <br />
+              <br />
               <p>
-                If you are having any issues with your account or accessing the portal, please don’t hesitate to contact us via email to techlockinc@servicenowservices.com.
+                Thanks!
+                <br />
+                <strong>Tech Lock Managed Security and Compliance Team</strong>
               </p>
 
               <br />
-              Thanks!
-              <br />
-
-              <strong>Tech Lock Managed Security and Compliance Team</strong>
-
-              <br /><br />
-              <hr style="border: 2px solid #EAEEF3; border-bottom: 0; margin: 20px 0;" />
-              <p style="text-align: center;color: #A9B3BC;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">
-                If you did not make this request, please contact us via email to techlockinc@servicenowservices.com.
+              <hr style="border: 1px solid #EAEEF3; border-bottom: 0; margin: 15px 0;" />
+              <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-around;">
+                <div><a href="https://www.techlockinc.com/" class="noline">Tech Lock Inc.</a></div>
+                <div style="border-right: 1px solid #EAEEF3;"></div>
+                <div><a href="https://ndr.techlockinc.com/" class="noline">Tech Lock NDR Portal</a></div>
+                <div style="border-right: 1px solid #EAEEF3;"></div>
+                <div><a href="mailto:techlockinc@servicenowservices.com" class="noline">Support</a></div>
+              </div>
+              <hr style="border: 1px solid #EAEEF3; border-bottom: 0; margin: 15px 0;" />
+              <p style="font-size: 11px;text-align: center;color: #A9B3BC;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">
+                This email was sent to {{ email }}.
+                <br />
+                <br />
+                If you did not make this request, please contact us via email to <a href="mailto:techlockinc@servicenowservices.com" class="noline">techlockinc@servicenowservices.com.</a>.
               </p>
             </div>
           </td>
