@@ -371,11 +371,13 @@ class Auth0Idp(IdpProvider):
 
         # if base role exists, and is not assigned, assign it.
         base_role = next((r for r in all_roles if r['name'] == user_base_role), None)
-        if (
-            base_role is not None
-            and next((r for r in auth0_roles if r['name'] == user_base_role), None) is None
-        ):
+        if base_role is None:
+            logger.warning('No base role detected!!', extra={'base_role': user_base_role})
+        elif next((r for r in auth0_roles if r['name'] == user_base_role), None) is None:
+            logger.info('Base role not yet assiged, adding.', extra={'user': user.entity_id, 'base_role': user_base_role, 'base_role_id': base_role['id']})
             add_roles += [base_role['id']]
+        else:
+            logger.info('Base role already assigned.', extra={'user': user.entity_id, 'base_role': user_base_role, 'base_role_id': base_role['id']})
 
         for auth0_role in auth0_roles:
             # Never delete the base role
