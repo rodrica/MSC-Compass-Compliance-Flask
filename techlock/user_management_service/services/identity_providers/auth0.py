@@ -358,7 +358,7 @@ class Auth0Idp(IdpProvider):
         # Filter roles by the "{tenant}_{stage}_" prefix
         all_roles = self.auth0.roles.list(per_page=100, name_filter=f'{current_user.tenant_id}_{STAGE}_')['roles']
 
-        user_base_role = f'{user.tenant_id}_{STAGE}_{TENANT_BASE_ROLE_NAME}'
+        user_base_role = f'{current_user.tenant_id}_{STAGE}_{TENANT_BASE_ROLE_NAME}'
 
         add_roles = []
         del_roles = []
