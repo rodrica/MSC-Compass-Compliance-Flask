@@ -232,11 +232,11 @@ class Users(MethodView):
                 logger.info('User created')
             except Exception:
                 # Clean up silently. We expect part of this to fail, because if everything was created properly, we wouldn't be here.
-                # Bit of a lazy approach :)
-                with suppress_with_log(logger, Exception, log_level=logging.DEBUG):
+                # IDP user was created successfully, so if it failed to delete, we're in trouble
+                with suppress_with_log(logger, Exception, log_level=logging.ERROR):
                     self.idp.delete_user(current_user, user)
 
-                with suppress_with_log(logger, Exception, log_level=logging.DEBUG):
+                with suppress_with_log(logger, Exception, log_level=logging.WARNING):
                     user = _get_user(current_user, data['email'])
                     user.delete(current_user, claims=user_claims)
 

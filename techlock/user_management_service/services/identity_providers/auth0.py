@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Dict, List
 import jinja2
 import jwt
 from auth0.v3.authentication import GetToken
-from auth0.v3.exceptions import Auth0Error
+from auth0.v3.exceptions import Auth0Error, RateLimitError
 from auth0.v3.management import Auth0
 from techlock.common import AuthInfo, AwsUtils, ConfigManager, read_file
 from techlock.common.api import BadRequestException, ConflictException, NotFoundException
@@ -94,6 +94,15 @@ class Auth0Idp(IdpProvider):
         '''
         try:
             return callback()
+        except RateLimitError as e:
+            if STAGE != 'PROD' and e.message == 'Global limit has been reached':
+                # https://auth0.com/docs/troubleshoot/customer-support/operational-policies/rate-limit-policy/authentication-api-endpoint-rate-limits#free-tenant-global-limits
+                logger.warning('Auth0: Global limit reached, sleeping 60 seconds.')
+                time.sleep(60)
+                self._refresh_if_needed()
+                return callback()
+            else:
+                raise
         except Auth0Error as e:
             if 'expired token' in e.message.lower():
                 logger.error('Auth0: Token expired, refreshing and trying again.')
