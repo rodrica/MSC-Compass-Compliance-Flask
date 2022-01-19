@@ -345,18 +345,18 @@ class Auth0Idp(IdpProvider):
         auth0_role = self._get_role(role.idp_name, False)
         if auth0_role is None:
             logger.info('Auth0: Creating role', extra={'role': role.idp_name})
-            self.auth0.roles.create(body={'name': role.idp_name})
+            self._handle_token_error(lambda: self.auth0.roles.create(body={'name': role.idp_name}))
             logger.info('Auth0: Created role', extra={'role': role.idp_name})
         else:
             logger.info('Auth0: Updating role', extra={'role': role.idp_name})
-            self.auth0.roles.update(auth0_role['id'], body={'name': role.idp_name})
+            self._handle_token_error(lambda: self.auth0.roles.update(auth0_role['id'], body={'name': role.idp_name}))
             logger.info('Auth0: Updated role', extra={'role': role.idp_name})
 
     def delete_role(self, current_user: AuthInfo, role: Role, **kwargs):
         logger.info('Auth0: Deleting role', extra={'role': role.idp_name})
 
         auth0_role = self._get_role(role.idp_name)
-        self.auth0.roles.delete(auth0_role['id'])
+        self._handle_token_error(lambda: self.auth0.roles.delete(auth0_role['id']))
 
         logger.info('Auth0: Deleted role', extra={'role': role.idp_name})
 
@@ -364,9 +364,9 @@ class Auth0Idp(IdpProvider):
         logger.info('Auth0: Updating user roles', extra={'user': user.entity_id, 'roles': [{'id': r.entity_id, 'name': r.name} for r in roles]})
         auth0_user = self._get_user(user)
         # todo add paging for when total results exceeds page size
-        auth0_roles = self.auth0.users.list_roles(auth0_user['user_id'], per_page=100)['roles']
+        auth0_roles = self._handle_token_error(lambda: self.auth0.users.list_roles(auth0_user['user_id'], per_page=100))['roles']
         # Filter roles by the "{tenant}_{stage}_" prefix
-        all_roles = self.auth0.roles.list(per_page=100, name_filter=f'{current_user.tenant_id}_{STAGE}_')['roles']
+        all_roles = self._handle_token_error(lambda: self.auth0.roles.list(per_page=100, name_filter=f'{current_user.tenant_id}_{STAGE}_'))['roles']
 
         user_base_role = f'{current_user.tenant_id}_{STAGE}_{TENANT_BASE_ROLE_NAME}'
 
@@ -400,10 +400,10 @@ class Auth0Idp(IdpProvider):
 
         if len(add_roles) > 0:
             logger.info('Auth0: Adding roles to user', extra={'user': user.entity_id, 'add_roles': add_roles})
-            self.auth0.users.add_roles(auth0_user['user_id'], add_roles)
+            self._handle_token_error(lambda: self.auth0.users.add_roles(auth0_user['user_id'], add_roles))
 
         if len(del_roles) > 0:
             logger.info('Auth0: Removing roles from user', extra={'user': user.entity_id, 'del_roles': del_roles})
-            self.auth0.users.remove_roles(auth0_user['user_id'], del_roles)
+            self._handle_token_error(lambda: self.auth0.users.remove_roles(auth0_user['user_id'], del_roles))
 
         logger.info('Auth0: Updated user roles', extra={'user': user.entity_id})
