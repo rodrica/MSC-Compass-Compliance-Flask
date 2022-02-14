@@ -2,18 +2,16 @@ import logging
 import os
 from typing import Dict
 
-from flask import request
-from flask.views import MethodView
 from flask_httpauth import HTTPBasicAuth
 from techlock.common.api import BadRequestException, NotFoundException
 from techlock.common.api.auth import Claim
-from techlock.common.api.auth.jwt import tenant_header_key
-from techlock.common.api.auth.utils import SYSTEM_TENANT_ID
 from techlock.common.api.blueprint import Blueprint
 from techlock.common.util.helper import parse_boolean
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from techlock.user_management_service.models import HydratorPostSchema, Tenant, User
+from flask import request
+from flask.views import MethodView
+from techlock.compas.models import HydratorPostSchema, User
 
 logger = logging.getLogger(__name__)
 
@@ -84,29 +82,15 @@ class Hydrator(MethodView):
         if user is None:
             raise NotFoundException("User '{}' not found.".format(email))
 
-        tenant_id = user.tenant_id
-        if tenant_header_key in request.headers:
-            tenant_id = request.headers.get(tenant_header_key)
-
-        claims = self._filter_claims(user.claims_by_audience, audience, tenant_id)
-        role_names = set()
-        for role in user.roles:
-            claims.update(self._filter_claims(role.claims_by_audience, audience, tenant_id))
-            role_names.add(role.name)
-
         sn_id = None
-        if tenant_id != SYSTEM_TENANT_ID:
-            tenant: Tenant = Tenant._unsecure_get(tenant_id)
-            sn_id = tenant.service_now_id
 
         response = {
             'subject': data['subject'],
             'extra': {
                 'user_id': user.entity_id,
-                'tenant_id': user.tenant_id,
                 'service_now_customer_id': sn_id,
-                'claims': list(claims),
-                'roles': list(role_names),
+                # 'claims': list(claims),
+                # 'roles': list(role_names),
             },
             'header': data['header'],
         }

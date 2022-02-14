@@ -1,10 +1,11 @@
 import logging
 
-from flask.views import MethodView
 from flask_jwt_extended import get_current_user
 from flask_smorest import Blueprint
 from techlock.common.api.auth import access_required
 from techlock.common.config import ConfigManager
+
+from flask.views import MethodView
 
 from ..models import DashboardDataSchema
 

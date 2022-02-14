@@ -18,8 +18,6 @@ from techlock.common.config import AuthInfo
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db, get_string_filter
 
 from ..services import get_idp
-from .department import Department, DepartmentSchema
-from .office import Office, OfficeSchema
 from .role import Role, RoleSchema
 
 logger = logging.getLogger(__name__)
@@ -70,6 +68,7 @@ class Email(mf.Email):
     '''
         Convert Email address to lowercase.
     '''
+
     def _serialize(self, value, attr, obj, **kwargs):
         value = super()._serialize(value, attr, obj, **kwargs)
         return value.lower()
@@ -88,8 +87,6 @@ class UserSchema(BaseModelSchema):
 
     # DEPRECATED, need to remove this since it's problematic with permissions
     roles = mf.Nested(RoleSchema, allow_none=True, many=True)
-    departments = mf.Nested(DepartmentSchema, allow_none=True, many=True)
-    offices = mf.Nested(OfficeSchema, allow_none=True, many=True)
 
     role_ids = mf.List(mf.UUID(), required=False, allow_none=True)
     department_ids = mf.List(mf.UUID(), required=False, allow_none=True)
@@ -135,8 +132,6 @@ class UpdateUserSchema(ma.Schema):
     tags = mf.Dict(keys=mf.String(), values=mf.String(), allow_none=True)
 
     role_ids = mf.List(mf.UUID(), required=False, allow_none=True)
-    department_ids = mf.List(mf.UUID(), required=False, allow_none=True)
-    office_ids = mf.List(mf.UUID(), required=False, allow_none=True)
 
 
 class PostUserChangePasswordSchema(ma.Schema):
@@ -149,8 +144,6 @@ class UserListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
     ftp_username = mf.String(allow_none=True, description='Used to filter users by ftp_username prefix.')
 
     role_ids = mf.UUID(allow_none=True, description='Used to filter users by role_ids. Comma delimited list of exact ids.')
-    department_ids = mf.UUID(allow_none=True, description='Used to filter users by department_ids. Comma delimited list of exact ids.')
-    office_ids = mf.UUID(allow_none=True, description='Used to filter users by office_ids. Comma delimited list of exact ids.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -192,18 +185,6 @@ class User(BaseModel):
         lazy='subquery',
         backref=db.backref('users', lazy=True),
     )
-    departments = db.relationship(
-        'Department',
-        secondary=users_to_departments,
-        lazy='subquery',
-        backref=db.backref('users', lazy=True),
-    )
-    offices = db.relationship(
-        'Office',
-        secondary=users_to_offices,
-        lazy='subquery',
-        backref=db.backref('users', lazy=True),
-    )
 
     claims_by_audience = db.Column(JSONB, nullable=True)
 
@@ -235,8 +216,6 @@ class UserListQueryParameters(BaseOffsetListQueryParams):
     ftp_username: str = None
 
     role_id: str = None
-    department_id: str = None
-    office_id: str = None
 
     def get_filters(self, auth_info: AuthInfo):
         filters = []
@@ -251,13 +230,5 @@ class UserListQueryParameters(BaseOffsetListQueryParams):
         if self.role_id:
             role = Role.get(auth_info, self.role_id, raise_if_not_found=True)
             filters.append(User.roles.contains(role))
-
-        if self.department_id:
-            department = Department.get(auth_info, self.department_id, raise_if_not_found=True)
-            filters.append(User.departments.contains(department))
-
-        if self.office_id:
-            office = Office.get(auth_info, self.office_id, raise_if_not_found=True)
-            filters.append(User.offices.contains(office))
 
         return filters

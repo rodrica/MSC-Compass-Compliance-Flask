@@ -3,7 +3,6 @@ from dataclasses import asdict
 from typing import Any, Dict, List, Tuple, Union
 from uuid import UUID
 
-from flask.views import MethodView
 from flask_smorest import Blueprint
 from sqlalchemy import and_ as sql_and_  # diffentiate from operators.and_
 from techlock.common.api import BadRequestException, ConflictException
@@ -17,11 +16,11 @@ from techlock.common.messaging.sns import publish as publish_sns
 from techlock.common.orm.sqlalchemy import BaseModel
 from techlock.common.util.helper import suppress_with_log
 
-from ..models import DEPARTMENT_CLAIM_SPEC, OFFICE_CLAIM_SPEC, ROLE_CLAIM_SPEC
+from flask.views import MethodView
+
+from ..models import ROLE_CLAIM_SPEC
 from ..models import USER_CLAIM_SPEC as claim_spec
 from ..models import (
-    Department,
-    Office,
     PostUserChangePasswordSchema,
     Role,
     UpdateUserSchema,
@@ -42,23 +41,17 @@ idp_attribute_keys = []
 merged_claim_spec = ClaimSpec(
     resource_name=[
         claim_spec.resource_name,
-        DEPARTMENT_CLAIM_SPEC.resource_name,
-        OFFICE_CLAIM_SPEC.resource_name,
         ROLE_CLAIM_SPEC.resource_name,
     ],
     filter_fields=list(
         set(
             claim_spec.filter_fields
-            + DEPARTMENT_CLAIM_SPEC.filter_fields
-            + OFFICE_CLAIM_SPEC.filter_fields
             + ROLE_CLAIM_SPEC.filter_fields,  # noqa: C812
         ),
     ),
     default_actions=list(
         set(
             claim_spec.default_actions
-            + DEPARTMENT_CLAIM_SPEC.default_actions
-            + OFFICE_CLAIM_SPEC.default_actions
             + ROLE_CLAIM_SPEC.default_actions,  # noqa: C812
         ),
     ),
@@ -118,25 +111,17 @@ def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
     return claims_by_audience
 
 
-def _split_claims(claims: ClaimSet, *office_actions: List[str]) -> Tuple[ClaimSet, ClaimSet, ClaimSet, ClaimSet]:
+def _split_claims(claims: ClaimSet, *office_actions: List[str]) -> Tuple[ClaimSet, ClaimSet]:
     user_claims = ClaimSet([
         c for c in claims
         if c.action in ('*', *office_actions) and c.resource in ('*', claim_spec.resource_name)
-    ])
-    department_claims = ClaimSet([
-        c for c in claims
-        if c.action in ('*', 'read') and c.resource in ('*', DEPARTMENT_CLAIM_SPEC.resource_name)
-    ])
-    office_claims = ClaimSet([
-        c for c in claims
-        if c.action in ('*', 'read') and c.resource in ('*', OFFICE_CLAIM_SPEC.resource_name)
     ])
     role_claims = ClaimSet([
         c for c in claims
         if c.action in ('*', 'read') and c.resource in ('*', ROLE_CLAIM_SPEC.resource_name)
     ])
 
-    return user_claims, department_claims, office_claims, role_claims
+    return user_claims, role_claims
 
 
 @blp.route('')
@@ -193,8 +178,6 @@ class Users(MethodView):
         user_claims, department_claims, office_claims, role_claims = _split_claims(claims, 'create')
         # Validate that items exist and get actual items
         roles = _get_items_from_id_list(current_user, claims=role_claims, id_list=data.get('role_ids'), orm_class=Role)
-        departments = _get_items_from_id_list(current_user, claims=department_claims, id_list=data.get('department_ids'), orm_class=Department)
-        offices = _get_items_from_id_list(current_user, claims=office_claims, id_list=data.get('office_ids'), orm_class=Office)
 
         user = User(
             entity_id=data.get('email'),
@@ -203,11 +186,8 @@ class Users(MethodView):
             family_name=data.get('family_name'),
             ftp_username=ftp_username,
             description=data.get('description'),
-            claims_by_audience=set_claims_default_tenant(data, current_user.tenant_id),
             tags=data.get('tags'),
             roles=roles,
-            departments=departments,
-            offices=offices,
         )
 
         if dry_run:
@@ -276,8 +256,6 @@ class UserById(MethodView):
 
         # Validate that items exist and get actual items
         data['roles'] = _get_items_from_id_list(current_user, claims=role_claims, id_list=data.pop('role_ids', None), orm_class=Role)
-        data['departments'] = _get_items_from_id_list(current_user, claims=department_claims, id_list=data.pop('department_ids', None), orm_class=Department)
-        data['offices'] = _get_items_from_id_list(current_user, claims=office_claims, id_list=data.pop('office_ids', None), orm_class=Office)
 
         ftp_username = data.get('ftp_username')
         if ftp_username == '':
@@ -296,8 +274,6 @@ class UserById(MethodView):
                     attributes_to_update[k] = v
             else:
                 raise BadRequestException(f'User has no attribute: {k}')
-
-        user.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         user.save(current_user, claims=user_claims.filter_by_action('update'), commit=not dry_run)
 

@@ -33,9 +33,9 @@ def get_version():
 
 
 setup(
-    name='tl-msc-user-management-service',
+    name='compliance',
     version=get_version(),
-    description='TechLock User Management service',
+    description='TechLock Compliance service',
     author='Michiel Vanderlee',
     author_email='jmt.vanderlee@gmail.com',
     packages=find_packages(exclude=('tests', 'docs')),

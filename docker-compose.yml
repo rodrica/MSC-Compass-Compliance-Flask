@@ -59,7 +59,7 @@ services:
       # LOG_LEVEL: debug
       TENANT_ID: test
       NO_CACHE: ${NO_CACHE:-true}
-      FLASK_APP: techlock/user_management_service/app.py
+      FLASK_APP: techlock/compas/app.py
       FLASK_SQLALCHEMY_DATABASE_URI: postgresql://techlock:password@psql:5432/postgres
       FLASK_JWT_ALGORITHM: RS256
       JWKS_URLS: 'http://jwt:5000/.well-known/jwks.json'

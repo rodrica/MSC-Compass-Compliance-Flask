@@ -12,9 +12,9 @@ init_logging(flask_logger=True)
 logger = logging.getLogger(__name__)
 
 flask_wrapper = create_flask(
-    "User Management",
+    "compas",
     enable_jwt=True,
-    audience='user-management',
+    audience='compliance',
     claim_specs=ALL_CLAIM_SPECS,
 )
 # unwrap wrapper to ensure all plugins work properly
@@ -25,7 +25,7 @@ jwt = flask_wrapper.jwt
 api = flask_wrapper.api
 
 # Initialize ConfigManager with namespace
-ConfigManager(namespace='user_management')
+ConfigManager(namespace='compas')
 
 logger.info('Initializing routes')
 dynamically_register_routes(app, api)
