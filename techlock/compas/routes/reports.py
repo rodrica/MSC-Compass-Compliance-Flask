@@ -77,9 +77,6 @@ class Reports(MethodView):
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         report.save(current_user, claims=claims, commit=not dry_run)
 
-        if not dry_run:
-            self.idp.update_or_create_report(current_user, report)
-
         return report
 
 
