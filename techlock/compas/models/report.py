@@ -3,15 +3,13 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-from sqlalchemy.dialects.postgresql import JSONB
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
-    Claim,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Report',

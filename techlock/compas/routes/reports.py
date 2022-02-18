@@ -4,7 +4,7 @@ from typing import Any, Dict
 from uuid import UUID
 
 from flask_smorest import Blueprint
-from techlock.common.api import BadRequestException, Claim, NotFoundException
+from techlock.common.api import BadRequestException, Claim
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.api.models.dry_run import DryRunSchema
