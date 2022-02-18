@@ -20,7 +20,6 @@ from ..models import (
     ReportPageableSchema,
     ReportSchema,
 )
-from ..services import get_idp
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +45,6 @@ class Reports(MethodView):
 
     def __init__(self, *args, **kwargs):
         MethodView.__init__(self, *args, **kwargs)
-        self.idp = get_idp()
 
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=ReportListQueryParametersSchema, location='query')
@@ -85,7 +83,6 @@ class ReportById(MethodView):
 
     def __init__(self, *args, **kwargs):
         MethodView.__init__(self, *args, **kwargs)
-        self.idp = get_idp()
 
     def get_report(self, current_user: AuthInfo, claims: ClaimSet, report_id: str):
         report = Report.get(current_user, report_id, claims=claims, raise_if_not_found=True)
@@ -119,8 +116,6 @@ class ReportById(MethodView):
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         report.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
-        if not dry_run:
-            self.idp.update_or_create_report(current_user, report)
 
         return report
 
@@ -131,12 +126,6 @@ class ReportById(MethodView):
         logger.info('Deleting report', extra={'id': report_id})
 
         report = self.get_report(current_user, claims.filter_by_action('read'), report_id)
-
-        if not dry_run:
-            try:
-                self.idp.delete_report(current_user, report)
-            except NotFoundException:
-                logger.warning('Report does not exist in IDP, skipping IDP deletion...', extra={'report_idp_name': report.idp_name})
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         report.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
