@@ -6,8 +6,10 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
+from pkg_resources import require
 
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
+from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
 
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -16,6 +18,8 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+
+from techlock.compas.models.report import ReportSchema
 
 from ..models.int_enum import IntEnum
 
@@ -64,20 +68,23 @@ class Compliance(enum.Enum):
 
 
 class ReportVersionSchema(BaseModelSchema):
-    uuid = mf.String(nullable=False, help="")
-    component = mf.String(nullable=False, help="")
+    uuid = mf.String(requird=True, help="")
+    component = mf.String(requird=True, help="")
     template = mf.String(help="")
     processor = mf.String(help="")
-    mapped = mf.Boolean(nullable=False, help="")
-    compliance_only = mf.Boolean(nullable=False, help="")
-    compliance_options = mf.List(EnumField(Compliance), nullable=False)
-    highest_priority = mf.Integer(nullable=False, help="")
-    tag_options = mf.List(EnumField(Tag), nullable=False)
-    default_navigation = mf.Integer(help="")
-    section_regex = mf.String(help="")
-    column_mapping = mf.List(mf.List(mf.Integer(), nullable=False))
+    mapped = mf.Boolean(requird=True, help="")
+    compliance_only = mf.Boolean(requird=True, help="")
+    compliance_options = mf.List(EnumField(Compliance), requird=True)
+    highest_priority = mf.Integer(requird=True, help="")
+    tag_options = mf.List(EnumField(Tag), requird=True)
+    default_navigation = mf.Integer(required=False, allow_none=True, help="")
+    section_regex = mf.String(required=False, allow_none=True, help="")
+    column_mapping = mf.List(mf.List(mf.Integer(), requird=True))
     tlc_header = mf.String(help="")
     tlc_position = mf.Integer(help="")
+
+    report = mf.Nested(ReportSchema, dump_only=True)
+    report_id = mf.Integer(allow_none=True, required=False)
 
 
 class ReportVersionPageableSchema(OffsetPageableResponseBaseSchema):
@@ -110,8 +117,13 @@ class ReportVersion(BaseModel):
     tlc_header = db.Column(db.String)
     tlc_position = db.Column(db.Integer)
 
-    #has_many :nodes, Node
-    #belongs_to :report, Report
+    report_id = db.Column(db.Integer, db.ForeignKey('reports.id'))
+
+    report = db.relationship(
+        'Report',
+        back_populates='versions'
+    )
+    #has_many :nodes, Noddump_only=True, e
 
 
 @dataclass

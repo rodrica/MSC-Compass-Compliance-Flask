@@ -9,7 +9,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
 __all__ = [
     'Report',
@@ -56,6 +56,10 @@ class ReportListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 
 class Report(BaseModel):
     __tablename__ = 'reports'
+    versions = db.relationship(
+        'ReportVersion',
+        back_populates='report'
+    )
 
 
 @dataclass
