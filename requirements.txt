@@ -1,5 +1,6 @@
 tl-msc-common==1.0.0.dev0+master.7685c9b52085692fc7506a06b9397a37dd406307
 Flask-HTTPAuth==3.3.0
+marshmallow_enum==1.5.1
 
 # dev only requirements
 attrs==20.3.0
