@@ -129,7 +129,6 @@ class ReportVersion(BaseModel):
         'ReportNode',
         back_populates='version'
     )
-    #has_many :nodes, Noddump_only=True, e
 
 
 @dataclass

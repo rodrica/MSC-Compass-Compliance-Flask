@@ -109,10 +109,6 @@ class ReportNode(BaseModel):
         'ReportVersion',
         back_populates='nodes'
     )
-    #belongs_to :version, Version
-    #belongs_to :parent, Node
-    #has_many :children, Node, foreign_key: :parent_id
-    #has_many :instructions, Instruction
 
 
 @dataclass
