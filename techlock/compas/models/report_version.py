@@ -86,6 +86,7 @@ class ReportVersionSchema(BaseModelSchema):
     report = mf.Nested(ReportSchema, dump_only=True)
     report_id = mf.Integer(allow_none=True, required=False)
 
+    nodes = mf.Nested('ReportNodeSchema', dump_only=True, many=True, exclude=('version',))
 
 class ReportVersionPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(ReportVersionSchema, many=True, dump_only=True)
@@ -122,6 +123,11 @@ class ReportVersion(BaseModel):
     report = db.relationship(
         'Report',
         back_populates='versions'
+    )
+
+    nodes = db.relationship(
+        'ReportNode',
+        back_populates='version'
     )
     #has_many :nodes, Noddump_only=True, e
 
