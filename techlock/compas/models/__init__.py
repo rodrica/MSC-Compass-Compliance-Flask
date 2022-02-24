@@ -24,8 +24,18 @@ from .report_node import (
     ReportNodeSchema,
 )
 
+from .report_instruction import (
+    REPORT_INSTRUCTION_CLAIM_SPEC,
+    ReportInstruction,
+    ReportInstructionListQueryParameters,
+    ReportInstructionListQueryParametersSchema,
+    ReportInstructionPageableSchema,
+    ReportInstructionSchema,
+)
+
 ALL_CLAIM_SPECS = [
     REPORT_CLAIM_SPEC,
     REPORT_NODE_CLAIM_SPEC,
+    REPORT_INSTRUCTION_CLAIM_SPEC,
     REPORT_VERSION_CLAIM_SPEC
 ]

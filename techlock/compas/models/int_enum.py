@@ -9,7 +9,7 @@ class IntEnum(sa.types.TypeDecorator):
         self._enumtype = enumtype
 
     def process_bind_param(self, value, dialect):
-        return value.value
+        return value.value if value is not None else None
 
     def process_result_value(self, value, dialect):
-        return self._enumtype(value)
+        return self._enumtype(value) if value is not None else None
