@@ -33,9 +33,19 @@ from .report_instruction import (
     ReportInstructionSchema,
 )
 
+from .compliance_task import (
+    COMPLIANCE_TASK_CLAIM_SPEC,
+    ComplianceTask,
+    ComplianceTaskListQueryParameters,
+    ComplianceTaskListQueryParametersSchema,
+    ComplianceTaskPageableSchema,
+    ComplianceTaskSchema,
+)
+
 ALL_CLAIM_SPECS = [
+    COMPLIANCE_TASK_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
-    REPORT_NODE_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
+    REPORT_NODE_CLAIM_SPEC,
     REPORT_VERSION_CLAIM_SPEC
 ]
