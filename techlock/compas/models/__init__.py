@@ -42,7 +42,17 @@ from .compliance_task import (
     ComplianceTaskSchema,
 )
 
+from .audit import (
+    AUDIT_CLAIM_SPEC,
+    Audit,
+    AuditListQueryParameters,
+    AuditListQueryParametersSchema,
+    AuditPageableSchema,
+    AuditSchema,
+)
+
 ALL_CLAIM_SPECS = [
+    AUDIT_CLAIM_SPEC,
     COMPLIANCE_TASK_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
