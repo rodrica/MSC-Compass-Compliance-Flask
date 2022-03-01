@@ -8,8 +8,7 @@ Create Date: 2022-02-25 13:16:06.825951
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from sqlalchemy.sql.schema import Column
-from yaml.events import ScalarEvent
+from sqlalchemy.sql.elements import True_
 
 from techlock.compas.models.audit import Phase
 
@@ -30,8 +29,9 @@ def upgrade():
     schemas = ins.get_schema_names()
 
     op.create_table("audits", 
-                    sa.Column('id', sa.Integer, primary_key=True),
+                    sa.Column('history_id', sa.Integer, primary_key=True),
                     # id from table in client schema for migration
+                    sa.Column('id', sa.Integer),
                     sa.Column('internal_id', sa.Integer),
 
                     sa.Column("name", sa.String, unique=False, nullable=False, server_default=""),
@@ -45,14 +45,14 @@ def upgrade():
                     sa.Column("created_on", sa.DateTime, unique=False, nullable=True),
                     sa.Column("changed_on", sa.DateTime, unique=False, nullable=True),
                     sa.Column("is_active", sa.Boolean, unique=False, nullable=False, server_default="TRUE"),
-                    sa.Column("user_id", sa.String, nullable=False),
+                    sa.Column("user_id", sa.String, nullable=True),
                     sa.Column("reports", postgresql.ARRAY(sa.Integer),
-                              nullable=False),
-                    sa.Column("start_date", sa.Date, nullable=False),
+                              nullable=True),
+                    sa.Column("start_date", sa.Date, nullable=True),
                     sa.Column("estimated_remediation_date", sa.Date),
                     sa.Column("remediation_date", sa.Date),
                     sa.Column("estimated_end_date", sa.Date,
-                              nullable=False),
+                              nullable=True),
                     sa.Column("end_date", sa.Date),
                     sa.Column("phase", IntEnum(Phase),
                               default=Phase.scoping_and_validation),
