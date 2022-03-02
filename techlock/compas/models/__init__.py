@@ -51,8 +51,18 @@ from .audit import (
     AuditSchema,
 )
 
+from .audit_history import (
+    AUDIT_HISTORY_CLAIM_SPEC,
+    AuditHistory,
+    AuditHistoryListQueryParameters,
+    AuditHistoryListQueryParametersSchema,
+    AuditHistoryPageableSchema,
+    AuditHistorySchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
+    AUDIT_HISTORY_CLAIM_SPEC,
     COMPLIANCE_TASK_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
