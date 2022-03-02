@@ -6,6 +6,7 @@ Create Date: 2022-03-01 10:56:59.262680
 
 """
 from alembic import op
+from alembic.context import execute
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.sql.elements import True_
@@ -72,9 +73,32 @@ def upgrade():
             '''.format(schema, schema)
             )
 
+    op.execute("""
+    CREATE OR REPLACE FUNCTION public.trigger_history_audits()
+     RETURNS trigger
+     LANGUAGE plpgsql
+    AS $function$
+    BEGIN
+      INSERT INTO "public"."audits_history"
+      SELECT nextval('public.audits_history_history_id_seq'::regclass), OLD.*;
+      RETURN NEW;
+    END $function$
+    """
+               )
+
+    op.execute("""
+        CREATE TRIGGER trigger_history_audits
+        AFTER UPDATE ON "public"."audits"
+        FOR EACH ROW
+        EXECUTE PROCEDURE "public".trigger_history_audits();
+    """)
+
+
             # TODO: Create a schemas clear migration
             # op.drop_table("audits", schema=schema)
 
 
 def downgrade():
     op.drop_table("audits_history", "public")
+    op.execute("""DROP TRIGGER trigger_history_audits ON "public"."audits" """)
+    op.execute("""DROP FUNCTION trigger_history_audits""")
