@@ -8,7 +8,6 @@ Create Date: 2022-02-25 13:16:06.825951
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from sqlalchemy.sql.elements import True_
 
 from techlock.compas.models.audit import Phase
 
