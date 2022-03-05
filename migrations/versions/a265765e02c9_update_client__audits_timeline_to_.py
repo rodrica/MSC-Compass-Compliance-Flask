@@ -65,7 +65,7 @@ def upgrade():
                 tenant_id, is_active, created_on, changed_on)
             SELECT id, '',
                 audit_id, date, compliant, notice, noncompliant, pending,
-                '{}', FALSE,
+                '{}', TRUE,
                 NULL, NULL FROM "{}"."audits_timeline"
             '''.format(schema, schema)
             )
