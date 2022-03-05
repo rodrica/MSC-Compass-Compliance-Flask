@@ -60,9 +60,18 @@ from .audit_history import (
     AuditHistorySchema,
 )
 
+from .audit_timeline import (
+    AUDIT_TIMELINE_CLAIM_SPEC,
+    AuditTimeline,
+    AuditTimelineListQueryParameters,
+    AuditTimelineListQueryParametersSchema,
+    AuditTimelinePageableSchema,
+    AuditTimelineSchema,
+)
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
+    AUDIT_TIMELINE_CLAIM_SPEC,
     COMPLIANCE_TASK_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
