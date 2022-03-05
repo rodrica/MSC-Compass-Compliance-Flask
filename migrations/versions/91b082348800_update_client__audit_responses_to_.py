@@ -25,9 +25,12 @@ def upgrade():
     op.create_table("audit_responses", 
                     sa.Column('id', sa.Integer, primary_key=True),
                     # id from table in client schema for migration
-                    sa.Column('audit_id', sa.Integer, sa.ForeignKey("public.audits.id")),
+                    sa.Column('audit_id', sa.Integer,
+                              sa.ForeignKey("public.audits.id"),
+                              nullable=False),
                     sa.Column('instruction_id', sa.Integer,
-                              sa.ForeignKey("public.report_instructions.id")),
+                              sa.ForeignKey("public.report_instructions.id"),
+                              nullable=False),
                     sa.Column('internal_id', sa.Integer),
 
                     sa.Column("name", sa.String, unique=False, nullable=False, server_default=""),
@@ -41,7 +44,7 @@ def upgrade():
                     sa.Column("created_on", sa.DateTime, unique=False, nullable=True),
                     sa.Column("changed_on", sa.DateTime, unique=False, nullable=True),
                     sa.Column("is_active", sa.Boolean, unique=False, nullable=False, server_default="TRUE"),
-                    sa.Column('compliance', sa.Integer),
+                    sa.Column('compliance', sa.Integer, nullable=False),
                     )
 
     for schema in schemas:
