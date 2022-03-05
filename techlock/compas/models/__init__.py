@@ -68,9 +68,20 @@ from .audit_timeline import (
     AuditTimelinePageableSchema,
     AuditTimelineSchema,
 )
+
+from .audit_response import (
+    AUDIT_RESPONSE_CLAIM_SPEC,
+    AuditResponse,
+    AuditResponseListQueryParameters,
+    AuditResponseListQueryParametersSchema,
+    AuditResponsePageableSchema,
+    AuditResponseSchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
+    AUDIT_RESPONSE_CLAIM_SPEC,
     AUDIT_TIMELINE_CLAIM_SPEC,
     COMPLIANCE_TASK_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
