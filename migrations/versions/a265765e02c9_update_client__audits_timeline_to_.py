@@ -5,12 +5,9 @@ Revises: caf08fc6272a
 Create Date: 2022-03-02 20:29:10.354272
 
 """
-from inspect import Traceback
 from alembic import op
-from attr import Factory
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from sqlalchemy.sql.sqltypes import Integer
 
 from techlock.compas.models.audit import Phase
 
