@@ -73,7 +73,7 @@ def upgrade():
      LANGUAGE plpgsql
     AS $function$
     BEGIN
-      INSERT INTO "public"."audit_repponses_history"
+      INSERT INTO "public"."audit_responses_history"
       SELECT nextval('public.audit_responses_history_history_id_seq'::regclass), OLD.*;
       RETURN NEW;
     END $function$
@@ -90,4 +90,4 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table("audit_responses", "public")
+    op.drop_table("audit_responses_history", "public")
