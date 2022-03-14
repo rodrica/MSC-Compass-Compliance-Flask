@@ -62,14 +62,11 @@ class Plan(enum.Enum):
 
 
 class ComplianceSchema(BaseModelSchema):
-    user_id = mf.String()
-    reports = mf.List(mf.Integer)
-    start_date = mf.Date()
-    estimated_remediation_date = mf.Date()
-    remediation_date = mf.Date(required=True, allow_none=False)
-    estimated_end_date = mf.Date()
+    user_id = mf.String(require=True, allow_none=False)
+    tasks = mf.List(mf.Integer, require=True, allow_none=False)
+    start_date = mf.Date(require=True, allow_none=False)
     end_date = mf.Date(required=True, allow_none=False)
-    phase = EnumField(Plan, default=Plan.bronze)
+    plan = EnumField(Plan, require=True, allow_none=False)
 
 
 class CompliancePageableSchema(OffsetPageableResponseBaseSchema):
@@ -87,14 +84,11 @@ class ComplianceListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Compliance(BaseModel):
     __tablename__ = 'compliances'
 
-    user_id = db.Column(db.String)
-    reports = db.Column(ARRAY(db.Integer))
-    start_date = db.Column(db.Date)
-    estimated_remediation_date = db.Column(db.Date)
-    remediation_date = db.Column(db.Date)
-    estimated_end_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
-    phase = db.Column(IntEnum(Plan), default=Plan.bronze)
+    user_id = db.Column(db.String, nullable=False)
+    tasks = db.Column(ARRAY(db.Integer), nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=False)
+    plan = db.Column(IntEnum(Plan), nullable=False)
 
 
 @dataclass
