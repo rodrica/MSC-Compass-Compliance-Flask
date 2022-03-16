@@ -61,7 +61,6 @@ def upgrade():
                   '{}', not deleted, inserted_at, updated_at FROM "{}"."compliances"
             '''.format(schema, schema)
             )
-    pass
 
 
 def downgrade():
