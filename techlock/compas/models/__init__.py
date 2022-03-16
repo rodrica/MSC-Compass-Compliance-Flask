@@ -105,6 +105,15 @@ from .compliance_history import (
     ComplianceHistorySchema,
 )
 
+from .compliance_period import (
+    COMPLIANCE_PERIOD_CLAIM_SPEC,
+    CompliancePeriod,
+    CompliancePeriodListQueryParameters,
+    CompliancePeriodListQueryParametersSchema,
+    CompliancePeriodPageableSchema,
+    CompliancePeriodSchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
@@ -113,6 +122,7 @@ ALL_CLAIM_SPECS = [
     AUDIT_TIMELINE_CLAIM_SPEC,
     COMPLIANCE_CLAIM_SPEC,
     COMPLIANCE_HISTORY_CLAIM_SPEC,
+    COMPLIANCE_PERIOD_CLAIM_SPEC,
     COMPLIANCE_TASK_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
