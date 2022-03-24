@@ -132,6 +132,14 @@ from .compliance_response import (
     ComplianceResponseSchema,
 )
 
+from .compliance_response_history import (
+    COMPLIANCE_RESPONSE_HISTORY_CLAIM_SPEC,
+    ComplianceResponseHistory,
+    ComplianceResponseHistoryListQueryParameters,
+    ComplianceResponseHistoryListQueryParametersSchema,
+    ComplianceResponseHistoryPageableSchema,
+    ComplianceResponseHistorySchema,
+)
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
@@ -142,6 +150,7 @@ ALL_CLAIM_SPECS = [
     COMPLIANCE_HISTORY_CLAIM_SPEC,
     COMPLIANCE_PERIOD_CLAIM_SPEC,
     COMPLIANCE_RESPONSE_CLAIM_SPEC,
+    COMPLIANCE_RESPONSE_HISTORY_CLAIM_SPEC,
     COMPLIANCE_TASK_CLAIM_SPEC,
     COMPLIANCE_TIMELINE_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
