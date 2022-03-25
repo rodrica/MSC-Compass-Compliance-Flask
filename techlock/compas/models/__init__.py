@@ -140,12 +140,23 @@ from .compliance_response_history import (
     ComplianceResponseHistoryPageableSchema,
     ComplianceResponseHistorySchema,
 )
+
+from .comment import (
+    COMMENT_CLAIM_SPEC,
+    Comment,
+    CommentListQueryParameters,
+    CommentListQueryParametersSchema,
+    CommentPageableSchema,
+    CommentSchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
     AUDIT_RESPONSE_CLAIM_SPEC,
     AUDIT_RESPONSE_HISTORY_CLAIM_SPEC,
     AUDIT_TIMELINE_CLAIM_SPEC,
+    COMMENT_CLAIM_SPEC,
     COMPLIANCE_CLAIM_SPEC,
     COMPLIANCE_HISTORY_CLAIM_SPEC,
     COMPLIANCE_PERIOD_CLAIM_SPEC,
