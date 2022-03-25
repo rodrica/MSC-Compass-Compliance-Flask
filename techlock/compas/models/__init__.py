@@ -150,6 +150,15 @@ from .comment import (
     CommentSchema,
 )
 
+from .detail import (
+    DETAIL_CLAIM_SPEC,
+    Detail,
+    DetailListQueryParameters,
+    DetailListQueryParametersSchema,
+    DetailPageableSchema,
+    DetailSchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
@@ -164,6 +173,7 @@ ALL_CLAIM_SPECS = [
     COMPLIANCE_RESPONSE_HISTORY_CLAIM_SPEC,
     COMPLIANCE_TASK_CLAIM_SPEC,
     COMPLIANCE_TIMELINE_CLAIM_SPEC,
+    DETAIL_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
     REPORT_NODE_CLAIM_SPEC,
