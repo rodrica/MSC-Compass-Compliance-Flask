@@ -168,6 +168,15 @@ from .event import (
     EventSchema,
 )
 
+from .journal import (
+    JOURNAL_CLAIM_SPEC,
+    Journal,
+    JournalListQueryParameters,
+    JournalListQueryParametersSchema,
+    JournalPageableSchema,
+    JournalSchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
@@ -184,6 +193,7 @@ ALL_CLAIM_SPECS = [
     COMPLIANCE_TIMELINE_CLAIM_SPEC,
     DETAIL_CLAIM_SPEC,
     EVENT_CLAIM_SPEC,
+    JOURNAL_CLAIM_SPEC,
     REPORT_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
     REPORT_NODE_CLAIM_SPEC,
