@@ -177,6 +177,15 @@ from .journal import (
     JournalSchema,
 )
 
+from .summary_note import (
+    SUMMARY_NOTE_CLAIM_SPEC,
+    SummaryNote,
+    SummaryNoteListQueryParameters,
+    SummaryNoteListQueryParametersSchema,
+    SummaryNotePageableSchema,
+    SummaryNoteSchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
@@ -197,5 +206,6 @@ ALL_CLAIM_SPECS = [
     REPORT_CLAIM_SPEC,
     REPORT_INSTRUCTION_CLAIM_SPEC,
     REPORT_NODE_CLAIM_SPEC,
-    REPORT_VERSION_CLAIM_SPEC
+    REPORT_VERSION_CLAIM_SPEC,
+    SUMMARY_NOTE_CLAIM_SPEC,
 ]
