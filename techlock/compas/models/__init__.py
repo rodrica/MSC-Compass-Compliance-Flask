@@ -151,8 +151,7 @@ from .comment import (
 )
 
 from .detail import (
-    DETAIL_CLAIM_SPEC,
-    Detail,
+    DETAIL_CLAIM_SPEC, Detail,
     DetailListQueryParameters,
     DetailListQueryParametersSchema,
     DetailPageableSchema,
@@ -186,6 +185,15 @@ from .summary_note import (
     SummaryNoteSchema,
 )
 
+from .upload import (
+    UPLOAD_CLAIM_SPEC,
+    Upload,
+    UploadListQueryParameters,
+    UploadListQueryParametersSchema,
+    UploadPageableSchema,
+    UploadSchema,
+)
+
 ALL_CLAIM_SPECS = [
     AUDIT_CLAIM_SPEC,
     AUDIT_HISTORY_CLAIM_SPEC,
@@ -208,4 +216,5 @@ ALL_CLAIM_SPECS = [
     REPORT_NODE_CLAIM_SPEC,
     REPORT_VERSION_CLAIM_SPEC,
     SUMMARY_NOTE_CLAIM_SPEC,
+    UPLOAD_CLAIM_SPEC,
 ]
