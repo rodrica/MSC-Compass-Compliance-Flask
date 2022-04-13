@@ -1,19 +1,8 @@
-from json import dump
 import os
-import enum
 from dataclasses import dataclass
-from sys import audit
-from humanfriendly.terminal import enable_ansi_support
 
 import marshmallow as ma
 import marshmallow.fields as mf
-from marshmallow_enum import EnumField
-from pkg_resources import require
-
-from sqlalchemy.dialects.postgresql import ARRAY, UUID
-from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
-from sqlalchemy.sql.elements import True_
-from sqlalchemy.sql.operators import nulls_last_op
 
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -21,12 +10,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.api.flask import enum_to_properties
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
-from techlock.compas.models.report import ReportSchema
-from techlock.compas.models.report_version import Compliance
-from techlock.compas.routes import compliances
 
 
 __all__ = [
@@ -63,8 +47,8 @@ class CommentSchema(BaseModelSchema):
     audit_id = mf.Integer(allow_none=True)
     audit_instruction_id = mf.Integer(allow_none=True)
 
-    compliance_id= mf.Integer(allow_none=True)
-    compliance_period_id= mf.Integer(allow_none=True)
+    compliance_id = mf.Integer(allow_none=True)
+    compliance_period_id = mf.Integer(allow_none=True)
 
     timestamp = mf.DateTime(requird=True, allow_null=False)
 
@@ -80,7 +64,8 @@ class CommentPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class CommentListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True, description='Used to filter comments by name prefix.')
+    name = mf.String(allow_none=True,
+                     description='Used to filter comments by name prefix.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -94,10 +79,12 @@ class Comment(BaseModel):
 
     audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
 
-    audit_instruction_id = db.Column(db.Integer, db.ForeignKey("report_instructions.id"))
+    audit_instruction_id = db.Column(db.Integer,
+                                     db.ForeignKey("report_instructions.id"))
 
     compliance_id= db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id= db.Column(db.Integer, db.ForeignKey("compliance_periods.id"))
+    compliance_period_id= db.Column(db.Integer,
+                                    db.ForeignKey("compliance_periods.id"))
 
     timestamp = db.Column(db.TIMESTAMP, nullable=False)
 
@@ -111,4 +98,3 @@ class Comment(BaseModel):
 @dataclass
 class CommentListQueryParameters(BaseOffsetListQueryParams):
     __db_model__ = Comment
-

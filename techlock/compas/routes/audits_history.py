@@ -47,7 +47,8 @@ class AuditHistorys(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
-    @blp.arguments(schema=AuditHistoryListQueryParametersSchema, location='query')
+    @blp.arguments(schema=AuditHistoryListQueryParametersSchema,
+                   location='query')
     @blp.response(status_code=200, schema=AuditHistoryPageableSchema)
     def get(self, query_params: AuditHistoryListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         logger.info('GET audits_history')
@@ -70,7 +71,8 @@ class AuditHistorys(MethodView):
         logger.info('Creating audit_history', extra={'data': data})
 
         audit_history = AuditHistory(**data)
-        audit_history.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        audit_history.claims_by_audience = set_claims_default_tenant(data,
+                                                                     current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         audit_history.save(current_user, claims=claims, commit=not dry_run)
@@ -85,7 +87,10 @@ class AuditHistoryById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_audit_history(self, current_user: AuthInfo, claims: ClaimSet, audit_history_id: str):
-        audit_history = AuditHistory.get(current_user, audit_history_id, claims=claims, raise_if_not_found=True)
+        audit_history = AuditHistory.get(current_user,
+                                         audit_history_id,
+                                         claims=claims,
+                                         raise_if_not_found=True)
 
         return audit_history
 
@@ -93,7 +98,9 @@ class AuditHistoryById(MethodView):
     @blp.response(status_code=200, schema=AuditHistorySchema)
     def get(self, audit_history_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Getting audit_history', extra={'id': audit_history_id})
-        audit_history = self.get_audit_history(current_user, claims, audit_history_id)
+        audit_history = self.get_audit_history(current_user,
+                                               claims,
+                                               audit_history_id)
 
         return audit_history
 
@@ -104,7 +111,9 @@ class AuditHistoryById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, audit_history_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating audit_history', extra={'data': data})
 
-        audit_history = self.get_audit_history(current_user, claims.filter_by_action('read'), audit_history_id)
+        audit_history = self.get_audit_history(current_user,
+                                               claims.filter_by_action('read'),
+                                               audit_history_id)
 
         for k, v in data.items():
             if hasattr(audit_history, k):
@@ -112,10 +121,13 @@ class AuditHistoryById(MethodView):
             else:
                 raise BadRequestException(f'AuditHistory has no attribute: {k}')
 
-        audit_history.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        audit_history.claims_by_audience = set_claims_default_tenant(data,
+                                                                     current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        audit_history.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        audit_history.save(current_user,
+                           claims=claims.filter_by_action('update'),
+                           commit=not dry_run)
 
         return audit_history
 
@@ -125,9 +137,13 @@ class AuditHistoryById(MethodView):
     def delete(self, dry_run: bool, audit_history_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting audit_history', extra={'id': audit_history_id})
 
-        audit_history = self.get_audit_history(current_user, claims.filter_by_action('read'), audit_history_id)
+        audit_history = self.get_audit_history(current_user,
+                                               claims.filter_by_action('read'),
+                                               audit_history_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        audit_history.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        audit_history.delete(current_user,
+                             claims=claims.filter_by_action('delete'),
+                             commit=not dry_run)
 
         return

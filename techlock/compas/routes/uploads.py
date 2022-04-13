@@ -1,7 +1,6 @@
 import logging
 from dataclasses import asdict
 from typing import Any, Dict
-from uuid import UUID
 
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim
@@ -26,7 +25,7 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('uploads', __name__, url_prefix='/uploads')
 
 
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+def set_claims_default_tenant(data: dict, default_tenant_id: str):
     claims_by_audience = data.get('claims_by_audience')
     if claims_by_audience is not None:
         for key, claims in claims_by_audience.items():
@@ -70,7 +69,8 @@ class Uploads(MethodView):
         logger.info('Creating upload', extra={'data': data})
 
         upload = Upload(**data)
-        upload.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        upload.claims_by_audience = set_claims_default_tenant(data,
+                                                              current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         upload.save(current_user, claims=claims, commit=not dry_run)
@@ -85,7 +85,10 @@ class UploadById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_upload(self, current_user: AuthInfo, claims: ClaimSet, upload_id: str):
-        upload = Upload.get(current_user, upload_id, claims=claims, raise_if_not_found=True)
+        upload = Upload.get(current_user,
+                            upload_id,
+                            claims=claims,
+                            raise_if_not_found=True)
 
         return upload
 
@@ -104,7 +107,9 @@ class UploadById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, upload_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating upload', extra={'data': data})
 
-        upload = self.get_upload(current_user, claims.filter_by_action('read'), upload_id)
+        upload = self.get_upload(current_user,
+                                 claims.filter_by_action('read'),
+                                 upload_id)
 
         for k, v in data.items():
             if hasattr(upload, k):
@@ -115,7 +120,9 @@ class UploadById(MethodView):
         upload.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        upload.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        upload.save(current_user,
+                    claims=claims.filter_by_action('update'),
+                    commit=not dry_run)
 
         return upload
 
@@ -125,9 +132,13 @@ class UploadById(MethodView):
     def delete(self, dry_run: bool, upload_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting upload', extra={'id': upload_id})
 
-        upload = self.get_upload(current_user, claims.filter_by_action('read'), upload_id)
+        upload = self.get_upload(current_user,
+                                 claims.filter_by_action('read'),
+                                 upload_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        upload.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        upload.delete(current_user,
+                      claims=claims.filter_by_action('delete'),
+                      commit=not dry_run)
 
         return

@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('audits_timeline', __name__, url_prefix='/audits_timeline')
 
 
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+def set_claims_default_tenant(data: dict, default_tenant_id: str):
     claims_by_audience = data.get('claims_by_audience')
     if claims_by_audience is not None:
         for key, claims in claims_by_audience.items():
@@ -47,7 +47,8 @@ class AuditTimelines(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
-    @blp.arguments(schema=AuditTimelineListQueryParametersSchema, location='query')
+    @blp.arguments(schema=AuditTimelineListQueryParametersSchema,
+                   location='query')
     @blp.response(status_code=200, schema=AuditTimelinePageableSchema)
     def get(self, query_params: AuditTimelineListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         logger.info('GET audits_timeline')
@@ -70,7 +71,8 @@ class AuditTimelines(MethodView):
         logger.info('Creating audit', extra={'data': data})
 
         audit = AuditTimeline(**data)
-        audit.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        audit.claims_by_audience = set_claims_default_tenant(data,
+                                                             current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         audit.save(current_user, claims=claims, commit=not dry_run)

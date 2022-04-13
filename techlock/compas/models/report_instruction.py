@@ -1,19 +1,11 @@
-from json import dump
 import os
-import enum
 from dataclasses import dataclass
-from attr import Factory
 
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-from pkg_resources import require
 
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
-from sqlalchemy.orm import backref
-from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
-from sqlalchemy.sql.elements import True_
-from sqlalchemy.sql.operators import regexp_match_op
 
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -21,7 +13,6 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.api.errors.error_handlers import default_exception_handler
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
 from techlock.compas.models.report_version import Tag
@@ -80,7 +71,8 @@ class ReportInstructionPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ReportInstructionListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True, description='Used to filter report_instructions by name prefix.')
+    name = mf.String(allow_none=True,
+                     description='Used to filter report_instructions by name prefix.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):

@@ -1,18 +1,10 @@
-from json import dump
 import os
 import enum
 from dataclasses import dataclass
-from humanfriendly.terminal import enable_ansi_support
 
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-from pkg_resources import require
-
-from sqlalchemy.dialects.postgresql import ARRAY, UUID
-from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
-from sqlalchemy.sql.elements import True_
-from sqlalchemy.sql.operators import nulls_last_op
 
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -20,10 +12,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.api.flask import enum_to_properties
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
-from techlock.compas.models.report import ReportSchema
 
 from ..models.int_enum import IntEnum
 
@@ -80,7 +69,8 @@ class ComplianceResponsePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True, description='Used to filter compliance_responses by name prefix.')
+    name = mf.String(allow_none=True,
+                     description='Used to filter compliance_responses by name prefix.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -103,4 +93,3 @@ class ComplianceResponse(BaseModel):
 @dataclass
 class ComplianceResponseListQueryParameters(BaseOffsetListQueryParams):
     __db_model__ = ComplianceResponse
-

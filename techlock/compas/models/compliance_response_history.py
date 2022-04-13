@@ -1,18 +1,9 @@
-from json import dump
 import os
-import enum
 from dataclasses import dataclass
-from humanfriendly.terminal import enable_ansi_support
 
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-from pkg_resources import require
-
-from sqlalchemy.dialects.postgresql import ARRAY, UUID
-from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
-from sqlalchemy.sql.elements import True_
-from sqlalchemy.sql.operators import nulls_last_op
 
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -20,11 +11,8 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.api.flask import enum_to_properties
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-from techlock.compas.models import compliance_response
 
-from techlock.compas.models.report import ReportSchema
 from techlock.compas.models.compliance_response import Phase, Status
 
 from ..models.int_enum import IntEnum
@@ -63,11 +51,14 @@ class ComplianceResponseHistorySchema(BaseModelSchema):
 
 
 class ComplianceResponseHistoryPageableSchema(OffsetPageableResponseBaseSchema):
-    items = mf.Nested(ComplianceResponseHistorySchema, many=True, dump_only=True)
+    items = mf.Nested(ComplianceResponseHistorySchema,
+                      many=True,
+                      dump_only=True)
 
 
 class ComplianceResponseHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True, description='Used to filter compliance_responses_history by name prefix.')
+    name = mf.String(allow_none=True,
+                     description='Used to filter compliance_responses_history by name prefix.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -77,7 +68,9 @@ class ComplianceResponseHistoryListQueryParametersSchema(BaseOffsetListQueryPara
 class ComplianceResponseHistory(BaseModel):
     __tablename__ = 'compliance_responses_history'
 
-    entity_id = db.Column('history_id', db.Integer, primary_key=True)
+    entity_id = db.Column('history_id',
+                          db.Integer,
+                          primary_key=True)
     compliance_response_id = db.Column('id', db.Integer)
     compliance_id = db.Column(db.Integer,
                               db.ForeignKey('compliances.id'),
@@ -92,4 +85,3 @@ class ComplianceResponseHistory(BaseModel):
 @dataclass
 class ComplianceResponseHistoryListQueryParameters(BaseOffsetListQueryParams):
     __db_model__ = ComplianceResponseHistory
-

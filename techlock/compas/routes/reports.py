@@ -1,7 +1,6 @@
 import logging
 from dataclasses import asdict
 from typing import Any, Dict
-from uuid import UUID
 
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim
@@ -26,7 +25,7 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('reports', __name__, url_prefix='/reports')
 
 
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+def set_claims_default_tenant(data: dict, default_tenant_id: str):
     claims_by_audience = data.get('claims_by_audience')
     if claims_by_audience is not None:
         for key, claims in claims_by_audience.items():
@@ -70,7 +69,8 @@ class Reports(MethodView):
         logger.info('Creating report', extra={'data': data})
 
         report = Report(**data)
-        report.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        report.claims_by_audience = set_claims_default_tenant(data,
+                                                              current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         report.save(current_user, claims=claims, commit=not dry_run)
@@ -85,7 +85,10 @@ class ReportById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_report(self, current_user: AuthInfo, claims: ClaimSet, report_id: str):
-        report = Report.get(current_user, report_id, claims=claims, raise_if_not_found=True)
+        report = Report.get(current_user,
+                            report_id,
+                            claims=claims,
+                            raise_if_not_found=True)
 
         return report
 
@@ -104,7 +107,9 @@ class ReportById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, report_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating report', extra={'data': data})
 
-        report = self.get_report(current_user, claims.filter_by_action('read'), report_id)
+        report = self.get_report(current_user,
+                                 claims.filter_by_action('read'),
+                                 report_id)
 
         for k, v in data.items():
             if hasattr(report, k):
@@ -112,10 +117,13 @@ class ReportById(MethodView):
             else:
                 raise BadRequestException(f'Report has no attribute: {k}')
 
-        report.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        report.claims_by_audience = set_claims_default_tenant(data,
+                                                              current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        report.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        report.save(current_user,
+                    claims=claims.filter_by_action('update'),
+                    commit=not dry_run)
 
         return report
 
@@ -125,9 +133,13 @@ class ReportById(MethodView):
     def delete(self, dry_run: bool, report_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting report', extra={'id': report_id})
 
-        report = self.get_report(current_user, claims.filter_by_action('read'), report_id)
+        report = self.get_report(current_user,
+                                 claims.filter_by_action('read'),
+                                 report_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        report.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        report.delete(current_user,
+                      claims=claims.filter_by_action('delete'),
+                      commit=not dry_run)
 
         return

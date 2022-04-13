@@ -1,23 +1,9 @@
-from importlib import import_module
-from json import dump
 import os
-import enum
 from dataclasses import dataclass
-
-from flask_migrate import history
-from humanfriendly.terminal import enable_ansi_support
-from jinja2 import defaults
 
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-from pkg_resources import require
-
-from sqlalchemy.dialects.postgresql import ARRAY, UUID
-from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
-from sqlalchemy.sql.elements import True_
-from sqlalchemy.sql.operators import from_, nulls_last_op
-from sqlalchemy.sql.sqltypes import Integer
 
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -27,7 +13,6 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
-from techlock.compas.models.report import ReportSchema
 from techlock.compas.models.report_version import Compliance
 
 from ..models.int_enum import IntEnum
@@ -73,7 +58,8 @@ class AuditResponsePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True, description='Used to filter audit_responses by name prefix.')
+    name = mf.String(allow_none=True,
+                     description='Used to filter audit_responses by name prefix.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -88,12 +74,14 @@ class AuditResponse(BaseModel):
     instruction_id = db.Column(db.Integer,
                                db.ForeignKey("report_instructions.id"),
                                nullable=False)
-    compliance = db.Column(IntEnum(Compliance), nullable=False, default=Compliance.pending)
-    
+    compliance = db.Column(IntEnum(Compliance),
+                           nullable=False,
+                           default=Compliance.pending)
+
     audit = db.relationship('Audit')
     instruction = db.relationship('ReportInstruction')
+
 
 @dataclass
 class AuditResponseListQueryParameters(BaseOffsetListQueryParams):
     __db_model__ = AuditResponse
-

@@ -1,7 +1,6 @@
 import logging
 from dataclasses import asdict
 from typing import Any, Dict
-from uuid import UUID
 
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim
@@ -26,7 +25,7 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('summary_notes', __name__, url_prefix='/summary_notes')
 
 
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+def set_claims_default_tenant(data: dict, default_tenant_id: str):
     claims_by_audience = data.get('claims_by_audience')
     if claims_by_audience is not None:
         for key, claims in claims_by_audience.items():
@@ -47,7 +46,8 @@ class SummaryNotes(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
-    @blp.arguments(schema=SummaryNoteListQueryParametersSchema, location='query')
+    @blp.arguments(schema=SummaryNoteListQueryParametersSchema,
+                   location='query')
     @blp.response(status_code=200, schema=SummaryNotePageableSchema)
     def get(self, query_params: SummaryNoteListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         logger.info('GET summary_notes')
@@ -70,7 +70,8 @@ class SummaryNotes(MethodView):
         logger.info('Creating summary_note', extra={'data': data})
 
         summary_note = SummaryNote(**data)
-        summary_note.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        summary_note.claims_by_audience = set_claims_default_tenant(data,
+                                                                    current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         summary_note.save(current_user, claims=claims, commit=not dry_run)
@@ -85,7 +86,10 @@ class SummaryNoteById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_summary_note(self, current_user: AuthInfo, claims: ClaimSet, summary_note_id: str):
-        summary_note = SummaryNote.get(current_user, summary_note_id, claims=claims, raise_if_not_found=True)
+        summary_note = SummaryNote.get(current_user,
+                                       summary_note_id,
+                                       claims=claims,
+                                       raise_if_not_found=True)
 
         return summary_note
 
@@ -93,7 +97,9 @@ class SummaryNoteById(MethodView):
     @blp.response(status_code=200, schema=SummaryNoteSchema)
     def get(self, summary_note_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Getting summary_note', extra={'id': summary_note_id})
-        summary_note = self.get_summary_note(current_user, claims, summary_note_id)
+        summary_note = self.get_summary_note(current_user,
+                                             claims,
+                                             summary_note_id)
 
         return summary_note
 
@@ -104,7 +110,9 @@ class SummaryNoteById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, summary_note_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating summary_note', extra={'data': data})
 
-        summary_note = self.get_summary_note(current_user, claims.filter_by_action('read'), summary_note_id)
+        summary_note = self.get_summary_note(current_user,
+                                             claims.filter_by_action('read'),
+                                             summary_note_id)
 
         for k, v in data.items():
             if hasattr(summary_note, k):
@@ -112,10 +120,13 @@ class SummaryNoteById(MethodView):
             else:
                 raise BadRequestException(f'SummaryNote has no attribute: {k}')
 
-        summary_note.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        summary_note.claims_by_audience = set_claims_default_tenant(data,
+                                                                    current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        summary_note.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        summary_note.save(current_user,
+                          claims=claims.filter_by_action('update'),
+                          commit=not dry_run)
 
         return summary_note
 
@@ -125,9 +136,13 @@ class SummaryNoteById(MethodView):
     def delete(self, dry_run: bool, summary_note_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting summary_note', extra={'id': summary_note_id})
 
-        summary_note = self.get_summary_note(current_user, claims.filter_by_action('read'), summary_note_id)
+        summary_note = self.get_summary_note(current_user,
+                                             claims.filter_by_action('read'),
+                                             summary_note_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        summary_note.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        summary_note.delete(current_user,
+                            claims=claims.filter_by_action('delete'),
+                            commit=not dry_run)
 
         return

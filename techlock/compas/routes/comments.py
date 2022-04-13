@@ -1,7 +1,6 @@
 import logging
 from dataclasses import asdict
 from typing import Any, Dict
-from uuid import UUID
 
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim
@@ -26,7 +25,7 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('comments', __name__, url_prefix='/comments')
 
 
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+def set_claims_default_tenant(data: dict, default_tenant_id: str):
     claims_by_audience = data.get('claims_by_audience')
     if claims_by_audience is not None:
         for key, claims in claims_by_audience.items():
@@ -70,7 +69,8 @@ class Comments(MethodView):
         logger.info('Creating comment', extra={'data': data})
 
         comment = Comment(**data)
-        comment.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        comment.claims_by_audience = set_claims_default_tenant(data,
+                                                               current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         comment.save(current_user, claims=claims, commit=not dry_run)
@@ -85,7 +85,10 @@ class CommentById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_comment(self, current_user: AuthInfo, claims: ClaimSet, comment_id: str):
-        comment = Comment.get(current_user, comment_id, claims=claims, raise_if_not_found=True)
+        comment = Comment.get(current_user,
+                              comment_id,
+                              claims=claims,
+                              raise_if_not_found=True)
 
         return comment
 
@@ -104,7 +107,9 @@ class CommentById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, comment_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating comment', extra={'data': data})
 
-        comment = self.get_comment(current_user, claims.filter_by_action('read'), comment_id)
+        comment = self.get_comment(current_user,
+                                   claims.filter_by_action('read'),
+                                   comment_id)
 
         for k, v in data.items():
             if hasattr(comment, k):
@@ -112,10 +117,13 @@ class CommentById(MethodView):
             else:
                 raise BadRequestException(f'Comment has no attribute: {k}')
 
-        comment.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        comment.claims_by_audience = set_claims_default_tenant(data,
+                                                               current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        comment.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        comment.save(current_user,
+                     claims=claims.filter_by_action('update'),
+                     commit=not dry_run)
 
         return comment
 
@@ -125,9 +133,13 @@ class CommentById(MethodView):
     def delete(self, dry_run: bool, comment_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting comment', extra={'id': comment_id})
 
-        comment = self.get_comment(current_user, claims.filter_by_action('read'), comment_id)
+        comment = self.get_comment(current_user,
+                                   claims.filter_by_action('read'),
+                                   comment_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        comment.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        comment.delete(current_user,
+                       claims=claims.filter_by_action('delete'),
+                       commit=not dry_run)
 
         return

@@ -1,4 +1,3 @@
-from json import dump
 import os
 import enum
 from dataclasses import dataclass
@@ -6,10 +5,8 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-from pkg_resources import require
 
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
-from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
 
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -86,14 +83,19 @@ class ReportVersionSchema(BaseModelSchema):
     report = mf.Nested(ReportSchema, dump_only=True)
     report_id = mf.Integer(allow_none=True, required=False)
 
-    nodes = mf.Nested('ReportNodeSchema', dump_only=True, many=True, exclude=('version',))
+    nodes = mf.Nested('ReportNodeSchema',
+                      dump_only=True,
+                      many=True,
+                      exclude=('version',))
+
 
 class ReportVersionPageableSchema(OffsetPageableResponseBaseSchema):
     items = mf.Nested(ReportVersionSchema, many=True, dump_only=True)
 
 
 class ReportVersionListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True, description='Used to filter report_versions by name prefix.')
+    name = mf.String(allow_none=True,
+                     description='Used to filter report_versions by name prefix.')
 
     @ma.post_load
     def make_object(self, data, **kwargs):

@@ -23,7 +23,9 @@ from ..models import (
 
 logger = logging.getLogger(__name__)
 
-blp = Blueprint('compliance_responses', __name__, url_prefix='/compliance_responses')
+blp = Blueprint('compliance_responses',
+                __name__,
+                url_prefix='/compliance_responses')
 
 
 def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
@@ -47,7 +49,8 @@ class ComplianceResponses(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
-    @blp.arguments(schema=ComplianceResponseListQueryParametersSchema, location='query')
+    @blp.arguments(schema=ComplianceResponseListQueryParametersSchema,
+                   location='query')
     @blp.response(status_code=200, schema=ComplianceResponsePageableSchema)
     def get(self, query_params: ComplianceResponseListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         logger.info('GET compliance_responses')
@@ -70,10 +73,13 @@ class ComplianceResponses(MethodView):
         logger.info('Creating compliance_response', extra={'data': data})
 
         compliance_response = ComplianceResponse(**data)
-        compliance_response.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        compliance_response.claims_by_audience = set_claims_default_tenant(data,
+                                                                           current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        compliance_response.save(current_user, claims=claims, commit=not dry_run)
+        compliance_response.save(current_user,
+                                 claims=claims,
+                                 commit=not dry_run)
 
         return compliance_response
 
@@ -85,15 +91,21 @@ class ComplianceResponseById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_compliance_response(self, current_user: AuthInfo, claims: ClaimSet, compliance_response_id: str):
-        compliance_response = ComplianceResponse.get(current_user, compliance_response_id, claims=claims, raise_if_not_found=True)
+        compliance_response = ComplianceResponse.get(current_user,
+                                                     compliance_response_id,
+                                                     claims=claims,
+                                                     raise_if_not_found=True)
 
         return compliance_response
 
     @access_required('read', claim_spec=claim_spec)
     @blp.response(status_code=200, schema=ComplianceResponseSchema)
     def get(self, compliance_response_id: str, current_user: AuthInfo, claims: ClaimSet):
-        logger.info('Getting compliance_response', extra={'id': compliance_response_id})
-        compliance_response = self.get_compliance_response(current_user, claims, compliance_response_id)
+        logger.info('Getting compliance_response',
+                    extra={'id': compliance_response_id})
+        compliance_response = self.get_compliance_response(current_user,
+                                                           claims,
+                                                           compliance_response_id)
 
         return compliance_response
 
@@ -104,7 +116,9 @@ class ComplianceResponseById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, compliance_response_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating compliance_response', extra={'data': data})
 
-        compliance_response = self.get_compliance_response(current_user, claims.filter_by_action('read'), compliance_response_id)
+        compliance_response = self.get_compliance_response(current_user,
+                                                           claims.filter_by_action('read'),
+                                                           compliance_response_id)
 
         for k, v in data.items():
             if hasattr(compliance_response, k):
@@ -112,10 +126,13 @@ class ComplianceResponseById(MethodView):
             else:
                 raise BadRequestException(f'ComplianceResponse has no attribute: {k}')
 
-        compliance_response.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        compliance_response.claims_by_audience = set_claims_default_tenant(data,
+                                                                           current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        compliance_response.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        compliance_response.save(current_user,
+                                 claims=claims.filter_by_action('update'),
+                                 commit=not dry_run)
 
         return compliance_response
 
@@ -123,11 +140,16 @@ class ComplianceResponseById(MethodView):
     @blp.arguments(DryRunSchema, location='query', as_kwargs=True)
     @blp.response(status_code=204)
     def delete(self, dry_run: bool, compliance_response_id: str, current_user: AuthInfo, claims: ClaimSet):
-        logger.info('Deleting compliance_response', extra={'id': compliance_response_id})
+        logger.info('Deleting compliance_response',
+                    extra={'id': compliance_response_id})
 
-        compliance_response = self.get_compliance_response(current_user, claims.filter_by_action('read'), compliance_response_id)
+        compliance_response = self.get_compliance_response(current_user,
+                                                           claims.filter_by_action('read'),
+                                                           compliance_response_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        compliance_response.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        compliance_response.delete(current_user,
+                                   claims=claims.filter_by_action('delete'),
+                                   commit=not dry_run)
 
         return

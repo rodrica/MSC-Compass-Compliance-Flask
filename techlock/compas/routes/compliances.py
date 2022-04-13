@@ -1,7 +1,6 @@
 import logging
 from dataclasses import asdict
 from typing import Any, Dict
-from uuid import UUID
 
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim
@@ -26,7 +25,7 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('compliances', __name__, url_prefix='/compliances')
 
 
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+def set_claims_default_tenant(data: dict, default_tenant_id: str):
     claims_by_audience = data.get('claims_by_audience')
     if claims_by_audience is not None:
         for key, claims in claims_by_audience.items():
@@ -47,7 +46,8 @@ class Compliances(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
-    @blp.arguments(schema=ComplianceListQueryParametersSchema, location='query')
+    @blp.arguments(schema=ComplianceListQueryParametersSchema,
+                   location='query')
     @blp.response(status_code=200, schema=CompliancePageableSchema)
     def get(self, query_params: ComplianceListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         logger.info('GET compliances')
@@ -70,7 +70,8 @@ class Compliances(MethodView):
         logger.info('Creating compliance', extra={'data': data})
 
         compliance = Compliance(**data)
-        compliance.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        compliance.claims_by_audience = set_claims_default_tenant(data,
+                                                                  current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         compliance.save(current_user, claims=claims, commit=not dry_run)
@@ -85,7 +86,10 @@ class ComplianceById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_compliance(self, current_user: AuthInfo, claims: ClaimSet, compliance_id: str):
-        compliance = Compliance.get(current_user, compliance_id, claims=claims, raise_if_not_found=True)
+        compliance = Compliance.get(current_user,
+                                    compliance_id,
+                                    claims=claims,
+                                    raise_if_not_found=True)
 
         return compliance
 
@@ -104,7 +108,9 @@ class ComplianceById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, compliance_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating compliance', extra={'data': data})
 
-        compliance = self.get_compliance(current_user, claims.filter_by_action('read'), compliance_id)
+        compliance = self.get_compliance(current_user,
+                                         claims.filter_by_action('read'),
+                                         compliance_id)
 
         for k, v in data.items():
             if hasattr(compliance, k):
@@ -115,7 +121,9 @@ class ComplianceById(MethodView):
         compliance.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        compliance.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        compliance.save(current_user,
+                        claims=claims.filter_by_action('update'),
+                        commit=not dry_run)
 
         return compliance
 
@@ -125,9 +133,13 @@ class ComplianceById(MethodView):
     def delete(self, dry_run: bool, compliance_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting compliance', extra={'id': compliance_id})
 
-        compliance = self.get_compliance(current_user, claims.filter_by_action('read'), compliance_id)
+        compliance = self.get_compliance(current_user,
+                                         claims.filter_by_action('read'),
+                                         compliance_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        compliance.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        compliance.delete(current_user,
+                          claims=claims.filter_by_action('delete'),
+                          commit=not dry_run)
 
         return

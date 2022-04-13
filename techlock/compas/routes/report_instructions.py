@@ -1,7 +1,6 @@
 import logging
 from dataclasses import asdict
 from typing import Any, Dict
-from uuid import UUID
 
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException, Claim
@@ -23,10 +22,12 @@ from ..models import (
 
 logger = logging.getLogger(__name__)
 
-blp = Blueprint('report_instructions', __name__, url_prefix='/report_instructions')
+blp = Blueprint('report_instructions',
+                __name__,
+                url_prefix='/report_instructions')
 
 
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
+def set_claims_default_tenant(data: dict, default_tenant_id: str):
     claims_by_audience = data.get('claims_by_audience')
     if claims_by_audience is not None:
         for key, claims in claims_by_audience.items():
@@ -47,7 +48,8 @@ class ReportInstructions(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
-    @blp.arguments(schema=ReportInstructionListQueryParametersSchema, location='query')
+    @blp.arguments(schema=ReportInstructionListQueryParametersSchema,
+                   location='query')
     @blp.response(status_code=200, schema=ReportInstructionPageableSchema)
     def get(self, query_params: ReportInstructionListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         logger.info('GET report_instructions')
@@ -70,10 +72,13 @@ class ReportInstructions(MethodView):
         logger.info('Creating report_instruction', extra={'data': data})
 
         report_instruction = ReportInstruction(**data)
-        report_instruction.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        report_instruction.claims_by_audience = set_claims_default_tenant(data,
+                                                                          current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        report_instruction.save(current_user, claims=claims, commit=not dry_run)
+        report_instruction.save(current_user,
+                                claims=claims,
+                                commit=not dry_run)
 
         return report_instruction
 
@@ -85,15 +90,21 @@ class ReportInstructionById(MethodView):
         MethodView.__init__(self, *args, **kwargs)
 
     def get_report_instruction(self, current_user: AuthInfo, claims: ClaimSet, report_instruction_id: str):
-        report_instruction = ReportInstruction.get(current_user, report_instruction_id, claims=claims, raise_if_not_found=True)
+        report_instruction = ReportInstruction.get(current_user,
+                                                   report_instruction_id,
+                                                   claims=claims,
+                                                   raise_if_not_found=True)
 
         return report_instruction
 
     @access_required('read', claim_spec=claim_spec)
     @blp.response(status_code=200, schema=ReportInstructionSchema)
     def get(self, report_instruction_id: str, current_user: AuthInfo, claims: ClaimSet):
-        logger.info('Getting report_instruction', extra={'id': report_instruction_id})
-        report_instruction = self.get_report_instruction(current_user, claims, report_instruction_id)
+        logger.info('Getting report_instruction',
+                    extra={'id': report_instruction_id})
+        report_instruction = self.get_report_instruction(current_user,
+                                                         claims,
+                                                         report_instruction_id)
 
         return report_instruction
 
@@ -104,7 +115,9 @@ class ReportInstructionById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, report_instruction_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating report_instruction', extra={'data': data})
 
-        report_instruction = self.get_report_instruction(current_user, claims.filter_by_action('read'), report_instruction_id)
+        report_instruction = self.get_report_instruction(current_user,
+                                                         claims.filter_by_action('read'),
+                                                         report_instruction_id)
 
         for k, v in data.items():
             if hasattr(report_instruction, k):
@@ -112,10 +125,13 @@ class ReportInstructionById(MethodView):
             else:
                 raise BadRequestException(f'ReportInstruction has no attribute: {k}')
 
-        report_instruction.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
+        report_instruction.claims_by_audience = set_claims_default_tenant(data,
+                                                                          current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        report_instruction.save(current_user, claims=claims.filter_by_action('update'), commit=not dry_run)
+        report_instruction.save(current_user,
+                                claims=claims.filter_by_action('update'),
+                                commit=not dry_run)
 
         return report_instruction
 
@@ -123,11 +139,16 @@ class ReportInstructionById(MethodView):
     @blp.arguments(DryRunSchema, location='query', as_kwargs=True)
     @blp.response(status_code=204)
     def delete(self, dry_run: bool, report_instruction_id: str, current_user: AuthInfo, claims: ClaimSet):
-        logger.info('Deleting report_instruction', extra={'id': report_instruction_id})
+        logger.info('Deleting report_instruction',
+                    extra={'id': report_instruction_id})
 
-        report_instruction = self.get_report_instruction(current_user, claims.filter_by_action('read'), report_instruction_id)
+        report_instruction = self.get_report_instruction(current_user,
+                                                         claims.filter_by_action('read'),
+                                                         report_instruction_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        report_instruction.delete(current_user, claims=claims.filter_by_action('delete'), commit=not dry_run)
+        report_instruction.delete(current_user,
+                                  claims=claims.filter_by_action('delete'),
+                                  commit=not dry_run)
 
         return
