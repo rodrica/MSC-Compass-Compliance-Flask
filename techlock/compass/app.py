@@ -12,7 +12,7 @@ init_logging(flask_logger=True)
 logger = logging.getLogger(__name__)
 
 flask_wrapper = create_flask(
-    "compas",
+    "compass",
     enable_jwt=True,
     audience='compliance',
     claim_specs=ALL_CLAIM_SPECS,
@@ -25,7 +25,7 @@ jwt = flask_wrapper.jwt
 api = flask_wrapper.api
 
 # Initialize ConfigManager with namespace
-ConfigManager(namespace='compas')
+ConfigManager(namespace='compass')
 
 logger.info('Initializing routes')
 dynamically_register_routes(app, api)

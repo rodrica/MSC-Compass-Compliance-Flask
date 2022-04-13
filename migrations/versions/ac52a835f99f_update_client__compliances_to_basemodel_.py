@@ -9,9 +9,9 @@ from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
-from techlock.compas.models.int_enum import IntEnum
+from techlock.compass.models.int_enum import IntEnum
 
-from techlock.compas.models.compliance import Plan
+from techlock.compass.models.compliance import Plan
 
 
 # revision identifiers, used by Alembic.

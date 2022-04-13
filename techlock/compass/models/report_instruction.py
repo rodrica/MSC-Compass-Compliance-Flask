@@ -15,7 +15,7 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
-from techlock.compas.models.report_version import Tag
+from techlock.compass.models.report_version import Tag
 
 from ..models.int_enum import IntEnum
 

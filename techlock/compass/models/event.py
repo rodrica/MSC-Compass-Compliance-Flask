@@ -14,7 +14,7 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
-from techlock.compas.models.int_enum import IntEnum
+from techlock.compass.models.int_enum import IntEnum
 
 
 __all__ = [

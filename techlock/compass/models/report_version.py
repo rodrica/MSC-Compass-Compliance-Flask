@@ -16,7 +16,7 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
-from techlock.compas.models.report import ReportSchema
+from techlock.compass.models.report import ReportSchema
 
 from ..models.int_enum import IntEnum
 

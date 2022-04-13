@@ -9,9 +9,9 @@ from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
-from techlock.compas.models.audit import Phase
+from techlock.compass.models.audit import Phase
 
-from techlock.compas.models.int_enum import IntEnum
+from techlock.compass.models.int_enum import IntEnum
 
 
 

@@ -13,7 +13,7 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
-from techlock.compas.models.report_version import Compliance
+from techlock.compass.models.report_version import Compliance
 
 from ..models.int_enum import IntEnum
 

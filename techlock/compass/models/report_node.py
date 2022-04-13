@@ -13,7 +13,7 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
-from techlock.compas.models.report_version import ReportVersionSchema
+from techlock.compass.models.report_version import ReportVersionSchema
 
 
 __all__ = [
