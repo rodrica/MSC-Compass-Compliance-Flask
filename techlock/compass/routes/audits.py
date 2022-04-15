@@ -1,10 +1,8 @@
 import logging
-from dataclasses import asdict
 from typing import Any, Dict
-from uuid import UUID
 
 from flask_smorest import Blueprint
-from techlock.common.api import BadRequestException, Claim
+from techlock.common.api import BadRequestException
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.api.models.dry_run import DryRunSchema
@@ -24,20 +22,6 @@ from ..models import (
 logger = logging.getLogger(__name__)
 
 blp = Blueprint('audits', __name__, url_prefix='/audits')
-
-
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
-    claims_by_audience = data.get('claims_by_audience')
-    if claims_by_audience is not None:
-        for key, claims in claims_by_audience.items():
-            new_claims = []
-            for claim in claims:
-                c = Claim.from_string(claim)
-                if c.tenant_id == '':
-                    c = Claim(**{**asdict(c), 'tenant_id': default_tenant_id})
-                new_claims = new_claims + [str(c)]
-            claims_by_audience[key] = new_claims
-    return claims_by_audience
 
 
 @blp.route('')
@@ -70,7 +54,6 @@ class Audits(MethodView):
         logger.info('Creating audit', extra={'data': data})
 
         audit = Audit(**data)
-        audit.claims_by_audience = set_claims_default_tenant(data, current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         audit.save(current_user, claims=claims, commit=not dry_run)
@@ -116,9 +99,6 @@ class AuditById(MethodView):
                 setattr(audit, k, v)
             else:
                 raise BadRequestException(f'Audit has no attribute: {k}')
-
-        audit.claims_by_audience = set_claims_default_tenant(data,
-                                                             current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         audit.save(current_user,

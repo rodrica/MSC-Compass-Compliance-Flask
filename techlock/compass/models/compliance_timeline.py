@@ -1,4 +1,3 @@
-import os
 from dataclasses import dataclass
 
 import marshmallow as ma
@@ -37,7 +36,6 @@ COMPLIANCE_TIMELINE_CLAIM_SPEC = ClaimSpec(
     ],
     default_actions=['read'],
 )
-STAGE = os.environ.get('STAGE', 'dev').upper()
 
 
 class ComplianceTimelineSchema(BaseModelSchema):

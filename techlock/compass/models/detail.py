@@ -1,4 +1,3 @@
-import os
 from dataclasses import dataclass
 
 import marshmallow as ma
@@ -37,7 +36,6 @@ DETAIL_CLAIM_SPEC = ClaimSpec(
     ],
     default_actions=['read'],
 )
-STAGE = os.environ.get('STAGE', 'dev').upper()
 
 
 class DetailSchema(BaseModelSchema):

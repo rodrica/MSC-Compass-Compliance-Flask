@@ -1,4 +1,3 @@
-import os
 import enum
 from dataclasses import dataclass
 
@@ -42,7 +41,6 @@ AUDIT_CLAIM_SPEC = ClaimSpec(
     ],
     default_actions=['read'],
 )
-STAGE = os.environ.get('STAGE', 'dev').upper()
 
 
 class Phase(enum.Enum):

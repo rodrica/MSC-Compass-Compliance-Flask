@@ -1,4 +1,3 @@
-import os
 import enum
 from dataclasses import dataclass
 
@@ -41,8 +40,6 @@ EVENT_CLAIM_SPEC = ClaimSpec(
     ],
     default_actions=['read'],
 )
-
-STAGE = os.environ.get('STAGE', 'dev').upper()
 
 
 class Type(enum.Enum):

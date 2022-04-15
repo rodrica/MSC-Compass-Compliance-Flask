@@ -1,9 +1,8 @@
 import logging
-from dataclasses import asdict
 from typing import Any, Dict
 
 from flask_smorest import Blueprint
-from techlock.common.api import BadRequestException, Claim
+from techlock.common.api import BadRequestException
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.api.models.dry_run import DryRunSchema
@@ -23,20 +22,6 @@ from ..models import (
 logger = logging.getLogger(__name__)
 
 blp = Blueprint('compliance_tasks', __name__, url_prefix='/compliance_tasks')
-
-
-def set_claims_default_tenant(data: dict, default_tenant_id: str):
-    claims_by_audience = data.get('claims_by_audience')
-    if claims_by_audience is not None:
-        for key, claims in claims_by_audience.items():
-            new_claims = []
-            for claim in claims:
-                c = Claim.from_string(claim)
-                if c.tenant_id == '':
-                    c = Claim(**{**asdict(c), 'tenant_id': default_tenant_id})
-                new_claims = new_claims + [str(c)]
-            claims_by_audience[key] = new_claims
-    return claims_by_audience
 
 
 @blp.route('')
@@ -70,8 +55,6 @@ class ComplianceTasks(MethodView):
         logger.info('Creating compliance_task', extra={'data': data})
 
         compliance_task = ComplianceTask(**data)
-        compliance_task.claims_by_audience = set_claims_default_tenant(data,
-                                                                       current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         compliance_task.save(current_user, claims=claims, commit=not dry_run)
@@ -120,9 +103,6 @@ class ComplianceTaskById(MethodView):
                 setattr(compliance_task, k, v)
             else:
                 raise BadRequestException(f'ComplianceTask has no attribute: {k}')
-
-        compliance_task.claims_by_audience = set_claims_default_tenant(data,
-                                                                       current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         compliance_task.save(current_user,

@@ -1,9 +1,8 @@
 import logging
-from dataclasses import asdict
 from typing import Any, Dict
 
 from flask_smorest import Blueprint
-from techlock.common.api import BadRequestException, Claim
+from techlock.common.api import BadRequestException
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.api.models.dry_run import DryRunSchema
@@ -23,20 +22,6 @@ from ..models import (
 logger = logging.getLogger(__name__)
 
 blp = Blueprint('report_nodes', __name__, url_prefix='/report_nodes')
-
-
-def set_claims_default_tenant(data: dict, default_tenant_id: str):
-    claims_by_audience = data.get('claims_by_audience')
-    if claims_by_audience is not None:
-        for key, claims in claims_by_audience.items():
-            new_claims = []
-            for claim in claims:
-                c = Claim.from_string(claim)
-                if c.tenant_id == '':
-                    c = Claim(**{**asdict(c), 'tenant_id': default_tenant_id})
-                new_claims = new_claims + [str(c)]
-            claims_by_audience[key] = new_claims
-    return claims_by_audience
 
 
 @blp.route('')
@@ -70,8 +55,6 @@ class ReportNodes(MethodView):
         logger.info('Creating report_node', extra={'data': data})
 
         report_node = ReportNode(**data)
-        report_node.claims_by_audience = set_claims_default_tenant(data,
-                                                                   current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         report_node.save(current_user, claims=claims, commit=not dry_run)
@@ -119,9 +102,6 @@ class ReportNodeById(MethodView):
                 setattr(report_node, k, v)
             else:
                 raise BadRequestException(f'ReportNode has no attribute: {k}')
-
-        report_node.claims_by_audience = set_claims_default_tenant(data,
-                                                                   current_user.tenant_id)
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
         report_node.save(current_user,

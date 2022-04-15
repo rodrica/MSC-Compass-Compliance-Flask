@@ -1,9 +1,6 @@
 import logging
-from dataclasses import asdict
-from uuid import UUID
 
 from flask_smorest import Blueprint
-from techlock.common.api import Claim
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.config import AuthInfo
@@ -24,20 +21,6 @@ logger = logging.getLogger(__name__)
 blp = Blueprint('audit_responses_history',
                 __name__,
                 url_prefix='/audit_responses_history')
-
-
-def set_claims_default_tenant(data: dict, default_tenant_id: UUID):
-    claims_by_audience = data.get('claims_by_audience')
-    if claims_by_audience is not None:
-        for key, claims in claims_by_audience.items():
-            new_claims = []
-            for claim in claims:
-                c = Claim.from_string(claim)
-                if c.tenant_id == '':
-                    c = Claim(**{**asdict(c), 'tenant_id': default_tenant_id})
-                new_claims = new_claims + [str(c)]
-            claims_by_audience[key] = new_claims
-    return claims_by_audience
 
 
 @blp.route('')
