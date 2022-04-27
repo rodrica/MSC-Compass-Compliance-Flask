@@ -3,14 +3,17 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.int_enum import IntEnum
 
@@ -91,30 +94,30 @@ class EventListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Event(BaseModel):
     __tablename__ = 'events'
 
-    user_id = db.Column(db.String, nullable=True)
+    user_id = sa.Column(st.String, nullable=True)
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
+    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
 
-    audit_instruction_id = db.Column(
-        db.Integer,
-        db.ForeignKey("report_instructions.id"),
+    audit_instruction_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey("report_instructions.id"),
     )
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id = db.Column(
-        db.Integer,
-        db.ForeignKey("compliance_periods.id"),
+    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey("compliance_periods.id"),
     )
 
-    timestamp = db.Column(db.TIMESTAMP, nullable=False)
-    type = db.Column(IntEnum(Type), nullable=False)
-    visibility = db.Column(IntEnum(Visibility), nullable=False)
+    timestamp = sa.Column(st.TIMESTAMP, nullable=False)
+    type = sa.Column(IntEnum(Type), nullable=False)
+    visibility = sa.Column(IntEnum(Visibility), nullable=False)
 
-    audit = db.relationship('Audit')
-    audit_instruction = db.relationship('ReportInstruction')
+    audit = relationship('Audit')
+    audit_instruction = relationship('ReportInstruction')
 
-    compliance = db.relationship('Compliance')
-    compliance_period = db.relationship('CompliancePeriod')
+    compliance = relationship('Compliance')
+    compliance_period = relationship('CompliancePeriod')
 
 
 @dataclass

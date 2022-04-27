@@ -2,15 +2,18 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.report_version import Tag
 
@@ -80,29 +83,24 @@ class ReportInstructionListQueryParametersSchema(BaseOffsetListQueryParamsSchema
 class ReportInstruction(BaseModel):
     __tablename__ = 'report_instructions'
 
-    uuid = db.Column(UUID(as_uuid=True), nullable=False)
-    name = db.Column(db.String, nullable=True)
-    text = db.Column(db.String)
-    number = db.Column(db.String)
-    priority = db.Column(db.Integer)
-    tag = db.Column(IntEnum(Tag), nullable=True)
-    mappings = db.Column(ARRAY(db.Integer), nullable=False)
-    notice = db.Column(db.Boolean, default=False)
-    hidden = db.Column(db.Boolean, default=False)
-    row = db.Column(db.Integer)
-    table = db.Column(db.Integer)
+    uuid = sa.Column(UUID(as_uuid=True), nullable=False)
+    name = sa.Column(st.String, nullable=True)
+    text = sa.Column(st.String)
+    number = sa.Column(st.String)
+    priority = sa.Column(st.Integer)
+    tag = sa.Column(IntEnum(Tag), nullable=True)
+    mappings = sa.Column(ARRAY(st.Integer), nullable=False)
+    notice = sa.Column(st.Boolean, default=False)
+    hidden = sa.Column(st.Boolean, default=False)
+    row = sa.Column(st.Integer)
+    table = sa.Column(st.Integer)
 
-    version_id = db.Column(db.Integer, db.ForeignKey('report_versions.id'))
-    node_id = db.Column(db.Integer, db.ForeignKey('report_nodes.id'))
+    version_id = sa.Column(st.Integer, sa.ForeignKey('report_versions.id'))
+    node_id = sa.Column(st.Integer, sa.ForeignKey('report_nodes.id'))
 
-    version = db.relationship(
-        'ReportVersion',
-    )
+    version = relationship('ReportVersion')
 
-    node = db.relationship(
-        'ReportNode',
-        backref='instructions',
-    )
+    node = relationship('ReportNode', backref='instructions')
 
 
 @dataclass

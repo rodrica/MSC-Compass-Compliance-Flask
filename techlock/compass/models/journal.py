@@ -2,13 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Journal',
@@ -68,23 +71,23 @@ class JournalListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Journal(BaseModel):
     __tablename__ = 'journals'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
-    audit_instruction_id = db.Column(
-        db.Integer,
-        db.ForeignKey("report_instructions.id"),
+    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
+    audit_instruction_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey("report_instructions.id"),
     )
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id = db.Column(
-        db.Integer,
-        db.ForeignKey("compliance_periods.id"),
+    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey("compliance_periods.id"),
     )
 
-    audit = db.relationship('Audit')
-    audit_instruction = db.relationship('ReportInstruction')
+    audit = relationship('Audit')
+    audit_instruction = relationship('ReportInstruction')
 
-    compliance = db.relationship('Compliance')
-    compliance_period = db.relationship('CompliancePeriod')
+    compliance = relationship('Compliance')
+    compliance_period = relationship('CompliancePeriod')
 
 
 @dataclass

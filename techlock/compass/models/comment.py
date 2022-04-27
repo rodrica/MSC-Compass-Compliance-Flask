@@ -2,13 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Comment',
@@ -72,28 +75,28 @@ class CommentListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Comment(BaseModel):
     __tablename__ = 'comments'
 
-    user_id = db.Column(db.String, nullable=False)
+    user_id = sa.Column(st.String, nullable=False)
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
+    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
 
-    audit_instruction_id = db.Column(
-        db.Integer,
-        db.ForeignKey("report_instructions.id"),
+    audit_instruction_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey("report_instructions.id"),
     )
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id = db.Column(
-        db.Integer,
-        db.ForeignKey("compliance_periods.id"),
+    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey("compliance_periods.id"),
     )
 
-    timestamp = db.Column(db.TIMESTAMP, nullable=False)
+    timestamp = sa.Column(st.TIMESTAMP, nullable=False)
 
-    audit = db.relationship('Audit')
-    audit_instruction = db.relationship('ReportInstruction')
+    audit = relationship('Audit')
+    audit_instruction = relationship('ReportInstruction')
 
-    compliance = db.relationship('Compliance')
-    compliance_period = db.relationship('CompliancePeriod')
+    compliance = relationship('Compliance')
+    compliance_period = relationship('CompliancePeriod')
 
 
 @dataclass

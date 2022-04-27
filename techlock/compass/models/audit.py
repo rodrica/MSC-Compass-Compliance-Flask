@@ -3,6 +3,8 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
 from sqlalchemy.dialects.postgresql import ARRAY
 from techlock.common.api import (
@@ -11,7 +13,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from ..models.int_enum import IntEnum
 
@@ -81,14 +83,14 @@ class AuditListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Audit(BaseModel):
     __tablename__ = 'audits'
 
-    user_id = db.Column(db.String)
-    reports = db.Column(ARRAY(db.Integer))
-    start_date = db.Column(db.Date)
-    estimated_remediation_date = db.Column(db.Date)
-    remediation_date = db.Column(db.Date)
-    estimated_end_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
-    phase = db.Column(IntEnum(Phase), default=Phase.scoping_and_validation)
+    user_id = sa.Column(st.String)
+    reports = sa.Column(ARRAY(st.Integer))
+    start_date = sa.Column(st.Date)
+    estimated_remediation_date = sa.Column(st.Date)
+    remediation_date = sa.Column(st.Date)
+    estimated_end_date = sa.Column(st.Date)
+    end_date = sa.Column(st.Date)
+    phase = sa.Column(IntEnum(Phase), default=Phase.scoping_and_validation)
 
 
 @dataclass

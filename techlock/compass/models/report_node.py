@@ -2,13 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.report_version import ReportVersionSchema
 
@@ -85,27 +88,27 @@ class ReportNodeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class ReportNode(BaseModel):
     __tablename__ = 'report_nodes'
 
-    entity_id = db.Column('id', db.Integer, primary_key=True)
-    text = db.Column(db.String, nullable=True)
-    number = db.Column(db.String, nullable=True)
-    row = db.Column(db.Integer, nullable=True)
-    table = db.Column(db.Integer, nullable=True)
+    entity_id = sa.Column('id', st.Integer, primary_key=True)
+    text = sa.Column(st.String, nullable=True)
+    number = sa.Column(st.String, nullable=True)
+    row = sa.Column(st.Integer, nullable=True)
+    table = sa.Column(st.Integer, nullable=True)
 
-    parent_id = db.Column(db.Integer, db.ForeignKey('report_nodes.id'), nullable=True)
-    version_id = db.Column(db.Integer, db.ForeignKey('report_versions.id'))
+    parent_id = sa.Column(st.Integer, sa.ForeignKey('report_nodes.id'), nullable=True)
+    version_id = sa.Column(st.Integer, sa.ForeignKey('report_versions.id'))
 
-    parent = db.relationship(
+    parent = relationship(
         'ReportNode',
         remote_side=[entity_id],
         back_populates='children',
     )
 
-    children = db.relationship(
+    children = relationship(
         'ReportNode',
         back_populates='parent',
     )
 
-    version = db.relationship(
+    version = relationship(
         'ReportVersion',
         back_populates='nodes',
     )

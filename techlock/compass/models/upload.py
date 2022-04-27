@@ -2,13 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Upload',
@@ -73,25 +76,25 @@ class UploadListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Upload(BaseModel):
     __tablename__ = 'uploads'
 
-    user_id = db.Column(db.String, nullable=False)
+    user_id = sa.Column(st.String, nullable=False)
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
+    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id = db.Column(
-        db.Integer,
-        db.ForeignKey("compliance_periods.id"),
+    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey("compliance_periods.id"),
     )
 
-    timestamp = db.Column(db.TIMESTAMP, nullable=False)
+    timestamp = sa.Column(st.TIMESTAMP, nullable=False)
 
-    audit_evidence = db.Column(db.Boolean, unique=False)
-    uuid = db.Column(db.String, nullable=False)
+    audit_evidence = sa.Column(st.Boolean, unique=False)
+    uuid = sa.Column(st.String, nullable=False)
 
-    audit = db.relationship('Audit')
+    audit = relationship('Audit')
 
-    compliance = db.relationship('Compliance')
-    compliance_period = db.relationship('CompliancePeriod')
+    compliance = relationship('Compliance')
+    compliance_period = relationship('CompliancePeriod')
 
 
 @dataclass

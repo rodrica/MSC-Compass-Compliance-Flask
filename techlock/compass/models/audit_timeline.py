@@ -2,13 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'AuditTimeline',
@@ -65,14 +68,14 @@ class AuditTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class AuditTimeline(BaseModel):
     __tablename__ = 'audits_timeline'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
-    date = db.Column(db.Date, nullable=True)
-    compliant = db.Column(db.Integer, nullable=False)
-    notice = db.Column(db.Integer, nullable=False)
-    noncompliant = db.Column(db.Integer, nullable=False)
-    pending = db.Column(db.Integer, nullable=False)
+    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
+    date = sa.Column(st.Date, nullable=True)
+    compliant = sa.Column(st.Integer, nullable=False)
+    notice = sa.Column(st.Integer, nullable=False)
+    noncompliant = sa.Column(st.Integer, nullable=False)
+    pending = sa.Column(st.Integer, nullable=False)
 
-    audit = db.relationship('Audit')
+    audit = relationship('Audit')
 
 
 @dataclass

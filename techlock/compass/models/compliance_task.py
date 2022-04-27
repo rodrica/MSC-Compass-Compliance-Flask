@@ -3,6 +3,8 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -10,7 +12,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from ..models.int_enum import IntEnum
 
@@ -71,8 +73,8 @@ class ComplianceTaskListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class ComplianceTask(BaseModel):
     __tablename__ = 'compliance_tasks'
 
-    frequency = db.Column(IntEnum(Frequency), nullable=False)
-    text = db.Column(db.Text, nullable=False)
+    frequency = sa.Column(IntEnum(Frequency), nullable=False)
+    text = sa.Column(st.Text, nullable=False)
 
 
 @dataclass

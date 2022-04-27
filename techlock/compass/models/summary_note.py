@@ -2,13 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'SummaryNote',
@@ -64,13 +67,13 @@ class SummaryNoteListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class SummaryNote(BaseModel):
     __tablename__ = 'summary_notes'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
+    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
+    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
 
-    audit = db.relationship('Audit')
+    audit = relationship('Audit')
 
-    compliance = db.relationship('Compliance')
+    compliance = relationship('Compliance')
 
 
 @dataclass

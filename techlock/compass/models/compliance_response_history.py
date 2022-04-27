@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -9,7 +11,7 @@ from techlock.common.api import (
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.compliance_response import Phase, Status
 
@@ -69,24 +71,24 @@ class ComplianceResponseHistoryListQueryParametersSchema(BaseOffsetListQueryPara
 class ComplianceResponseHistory(BaseModel):
     __tablename__ = 'compliance_responses_history'
 
-    entity_id = db.Column(
+    entity_id = sa.Column(
         'history_id',
-        db.Integer,
+        st.Integer,
         primary_key=True,
     )
-    compliance_response_id = db.Column('id', db.Integer)
-    compliance_id = db.Column(
-        db.Integer,
-        db.ForeignKey('compliances.id'),
+    compliance_response_id = sa.Column('id', st.Integer)
+    compliance_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey('compliances.id'),
         nullable=False,
     )
-    period_id = db.Column(
-        db.Integer,
-        db.ForeignKey('compliance_periods.id'),
+    period_id = sa.Column(
+        st.Integer,
+        sa.ForeignKey('compliance_periods.id'),
         nullable=False,
     )
-    phase = db.Column(IntEnum(Phase), nullable=False)
-    status = db.Column(IntEnum(Status), nullable=False)
+    phase = sa.Column(IntEnum(Phase), nullable=False)
+    status = sa.Column(IntEnum(Status), nullable=False)
 
 
 @dataclass
