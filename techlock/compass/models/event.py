@@ -6,6 +6,7 @@ import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -14,8 +15,6 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
-
-from techlock.compass.models.int_enum import IntEnum
 
 __all__ = [
     'Event',
@@ -57,13 +56,11 @@ class Visibility(enum.Enum):
 
 
 class EventSchema(BaseModelSchema):
-    user_id = mf.String(allow_none=True)
+    audit_id = mf.String(allow_none=True)
+    audit_instruction_id = mf.String(allow_none=True)
 
-    audit_id = mf.Integer(allow_none=True)
-    audit_instruction_id = mf.Integer(allow_none=True)
-
-    compliance_id = mf.Integer(allow_none=True)
-    compliance_period_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
+    compliance_period_id = mf.String(allow_none=True)
 
     timestamp = mf.DateTime(requird=True, allow_none=False)
     type = EnumField(Type, required=True, allow_none=False)
@@ -94,24 +91,15 @@ class EventListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Event(BaseModel):
     __tablename__ = 'events'
 
-    user_id = sa.Column(st.String, nullable=True)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
+    audit_instruction_id = sa.Column(UUID, sa.ForeignKey("report_instructions.id"))
 
-    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
-
-    audit_instruction_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey("report_instructions.id"),
-    )
-
-    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
-    compliance_period_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey("compliance_periods.id"),
-    )
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(UUID, sa.ForeignKey("compliance_periods.id"))
 
     timestamp = sa.Column(st.TIMESTAMP, nullable=False)
-    type = sa.Column(IntEnum(Type), nullable=False)
-    visibility = sa.Column(IntEnum(Visibility), nullable=False)
+    type = sa.Column(st.Enum(Type), nullable=False)
+    visibility = sa.Column(st.Enum(Visibility), nullable=False)
 
     audit = relationship('Audit')
     audit_instruction = relationship('ReportInstruction')

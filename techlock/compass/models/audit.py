@@ -15,8 +15,6 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
-from ..models.int_enum import IntEnum
-
 __all__ = [
     'Audit',
     'AuditSchema',
@@ -55,7 +53,7 @@ class Phase(enum.Enum):
 
 
 class AuditSchema(BaseModelSchema):
-    user_id = mf.String()
+    auditor = mf.String()
     reports = mf.List(mf.Integer)
     start_date = mf.Date()
     estimated_remediation_date = mf.Date()
@@ -83,14 +81,14 @@ class AuditListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Audit(BaseModel):
     __tablename__ = 'audits'
 
-    user_id = sa.Column(st.String)
+    auditor = sa.Column(st.String)
     reports = sa.Column(ARRAY(st.Integer))
     start_date = sa.Column(st.Date)
     estimated_remediation_date = sa.Column(st.Date)
     remediation_date = sa.Column(st.Date)
     estimated_end_date = sa.Column(st.Date)
     end_date = sa.Column(st.Date)
-    phase = sa.Column(IntEnum(Phase), default=Phase.scoping_and_validation)
+    phase = sa.Column(st.Enum(Phase), default=Phase.scoping_and_validation)
 
 
 @dataclass

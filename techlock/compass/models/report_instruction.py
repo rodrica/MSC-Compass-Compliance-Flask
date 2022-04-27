@@ -17,8 +17,6 @@ from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.report_version import Tag
 
-from ..models.int_enum import IntEnum
-
 __all__ = [
     'ReportInstruction',
     'ReportInstructionSchema',
@@ -58,8 +56,8 @@ class ReportInstructionSchema(BaseModelSchema):
     row = mf.Integer(allow_none=True, required=False)
     table = mf.Integer(allow_none=True, required=False)
 
-    version_id = mf.Integer(required=True, allow_none=False)
-    node_id = mf.Integer(required=True, allow_none=False)
+    version_id = mf.String(required=True, allow_none=False)
+    node_id = mf.String(required=True, allow_none=False)
 
     version = mf.Nested('ReportVersionSchema', dump_only=True)
     node = mf.Nested('ReportNodeSchema', dump_only=True)
@@ -88,15 +86,15 @@ class ReportInstruction(BaseModel):
     text = sa.Column(st.String)
     number = sa.Column(st.String)
     priority = sa.Column(st.Integer)
-    tag = sa.Column(IntEnum(Tag), nullable=True)
+    tag = sa.Column(st.Enum(Tag), nullable=True)
     mappings = sa.Column(ARRAY(st.Integer), nullable=False)
     notice = sa.Column(st.Boolean, default=False)
     hidden = sa.Column(st.Boolean, default=False)
     row = sa.Column(st.Integer)
     table = sa.Column(st.Integer)
 
-    version_id = sa.Column(st.Integer, sa.ForeignKey('report_versions.id'))
-    node_id = sa.Column(st.Integer, sa.ForeignKey('report_nodes.id'))
+    version_id = sa.Column(UUID, sa.ForeignKey('report_versions.id'))
+    node_id = sa.Column(UUID, sa.ForeignKey('report_nodes.id'))
 
     version = relationship('ReportVersion')
 

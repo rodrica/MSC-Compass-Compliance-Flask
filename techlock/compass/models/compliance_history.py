@@ -5,7 +5,7 @@ import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -15,7 +15,6 @@ from techlock.common.api import (
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from ..models.compliance import Plan
-from ..models.int_enum import IntEnum
 
 __all__ = [
     'ComplianceHistory',
@@ -41,9 +40,7 @@ COMPLIANCE_HISTORY_CLAIM_SPEC = ClaimSpec(
 
 
 class ComplianceHistorySchema(BaseModelSchema):
-    entity_id = mf.Integer(dump_only=True)
-    compliance_id = mf.Integer()
-    user_id = mf.String(require=True, allow_none=False)
+    compliance_id = mf.String()
     tasks = mf.List(mf.Integer, require=True, allow_none=False)
     start_date = mf.Date(require=True, allow_none=False)
     end_date = mf.Date(required=True, allow_none=False)
@@ -68,13 +65,11 @@ class ComplianceHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema
 class ComplianceHistory(BaseModel):
     __tablename__ = 'compliances_history'
 
-    entity_id = sa.Column('history_id', st.Integer, primary_key=True)
-    audit_id = sa.Column('id', st.Integer)
-    user_id = sa.Column(st.String, nullable=False)
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"), nullable=False)
     tasks = sa.Column(ARRAY(st.Integer), nullable=False)
     start_date = sa.Column(st.Date, nullable=False)
     end_date = sa.Column(st.Date, nullable=False)
-    plan = sa.Column(IntEnum(Plan), nullable=False)
+    plan = sa.Column(st.Enum(Plan), nullable=False)
 
 
 @dataclass

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 import sqlalchemy as sa
-import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -40,9 +40,9 @@ SUMMARY_NOTE_CLAIM_SPEC = ClaimSpec(
 
 
 class SummaryNoteSchema(BaseModelSchema):
-    audit_id = mf.Integer(allow_none=True)
+    audit_id = mf.String(allow_none=True)
 
-    compliance_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
 
     audit = mf.Nested('AuditSchema', dump_only=True)
 
@@ -67,9 +67,9 @@ class SummaryNoteListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class SummaryNote(BaseModel):
     __tablename__ = 'summary_notes'
 
-    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
 
-    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
 
     audit = relationship('Audit')
 

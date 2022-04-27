@@ -18,8 +18,6 @@ from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.report import ReportSchema
 
-from ..models.int_enum import IntEnum
-
 __all__ = [
     'ReportVersion',
     'ReportVersionSchema',
@@ -80,7 +78,7 @@ class ReportVersionSchema(BaseModelSchema):
     tlc_position = mf.Integer(help="")
 
     report = mf.Nested(ReportSchema, dump_only=True)
-    report_id = mf.Integer(allow_none=True, required=False)
+    report_id = mf.String(allow_none=True, required=False)
 
     nodes = mf.Nested(
         'ReportNodeSchema',
@@ -114,16 +112,16 @@ class ReportVersion(BaseModel):
     processor = sa.Column(st.String)
     mapped = sa.Column(st.Boolean, nullable=False)
     compliance_only = sa.Column(st.Boolean, nullable=False)
-    compliance_options = sa.Column(ARRAY(IntEnum(Compliance)), nullable=False)
+    compliance_options = sa.Column(ARRAY(st.Enum(Compliance)), nullable=False)
     highest_priority = sa.Column(st.Integer, nullable=False)
-    tag_options = sa.Column(ARRAY(IntEnum(Tag)), nullable=False)
+    tag_options = sa.Column(ARRAY(st.Enum(Tag)), nullable=False)
     default_navigation = sa.Column(st.Integer)
     section_regex = sa.Column(st.String)
     column_mapping = sa.Column(ARRAY(st.Integer, dimensions=2), nullable=False)
     tlc_header = sa.Column(st.String)
     tlc_position = sa.Column(st.Integer)
 
-    report_id = sa.Column(st.Integer, sa.ForeignKey('reports.id'))
+    report_id = sa.Column(UUID, sa.ForeignKey('reports.id'))
 
     report = relationship(
         'Report',

@@ -14,8 +14,6 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
-from ..models.int_enum import IntEnum
-
 __all__ = [
     'ComplianceTask',
     'ComplianceTaskSchema',
@@ -73,7 +71,7 @@ class ComplianceTaskListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class ComplianceTask(BaseModel):
     __tablename__ = 'compliance_tasks'
 
-    frequency = sa.Column(IntEnum(Frequency), nullable=False)
+    frequency = sa.Column(st.Enum(Frequency), nullable=False)
     text = sa.Column(st.Text, nullable=False)
 
 

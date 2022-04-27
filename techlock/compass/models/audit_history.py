@@ -5,7 +5,7 @@ import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -14,7 +14,6 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
-from ..models.int_enum import IntEnum
 from .audit import Phase
 
 __all__ = [
@@ -44,9 +43,8 @@ AUDIT_HISTORY_CLAIM_SPEC = ClaimSpec(
 
 
 class AuditHistorySchema(BaseModelSchema):
-    entity_id = mf.Integer(dump_only=True)
-    audit_id = mf.Integer()
-    user_id = mf.String()
+    audit_id = mf.String()
+    auditor = mf.String()
     reports = mf.List(mf.Integer)
     start_date = mf.Date()
     estimated_remediation_date = mf.Date()
@@ -74,16 +72,15 @@ class AuditHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class AuditHistory(BaseModel):
     __tablename__ = 'audits_history'
 
-    entity_id = sa.Column('history_id', st.Integer, primary_key=True)
-    audit_id = sa.Column('id', st.Integer)
-    user_id = sa.Column(st.String)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
+    auditor = sa.Column(st.String)
     reports = sa.Column(ARRAY(st.Integer))
     start_date = sa.Column(st.Date)
     estimated_remediation_date = sa.Column(st.Date)
     remediation_date = sa.Column(st.Date)
     estimated_end_date = sa.Column(st.Date)
     end_date = sa.Column(st.Date)
-    phase = sa.Column(IntEnum(Phase), default=Phase.scoping_and_validation)
+    phase = sa.Column(st.Enum(Phase), default=Phase.scoping_and_validation)
 
 
 @dataclass

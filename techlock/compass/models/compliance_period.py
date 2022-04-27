@@ -4,6 +4,7 @@ import marshmallow as ma
 import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -40,8 +41,8 @@ COMPLIANCE_PERIOD_CLAIM_SPEC = ClaimSpec(
 
 
 class CompliancePeriodSchema(BaseModelSchema):
-    compliance_id = mf.Integer(require=True, allow_none=False)
-    task_id = mf.Integer(require=True, allow_none=False)
+    compliance_id = mf.String(require=True, allow_none=False)
+    task_id = mf.String(require=True, allow_none=False)
     start_date = mf.Date(require=True, allow_none=False)
     end_date = mf.Date(required=True, allow_none=False)
 
@@ -67,16 +68,8 @@ class CompliancePeriodListQueryParametersSchema(BaseOffsetListQueryParamsSchema)
 class CompliancePeriod(BaseModel):
     __tablename__ = 'compliance_periods'
 
-    compliance_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey('compliances.id'),
-        nullable=False,
-    )
-    task_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey('compliance_tasks.id'),
-        nullable=False,
-    )
+    compliance_id = sa.Column(UUID, sa.ForeignKey('compliances.id'), nullable=False)
+    task_id = sa.Column(UUID, sa.ForeignKey('compliance_tasks.id'), nullable=False)
     start_date = sa.Column(st.Date, nullable=False)
     end_date = sa.Column(st.Date, nullable=False)
 

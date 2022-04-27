@@ -6,6 +6,7 @@ import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
+from sqlalchemy.dialects.postgresql import UUID
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -13,8 +14,6 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
-
-from ..models.int_enum import IntEnum
 
 __all__ = [
     'ComplianceResponse',
@@ -57,8 +56,8 @@ class Status(enum.Enum):
 
 
 class ComplianceResponseSchema(BaseModelSchema):
-    compliance_id = mf.Integer(requird=True, allow_null=False)
-    period_id = mf.Integer(requird=True, allow_null=False)
+    compliance_id = mf.String(requird=True, allow_null=False)
+    period_id = mf.String(requird=True, allow_null=False)
     phase = EnumField(Phase, requird=True, allow_null=False)
     status = EnumField(Status, requird=True, allow_null=False)
 
@@ -81,18 +80,10 @@ class ComplianceResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchem
 class ComplianceResponse(BaseModel):
     __tablename__ = 'compliance_responses'
 
-    compliance_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey('compliances.id'),
-        nullable=False,
-    )
-    period_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey('compliance_periods.id'),
-        nullable=False,
-    )
-    phase = sa.Column(IntEnum(Phase), nullable=False)
-    status = sa.Column(IntEnum(Status), nullable=False)
+    compliance_id = sa.Column(UUID, sa.ForeignKey('compliances.id'), nullable=False)
+    period_id = sa.Column(UUID, sa.ForeignKey('compliance_periods.id'), nullable=False)
+    phase = sa.Column(st.Enum(Phase), nullable=False)
+    status = sa.Column(st.Enum(Status), nullable=False)
 
 
 @dataclass

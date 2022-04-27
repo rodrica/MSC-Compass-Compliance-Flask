@@ -120,4 +120,4 @@ pyvenv.cfg
 pip-selfcheck.json
 
 .vscode
-/.env
+.env

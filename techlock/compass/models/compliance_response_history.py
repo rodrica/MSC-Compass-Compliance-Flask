@@ -5,6 +5,7 @@ import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
+from sqlalchemy.dialects.postgresql import UUID
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -14,8 +15,6 @@ from techlock.common.api import (
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.compliance_response import Phase, Status
-
-from ..models.int_enum import IntEnum
 
 __all__ = [
     'ComplianceResponseHistory',
@@ -41,10 +40,9 @@ COMPLIANCE_RESPONSE_HISTORY_CLAIM_SPEC = ClaimSpec(
 
 
 class ComplianceResponseHistorySchema(BaseModelSchema):
-    entity_id = mf.Integer(dump_only=True)
-    compliance_response_id = mf.Integer(dump_only=True)
-    compliance_id = mf.Integer(requird=True, allow_null=False)
-    period_id = mf.Integer(requird=True, allow_null=False)
+    compliance_response_id = mf.String(dump_only=True)
+    compliance_id = mf.String(requird=True, allow_null=False)
+    period_id = mf.String(requird=True, allow_null=False)
     phase = EnumField(Phase, requird=True, allow_null=False)
     status = EnumField(Status, requird=True, allow_null=False)
 
@@ -71,24 +69,11 @@ class ComplianceResponseHistoryListQueryParametersSchema(BaseOffsetListQueryPara
 class ComplianceResponseHistory(BaseModel):
     __tablename__ = 'compliance_responses_history'
 
-    entity_id = sa.Column(
-        'history_id',
-        st.Integer,
-        primary_key=True,
-    )
-    compliance_response_id = sa.Column('id', st.Integer)
-    compliance_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey('compliances.id'),
-        nullable=False,
-    )
-    period_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey('compliance_periods.id'),
-        nullable=False,
-    )
-    phase = sa.Column(IntEnum(Phase), nullable=False)
-    status = sa.Column(IntEnum(Status), nullable=False)
+    compliance_response_id = sa.Column(UUID, sa.ForeignKey('compliance_responses.id'), nullable=False)
+    compliance_id = sa.Column(UUID, sa.ForeignKey('compliances.id'), nullable=False)
+    period_id = sa.Column(UUID, sa.ForeignKey('compliance_periods.id'), nullable=False)
+    phase = sa.Column(st.Enum(Phase), nullable=False)
+    status = sa.Column(st.Enum(Status), nullable=False)
 
 
 @dataclass

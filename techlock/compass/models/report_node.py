@@ -4,6 +4,7 @@ import marshmallow as ma
 import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -47,8 +48,8 @@ class ReportNodeSchema(BaseModelSchema):
     row = mf.Integer(allow_none=True)
     table = mf.Integer(allow_none=True)
 
-    parent_id = mf.Integer(allow_none=True)
-    version_id = mf.Integer(required=True, allow_none=False)
+    parent_id = mf.String(allow_none=True)
+    version_id = mf.String(required=True, allow_none=False)
 
     parent = mf.Nested(
         'ReportNodeSchema',
@@ -88,18 +89,17 @@ class ReportNodeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class ReportNode(BaseModel):
     __tablename__ = 'report_nodes'
 
-    entity_id = sa.Column('id', st.Integer, primary_key=True)
     text = sa.Column(st.String, nullable=True)
     number = sa.Column(st.String, nullable=True)
     row = sa.Column(st.Integer, nullable=True)
     table = sa.Column(st.Integer, nullable=True)
 
-    parent_id = sa.Column(st.Integer, sa.ForeignKey('report_nodes.id'), nullable=True)
-    version_id = sa.Column(st.Integer, sa.ForeignKey('report_versions.id'))
+    parent_id = sa.Column(UUID, sa.ForeignKey('report_nodes.id'), nullable=True)
+    version_id = sa.Column(UUID, sa.ForeignKey('report_versions.id'))
 
     parent = relationship(
         'ReportNode',
-        remote_side=[entity_id],
+        remote_side=['entity_id'],
         back_populates='children',
     )
 

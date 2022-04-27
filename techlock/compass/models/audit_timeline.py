@@ -4,6 +4,7 @@ import marshmallow as ma
 import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -40,7 +41,7 @@ AUDIT_TIMELINE_CLAIM_SPEC = ClaimSpec(
 
 
 class AuditTimelineSchema(BaseModelSchema):
-    audit_id = mf.Integer()
+    audit_id = mf.String()
     date = mf.Date(required=True, allow_none=False)
     compliant = mf.Integer(requird=True, allow_none=False)
     notice = mf.Integer(requird=True, allow_none=False)
@@ -68,7 +69,7 @@ class AuditTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class AuditTimeline(BaseModel):
     __tablename__ = 'audits_timeline'
 
-    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
     date = sa.Column(st.Date, nullable=True)
     compliant = sa.Column(st.Integer, nullable=False)
     notice = sa.Column(st.Integer, nullable=False)

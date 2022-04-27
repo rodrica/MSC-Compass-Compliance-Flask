@@ -15,8 +15,6 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
-from ..models.int_enum import IntEnum
-
 __all__ = [
     'Compliance',
     'ComplianceSchema',
@@ -80,7 +78,7 @@ class Compliance(BaseModel):
     tasks = sa.Column(ARRAY(st.Integer), nullable=False)
     start_date = sa.Column(st.Date, nullable=False)
     end_date = sa.Column(st.Date, nullable=False)
-    plan = sa.Column(IntEnum(Plan), nullable=False)
+    plan = sa.Column(st.Enum(Plan), nullable=False)
 
 
 @dataclass

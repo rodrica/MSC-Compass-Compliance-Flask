@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 import sqlalchemy as sa
-import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -40,11 +40,11 @@ JOURNAL_CLAIM_SPEC = ClaimSpec(
 
 
 class JournalSchema(BaseModelSchema):
-    audit_id = mf.Integer(allow_none=True)
-    audit_instruction_id = mf.Integer(allow_none=True)
+    audit_id = mf.String(allow_none=True)
+    audit_instruction_id = mf.String(allow_none=True)
 
-    compliance_id = mf.Integer(allow_none=True)
-    compliance_period_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
+    compliance_period_id = mf.String(allow_none=True)
 
     audit = mf.Nested('AuditSchema', dump_only=True)
     audit_instruction = mf.Nested('ReportInstructionSchema', dump_only=True)
@@ -71,17 +71,11 @@ class JournalListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Journal(BaseModel):
     __tablename__ = 'journals'
 
-    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
-    audit_instruction_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey("report_instructions.id"),
-    )
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
+    audit_instruction_id = sa.Column(UUID, sa.ForeignKey("report_instructions.id"))
 
-    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
-    compliance_period_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey("compliance_periods.id"),
-    )
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(UUID, sa.ForeignKey("compliance_periods.id"))
 
     audit = relationship('Audit')
     audit_instruction = relationship('ReportInstruction')

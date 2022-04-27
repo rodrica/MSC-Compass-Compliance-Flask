@@ -4,6 +4,7 @@ import marshmallow as ma
 import marshmallow.fields as mf
 import sqlalchemy as sa
 import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
@@ -40,12 +41,10 @@ UPLOAD_CLAIM_SPEC = ClaimSpec(
 
 
 class UploadSchema(BaseModelSchema):
-    user_id = mf.String(require=True, allow_none=False)
+    audit_id = mf.String(allow_none=True)
 
-    audit_id = mf.Integer(allow_none=True)
-
-    compliance_id = mf.Integer(allow_none=True)
-    compliance_period_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
+    compliance_period_id = mf.String(allow_none=True)
 
     timestamp = mf.DateTime(requird=True, allow_none=False)
 
@@ -76,15 +75,10 @@ class UploadListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Upload(BaseModel):
     __tablename__ = 'uploads'
 
-    user_id = sa.Column(st.String, nullable=False)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
 
-    audit_id = sa.Column(st.Integer, sa.ForeignKey("audits.id"))
-
-    compliance_id = sa.Column(st.Integer, sa.ForeignKey("compliances.id"))
-    compliance_period_id = sa.Column(
-        st.Integer,
-        sa.ForeignKey("compliance_periods.id"),
-    )
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(UUID, sa.ForeignKey("compliance_periods.id"))
 
     timestamp = sa.Column(st.TIMESTAMP, nullable=False)
 
