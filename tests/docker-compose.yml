@@ -33,8 +33,6 @@ services:
       context: ../
       args:
         NEXUS_HOST: ${NEXUS_HOST}
-        NEXUS_USERNAME: ${NEXUS_USERNAME}
-        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - redis
       - dynamodb
@@ -52,8 +50,6 @@ services:
       dockerfile: test.Dockerfile
       args:
         NEXUS_HOST: ${NEXUS_HOST}
-        NEXUS_USERNAME: ${NEXUS_USERNAME}
-        NEXUS_PASSWORD: ${NEXUS_PASSWORD}
     depends_on:
       - app
       - redis
