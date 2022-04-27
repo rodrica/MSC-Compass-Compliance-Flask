@@ -26,9 +26,6 @@ blp = Blueprint('uploads', __name__, url_prefix='/uploads')
 @blp.route('')
 class Uploads(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=UploadListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=UploadPageableSchema)
@@ -62,9 +59,6 @@ class Uploads(MethodView):
 
 @blp.route('/<upload_id>')
 class UploadById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_upload(self, current_user: AuthInfo, claims: ClaimSet, upload_id: str):
         upload = Upload.get(

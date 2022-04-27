@@ -26,9 +26,6 @@ blp = Blueprint('events', __name__, url_prefix='/events')
 @blp.route('')
 class Events(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=EventListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=EventPageableSchema)
@@ -62,9 +59,6 @@ class Events(MethodView):
 
 @blp.route('/<event_id>')
 class EventById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_event(self, current_user: AuthInfo, claims: ClaimSet, event_id: str):
         event = Event.get(

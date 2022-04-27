@@ -27,9 +27,6 @@ blp = Blueprint(
 @blp.route('')
 class ComplianceResponseHistorys(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(
         schema=ComplianceResponseHistoryListQueryParametersSchema,
@@ -55,9 +52,6 @@ class ComplianceResponseHistorys(MethodView):
 
 @blp.route('/<compliance_response_id>')
 class ComplianceResponseHistoryById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_compliance_response(self, current_user: AuthInfo, claims: ClaimSet, compliance_response_id: str):
         compliance_response = ComplianceResponseHistory.get(

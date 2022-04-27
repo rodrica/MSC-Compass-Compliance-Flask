@@ -26,9 +26,6 @@ blp = Blueprint('report_versions', __name__, url_prefix='/report_versions')
 @blp.route('')
 class ReportVersions(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(
         schema=ReportVersionListQueryParametersSchema,
@@ -65,9 +62,6 @@ class ReportVersions(MethodView):
 
 @blp.route('/<report_version_id>')
 class ReportVersionById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_report_version(self, current_user: AuthInfo, claims: ClaimSet, report_version_id: str):
         report_version = ReportVersion.get(

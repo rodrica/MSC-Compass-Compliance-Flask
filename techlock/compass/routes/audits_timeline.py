@@ -26,9 +26,6 @@ blp = Blueprint('audits_timeline', __name__, url_prefix='/audits_timeline')
 @blp.route('')
 class AuditTimelines(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(
         schema=AuditTimelineListQueryParametersSchema,
@@ -65,9 +62,6 @@ class AuditTimelines(MethodView):
 
 @blp.route('/<audit_id>')
 class AuditTimelineById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_audit(self, current_user: AuthInfo, claims: ClaimSet, audit_id: str):
         audit = AuditTimeline.get(

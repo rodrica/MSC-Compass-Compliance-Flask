@@ -26,9 +26,6 @@ blp = Blueprint('journals', __name__, url_prefix='/journals')
 @blp.route('')
 class Journals(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=JournalListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=JournalPageableSchema)
@@ -62,9 +59,6 @@ class Journals(MethodView):
 
 @blp.route('/<journal_id>')
 class JournalById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_journal(self, current_user: AuthInfo, claims: ClaimSet, journal_id: str):
         journal = Journal.get(

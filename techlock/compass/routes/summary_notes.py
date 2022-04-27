@@ -26,9 +26,6 @@ blp = Blueprint('summary_notes', __name__, url_prefix='/summary_notes')
 @blp.route('')
 class SummaryNotes(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(
         schema=SummaryNoteListQueryParametersSchema,
@@ -65,9 +62,6 @@ class SummaryNotes(MethodView):
 
 @blp.route('/<summary_note_id>')
 class SummaryNoteById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_summary_note(self, current_user: AuthInfo, claims: ClaimSet, summary_note_id: str):
         summary_note = SummaryNote.get(

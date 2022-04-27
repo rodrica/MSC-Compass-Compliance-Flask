@@ -26,9 +26,6 @@ blp = Blueprint('compliance_tasks', __name__, url_prefix='/compliance_tasks')
 @blp.route('')
 class ComplianceTasks(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(
         schema=ComplianceTaskListQueryParametersSchema,
@@ -65,9 +62,6 @@ class ComplianceTasks(MethodView):
 
 @blp.route('/<compliance_task_id>')
 class ComplianceTaskById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_compliance_task(self, current_user: AuthInfo, claims: ClaimSet, compliance_task_id: str):
         compliance_task = ComplianceTask.get(

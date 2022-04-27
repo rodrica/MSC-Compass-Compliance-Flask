@@ -30,9 +30,6 @@ blp = Blueprint(
 @blp.route('')
 class CompliancePeriods(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(
         schema=CompliancePeriodListQueryParametersSchema,
@@ -69,9 +66,6 @@ class CompliancePeriods(MethodView):
 
 @blp.route('/<compliance_period_id>')
 class CompliancePeriodById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_compliance_period(self, current_user: AuthInfo, claims: ClaimSet, compliance_period_id: str):
         compliance_period = CompliancePeriod.get(

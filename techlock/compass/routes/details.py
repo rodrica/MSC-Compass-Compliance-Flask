@@ -26,9 +26,6 @@ blp = Blueprint('details', __name__, url_prefix='/details')
 @blp.route('')
 class Details(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=DetailListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=DetailPageableSchema)
@@ -62,9 +59,6 @@ class Details(MethodView):
 
 @blp.route('/<detail_id>')
 class DetailById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_detail(self, current_user: AuthInfo, claims: ClaimSet, detail_id: str):
         detail = Detail.get(

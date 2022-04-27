@@ -26,9 +26,6 @@ blp = Blueprint('comments', __name__, url_prefix='/comments')
 @blp.route('')
 class Comments(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=CommentListQueryParametersSchema, location='query')
     @blp.response(status_code=200, schema=CommentPageableSchema)
@@ -62,9 +59,6 @@ class Comments(MethodView):
 
 @blp.route('/<comment_id>')
 class CommentById(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     def get_comment(self, current_user: AuthInfo, claims: ClaimSet, comment_id: str):
         comment = Comment.get(
