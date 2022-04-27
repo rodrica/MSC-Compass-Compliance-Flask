@@ -5,7 +5,6 @@ import pytest
 from techlock.common.api.flask import create_flask
 from techlock.common.config import AuthInfo, ConfigManager
 from techlock.common.orm.sqlalchemy import db
-from techlock.common.util.aws import get_client
 from techlock.common.util.helper import supress
 
 flask_wrapper = create_flask(__name__, enable_jwt=False, audience='rules-service')
