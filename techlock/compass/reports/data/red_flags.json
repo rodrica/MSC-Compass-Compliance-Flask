@@ -1,0 +1,164 @@
+{
+  "columnMapping": [],
+  "complianceOnly": false,
+  "complianceOptions": [
+    0,
+    1,
+    5
+  ],
+  "component": "i",
+  "defaultNavigation": null,
+  "highestPriority": 0,
+  "mapped": false,
+  "name": "Red Flags",
+  "processor": "i",
+  "requirements": [
+    {
+      "instructions": [
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "B1",
+          "priority": null,
+          "row": 1,
+          "table": null,
+          "tag": null,
+          "text": "Obtain approval of the initial written Program by the board of directors or a committee of the board, ensuring oversight of the development, implementation and administration of the Program, training staff, and overseeing service provider arrangements.",
+          "uuid": "2b87542b-71e7-4d8c-9772-9da72e4353ff"
+        }
+      ],
+      "number": "1",
+      "row": null,
+      "table": 0,
+      "text": "General Requirements"
+    },
+    {
+      "instructions": [
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "E1",
+          "priority": null,
+          "row": 3,
+          "table": null,
+          "tag": null,
+          "text": "Identity Theft Program must identify relevant Red Flags for covered accounts, including at least the following:\n(1) Alerts, notifications, or other warnings received from consumer reporting agencies or service providers, such as fraud detection services;\n(2) The presentation of suspicious documents;\n(3) The presentation of suspicious personal identifying information, such as a suspicious address change;\n(4) The unusual use of, or other suspicious activity related to, a covered account; and\n(5) Notice from customers, victims of identity theft, law enforcement authorities, or other persons regarding possible identity theft in connection with covered accounts held by the financial institution or creditor.",
+          "uuid": "f4b96d30-5ab0-48f8-a8f6-8b6172568941"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "E2",
+          "priority": null,
+          "row": 4,
+          "table": null,
+          "tag": null,
+          "text": "Identity Theft Program must detect Red Flags that have been incorporated into the Program, through methods such as:\n(a) Obtaining identifying information about, and verifying the identity of, a person opening a covered account, for example, using the policies and procedures regarding identification and verification set forth in the Customer Identification Program rules implementing 31 U.S.C. 5318(l) (31 CFR 103.121); and\n(b) Authenticating customers, monitoring transactions, and verifying the validity of change of address requests, in the case of existing covered accounts.",
+          "uuid": "7121c68e-49b4-4cf0-8d6f-fc146a7d04f1"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "E3",
+          "priority": null,
+          "row": 5,
+          "table": null,
+          "tag": null,
+          "text": "Identity Theft Program must respond appropriately to any Red Flags that are detected to prevent and mitigate identity theft. Examples of responses include:\n(a) Monitoring a covered account for evidence of identity theft;\n(b) Contacting the customer;\n(c) Changing any passwords, security codes, or other security devices that permit access to a covered account;\n(d) Reopening a covered account with a new account number;\n(e) Not opening a new covered account;\n(f) Closing an existing covered account;\n(g) Not attempting to collect on a covered account or not selling a covered account to a debt collector;\n(h) Notifying law enforcement; or\n(i) Determining that no response is warranted under the particular circumstances.",
+          "uuid": "4e94f20e-a841-4544-8ab6-cb4b1dc044fb"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "E4",
+          "priority": null,
+          "row": 6,
+          "table": null,
+          "tag": null,
+          "text": "Identity Theft Program must be updated periodically, to reflect changes in risks to customers or to the safety and soundness of the financial institution or creditor from identity theft. Examples of events that indicate an update is needed include:\n(a) The experiences of the financial institution or creditor with identity theft;\n(b) Changes in methods of identity theft;\n(c) Changes in methods to detect, prevent, and mitigate identity theft;\n(d) Changes in the types of accounts that the financial institution or creditor offers or maintains; and\n(e) Changes in the business arrangements of the financial institution or creditor, including mergers, acquisitions, alliances, joint ventures, and service provider arrangements.",
+          "uuid": "e42c92a3-a036-48c2-a034-c33a4392657d"
+        }
+      ],
+      "number": "2",
+      "row": null,
+      "table": 0,
+      "text": "Four Basic Elements of the Identity Theft Program"
+    },
+    {
+      "instructions": [
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "A1",
+          "priority": null,
+          "row": 8,
+          "table": null,
+          "tag": null,
+          "text": "Identity Theft Program includes oversight by the board of directors, an appropriate committee of the board, or a designated employee at the level of senior management. This oversight includes:\n(1) Assigning specific responsibility for the Program’s implementation;\n(2) Reviewing reports prepared by staff regarding compliance by the financial institution or creditor with § 681.2 of this part; and\n(3) Approving material changes to the Program as necessary to address changing identity theft risks.",
+          "uuid": "30c45c0c-247e-4d65-a7b1-0a451d6d1184"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "A2",
+          "priority": null,
+          "row": 9,
+          "table": null,
+          "tag": null,
+          "text": "Staff of the financial institution or creditor responsible for development, implementation, and administration of its Program should report to the board of directors, an appropriate committee of the board, or a designated employee at the level of senior management, at least annually, on compliance by the financial institution or creditor with § 681.2 of this part.",
+          "uuid": "3247834b-5b64-4ff4-9af2-bd3ff868e8ed"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "A3",
+          "priority": null,
+          "row": 10,
+          "table": null,
+          "tag": null,
+          "text": "The report should address material matters related to the Program and evaluate issues such as: The effectiveness of the policies and procedures of the financial institution or creditor in addressing the risk of identity theft in connection with the opening of covered accounts and with respect to existing covered accounts; service provider arrangements; significant incidents involving identity theft and management’s response; and recommendations for material changes to the Program.",
+          "uuid": "38ce395f-b689-471b-8e4d-f60c0edb6eb3"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "A4",
+          "priority": null,
+          "row": 11,
+          "table": null,
+          "tag": null,
+          "text": "Whenever a financial institution or creditor engages a service provider to perform an activity in connection with one or more covered accounts the financial institution or creditor should take steps to ensure that the activity of the service provider is conducted in accordance with reasonable policies and procedures designed to detect, prevent, and mitigate the risk of identity theft. For example, a financial institution or creditor could require the service provider by contract to have policies and procedures to detect relevant Red Flags that may arise in the performance of the service provider’s activities, and either report the Red Flags to the financial institution or creditor, or to take appropriate steps to prevent or mitigate identity theft.",
+          "uuid": "5d7d4ea2-baec-4c21-b7ed-ebd6cf30d0cc"
+        }
+      ],
+      "number": "3",
+      "row": null,
+      "table": 0,
+      "text": "Administering the Identity Theft Program"
+    }
+  ],
+  "sectionRegex": null,
+  "tagOptions": [],
+  "template": "red_flags_rule.docx",
+  "tlcHeader": "Red Flags Rule",
+  "tlcPosition": 16,
+  "uuid": "aa65208c-2295-4477-9a92-fea07f24fdc4"
+}

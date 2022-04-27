@@ -1,0 +1,159 @@
+{
+  "columnMapping": [],
+  "complianceOnly": false,
+  "complianceOptions": [
+    0,
+    1,
+    5
+  ],
+  "component": "i",
+  "defaultNavigation": null,
+  "highestPriority": 0,
+  "mapped": false,
+  "name": "NRS 603A",
+  "processor": "i",
+  "requirements": [
+    {
+      "instructions": [
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "D1",
+          "priority": null,
+          "row": 2,
+          "table": null,
+          "tag": null,
+          "text": "Take reasonable measures to ensure the destruction of those records when the business decides that it will no longer maintain the records.",
+          "uuid": "4f7f16da-6177-47cb-a2f8-29c10662afeb"
+        }
+      ],
+      "number": "603A.200",
+      "row": null,
+      "table": 0,
+      "text": "Destruction of certain records"
+    },
+    {
+      "instructions": [
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "S1",
+          "priority": null,
+          "row": 4,
+          "table": null,
+          "tag": null,
+          "text": "Implement and maintain reasonable security measures to protect personal information from unauthorized access, acquisition, destruction, use, modification or disclosure.",
+          "uuid": "451cb304-cf58-4042-a041-8c61835e54d4"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "S2",
+          "priority": null,
+          "row": 5,
+          "table": null,
+          "tag": null,
+          "text": "A contract for the disclosure of the personal information of a resident of this State which is maintained by a data collector must include a provision requiring the person to whom the information is disclosed to implement and maintain reasonable security measures to protect those records from unauthorized access, acquisition, destruction, use, modification or disclosure.",
+          "uuid": "c16fc9f2-912c-43a5-b220-bc38183875be"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "S3",
+          "priority": null,
+          "row": 6,
+          "table": null,
+          "tag": null,
+          "text": "If a state or federal law requires a data collector to provide greater protection to records that contain personal information of a resident of this State which are maintained by the data collector and the data collector is in compliance with the provisions of that state or federal law, the data collector shall be deemed to be in compliance with the provisions of this section.",
+          "uuid": "101d4b67-5e4a-4744-86a5-ed62e086a09e"
+        }
+      ],
+      "number": "603A.210",
+      "row": null,
+      "table": 0,
+      "text": "Security measures"
+    },
+    {
+      "instructions": [
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "C1",
+          "priority": null,
+          "row": 8,
+          "table": null,
+          "tag": null,
+          "text": "If a data collector doing business in this State accepts a payment card in connection with a sale of goods or services, the data collector shall comply with the current version of the Payment Card Industry (PCI) Data Security Standard, as adopted by the PCI Security Standards Council or its successor organization, with respect to those transactions, not later than the date for compliance set forth in the Payment Card Industry (PCI) Data Security Standard or by the PCI Security Standards Council or its successor organization.",
+          "uuid": "0ccf9767-e499-4622-809a-8fce80c689ff"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "C2",
+          "priority": null,
+          "row": 9,
+          "table": null,
+          "tag": null,
+          "text": "A data collector doing business in this State to whom subsection 1 does not apply shall not:\n   (a) Transfer any personal information through an electronic, nonvoice transmission other than a facsimile to a person outside of the secure system of the data collector unless the data collector uses encryption to ensure the security of electronic transmission; or\n   (b) Move any data storage device containing personal information beyond the logical or physical controls of the data collector or its data storage contractor unless the data collector uses encryption to ensure the security of the information.",
+          "uuid": "4118dc37-eb4e-48b9-984f-b394702a1ddb"
+        }
+      ],
+      "number": "603A.215",
+      "row": null,
+      "table": 0,
+      "text": "Security measures for data collector that accepts payment card; use of encryption; liability for damages; applicability"
+    },
+    {
+      "instructions": [
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "B1",
+          "priority": null,
+          "row": 11,
+          "table": null,
+          "tag": null,
+          "text": "Disclose any breach of the security of the system data following discovery or notification of the breach to any resident of this State whose unencrypted personal information was, or is reasonably believed to have been, acquired by an unauthorized person. The disclosure must be made in the most expedient time possible and without unreasonable delay, consistent with the legitimate needs of law enforcement, as provided in subsection 3, or any measures necessary to determine the scope of the breach and restore the reasonable integrity of the system data.",
+          "uuid": "8cfd9e19-d491-48b4-a629-29528e5797fc"
+        },
+        {
+          "displayNumber": "",
+          "hidden": false,
+          "mappings": [],
+          "notice": false,
+          "number": "B2",
+          "priority": null,
+          "row": 12,
+          "table": null,
+          "tag": null,
+          "text": "Notify the owner or licensee of the information of any breach of the security of the system data immediately following discovery if the personal information was, or is reasonably believed to have been, acquired by an unauthorized person.",
+          "uuid": "e4586edf-36b9-4592-a614-e18008fd8acc"
+        }
+      ],
+      "number": "603A.220",
+      "row": null,
+      "table": 0,
+      "text": "Disclosure of breach of security of system data; methods of disclosure"
+    }
+  ],
+  "sectionRegex": null,
+  "tagOptions": [],
+  "template": "nrs_603a.docx",
+  "tlcHeader": "NRS 603A",
+  "tlcPosition": 14,
+  "uuid": "827d23f6-24ec-4c8a-b41c-77c7ea0da480"
+}

@@ -1,0 +1,387 @@
+{
+  "columnMapping": [
+    {
+      "mapping": [
+        0,
+        1,
+        2,
+        4
+      ]
+    }
+  ],
+  "complianceOnly": false,
+  "complianceOptions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "component": "s1gi",
+  "defaultNavigation": null,
+  "highestPriority": 0,
+  "mapped": true,
+  "name": "NRS 603A (PCI DSS v3.1-3.2.x)",
+  "processor": "sgi",
+  "requirements": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D1",
+                  "hidden": false,
+                  "mappings": [
+                    "df645b05-c01a-4999-ae9f-7c4b167d73dc",
+                    "2a26ee10-b79b-4caf-a312-2be6c200e82e",
+                    "3ff763c2-c991-4a6d-8b1b-03e23654318d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the data-retention and disposal documentation** examined to verify policies, procedures, and processes define the following for all confidential data (CHD) storage:\n* Limiting data storage amount and retention time to that which is required for legal, regulatory, and/or business requirements for data retention.\n* Specific requirements for retention of confidential data.\n* Processes for secure deletion of confidential data when no longer needed for legal, regulatory, or business reasons.\n* A quarterly process for identifying and securely deleting stored confidential data that exceeds defined retention requirements.",
+                  "uuid": "092df39c-aafd-4b11-a349-b0910c4355b2"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Take reasonable measures to ensure the destruction of those records when the business decides that it will no longer maintain the records."
+            }
+          ],
+          "number": "D1",
+          "row": null,
+          "table": null,
+          "text": ""
+        }
+      ],
+      "number": "603A.200",
+      "row": null,
+      "table": 0,
+      "text": "Destruction of certain records"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "S1",
+                  "hidden": false,
+                  "mappings": [
+                    "6f06cc98-6e16-4648-b1b4-8e859af0679f",
+                    "5c3ba559-dc34-402c-9fbf-ccdcdae9e356",
+                    "837ebba0-392a-49d3-ad22-a16a1537c51d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the written policy for access control** that was examined to verify the policy incorporates 7.1.1 through 7.1.4 as follows:\n* Defining access needs and privilege assignments for each role.\n* Restriction of access to privileged user IDs to least privileges necessary to perform job responsibilities.\n* Assignment of access based on individual personnel’s job classification and function\n* Documented approval (electronically or in writing) by authorized parties for all access, including listing of specific privileges approved.",
+                  "uuid": "ffe94a24-a1fc-4e3d-96c0-d702b590ff19"
+                }
+              ],
+              "number": null,
+              "row": 6,
+              "table": null,
+              "text": "Implement and maintain reasonable security measures to protect personal information from unauthorized access, acquisition, destruction, use, modification or disclosure."
+            }
+          ],
+          "number": "S1",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "S2",
+                  "hidden": false,
+                  "mappings": [
+                    "65ce9180-a37a-4ca2-a960-a9334245a57c",
+                    "656fe432-6254-4711-a793-11a6a30306c3",
+                    "86c927f1-986c-4fb1-b215-a6f6e5eaf2b5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 8,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** written agreements for each service provider were observed to confirm they include an acknowledgement by service providers that they will maintain all applicable PCI DSS requirements to the extent the service provider handles, has access to, or otherwise stores, processes, or transmits the customer’s confidential data or sensitive authentication data, or manages the customer's confidential data environment on behalf of a customer.",
+                  "uuid": "9c8430c6-8d97-42d0-ad76-3237cfd2915a"
+                }
+              ],
+              "number": null,
+              "row": 8,
+              "table": null,
+              "text": "A contract for the disclosure of the personal information of a resident of this State which is maintained by a data collector must include a provision requiring the person to whom the information is disclosed to implement and maintain reasonable security measures to protect those records from unauthorized access, acquisition, destruction, use, modification or disclosure."
+            }
+          ],
+          "number": "S2",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "S3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** how the data collection company is in compliance with state or federal law.",
+                  "uuid": "c3c5cda3-d6f0-4637-9543-da7ee15fb65d"
+                }
+              ],
+              "number": null,
+              "row": 10,
+              "table": null,
+              "text": "If a state or federal law requires a data collector to provide greater protection to records that contain personal information of a resident of this State which are maintained by the data collector and the data collector is in compliance with the provisions of that state or federal law, the data collector shall be deemed to be in compliance with the provisions of this section."
+            }
+          ],
+          "number": "S3",
+          "row": null,
+          "table": null,
+          "text": ""
+        }
+      ],
+      "number": "603A.210",
+      "row": null,
+      "table": 0,
+      "text": "Security measures"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "C1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the current PCI DSS version the data collection company is compliant with.",
+                  "uuid": "a55b10dd-75cb-4458-954b-c3ed7b530c76"
+                }
+              ],
+              "number": null,
+              "row": 13,
+              "table": null,
+              "text": "If a data collector doing business in this State accepts a payment card in connection with a sale of goods or services, the data collector shall comply with the current version of the Payment Card Industry (PCI) Data Security Standard, as adopted by the PCI Security Standards Council or its successor organization, with respect to those transactions, not later than the date for compliance set forth in the Payment Card Industry (PCI) Data Security Standard or by the PCI Security Standards Council or its successor organization."
+            }
+          ],
+          "number": "C1",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "C2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "0fa069c8-b060-4a28-8177-3ee68a2811d2",
+                    "14b17383-c042-41e5-80c6-cc441c9862f6",
+                    "14ccaf35-c013-40db-830b-8a0ee2d0735a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** all locations where confidential data is transmitted or received over open, public networks.",
+                  "uuid": "c4c27605-1b1e-40b2-b597-24e98fd15cff"
+                },
+                {
+                  "displayNumber": "C2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "c79bf16a-c917-4048-af6b-a48562fa5d5c",
+                    "1be905e1-17c6-4339-82e0-b8b4cce2c125",
+                    "6b3090d5-168c-46cb-83ac-433597bca8b6"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented standards** examined.",
+                  "uuid": "5e2e5934-7f82-4596-9aff-21aada9c8377"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the documented standards were examined and compared to system configurations to verify the use of:",
+                  "uuid": "bdb22a1c-51c8-4c3f-9614-4325ee837c42"
+                },
+                {
+                  "displayNumber": "C2-3",
+                  "hidden": false,
+                  "mappings": [
+                    "0a47100c-79d1-40b0-9b82-85419dc67550",
+                    "32479560-a5e9-41cc-bf89-f6cf9453188e",
+                    "c6c92846-f2b9-439b-9e5f-1d78ebfa787b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "Security protocols observed in use",
+                  "uuid": "8ee664d0-193a-4065-9132-4b7114ddf8d9"
+                },
+                {
+                  "displayNumber": "C2-4",
+                  "hidden": false,
+                  "mappings": [
+                    "479eeb2f-4832-4cee-8eeb-e1451886f18c",
+                    "e4ef8498-ecd0-4413-b9cd-891076df0841",
+                    "a7778528-0a9b-412d-82f0-a719f8aec15a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "Strong cryptography for all locations",
+                  "uuid": "6aaeba73-0e5b-4711-a7f1-41b67a304a69"
+                }
+              ],
+              "number": null,
+              "row": 15,
+              "table": null,
+              "text": "A data collector doing business in this State to whom subsection 1 does not apply shall not:\n(a) Transfer any personal information through an electronic, nonvoice transmission other than a facsimile to a person outside of the secure system of the data collector unless the data collector uses encryption to ensure the security of electronic transmission; or\n(b) Move any data storage device containing personal information beyond the logical or physical controls of the data collector or its data storage contractor unless the data collector uses encryption to ensure the security of the information."
+            }
+          ],
+          "number": "C2",
+          "row": null,
+          "table": null,
+          "text": ""
+        }
+      ],
+      "number": "603A.215",
+      "row": null,
+      "table": 0,
+      "text": "Security measures for data collector that accepts payment card; use of encryption; liability for damages; applicability"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "B1",
+                  "hidden": false,
+                  "mappings": [
+                    "d30be641-7c4a-41fd-a987-0821721e8e29",
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Roles and responsibilities.\n* Communication strategies.\n* Requirement for notification of the payment brands.\n* Specific incident response procedures.\n* Business recovery and continuity procedures.\n* Data back-up processes.\n* Analysis of legal requirements for reporting compromises.\n* Coverage for all critical system components.\n* Responses for all critical system components.\n* Reference or inclusion of incident response procedures from the payment brands.",
+                  "uuid": "b1d247ed-8c2e-4449-8681-f5b85a65d903"
+                }
+              ],
+              "number": null,
+              "row": 22,
+              "table": null,
+              "text": "Disclose any breach of the security of the system data following discovery or notification of the breach to any resident of this State whose unencrypted personal information was, or is reasonably believed to have been, acquired by an unauthorized person. The disclosure must be made in the most expedient time possible and without unreasonable delay, consistent with the legitimate needs of law enforcement, as provided in subsection 3, or any measures necessary to determine the scope of the breach and restore the reasonable integrity of the system data."
+            }
+          ],
+          "number": "B1",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "B2",
+                  "hidden": false,
+                  "mappings": [
+                    "d30be641-7c4a-41fd-a987-0821721e8e29",
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Roles and responsibilities.\n* Communication strategies.\n* Requirement for notification of the payment brands.\n* Specific incident response procedures.\n* Business recovery and continuity procedures.\n* Data back-up processes.\n* Analysis of legal requirements for reporting compromises.\n* Coverage for all critical system components.\n* Responses for all critical system components.\n* Reference or inclusion of incident response procedures from the payment brands.",
+                  "uuid": "6fa9c429-d95b-4794-888a-14fa1c9b1a69"
+                }
+              ],
+              "number": null,
+              "row": 24,
+              "table": null,
+              "text": "Notify the owner or licensee of the information of any breach of the security of the system data immediately following discovery if the personal information was, or is reasonably believed to have been, acquired by an unauthorized person."
+            }
+          ],
+          "number": "B2",
+          "row": null,
+          "table": null,
+          "text": ""
+        }
+      ],
+      "number": "603A.220",
+      "row": null,
+      "table": 0,
+      "text": "Disclosure of breach of security of system data; methods of disclosure"
+    }
+  ],
+  "sectionRegex": null,
+  "tagOptions": [],
+  "template": "nrs_603a_pci_dss_v3-1-3-2.docx",
+  "tlcHeader": "NRS 603A",
+  "tlcPosition": 15,
+  "uuid": "0b855f7d-6a45-4931-9abf-59cc6b7e27dd"
+}

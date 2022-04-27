@@ -3,6 +3,7 @@ repos:
   rev: v4.0.1
   hooks:
   - id: check-added-large-files
+    args: ['--maxkb=2048']
   - id: check-shebang-scripts-are-executable
   # - id: check-yaml
   - id: detect-aws-credentials
