@@ -3,7 +3,6 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -56,8 +55,10 @@ class AuditResponsePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter audit_responses by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter audit_responses by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -67,14 +68,20 @@ class AuditResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class AuditResponse(BaseModel):
     __tablename__ = 'audit_responses'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"),
-                         nullable=False)
-    instruction_id = db.Column(db.Integer,
-                               db.ForeignKey("report_instructions.id"),
-                               nullable=False)
-    compliance = db.Column(IntEnum(Compliance),
-                           nullable=False,
-                           default=Compliance.pending)
+    audit_id = db.Column(
+        db.Integer, db.ForeignKey("audits.id"),
+        nullable=False,
+    )
+    instruction_id = db.Column(
+        db.Integer,
+        db.ForeignKey("report_instructions.id"),
+        nullable=False,
+    )
+    compliance = db.Column(
+        IntEnum(Compliance),
+        nullable=False,
+        default=Compliance.pending,
+    )
 
     audit = db.relationship('Audit')
     instruction = db.relationship('ReportInstruction')

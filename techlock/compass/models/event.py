@@ -4,7 +4,6 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -14,7 +13,6 @@ from techlock.common.api import (
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
 from techlock.compass.models.int_enum import IntEnum
-
 
 __all__ = [
     'Event',
@@ -80,8 +78,10 @@ class EventPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class EventListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter events by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter events by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -95,12 +95,16 @@ class Event(BaseModel):
 
     audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
 
-    audit_instruction_id = db.Column(db.Integer,
-                                     db.ForeignKey("report_instructions.id"))
+    audit_instruction_id = db.Column(
+        db.Integer,
+        db.ForeignKey("report_instructions.id"),
+    )
 
     compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id = db.Column(db.Integer,
-                                     db.ForeignKey("compliance_periods.id"))
+    compliance_period_id = db.Column(
+        db.Integer,
+        db.ForeignKey("compliance_periods.id"),
+    )
 
     timestamp = db.Column(db.TIMESTAMP, nullable=False)
     type = db.Column(IntEnum(Type), nullable=False)

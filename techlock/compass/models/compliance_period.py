@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -10,7 +9,6 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
 
 __all__ = [
     'CompliancePeriod',
@@ -53,8 +51,10 @@ class CompliancePeriodPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class CompliancePeriodListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliance_periods by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliance_periods by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -64,12 +64,16 @@ class CompliancePeriodListQueryParametersSchema(BaseOffsetListQueryParamsSchema)
 class CompliancePeriod(BaseModel):
     __tablename__ = 'compliance_periods'
 
-    compliance_id = db.Column(db.Integer,
-                              db.ForeignKey('compliances.id'),
-                              nullable=False)
-    task_id = db.Column(db.Integer,
-                        db.ForeignKey('compliance_tasks.id'),
-                        nullable=False)
+    compliance_id = db.Column(
+        db.Integer,
+        db.ForeignKey('compliances.id'),
+        nullable=False,
+    )
+    task_id = db.Column(
+        db.Integer,
+        db.ForeignKey('compliance_tasks.id'),
+        nullable=False,
+    )
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
 

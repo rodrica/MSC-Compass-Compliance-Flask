@@ -6,10 +6,8 @@ Create Date: 2022-04-15 14:07:12.965492
 
 """
 from alembic import op
-
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
-
 from techlock.common import AuthInfo, ConfigManager
 
 # revision identifiers, used by Alembic.
@@ -42,7 +40,7 @@ TABLES = [
     'compliances',
     'compliances_history',
     'events',
-    'uploads'
+    'uploads',
 ]
 
 def upgrade():

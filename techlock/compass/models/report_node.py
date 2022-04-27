@@ -2,8 +2,6 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -13,7 +11,6 @@ from techlock.common.api import (
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
 from techlock.compass.models.report_version import ReportVersionSchema
-
 
 __all__ = [
     'ReportNode',
@@ -50,18 +47,24 @@ class ReportNodeSchema(BaseModelSchema):
     parent_id = mf.Integer(allow_none=True)
     version_id = mf.Integer(required=True, allow_none=False)
 
-    parent = mf.Nested('ReportNodeSchema',
-                       dump_only=True,
-                       exclude=('children',))
+    parent = mf.Nested(
+        'ReportNodeSchema',
+        dump_only=True,
+        exclude=('children',),
+    )
 
-    children = mf.Nested('ReportNodeSchema',
-                         many=True,
-                         exclude=('parent',),
-                         dump_only=True)
+    children = mf.Nested(
+        'ReportNodeSchema',
+        many=True,
+        exclude=('parent',),
+        dump_only=True,
+    )
 
-    version = mf.Nested(ReportVersionSchema,
-                        dump_only=True,
-                        exclude=('nodes',))
+    version = mf.Nested(
+        ReportVersionSchema,
+        dump_only=True,
+        exclude=('nodes',),
+    )
 
 
 class ReportNodePageableSchema(OffsetPageableResponseBaseSchema):
@@ -69,8 +72,10 @@ class ReportNodePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ReportNodeListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter report_nodes by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter report_nodes by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -92,17 +97,17 @@ class ReportNode(BaseModel):
     parent = db.relationship(
         'ReportNode',
         remote_side=[entity_id],
-        back_populates='children'
+        back_populates='children',
     )
 
     children = db.relationship(
         'ReportNode',
-        back_populates='parent'
+        back_populates='parent',
     )
 
     version = db.relationship(
         'ReportVersion',
-        back_populates='nodes'
+        back_populates='nodes',
     )
 
 

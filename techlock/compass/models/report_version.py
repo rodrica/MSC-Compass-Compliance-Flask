@@ -4,9 +4,7 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -81,10 +79,12 @@ class ReportVersionSchema(BaseModelSchema):
     report = mf.Nested(ReportSchema, dump_only=True)
     report_id = mf.Integer(allow_none=True, required=False)
 
-    nodes = mf.Nested('ReportNodeSchema',
-                      dump_only=True,
-                      many=True,
-                      exclude=('version',))
+    nodes = mf.Nested(
+        'ReportNodeSchema',
+        dump_only=True,
+        many=True,
+        exclude=('version',),
+    )
 
 
 class ReportVersionPageableSchema(OffsetPageableResponseBaseSchema):
@@ -92,8 +92,10 @@ class ReportVersionPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ReportVersionListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter report_versions by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter report_versions by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -122,12 +124,12 @@ class ReportVersion(BaseModel):
 
     report = db.relationship(
         'Report',
-        back_populates='versions'
+        back_populates='versions',
     )
 
     nodes = db.relationship(
         'ReportNode',
-        back_populates='version'
+        back_populates='version',
     )
 
 

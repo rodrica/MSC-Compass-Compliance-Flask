@@ -2,8 +2,6 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -11,7 +9,6 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
 
 __all__ = [
     'SummaryNote',
@@ -54,8 +51,10 @@ class SummaryNotePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class SummaryNoteListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter summary_notes by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter summary_notes by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):

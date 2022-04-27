@@ -6,11 +6,11 @@ Create Date: 2022-02-21 16:30:58.796154
 
 """
 from enum import unique
-from alembic import op
+
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.pool.impl import FallbackAsyncAdaptedQueuePool
-
 
 # revision identifiers, used by Alembic.
 revision = 'a9bba50d9954'

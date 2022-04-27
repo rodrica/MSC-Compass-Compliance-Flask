@@ -3,7 +3,6 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -28,7 +27,7 @@ __all__ = [
 
 AUDIT_RESPONSE_HISTORY_CLAIM_SPEC = ClaimSpec(
     actions=[
-        'read'
+        'read',
     ],
     resource_name='audit_responses_history',
     filter_fields=[
@@ -55,8 +54,10 @@ class AuditResponseHistoryPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditResponseHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter audit_responses_history by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter audit_responses_history by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -68,14 +69,20 @@ class AuditResponseHistory(BaseModel):
 
     entity_id = db.Column('history_id', db.Integer, primary_key=True)
     audit_response_id = db.Column('id', db.Integer)
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"),
-                         nullable=False)
-    instruction_id = db.Column(db.Integer,
-                               db.ForeignKey("report_instructions.id"),
-                               nullable=False)
-    compliance = db.Column(IntEnum(Compliance),
-                           nullable=False,
-                           default=Compliance.pending)
+    audit_id = db.Column(
+        db.Integer, db.ForeignKey("audits.id"),
+        nullable=False,
+    )
+    instruction_id = db.Column(
+        db.Integer,
+        db.ForeignKey("report_instructions.id"),
+        nullable=False,
+    )
+    compliance = db.Column(
+        IntEnum(Compliance),
+        nullable=False,
+        default=Compliance.pending,
+    )
 
     audit = db.relationship('Audit')
     instruction = db.relationship('ReportInstruction')

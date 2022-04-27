@@ -4,9 +4,7 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from sqlalchemy.dialects.postgresql import ARRAY
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -70,8 +68,10 @@ class AuditPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter audits by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter audits by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):

@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -10,7 +9,6 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
 
 __all__ = [
     'ComplianceTimeline',
@@ -55,8 +53,10 @@ class ComplianceTimelinePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliances_timeline by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliances_timeline by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -66,9 +66,11 @@ class ComplianceTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchem
 class ComplianceTimeline(BaseModel):
     __tablename__ = 'compliances_timeline'
 
-    compliance_id = db.Column(db.Integer,
-                              db.ForeignKey('compliances.id'),
-                              nullable=False)
+    compliance_id = db.Column(
+        db.Integer,
+        db.ForeignKey('compliances.id'),
+        nullable=False,
+    )
     date = db.Column(db.Date, nullable=False)
     pending = db.Column(db.Integer, nullable=False)
     passed = db.Column(db.Integer, nullable=False)

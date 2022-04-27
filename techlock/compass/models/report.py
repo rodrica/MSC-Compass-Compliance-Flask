@@ -56,7 +56,7 @@ class Report(BaseModel):
     __tablename__ = 'reports'
     versions = db.relationship(
         'ReportVersion',
-        back_populates='report'
+        back_populates='report',
     )
 
 

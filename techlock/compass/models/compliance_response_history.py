@@ -3,7 +3,6 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -49,14 +48,18 @@ class ComplianceResponseHistorySchema(BaseModelSchema):
 
 
 class ComplianceResponseHistoryPageableSchema(OffsetPageableResponseBaseSchema):
-    items = mf.Nested(ComplianceResponseHistorySchema,
-                      many=True,
-                      dump_only=True)
+    items = mf.Nested(
+        ComplianceResponseHistorySchema,
+        many=True,
+        dump_only=True,
+    )
 
 
 class ComplianceResponseHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliance_responses_history by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliance_responses_history by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -66,16 +69,22 @@ class ComplianceResponseHistoryListQueryParametersSchema(BaseOffsetListQueryPara
 class ComplianceResponseHistory(BaseModel):
     __tablename__ = 'compliance_responses_history'
 
-    entity_id = db.Column('history_id',
-                          db.Integer,
-                          primary_key=True)
+    entity_id = db.Column(
+        'history_id',
+        db.Integer,
+        primary_key=True,
+    )
     compliance_response_id = db.Column('id', db.Integer)
-    compliance_id = db.Column(db.Integer,
-                              db.ForeignKey('compliances.id'),
-                              nullable=False)
-    period_id = db.Column(db.Integer,
-                          db.ForeignKey('compliance_periods.id'),
-                          nullable=False)
+    compliance_id = db.Column(
+        db.Integer,
+        db.ForeignKey('compliances.id'),
+        nullable=False,
+    )
+    period_id = db.Column(
+        db.Integer,
+        db.ForeignKey('compliance_periods.id'),
+        nullable=False,
+    )
     phase = db.Column(IntEnum(Phase), nullable=False)
     status = db.Column(IntEnum(Status), nullable=False)
 

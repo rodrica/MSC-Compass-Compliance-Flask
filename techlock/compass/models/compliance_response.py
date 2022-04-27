@@ -4,7 +4,6 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -67,8 +66,10 @@ class ComplianceResponsePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliance_responses by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliance_responses by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -78,12 +79,16 @@ class ComplianceResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchem
 class ComplianceResponse(BaseModel):
     __tablename__ = 'compliance_responses'
 
-    compliance_id = db.Column(db.Integer,
-                              db.ForeignKey('compliances.id'),
-                              nullable=False)
-    period_id = db.Column(db.Integer,
-                          db.ForeignKey('compliance_periods.id'),
-                          nullable=False)
+    compliance_id = db.Column(
+        db.Integer,
+        db.ForeignKey('compliances.id'),
+        nullable=False,
+    )
+    period_id = db.Column(
+        db.Integer,
+        db.ForeignKey('compliance_periods.id'),
+        nullable=False,
+    )
     phase = db.Column(IntEnum(Phase), nullable=False)
     status = db.Column(IntEnum(Status), nullable=False)
 

@@ -5,10 +5,9 @@ Revises: 96049162edef
 Create Date: 2022-03-16 16:31:01.035268
 
 """
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import postgresql
-
 
 # revision identifiers, used by Alembic.
 revision = '45ad0708415a'
@@ -22,36 +21,44 @@ def upgrade():
     ins = sa.inspect(engine)
     schemas = ins.get_schema_names()
 
-    op.create_table("compliances_timeline", 
-                    sa.Column('id', sa.Integer, primary_key=True),
-                    # id from table in client schema for migration
-                    sa.Column('internal_id', sa.Integer),
+    op.create_table(
+        "compliances_timeline",
+        sa.Column('id', sa.Integer, primary_key=True),
+        # id from table in client schema for migration
+        sa.Column('internal_id', sa.Integer),
 
-                    sa.Column("name", sa.String, unique=False, nullable=False, server_default=""),
-                    sa.Column("description", sa.String, unique=False, nullable=True),
-                    sa.Column("tags", postgresql.JSONB, nullable=True),
+        sa.Column("name", sa.String, unique=False, nullable=False, server_default=""),
+        sa.Column("description", sa.String, unique=False, nullable=True),
+        sa.Column("tags", postgresql.JSONB, nullable=True),
 
-                    sa.Column("tenant_id", sa.String, unique=False,
-                              nullable=False),
-                    sa.Column("created_by", sa.String, unique=False, nullable=True),
-                    sa.Column("changed_by", sa.String, unique=False, nullable=True),
-                    sa.Column("created_on", sa.DateTime, unique=False, nullable=True),
-                    sa.Column("changed_on", sa.DateTime, unique=False, nullable=True),
-                    sa.Column("is_active", sa.Boolean, unique=False, nullable=False, server_default="TRUE"),
+        sa.Column(
+            "tenant_id", sa.String, unique=False,
+            nullable=False,
+        ),
+        sa.Column("created_by", sa.String, unique=False, nullable=True),
+        sa.Column("changed_by", sa.String, unique=False, nullable=True),
+        sa.Column("created_on", sa.DateTime, unique=False, nullable=True),
+        sa.Column("changed_on", sa.DateTime, unique=False, nullable=True),
+        sa.Column("is_active", sa.Boolean, unique=False, nullable=False, server_default="TRUE"),
 
-                    sa.Column("compliance_id", sa.Integer,
-                              sa.ForeignKey('public.compliances.id'),
-                              nullable=False),
-                    sa.Column("date", sa.Date, nullable=False),
-                    sa.Column("pending", sa.Integer, nullable=False),
-                    sa.Column("passed", sa.Integer, nullable=False),
-                    sa.Column("failed", sa.Integer, nullable=False),
-                    sa.Column("remediation", sa.Integer, nullable=False),
-                    sa.Column("overdue", sa.Integer, nullable=False),
-                    schema="public")
-    op.create_index('compliances_timeline_tenant_id_compliance_id_date_index',
-                    'compliances_timeline', ['tenant_id', 'compliance_id', 'date'],
-                    schema="public", unique=True)
+        sa.Column(
+            "compliance_id", sa.Integer,
+            sa.ForeignKey('public.compliances.id'),
+            nullable=False,
+        ),
+        sa.Column("date", sa.Date, nullable=False),
+        sa.Column("pending", sa.Integer, nullable=False),
+        sa.Column("passed", sa.Integer, nullable=False),
+        sa.Column("failed", sa.Integer, nullable=False),
+        sa.Column("remediation", sa.Integer, nullable=False),
+        sa.Column("overdue", sa.Integer, nullable=False),
+        schema="public",
+    )
+    op.create_index(
+        'compliances_timeline_tenant_id_compliance_id_date_index',
+        'compliances_timeline', ['tenant_id', 'compliance_id', 'date'],
+        schema="public", unique=True,
+    )
     for schema in schemas:
         if schema not in ('public', 'information_schema'):
             op.execute(

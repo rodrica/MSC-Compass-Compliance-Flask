@@ -5,14 +5,12 @@ Revises: 91b082348800
 Create Date: 2022-03-10 19:04:14.693075
 
 """
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import postgresql
 
 from techlock.compass.models.audit import Phase
-
 from techlock.compass.models.int_enum import IntEnum
-
 
 # revision identifiers, used by Alembic.
 revision = '247ebb04c1a4'
@@ -26,31 +24,38 @@ def upgrade():
     ins = sa.inspect(engine)
     schemas = ins.get_schema_names()
 
-    op.create_table("audit_responses_history", 
-                    sa.Column('history_id', sa.Integer, primary_key=True),
-                    sa.Column('id', sa.Integer),
-                    # id from table in client schema for migration
-                    sa.Column('audit_id', sa.Integer,
-                              sa.ForeignKey("public.audits.id"),
-                              nullable=False),
-                    sa.Column('instruction_id', sa.Integer,
-                              sa.ForeignKey("public.report_instructions.id"),
-                              nullable=False),
-                    sa.Column('internal_id', sa.Integer),
+    op.create_table(
+        "audit_responses_history",
+        sa.Column('history_id', sa.Integer, primary_key=True),
+        sa.Column('id', sa.Integer),
+        # id from table in client schema for migration
+        sa.Column(
+            'audit_id', sa.Integer,
+            sa.ForeignKey("public.audits.id"),
+            nullable=False,
+        ),
+        sa.Column(
+            'instruction_id', sa.Integer,
+            sa.ForeignKey("public.report_instructions.id"),
+            nullable=False,
+        ),
+        sa.Column('internal_id', sa.Integer),
 
-                    sa.Column("name", sa.String, unique=False, nullable=False, server_default=""),
-                    sa.Column("description", sa.String, unique=False, nullable=True),
-                    sa.Column("tags", postgresql.JSONB, nullable=True),
+        sa.Column("name", sa.String, unique=False, nullable=False, server_default=""),
+        sa.Column("description", sa.String, unique=False, nullable=True),
+        sa.Column("tags", postgresql.JSONB, nullable=True),
 
-                    sa.Column("tenant_id", sa.String, unique=False,
-                              nullable=False),
-                    sa.Column("created_by", sa.String, unique=False, nullable=True),
-                    sa.Column("changed_by", sa.String, unique=False, nullable=True),
-                    sa.Column("created_on", sa.DateTime, unique=False, nullable=True),
-                    sa.Column("changed_on", sa.DateTime, unique=False, nullable=True),
-                    sa.Column("is_active", sa.Boolean, unique=False, nullable=False, server_default="TRUE"),
-                    sa.Column('compliance', sa.Integer, nullable=False),
-                    )
+        sa.Column(
+            "tenant_id", sa.String, unique=False,
+            nullable=False,
+        ),
+        sa.Column("created_by", sa.String, unique=False, nullable=True),
+        sa.Column("changed_by", sa.String, unique=False, nullable=True),
+        sa.Column("created_on", sa.DateTime, unique=False, nullable=True),
+        sa.Column("changed_on", sa.DateTime, unique=False, nullable=True),
+        sa.Column("is_active", sa.Boolean, unique=False, nullable=False, server_default="TRUE"),
+        sa.Column('compliance', sa.Integer, nullable=False),
+    )
 
     for schema in schemas:
         if schema not in ('public', 'information_schema'):
@@ -67,7 +72,8 @@ def upgrade():
             '''.format(schema, schema)
             )
     pass
-    op.execute("""
+    op.execute(
+        """
     CREATE OR REPLACE FUNCTION public.trigger_history_audit_responses()
      RETURNS trigger
      LANGUAGE plpgsql
@@ -78,7 +84,7 @@ def upgrade():
       RETURN NEW;
     END $function$
     """
-               )
+    )
 
     op.execute("""
         CREATE TRIGGER trigger_history_audit_responses

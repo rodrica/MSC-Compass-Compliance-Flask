@@ -2,8 +2,6 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -11,7 +9,6 @@ from techlock.common.api import (
     OffsetPageableResponseBaseSchema,
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
 
 __all__ = [
     'Upload',
@@ -63,8 +60,10 @@ class UploadPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class UploadListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter uploads by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter uploads by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -78,9 +77,11 @@ class Upload(BaseModel):
 
     audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
 
-    compliance_id= db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id= db.Column(db.Integer,
-                                    db.ForeignKey("compliance_periods.id"))
+    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
+    compliance_period_id = db.Column(
+        db.Integer,
+        db.ForeignKey("compliance_periods.id"),
+    )
 
     timestamp = db.Column(db.TIMESTAMP, nullable=False)
 

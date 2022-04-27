@@ -3,9 +3,7 @@ from dataclasses import dataclass
 import marshmallow as ma
 import marshmallow.fields as mf
 from marshmallow_enum import EnumField
-
 from sqlalchemy.dialects.postgresql import ARRAY
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
@@ -14,8 +12,8 @@ from techlock.common.api import (
 )
 from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
 
-from ..models.int_enum import IntEnum
 from ..models.compliance import Plan
+from ..models.int_enum import IntEnum
 
 __all__ = [
     'ComplianceHistory',
@@ -29,7 +27,7 @@ __all__ = [
 
 COMPLIANCE_HISTORY_CLAIM_SPEC = ClaimSpec(
     actions=[
-        'read'
+        'read',
     ],
     resource_name='compliances_history',
     filter_fields=[
@@ -55,8 +53,10 @@ class ComplianceHistoryPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliances_history by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliances_history by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):

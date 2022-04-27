@@ -1,15 +1,14 @@
 """Update reports to BaseModel structure
 
 Revision ID: f4a1fa3c2b9d
-Revises: 
+Revises:
 Create Date: 2022-02-17 14:34:59.538319
 
 """
+import sqlalchemy as sa
 from alembic import op
 from jinja2 import defaults
-import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-
 
 # revision identifiers, used by Alembic.
 revision = 'f4a1fa3c2b9d'
