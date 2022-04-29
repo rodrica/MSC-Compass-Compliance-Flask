@@ -2,16 +2,17 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
-
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Upload',
@@ -40,12 +41,10 @@ UPLOAD_CLAIM_SPEC = ClaimSpec(
 
 
 class UploadSchema(BaseModelSchema):
-    user_id = mf.String(require=True, allow_none=False)
+    audit_id = mf.String(allow_none=True)
 
-    audit_id = mf.Integer(allow_none=True)
-
-    compliance_id = mf.Integer(allow_none=True)
-    compliance_period_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
+    compliance_period_id = mf.String(allow_none=True)
 
     timestamp = mf.DateTime(requird=True, allow_none=False)
 
@@ -63,8 +62,10 @@ class UploadPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class UploadListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter uploads by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter uploads by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -74,23 +75,20 @@ class UploadListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Upload(BaseModel):
     __tablename__ = 'uploads'
 
-    user_id = db.Column(db.String, nullable=False)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(UUID, sa.ForeignKey("compliance_periods.id"))
 
-    compliance_id= db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id= db.Column(db.Integer,
-                                    db.ForeignKey("compliance_periods.id"))
+    timestamp = sa.Column(st.TIMESTAMP, nullable=False)
 
-    timestamp = db.Column(db.TIMESTAMP, nullable=False)
+    audit_evidence = sa.Column(st.Boolean, unique=False)
+    uuid = sa.Column(st.String, nullable=False)
 
-    audit_evidence = db.Column(db.Boolean, unique=False)
-    uuid = db.Column(db.String, nullable=False)
+    audit = relationship('Audit')
 
-    audit = db.relationship('Audit')
-
-    compliance = db.relationship('Compliance')
-    compliance_period = db.relationship('CompliancePeriod')
+    compliance = relationship('Compliance')
+    compliance_period = relationship('CompliancePeriod')
 
 
 @dataclass

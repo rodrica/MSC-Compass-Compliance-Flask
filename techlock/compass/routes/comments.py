@@ -1,14 +1,13 @@
 import logging
 from typing import Any, Dict
 
+from flask.views import MethodView
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.api.models.dry_run import DryRunSchema
 from techlock.common.config import AuthInfo
-
-from flask.views import MethodView
 
 from ..models import COMMENT_CLAIM_SPEC as claim_spec
 from ..models import (
@@ -26,9 +25,6 @@ blp = Blueprint('comments', __name__, url_prefix='/comments')
 
 @blp.route('')
 class Comments(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=CommentListQueryParametersSchema, location='query')
@@ -64,14 +60,13 @@ class Comments(MethodView):
 @blp.route('/<comment_id>')
 class CommentById(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     def get_comment(self, current_user: AuthInfo, claims: ClaimSet, comment_id: str):
-        comment = Comment.get(current_user,
-                              comment_id,
-                              claims=claims,
-                              raise_if_not_found=True)
+        comment = Comment.get(
+            current_user,
+            comment_id,
+            claims=claims,
+            raise_if_not_found=True,
+        )
 
         return comment
 
@@ -90,9 +85,11 @@ class CommentById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, comment_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating comment', extra={'data': data})
 
-        comment = self.get_comment(current_user,
-                                   claims.filter_by_action('read'),
-                                   comment_id)
+        comment = self.get_comment(
+            current_user,
+            claims.filter_by_action('read'),
+            comment_id,
+        )
 
         for k, v in data.items():
             if hasattr(comment, k):
@@ -101,9 +98,11 @@ class CommentById(MethodView):
                 raise BadRequestException(f'Comment has no attribute: {k}')
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        comment.save(current_user,
-                     claims=claims.filter_by_action('update'),
-                     commit=not dry_run)
+        comment.save(
+            current_user,
+            claims=claims.filter_by_action('update'),
+            commit=not dry_run,
+        )
 
         return comment
 
@@ -113,13 +112,17 @@ class CommentById(MethodView):
     def delete(self, dry_run: bool, comment_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting comment', extra={'id': comment_id})
 
-        comment = self.get_comment(current_user,
-                                   claims.filter_by_action('read'),
-                                   comment_id)
+        comment = self.get_comment(
+            current_user,
+            claims.filter_by_action('read'),
+            comment_id,
+        )
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        comment.delete(current_user,
-                       claims=claims.filter_by_action('delete'),
-                       commit=not dry_run)
+        comment.delete(
+            current_user,
+            claims=claims.filter_by_action('delete'),
+            commit=not dry_run,
+        )
 
         return

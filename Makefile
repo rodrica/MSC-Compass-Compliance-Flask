@@ -52,7 +52,7 @@ build-docker:
 	@echo "Building docker image"
 	@docker build \
 		--build-arg NEXUS_HOST=${NEXUS_HOST} \
-		-t registry.gitlab.com/techlock/msc-user-management-service:local .
+		-t registry.gitlab.com/techlock/msc-compass:local .
 
 run:
 # 	Runs the project in docker. Allows easy testing

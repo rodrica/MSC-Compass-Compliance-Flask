@@ -1,14 +1,13 @@
 import logging
 from typing import Any, Dict
 
+from flask.views import MethodView
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.api.models.dry_run import DryRunSchema
 from techlock.common.config import AuthInfo
-
-from flask.views import MethodView
 
 from ..models import JOURNAL_CLAIM_SPEC as claim_spec
 from ..models import (
@@ -26,9 +25,6 @@ blp = Blueprint('journals', __name__, url_prefix='/journals')
 
 @blp.route('')
 class Journals(MethodView):
-
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
 
     @access_required('read', claim_spec=claim_spec)
     @blp.arguments(schema=JournalListQueryParametersSchema, location='query')
@@ -64,14 +60,13 @@ class Journals(MethodView):
 @blp.route('/<journal_id>')
 class JournalById(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     def get_journal(self, current_user: AuthInfo, claims: ClaimSet, journal_id: str):
-        journal = Journal.get(current_user,
-                              journal_id,
-                              claims=claims,
-                              raise_if_not_found=True)
+        journal = Journal.get(
+            current_user,
+            journal_id,
+            claims=claims,
+            raise_if_not_found=True,
+        )
 
         return journal
 
@@ -90,9 +85,11 @@ class JournalById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, journal_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating journal', extra={'data': data})
 
-        journal = self.get_journal(current_user,
-                                   claims.filter_by_action('read'),
-                                   journal_id)
+        journal = self.get_journal(
+            current_user,
+            claims.filter_by_action('read'),
+            journal_id,
+        )
 
         for k, v in data.items():
             if hasattr(journal, k):
@@ -101,9 +98,11 @@ class JournalById(MethodView):
                 raise BadRequestException(f'Journal has no attribute: {k}')
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        journal.save(current_user,
-                     claims=claims.filter_by_action('update'),
-                     commit=not dry_run)
+        journal.save(
+            current_user,
+            claims=claims.filter_by_action('update'),
+            commit=not dry_run,
+        )
 
         return journal
 
@@ -113,13 +112,17 @@ class JournalById(MethodView):
     def delete(self, dry_run: bool, journal_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting journal', extra={'id': journal_id})
 
-        journal = self.get_journal(current_user,
-                                   claims.filter_by_action('read'),
-                                   journal_id)
+        journal = self.get_journal(
+            current_user,
+            claims.filter_by_action('read'),
+            journal_id,
+        )
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        journal.delete(current_user,
-                       claims=claims.filter_by_action('delete'),
-                       commit=not dry_run)
+        journal.delete(
+            current_user,
+            claims=claims.filter_by_action('delete'),
+            commit=not dry_run,
+        )
 
         return

@@ -1,0 +1,2751 @@
+{
+  "columnMapping": [],
+  "complianceOnly": false,
+  "complianceOptions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "component": "sgi",
+  "defaultNavigation": null,
+  "highestPriority": 0,
+  "mapped": true,
+  "name": "GLBA (PCI DSS v3.2.x)",
+  "processor": "sgi",
+  "requirements": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "831dcfe3-513a-478f-ae71-67594fb6ec94",
+                    "3ee7a604-11e0-4f73-a174-668bb44ccd44"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 2,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented information security policy** examined.",
+                  "uuid": "cc28c123-f825-4001-90e6-75e72e272c1b"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the information security policy was examined to verify that it is published and disseminated to:",
+                  "uuid": "833dbd04-222f-435b-8c8c-5350364e9db5"
+                },
+                {
+                  "displayNumber": "G1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "6aecf438-ea83-41b5-9fa4-ea8869e8fc30",
+                    "348ef231-622c-459f-9bbf-205cc45379bd"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant personnel.",
+                  "uuid": "84b00fff-5b5f-4e87-930a-bc2518e5b78f"
+                },
+                {
+                  "displayNumber": "G1-3",
+                  "hidden": false,
+                  "mappings": [
+                    "60e7b31f-ab07-403b-81f4-1083c0d39684",
+                    "493c5955-78a5-47b3-acba-4fcb48055306"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant vendors and business partners.",
+                  "uuid": "e93104aa-84f9-4f04-8630-c2686e678529"
+                }
+              ],
+              "number": "G1",
+              "row": 2,
+              "table": null,
+              "text": "Examine the information security policy and verify that the policy is published and disseminated to all relevant personnel (including vendors and business partners)."
+            }
+          ],
+          "number": "G1",
+          "row": null,
+          "table": null,
+          "text": "Develop a written information security plan."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G2",
+                  "hidden": false,
+                  "mappings": [
+                    "3dcb5b5c-cdd7-485f-b5a7-235fee82b7d2",
+                    "32ec0889-958b-423d-851f-de0fac09285b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the information security policies** reviewed to verify the specific and formal assignment of the information security to a Chief Security Officer or other security-knowledgeable member of management.",
+                  "uuid": "a14a8c33-f85a-4934-b8af-7ed5c025d15e"
+                }
+              ],
+              "number": "G2",
+              "row": 7,
+              "table": null,
+              "text": "Examine information security policies and procedures to verify the formal assignment of information security to a Chief Security Officer or other security-knowledgeable member of management."
+            }
+          ],
+          "number": "G2",
+          "row": null,
+          "table": null,
+          "text": "Designate one or more employees to coordinate the information security program."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G3.a",
+                  "hidden": false,
+                  "mappings": [
+                    "7612c351-97c9-4026-b341-2547775462e0",
+                    "daa0e579-f146-4966-89b9-827d886d3e08"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the documented annual risk-assessment process:\n* Identifies critical assets, threats, and vulnerabilities\n* Results in a formal, documented analysis of risk.",
+                  "uuid": "8eab2700-8969-474c-9f7a-84c0d1740894"
+                }
+              ],
+              "number": "G3.a",
+              "row": 9,
+              "table": null,
+              "text": "Verify that an annual risk-assessment process is documented that:\n* Identifies critical assets, threats, and vulnerabilities\n* Results in a formal, documented analysis of risk."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G3.b",
+                  "hidden": false,
+                  "mappings": [
+                    "25b9ba0f-0e20-4270-afea-cfc1e0dcd4f8",
+                    "c5dd218d-6bc3-4a20-afd0-c726b77ee6e5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the risk assessment result documentation** reviewed to verify that the risk-assessment process is performed at least annually and upon significant changes to the environment.",
+                  "uuid": "308d5fc7-55e7-4ec1-afd6-3a9b32810e71"
+                }
+              ],
+              "number": "G3.b",
+              "row": 10,
+              "table": null,
+              "text": "Review risk-assessment documentation to verify that the risk-assessment process is performed at least annually and upon significant changes to the environment."
+            }
+          ],
+          "number": "G3",
+          "row": null,
+          "table": null,
+          "text": "Identify and assess the risks to customer information in each relevant area of the company’s operation, and evaluate the effectiveness of the current safeguards for controlling these risks."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G4.a",
+                  "hidden": false,
+                  "mappings": [
+                    "01d03cce-4591-46f6-b9f8-cf80f8f0b93b",
+                    "a4808d9d-95b1-4090-907b-6de7f305dbc0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policies and procedures to manage service providers with whom customer information is shared, or that could affect the security of customer information**, reviewed to verify policy defines the following:\n* Maintain a list of service providers.\n* Maintain a written agreement that includes an acknowledgement that the service providers will maintain all applicable GLBA requirements to the extent the service provider handles, has access to, or otherwise stores, processes, or transmits the customer’s information, or manages the customer's network, applications or systems on behalf of a customer.\n* Ensure there is an established process for engaging service providers including proper due diligence prior to engagement.",
+                  "uuid": "d9e3be7f-48b7-4e8c-b2e8-2b7561f1ca5a"
+                }
+              ],
+              "number": "G4.a",
+              "row": 12,
+              "table": null,
+              "text": "Through observation, review of policies and procedures, and review of supporting documentation, verify that processes are implemented to manage service providers with whom customer information is shared, or that could affect the security of customer information (for example, backup tape storage facilities, managed service providers such as web-hosting companies or security service providers, those that receive data for fraud modeling purposes, etc.), as follows:"
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G4.b",
+                  "hidden": false,
+                  "mappings": [
+                    "0e7f9961-fda2-49c9-a12c-597bb5b35f7e",
+                    "fd7c81a4-c1e3-4e1a-825f-c8811bbfd0e2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the documented list of service providers was observed to be maintained (kept up-to-date).",
+                  "uuid": "a2b2457b-e3f4-40d9-9fe7-8afa6664aee9"
+                }
+              ],
+              "number": "G4.b",
+              "row": 13,
+              "table": null,
+              "text": "Verify that a list of service providers is maintained."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G4.c",
+                  "hidden": false,
+                  "mappings": [
+                    "656fe432-6254-4711-a793-11a6a30306c3",
+                    "86c927f1-986c-4fb1-b215-a6f6e5eaf2b5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** written agreements for each service provider were observed to confirm they include an acknowledgement by service providers that they will maintain all applicable GLBA requirements to the extent the service provider handles, has access to, or otherwise stores, processes, or transmits the customer data, or manages the customer's network, applications or systems on behalf of a customer.",
+                  "uuid": "7d38dc2f-5a97-4ad4-83f9-9d65a0826d7c"
+                }
+              ],
+              "number": "G4.c",
+              "row": 14,
+              "table": null,
+              "text": "Observe written agreements and confirm they include an acknowledgement by service providers that they are responsible for the security of customer data the service providers possess or otherwise store, process or transmit on behalf of the customer, or to the extent that they could impact the security of the customer’s network, applications or systems."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "G4.d-1",
+                  "hidden": false,
+                  "mappings": [
+                    "24d58058-1e38-4de9-b410-f98189850866",
+                    "30ddfaed-437c-4ebd-a9f1-fb0f8f7eb78c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the policies and procedures** reviewed to verify that processes included proper due diligence prior to engaging any service provider.",
+                  "uuid": "2a34fc9f-0dc5-435a-a286-37cd0133a585"
+                },
+                {
+                  "displayNumber": "G4.d-2",
+                  "hidden": false,
+                  "mappings": [
+                    "09b31012-7ff7-407c-ac3d-ceab2d1dc7b9",
+                    "2c5ffeb1-7097-4382-be1b-606317d39d1d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that the above policies and procedures are implemented.",
+                  "uuid": "51aab33a-d4ee-4c66-bee1-999356d47ad1"
+                }
+              ],
+              "number": "G4.d",
+              "row": 15,
+              "table": null,
+              "text": "Verify that policies and procedures are documented and implemented including proper due diligence prior to engaging any service provider."
+            }
+          ],
+          "number": "G4",
+          "row": null,
+          "table": null,
+          "text": "Select service providers that can maintain appropriate safeguards, make sure your contract requires them to maintain safeguards, and oversee their handling of customer information."
+        }
+      ],
+      "number": "G",
+      "row": null,
+      "table": 0,
+      "text": "General Requirements"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "57c4974a-88c5-4509-8ce1-7e7c033b01fd",
+                    "f6291003-1133-4140-a62c-c425e4eaf8ab"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 2,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the Human Resources personnel** interviewed who confirm background checks are conducted (within the constraints of local laws) prior to hire on potential personnel who will have access to confidential data or the confidential data environment.",
+                  "uuid": "8dcc411b-cbb5-44f8-b820-a6f5cfc05149"
+                },
+                {
+                  "displayNumber": "E1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "dd4be78f-08f3-4717-9d93-e103bcaf05ab",
+                    "f9d55d81-14ee-4d9e-b557-a95e50253472"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that background checks are conducted (within the constraints of local laws) prior to hire on potential personnel who will have access to confidential data or the confidential data environment.",
+                  "uuid": "f5effc00-bea8-4ea8-a361-fd92f22e18ce"
+                }
+              ],
+              "number": "E1",
+              "row": 2,
+              "table": null,
+              "text": "Inquire with Human Resource department management and verify that background checks are conducted (within the constraints of local laws) prior to hire on potential personnel who will have access to customer data or the customer data environment."
+            }
+          ],
+          "number": "E1",
+          "row": null,
+          "table": null,
+          "text": "Check references or do background checks before hiring employees who will have access to customer information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was verified that, per the security awareness program, all personnel:",
+                  "uuid": "6996af72-7e74-4f78-8bab-a632fcf5a7aa"
+                },
+                {
+                  "displayNumber": "E2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "26fb6aa0-8757-4409-a60f-4b2bd9951b0e",
+                    "9854cbd9-6c90-4086-ba94-4159b78fadcb"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Acknowledge that they have read and understand the information security policy (including whether this is in writing or electronic).",
+                  "uuid": "6af25f6a-54d0-4256-989f-908b692b9fa1"
+                },
+                {
+                  "displayNumber": "E2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "c86ae5c6-4b89-4495-a762-3860cb9d0a78",
+                    "90d7c55f-32b4-4610-a1b0-3481d64c0042"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Provide an acknowledgement at least annually.",
+                  "uuid": "91fd96ca-592b-4cd5-a9fc-eced9ffca9c8"
+                }
+              ],
+              "number": "E2",
+              "row": 5,
+              "table": null,
+              "text": "Verify that the security awareness program requires personnel to acknowledge, in writing or electronically, at least annually that they have read and understand the information security policy."
+            }
+          ],
+          "number": "E2",
+          "row": null,
+          "table": null,
+          "text": "Require every new employee to sign an agreement to follow your company’s confidentiality and security standards for handling customer information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E3-1",
+                  "hidden": false,
+                  "mappings": [
+                    "ed2a25cf-269a-40fa-8890-c9e0f5d58a3f",
+                    "82a4fca7-a277-4791-98e9-178714808f37"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "* **Identify the selected sample** of roles for this testing procedure.",
+                  "uuid": "bc1e1093-1714-4883-9ede-bfd974af2f3f"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each role in the selected sample*, **describe how** the role was examined to verify access needs for each role are defined and include:",
+                  "uuid": "e98bb3a5-62b0-48e2-a20c-c4cced778315"
+                },
+                {
+                  "displayNumber": "E3-2",
+                  "hidden": false,
+                  "mappings": [
+                    "1b3a71a2-05f1-415b-ae6d-3958b422178d",
+                    "4ace04d0-4a24-4503-bbab-7ae8d501e728"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "* System components and data resources that each role needs to access for their job function.",
+                  "uuid": "8ed0e11d-fb08-4cfb-bec4-eaf737f620fa"
+                },
+                {
+                  "displayNumber": "E3-3",
+                  "hidden": false,
+                  "mappings": [
+                    "ee398d65-a39d-4ab8-a2ef-766d8c0138f9",
+                    "dee22442-523c-40c5-98f3-36515837f894"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Identification of privilege necessary for each role to perform their job function.",
+                  "uuid": "5b85cb62-8b60-4c0d-8048-51c3f3781073"
+                }
+              ],
+              "number": "E3",
+              "row": 9,
+              "table": null,
+              "text": "Select a sample of roles and verify access needs for each role are defined and include:\n* System components and data resources that each role needs to access for their job function.\n* Identification of privilege necessary for each role to perform their job function."
+            }
+          ],
+          "number": "E3",
+          "row": null,
+          "table": null,
+          "text": "Limit access to customer information to employees who have a business reason to see it. For example, give employees who respond to customer inquiries access to customer files, but only to the extent they need it to do their jobs."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E4-1",
+                  "hidden": false,
+                  "mappings": [
+                    "3cc31af1-23e8-4ece-8fe5-b7eb100ad525",
+                    "b340ec21-2435-440a-b475-5ea457983b17"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of system components selected for this testing procedure.",
+                  "uuid": "9a490806-c401-4226-9570-b19b4976ac84"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each item in the sample,* **describe how** system configuration settings were inspected to verify that user password parameters are set to require at least the following strength/complexity:",
+                  "uuid": "cff9fbde-dbab-45f5-9302-23c083f336b7"
+                },
+                {
+                  "displayNumber": "E4-2",
+                  "hidden": false,
+                  "mappings": [
+                    "716160c5-aaca-4fa6-b635-6402d268e36c",
+                    "4bbbd5b0-b6eb-4d1d-9528-9a314e59ca34"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Require a minimum length of at least seven characters.",
+                  "uuid": "255257d5-1fb8-432e-a2bd-eef4a6895660"
+                },
+                {
+                  "displayNumber": "E4-3",
+                  "hidden": false,
+                  "mappings": [
+                    "88612448-182a-4739-b895-991497ec01d8",
+                    "ae9ed834-b959-46e0-accf-cf2b95f18168"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Contain both numeric and alphabetic characters.",
+                  "uuid": "6412e7aa-66d0-4bc2-88ce-00e6f8b494f4"
+                }
+              ],
+              "number": "E4",
+              "row": 14,
+              "table": null,
+              "text": "For a sample of system components, inspect system configuration settings to verify that user password parameters are set to require at least the following strength/complexity:\n* Require a minimum length of at least seven characters.\n* Contain both numeric and alphabetic characters."
+            }
+          ],
+          "number": "E4",
+          "row": null,
+          "table": null,
+          "text": "**4 **Control access to sensitive information by requiring employees to use “strong” passwords that must be changed on a regular basis. (Tough-to-crack passwords require the use of at least six characters, upper- and lower-case letters, and a combination of letters, numbers, and symbols.)"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E5-1",
+                  "hidden": false,
+                  "mappings": [
+                    "4c9f8f6e-e5c7-4fd3-8542-36645713fbf3",
+                    "1c345555-2992-437c-b172-3966463ad372"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of system components selected for this testing procedure.",
+                  "uuid": "808fa14d-19ac-4ef9-bac0-34e3e48ad858"
+                },
+                {
+                  "displayNumber": "E5-2",
+                  "hidden": false,
+                  "mappings": [
+                    "48fe807b-9bd0-46dd-8c29-b4c38851003e",
+                    "0746dc6f-6d9b-42b0-8fa5-77a7a8320a52"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each item in the sample,* **describe how** system configuration settings were inspected to verify that system/session idle time out features have been set to 15 minutes or less.",
+                  "uuid": "b1834269-bd75-4b18-8324-16b6804d493b"
+                }
+              ],
+              "number": "E5",
+              "row": 19,
+              "table": null,
+              "text": "For a sample of system components, inspect system configuration settings to verify that system/session idle time out features have been set to 15 minutes or less."
+            }
+          ],
+          "number": "E5",
+          "row": null,
+          "table": null,
+          "text": "Use password-activated screen savers to lock employee computers after a period of inactivity."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E6",
+                  "hidden": false,
+                  "mappings": [
+                    "660c4971-6116-46d2-b3b6-9621109fd9ba",
+                    "eb4883de-bcaa-4301-a112-16ccdfe1ee7e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the usage policies were verified to define acceptable uses for the technology.",
+                  "uuid": "67c290a7-2b3b-4993-b0c6-4789cdae80ca"
+                }
+              ],
+              "number": "E6",
+              "row": 22,
+              "table": null,
+              "text": "Verify that the usage policies define acceptable uses for the technology."
+            }
+          ],
+          "number": "E6",
+          "row": null,
+          "table": null,
+          "text": "Develop policies for appropriate use and protection of laptops, PDAs, cell phones, or other mobile devices. For example, make sure employees store these devices in a secure place when not in use. Also, consider that customer information in encrypted files will be better protected in case of theft of such a device."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E7",
+                  "hidden": false,
+                  "mappings": [
+                    "0ad75827-10c6-46a9-92e7-f5165e5cac98",
+                    "46729f53-0177-4a1e-b317-70fc6b26685d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented security awareness training documentation reviewed to verify it includes at least the following topics:\n* Locking rooms and file cabinets where records are kept;\n* Not sharing or openly posting employee passwords in work areas;\n* Encrypting sensitive customer information when it is transmitted electronically via public networks;\n* Referring calls or other requests for customer information to designated individuals who have been trained in how your company safeguards personal data; and\n* Reporting suspicious attempts to obtain customer information to designated personnel.",
+                  "uuid": "6f088a51-c441-4873-b2f9-4ccc7f60eb9f"
+                }
+              ],
+              "number": "E7",
+              "row": 24,
+              "table": null,
+              "text": "Review the security awareness training documentation to verify it provides awareness to all personnel about the importance of protecting customer information."
+            }
+          ],
+          "number": "E7",
+          "row": null,
+          "table": null,
+          "text": "Train employees to take basic steps to maintain the security, confidentiality, and integrity of customer information, including:\n* Locking rooms and file cabinets where records are kept;\n* Not sharing or openly posting employee passwords in work areas;\n* Encrypting sensitive customer information when it is transmitted electronically via public networks;\n* Referring calls or other requests for customer information to designated individuals who have been trained in how your company safeguards personal data; and\n* Reporting suspicious attempts to obtain customer information to designated personnel."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E8",
+                  "hidden": false,
+                  "mappings": [
+                    "0dbae85d-1362-4255-a406-052553bb24ac",
+                    "909217cd-428f-41c8-bca2-5b8896a55349"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** how the security awareness program provides multiple methods of communicating awareness and educating personnel.",
+                  "uuid": "a5524d08-bc61-40e9-97ca-3fef70913c07"
+                }
+              ],
+              "number": "E8",
+              "row": 26,
+              "table": null,
+              "text": "Verify that the security awareness program provides multiple methods of communicating awareness and educating personnel (for example, posters, letters, memos, web-based training, meetings, and promotions)."
+            }
+          ],
+          "number": "E8",
+          "row": null,
+          "table": null,
+          "text": "Regularly remind all employees of your company’s policy — and the legal requirement — to keep customer information secure and confidential. For example, consider posting reminders about their responsibility for security in areas where customer information is stored, like file rooms."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E9",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented telecommuting policy reviewed to verify it includes at least the following topics:\n* Whether or how employees are allowed to keep or access customer data at home\n* Requirement for employees who use personal computers or access cuistomer data to use adequate protection measures (anti-virus, firewall, patching, etc.)",
+                  "uuid": "b485fa9f-263e-4bae-af26-01ede7dc2e9c"
+                }
+              ],
+              "number": "E9",
+              "row": 28,
+              "table": null,
+              "text": "Verify that telecommuting policies specify in detail at a minimum, the following:\n* Whether or how employees are allowed to keep or access customer data at home\n* Requirement for employees who use personal computers or access cuistomer data to use adequate protection measures (anti-virus, firewall, patching, etc.)"
+            }
+          ],
+          "number": "E9",
+          "row": null,
+          "table": null,
+          "text": "Develop policies for employees who telecommute. For example, consider whether or how employees should be allowed to keep or access customer data at home. Also, require employees who use personal computers to store or access customer data to use protections against viruses, spyware, and other unauthorized intrusions."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E10",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the Human Resources personnel interviewed who confirm that employees are sanctioned when they violate security policies.",
+                  "uuid": "2367ef55-8ff0-4557-9467-a8498bb08f19"
+                }
+              ],
+              "number": "E10",
+              "row": 30,
+              "table": null,
+              "text": "Inquire with Human Resource department management and verify that employees are sanctioned when they violate security policies."
+            }
+          ],
+          "number": "E10",
+          "row": null,
+          "table": null,
+          "text": "Impose disciplinary measures for security policy violations."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E11.a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "403e1030-0734-4019-ab77-2fb9cce36996",
+                    "2dc87cfc-d630-476f-9842-6f0ce04befa4"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 32,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the sample of users terminated in the past six months selected.",
+                  "uuid": "c83b7a32-9e2d-4f3b-bdbc-35968241f11e"
+                },
+                {
+                  "displayNumber": "E11.a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "6a3c283b-8d5f-48c3-94a6-0d5ca31c7f39",
+                    "078d5282-e371-4d00-b85a-5a21e2f67f9d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***local access*** were reviewed to verify that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "380d3470-3ebb-462c-8801-b2c0e41ecc73"
+                },
+                {
+                  "displayNumber": "E11.a-3",
+                  "hidden": false,
+                  "mappings": [
+                    "2e3cd100-36d7-4397-be47-781ebaaba12d",
+                    "0a440624-33b1-4618-bf3d-fc460730619c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 34,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***remote access*** were reviewed to verify that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "65364ef5-3c67-4fad-b5de-ccddc5326a98"
+                }
+              ],
+              "number": "E11.a",
+              "row": 32,
+              "table": null,
+              "text": "Select a sample of users terminated in the past six months, and review current user access lists*—*for both local and remote access—to verify that their IDs have been deactivated or removed from the access lists."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "E11.b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "d6803103-f812-434e-8cdb-2e99a9d770c1",
+                    "1268179c-11a7-4167-98e5-0097aeeb0c19"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 35,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For the sample of users terminated in the past six months at 8.1.3.a*, **describe how** it was determined which, if any, physical authentication methods, the terminated users had access to prior to termination.",
+                  "uuid": "41b71ed8-94af-4255-8bf5-cd471e7e1f7d"
+                },
+                {
+                  "displayNumber": "E11.b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "e254d223-8443-460c-988a-8d3adc567c2b",
+                    "e7547963-fa33-4847-9328-559c0f132c4e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 36,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the physical authentication method(s) for the terminated employees were verified to have been returned or deactivated.",
+                  "uuid": "01f6d910-a786-4949-9f63-cdd05fb5cad5"
+                }
+              ],
+              "number": "E11.b",
+              "row": 35,
+              "table": null,
+              "text": "Verify all physical authentication methods—such as, smart cards, tokens, etc.—have been returned or deactivated."
+            }
+          ],
+          "number": "E11",
+          "row": null,
+          "table": null,
+          "text": "Prevent terminated employees from accessing customer information by immediately deactivating their passwords and user names and taking other appropriate measures."
+        }
+      ],
+      "number": "E",
+      "row": null,
+      "table": 1,
+      "text": "Employee Management and Training"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 2,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify and briefly describe** all of the storage areas containing customer data:",
+                  "uuid": "eeb5c9e3-d075-4ec1-802b-1420fca6f33e"
+                },
+                {
+                  "displayNumber": "I1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "b2c07a98-17d2-4d17-8385-705f9f3ff4c4",
+                    "46ad5061-bcb7-430a-b75b-76df397c4acb"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "All computer rooms",
+                  "uuid": "0ff07798-95a6-4620-b720-3bb545a7357d"
+                },
+                {
+                  "displayNumber": "I1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "bedaa552-a538-445e-8ab5-a86376131b45",
+                    "010d2372-0804-454b-bc2e-15e2b57e6de1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "All data centers",
+                  "uuid": "f75869bb-46c1-4baf-885d-22443daefd4d"
+                },
+                {
+                  "displayNumber": "I1-3",
+                  "hidden": false,
+                  "mappings": [
+                    "c8f8796c-8703-495b-b93e-00d55525aa76",
+                    "5dcdacf2-f868-489d-8780-662bdbd8f24e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "Any other physical areas",
+                  "uuid": "69b9cbbb-904e-4931-9992-63781785d937"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each identified area, complete the following*:",
+                  "uuid": "5526ccd4-88e7-40d6-8cf2-cafbbe93cc70"
+                },
+                {
+                  "displayNumber": "I1-4",
+                  "hidden": false,
+                  "mappings": [
+                    "faea1007-cdc9-4f57-9770-629d30420e82",
+                    "dc82c0e6-dd7d-4c5d-9649-f446deae2a3d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "Describe the environmental security controls to be in place",
+                  "uuid": "db79420d-091f-4b89-b994-39078967b009"
+                }
+              ],
+              "number": "I1",
+              "row": 2,
+              "table": null,
+              "text": "Verify the existence of environmental security controls for each computer room, data center, and other storage areas containing customer data."
+            }
+          ],
+          "number": "I1",
+          "row": null,
+          "table": null,
+          "text": "Ensure that storage areas are protected against destruction or damage from physical hazards, like fire or floods."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I2",
+                  "hidden": false,
+                  "mappings": [
+                    "41f3fba3-f565-4157-93b7-27dadf071590",
+                    "f797c73e-ea8d-4cad-87c1-83f854d8dc9e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that the storage location is reviewed at least annually to confirm that backup media storage is secure.",
+                  "uuid": "b01e3f22-89d2-418a-a9a3-c4a441882f40"
+                }
+              ],
+              "number": "I2",
+              "row": 9,
+              "table": null,
+              "text": "Observe the storage location’s physical security to confirm that all records storage is secure."
+            }
+          ],
+          "number": "I2",
+          "row": null,
+          "table": null,
+          "text": "Store records in a room or cabinet that is locked when unattended."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify and briefly describe** all of the storage areas containing customer data:",
+                  "uuid": "99d5c006-c664-4aad-acda-356650d416e4"
+                },
+                {
+                  "displayNumber": "I3-1",
+                  "hidden": false,
+                  "mappings": [
+                    "b2c07a98-17d2-4d17-8385-705f9f3ff4c4",
+                    "46ad5061-bcb7-430a-b75b-76df397c4acb"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "All computer rooms",
+                  "uuid": "5c5eeb11-daca-460b-a3f6-3048be8f45c1"
+                },
+                {
+                  "displayNumber": "I3-2",
+                  "hidden": false,
+                  "mappings": [
+                    "bedaa552-a538-445e-8ab5-a86376131b45",
+                    "010d2372-0804-454b-bc2e-15e2b57e6de1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "All data centers",
+                  "uuid": "476c9c44-dede-4a0e-8dc5-d6e063d88ca6"
+                },
+                {
+                  "displayNumber": "I3-3",
+                  "hidden": false,
+                  "mappings": [
+                    "c8f8796c-8703-495b-b93e-00d55525aa76",
+                    "5dcdacf2-f868-489d-8780-662bdbd8f24e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "Any other physical areas",
+                  "uuid": "3b56a88f-01da-4f7f-b624-938610cea1a1"
+                },
+                {
+                  "displayNumber": "I3-4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each identified area, complete the following*:",
+                  "uuid": "126b6f48-34fc-4667-a4b2-08d54a4cdec2"
+                },
+                {
+                  "displayNumber": "I3-5",
+                  "hidden": false,
+                  "mappings": [
+                    "faea1007-cdc9-4f57-9770-629d30420e82",
+                    "dc82c0e6-dd7d-4c5d-9649-f446deae2a3d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the physical security controls to be in place, including authorized badges and lock and key.",
+                  "uuid": "06bb047f-ae05-40b8-869d-6d7d02ef897a"
+                },
+                {
+                  "displayNumber": "I3-6",
+                  "hidden": false,
+                  "mappings": [
+                    "1ec18024-e7de-4282-8893-162f3726f41f",
+                    "e80593c2-ce77-49f0-a4e1-ecfcc443355a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the randomly selected systems in the confidential data environment for which a system administrator login attempt was observed.",
+                  "uuid": "33c137df-c341-428e-9e4d-729289191dcb"
+                },
+                {
+                  "displayNumber": "I3-7",
+                  "hidden": false,
+                  "mappings": [
+                    "4d919f82-9f50-4833-b844-7b071ba1a2d5",
+                    "630a4a71-e0b6-4fac-a0d6-a06ce65c7e04"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** consoles for the randomly selected systems were observed to verify that they are “locked” when not in use to prevent unauthorized use.",
+                  "uuid": "f052aa9d-6f68-4e16-9b02-11c0a91c62f8"
+                }
+              ],
+              "number": "I3",
+              "row": 11,
+              "table": null,
+              "text": "Verify the existence of physical security controls for each computer room, data center, and other physical areas with systems in the customer data environment.\n* Verify that access is controlled with badge readers or other devices including authorized badges and lock and key.\n* Observe a system administrator’s attempt to log into consoles for randomly selected systems in the customer data environment and verify that they are “locked” to prevent unauthorized use."
+            }
+          ],
+          "number": "I3",
+          "row": null,
+          "table": null,
+          "text": "When customer information is stored on a server or other computer, ensure that the computer is accessible only with a “strong” password and is kept in a physically-secure area."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I4-1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify and briefly describe** all computers that store sensitive customer data and have an Internet connection.",
+                  "uuid": "b03a321e-bc33-480a-bb46-4b829de4c832"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 21,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each computer that stores sensitive consumer data and has an Internet connection,* complete the following:",
+                  "uuid": "f5e755af-db02-453e-b965-9bdd79edfd89"
+                },
+                {
+                  "displayNumber": "I4-2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the reason why the computer must have an Internet connection.",
+                  "uuid": "43801b1e-8eab-4678-971c-70836309cf3b"
+                }
+              ],
+              "number": "I4",
+              "row": 20,
+              "table": null,
+              "text": "Verify that all systems that store sensitive customer data either do not have an Internet connection, or must (for business or technical reasons) have an Internet connection."
+            }
+          ],
+          "number": "I4",
+          "row": null,
+          "table": null,
+          "text": "Where possible, avoid storing sensitive customer data on a computer with an Internet connection."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I5.a",
+                  "hidden": false,
+                  "mappings": [
+                    "41f3fba3-f565-4157-93b7-27dadf071590",
+                    "f797c73e-ea8d-4cad-87c1-83f854d8dc9e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that the storage location is reviewed at least annually to confirm that backup media storage is secure.",
+                  "uuid": "f39b89ab-21c7-4a76-8e0f-af31d3601891"
+                }
+              ],
+              "number": "I5.a",
+              "row": 24,
+              "table": null,
+              "text": "Observe the storage location’s physical security to confirm that backup media storage is secure. Verify that the storage location security is reviewed at least annually."
+            }
+          ],
+          "number": "I5",
+          "row": null,
+          "table": null,
+          "text": "Maintain secure backup records and keep archived data secure by storing it off-line and in a physically-secure area."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the system inventory was examined to verify that a list of hardware and software components is:",
+                  "uuid": "1aa43e11-5faf-49d5-9001-e885ca0e0bb6"
+                },
+                {
+                  "displayNumber": "I6.a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "9088ddef-0005-4179-9a60-a8346f2519aa",
+                    "8c1eedfc-db7f-423a-8be6-f9298265d528"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Maintained",
+                  "uuid": "f91ff36a-8265-4570-a247-676d3a1d12f1"
+                },
+                {
+                  "displayNumber": "I6.a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "a0ffa1de-2aaf-4c67-baa4-6f12d8596e63",
+                    "f2dbbdb7-9959-4a46-bc5d-bf81947cc381"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Includes a description of function/use for each",
+                  "uuid": "914934f7-22b1-4826-a4d3-9317e761d117"
+                }
+              ],
+              "number": "I6.a",
+              "row": 26,
+              "table": null,
+              "text": "Examine system inventory to verify that a list of hardware and software components is maintained and includes a description of function/use for each."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I6.b",
+                  "hidden": false,
+                  "mappings": [
+                    "360313ef-dbb1-4639-8e0b-5b6ac623ba2e",
+                    "4035f01b-bdc3-4d77-88a7-615715ca9bff"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 29,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed who confirm that the documented inventory is kept current.",
+                  "uuid": "4c77540c-9f82-4bbe-82ea-02b07405b0f7"
+                }
+              ],
+              "number": "I6.b",
+              "row": 29,
+              "table": null,
+              "text": "Interview personnel to verify the documented inventory is kept current."
+            }
+          ],
+          "number": "I6",
+          "row": null,
+          "table": null,
+          "text": "Maintain a careful inventory of your company’s computers and any other equipment on which customer information may be stored."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I7.a",
+                  "hidden": false,
+                  "mappings": [
+                    "14b17383-c042-41e5-80c6-cc441c9862f6",
+                    "14ccaf35-c013-40db-830b-8a0ee2d0735a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 31,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** all locations where confidential data or other sensitive financial data is transmitted or received over open, public networks.",
+                  "uuid": "3d73363f-c5f4-43e6-b660-ef9c86c69d28"
+                }
+              ],
+              "number": "I7.a",
+              "row": 31,
+              "table": null,
+              "text": "Identify all locations where confidential data or other sensitive financial data is transmitted or received over open, public networks. Examine system configurations to verify the use of security protocols and strong cryptography for all locations."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I7.b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "e7b66400-cf3c-4e2e-b5b1-eb37e1a7b2d0",
+                    "2e7da71e-7daa-4f3a-ac57-96974fed3386"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 32,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the sample of inbound and outbound transmissions observed as they occurred.",
+                  "uuid": "128c03e8-ac44-4c50-89db-8439e4f5bb6c"
+                },
+                {
+                  "displayNumber": "I7.b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "cf5902b7-1ca1-4058-8159-0143626b6921",
+                    "fc4e351f-a0a1-47ec-88e0-fb344d7de08f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the samples of inbound and outbound transmissions were observed as they occurred to verify that all confidential data is encrypted with strong cryptography during transit.",
+                  "uuid": "9d8ca0dc-038c-4bf7-b287-0c7023f7aa8b"
+                }
+              ],
+              "number": "I7.b",
+              "row": 32,
+              "table": null,
+              "text": "Select and observe a sample of inbound and outbound transmissions as they occur to verify that all confidential data or other sensitive financial data is encrypted with strong cryptography during transit."
+            }
+          ],
+          "number": "I7",
+          "row": null,
+          "table": null,
+          "text": "When you transmit credit card information or other sensitive financial data, use a Secure Sockets Layer (SSL) or other secure connection, so that the information is protected in transit."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 35,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For all instances where customer data Is transmitted or received over open, public networks,* **describe how** system configurations were observed to verify that the protocol is implemented:",
+                  "uuid": "60849c1b-6f33-477e-8fa4-40712e2f39d5"
+                },
+                {
+                  "displayNumber": "I8-1",
+                  "hidden": false,
+                  "mappings": [
+                    "77e3530a-90cd-43e4-aec5-b1a73f8605e7",
+                    "79fa5f22-0a96-4108-aa9c-c178cc4ffba8"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 36,
+                  "table": null,
+                  "tag": null,
+                  "text": "To use only secure configurations.",
+                  "uuid": "791184cd-123a-4bbc-9001-641abd2e92a1"
+                },
+                {
+                  "displayNumber": "I8-2",
+                  "hidden": false,
+                  "mappings": [
+                    "9e3efda5-0f7c-4f93-8e04-f0e55942e500",
+                    "41b63661-783a-4ceb-b4d2-d98306babe14"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 37,
+                  "table": null,
+                  "tag": null,
+                  "text": "Does not support insecure versions or configurations.",
+                  "uuid": "09ec9931-87a4-4234-aa16-7ab4160c3fe2"
+                }
+              ],
+              "number": "I8",
+              "row": 35,
+              "table": null,
+              "text": "Examine system configurations to verify that the protocol is implemented to use only secure configurations and does not support insecure versions or configurations."
+            }
+          ],
+          "number": "I8",
+          "row": null,
+          "table": null,
+          "text": "If you collect information online directly from customers, make secure transmission automatic."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I9.a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "c13bb41f-4905-40eb-be7c-de7064f9b33c",
+                    "a8f49a47-850d-4170-8e86-bec5918e6d6c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 39,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** whether end-user messaging technologies are used to send confidential data. **(yes/no)**",
+                  "uuid": "5a9ebc52-0272-4100-9f78-44885e2c5bf1"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 40,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “no,” mark the remainder of I9.a as “Not Applicable” and proceed to I9.b.*\n*If “yes,” complete the following:*",
+                  "uuid": "6b7bd0a7-79b9-407b-b37c-f651e5a57dfc"
+                },
+                {
+                  "displayNumber": "I9.a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "959f8f2e-de84-4612-a52a-5dd2680018cc",
+                    "1a79bf38-dd54-4a5b-8b63-edef674e17ce"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 41,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes for sending PAN were observed to verify that PAN is rendered unreadable or secured with strong cryptography whenever it is sent via end-user messaging technologies.",
+                  "uuid": "68e4850d-dee5-4074-aee8-b8ce276f72cd"
+                },
+                {
+                  "displayNumber": "I9.a-3",
+                  "hidden": false,
+                  "mappings": [
+                    "7dc048de-5c4c-40ef-88c7-20d177beef31",
+                    "2309c4eb-0539-4691-a9cc-f525175ecd6d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 42,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the sample of outbound transmissions observed as they occurred to verify that PAN is rendered unreadable or secured with strong cryptography whenever it is sent via end-user messaging technologies.",
+                  "uuid": "91fc0de0-338c-40ac-940e-13d10cecc06e"
+                }
+              ],
+              "number": "I9.a",
+              "row": 39,
+              "table": null,
+              "text": "If end-user messaging technologies are used to send sensitive data, observe processes for sending sensitive data and examine a sample of outbound transmissions as they occur to verify that sensitive data is rendered unreadable or secured with strong cryptography whenever it is sent via end-user messaging technologies."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 43,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “no” at I9.a:*",
+                  "uuid": "25d6705c-6871-426d-b624-8ef768a9e365"
+                },
+                {
+                  "displayNumber": "I9.b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "8098478c-2770-4aff-80b0-09183b9a0fcf",
+                    "9bebd908-fff7-42b5-898f-e8434859537a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 44,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the policy document that explicitly prohibits sensitive data from being sent via end-user messaging technologies under any circumstance.",
+                  "uuid": "20d14c4b-4df9-49df-9129-2a8f599ccf30"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 45,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “yes” at I9.a:*",
+                  "uuid": "97942686-3412-453b-a76c-8eba305019f2"
+                },
+                {
+                  "displayNumber": "I9.b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "959f8f2e-de84-4612-a52a-5dd2680018cc",
+                    "1a79bf38-dd54-4a5b-8b63-edef674e17ce"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 46,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes for sending PAN were observed to verify that PAN is rendered unreadable or secured with strong cryptography whenever it is sent via end-user messaging technologies.",
+                  "uuid": "12bd45cd-174d-4127-9f17-eb8a738b289a"
+                }
+              ],
+              "number": "I9.b",
+              "row": 43,
+              "table": null,
+              "text": "Review written policies to verify the existence of a policy stating that unprotected sensitive data are not to be sent via end-user messaging technologies."
+            }
+          ],
+          "number": "I9",
+          "row": null,
+          "table": null,
+          "text": "If you must transmit sensitive data by email over the Internet, be sure to encrypt the data."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I10.a",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 48,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that responsibility for records retention and disposal has been formally assigned.",
+                  "uuid": "c8b88570-e16f-4e56-ae10-20961a75546a"
+                }
+              ],
+              "number": "I10.a",
+              "row": 48,
+              "table": null,
+              "text": "Verify that responsibility for records retention and disposal has been formally assigned."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I10.b",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 49,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the company has been certified by a recognized industry group.",
+                  "uuid": "e8bf03de-0356-4746-9306-18d4e44dee98"
+                }
+              ],
+              "number": "I10.b",
+              "row": 49,
+              "table": null,
+              "text": "If an outside disposal company is used, verify that the company has been certified by a recognized industry group."
+            }
+          ],
+          "number": "I10",
+          "row": null,
+          "table": null,
+          "text": "Consider designating or hiring a records retention manager to supervise the disposal of records containing customer information. If you hire an outside disposal company, conduct due diligence beforehand by checking references or requiring that the company be certified by a recognized industry group."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I11-1",
+                  "hidden": false,
+                  "mappings": [
+                    "8ffa32cd-d6e2-40c2-ae06-4437ffabc91d",
+                    "bacfaa9d-7430-4d94-a59f-1831c00cf49c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 51,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** personnel interviewed who confirm that hard-copy materials are crosscut shredded, incinerated, or pulped such that there is reasonable assurance the hard-copy materials cannot be reconstructed.",
+                  "uuid": "526df7e2-4f25-4eb2-aa92-26da33f56ebc"
+                },
+                {
+                  "displayNumber": "I11-2",
+                  "hidden": false,
+                  "mappings": [
+                    "349c6421-3213-466f-bd66-d2d7f319c0e6",
+                    "5aac5e61-dfca-4ff1-b4f0-ed964ca32275"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 52,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the procedures state that hard-copy materials are crosscut shredded, incinerated, or pulped such that there is reasonable assurance that hardcopy materials cannot be reconstructed.",
+                  "uuid": "e0f5abae-b28e-4270-a46d-ba54a80a344a"
+                }
+              ],
+              "number": "I11",
+              "row": 51,
+              "table": null,
+              "text": "Interview personnel and examine procedures to verify that hard-copy materials are crosscut shredded, incinerated, or pulped such that there is reasonable assurance the hard-copy materials cannot be reconstructed."
+            }
+          ],
+          "number": "I11",
+          "row": null,
+          "table": null,
+          "text": "Burn, pulverize, or shred papers containing customer information so that the information cannot be read or reconstructed."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "I12-1",
+                  "hidden": false,
+                  "mappings": [
+                    "905286c9-c754-4def-86a1-57a188c8d67c",
+                    "d6c7f85a-f8b8-43c6-ba6e-47e741c36bc9"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 54,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** confidential data on electronic media is rendered unrecoverable, via secure wiping of media and/or physical destruction of media.",
+                  "uuid": "eee7963e-fd19-464a-af06-e3bfc6cc88ae"
+                },
+                {
+                  "displayNumber": "I12-2",
+                  "hidden": false,
+                  "mappings": [
+                    "04742537-6e7f-4bfe-a110-85f3e3b34a64",
+                    "f449a725-40eb-45f4-88a9-62fcb42862d6"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 55,
+                  "table": null,
+                  "tag": null,
+                  "text": "If data is rendered unrecoverable via secure deletion or a secure wipe program, **identify** the industry-accepted standards used.",
+                  "uuid": "f77f1b7e-baeb-40df-a5bf-8c8944ed4f64"
+                }
+              ],
+              "number": "I12",
+              "row": 54,
+              "table": null,
+              "text": "Verify that confidential data on electronic media is rendered unrecoverable via a secure wipe program in accordance with industry-accepted standards for secure deletion, or otherwise physically destroying the media."
+            }
+          ],
+          "number": "I12",
+          "row": null,
+          "table": null,
+          "text": "Destroy or erase data when disposing of computers, disks, CDs, magnetic tapes, hard drives, laptops, PDAs, cell phones, or any other electronic media or hardware containing customer information."
+        }
+      ],
+      "number": "I",
+      "row": null,
+      "table": 2,
+      "text": "Information Systems"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "29a66630-411c-47a0-8882-42e06bd14c03",
+                    "14fcfc23-a923-40ba-b7ad-61c166fb1d70"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 2,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the responsible personnel interviewed who confirm that:\n* New security vulnerabilities are identified.\n* A risk ranking is assigned to vulnerabilities that includes identification of all “high” risk and “critical” vulnerabilities.\n* Processes to identify new security vulnerabilities include using reputable outside sources for security vulnerability information.",
+                  "uuid": "205964ed-af88-40c2-bf4a-3516bdf1593c"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the processes observed to verify that:",
+                  "uuid": "c4b6fa00-5013-45c4-b273-3762f1b46778"
+                },
+                {
+                  "displayNumber": "D1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "e91a4830-f742-4d1c-928a-056d2a6f536d",
+                    "12ad9471-868e-4e00-8d64-32f38ab0f296"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "New security vulnerabilities are identified.",
+                  "uuid": "07b1f325-d446-4f3e-8d91-984a9e16ab68"
+                },
+                {
+                  "displayNumber": "D1-3",
+                  "hidden": false,
+                  "mappings": [
+                    "5dd5677c-35f8-4ccf-981f-d6bc6e313bdd",
+                    "be550a2e-b000-4ce0-838d-51309734ff2f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "A risk ranking is assigned to vulnerabilities to include identification of all “high” risk and “critical” vulnerabilities.",
+                  "uuid": "99d123d3-d975-4ff8-b155-7eb81e19e0ae"
+                },
+                {
+                  "displayNumber": "D1-4",
+                  "hidden": false,
+                  "mappings": [
+                    "7954ffc8-395f-4d64-9cd9-addc3959c13f",
+                    "c330718b-8ca1-43d2-878b-2c6eb31bb86c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "Processes to identify new security vulnerabilities include using reputable outside sources for security vulnerability information.",
+                  "uuid": "8040f95a-eb72-4a3c-9652-c442dc3d2ce6"
+                },
+                {
+                  "displayNumber": "D1-5",
+                  "hidden": false,
+                  "mappings": [
+                    "8328d75b-c157-4f76-8367-925eb6367338",
+                    "7dcac860-23d8-492c-9a89-5bc11a73c882"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "Identify the outside sources used.",
+                  "uuid": "555e8c7d-ea1d-4864-836f-905c56e0aa6d"
+                }
+              ],
+              "number": "D1",
+              "row": 2,
+              "table": null,
+              "text": "Interview responsible personnel and observe processes to verify that:\n* New security vulnerabilities are identified.\n* A risk ranking is assigned to vulnerabilities that includes identification of all “high” risk and “critical” vulnerabilities.\n* Processes to identify new security vulnerabilities include using reputable outside sources for security vulnerability information."
+            }
+          ],
+          "number": "D1",
+          "row": null,
+          "table": null,
+          "text": "Monitor the websites of your software vendors and reading relevant industry publications for news about emerging threats and available defenses."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "df5b5ba4-1387-4635-a4a7-a5d4de074c84",
+                    "61a61a16-c6c7-4ec2-ab59-79fbc628442c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of system components and related software selected for this testing procedure.",
+                  "uuid": "09d00f95-10a0-49db-b253-f186a73953b0"
+                },
+                {
+                  "displayNumber": "D2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "53464031-be4c-4774-85c9-fa834f6270e7",
+                    "21d3d1de-4c3f-4de3-98b4-ef18e3a97c88"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the vendor security patch list reviewed.",
+                  "uuid": "f62a212c-1af7-492e-b931-20092f7e7210"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each item in the sample,* **describe how** the list of security patches installed on each system was compared to the most recent vendor security-patch list to verify that:",
+                  "uuid": "04a1aee2-106f-4765-8d18-16ed803c48c4"
+                },
+                {
+                  "displayNumber": "D2-3",
+                  "hidden": false,
+                  "mappings": [
+                    "5971b54e-7cc7-489c-bc1b-fac3eba36f5c",
+                    "14edc97b-62ad-4257-a1a7-1c9c27098572"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "Applicable critical vendor-supplied security patches are installed within one month of release.",
+                  "uuid": "eb190574-8b91-4e72-aff8-8d5098357ef0"
+                },
+                {
+                  "displayNumber": "D2-4",
+                  "hidden": false,
+                  "mappings": [
+                    "33bc192b-877b-484e-931f-a9a4a4309b52",
+                    "4125c862-df1e-4827-a43b-e6b39a439549"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "All applicable vendor-supplied security patches are installed within an appropriate time frame.",
+                  "uuid": "bc13fb0a-018a-4c0d-978b-ae450f6e7480"
+                }
+              ],
+              "number": "D2",
+              "row": 9,
+              "table": null,
+              "text": "For a sample of system components and related software, compare the list of security patches installed on each system to the most recent vendor security-patch list, to verify the following:\n* That applicable critical vendor-supplied security patches are installed within one month of release.\n* All applicable vendor-supplied security patches are installed within an appropriate time frame (for example, within three months)."
+            }
+          ],
+          "number": "D2",
+          "row": null,
+          "table": null,
+          "text": "Check with software vendors regularly to get and install patches that resolve software vulnerabilities."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D3.a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "daf44496-66d1-47a4-987b-79eca0ad2d09",
+                    "9f6a3dd6-fbf5-4d7f-a182-b00e82cc6ed2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of system components selected (including all operating system types commonly affected by malicious software).",
+                  "uuid": "824e3364-c4e3-4347-a912-a175cff50b29"
+                },
+                {
+                  "displayNumber": "D3.a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "db398415-e248-4450-9845-0ce7869e690a",
+                    "f13f737e-6877-46b9-a4f9-f51436c0e9bc"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each item in the sample*, **describe how** anti-virus software was observed to be deployed.",
+                  "uuid": "f69d9e32-99c4-42d3-a2f2-b912dc51b890"
+                }
+              ],
+              "number": "D3.a",
+              "row": 15,
+              "table": null,
+              "text": "For a sample of system components including all operating system types commonly affected by malicious software, verify that anti-virus software is deployed if applicable anti-virus technology exists."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D3.b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "c45254f8-c71c-45f2-ba7a-cc6cd5cfaccf",
+                    "4a49ff22-395a-4bcc-a371-29111d67a2e1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the vendor documentation reviewed to verify that anti-virus programs:\n* Detect all known types of malicious software,\n* Remove all known types of malicious software, and\n* Protect against all known types of malicious software.",
+                  "uuid": "8891b716-945c-4aaf-b365-7aefeb0f17a2"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** anti-virus configurations were examined to verify that anti-virus programs:",
+                  "uuid": "b5d6515d-4a66-463d-b6c2-a2eded9c91d5"
+                },
+                {
+                  "displayNumber": "D3.b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "7395071b-48df-4be2-a579-368c7f299c7a",
+                    "b453db76-15bf-4fe6-a022-70a54e11ee53"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "Detect all known types of malicious software,",
+                  "uuid": "9d22bcc4-55f5-4b9a-8f15-87de96e00763"
+                },
+                {
+                  "displayNumber": "D3.b-3",
+                  "hidden": false,
+                  "mappings": [
+                    "4d508925-f087-44f8-906d-330264c29c63",
+                    "6e1fbcb0-7140-4181-923a-547d2639410c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "Remove all known types of malicious software, and",
+                  "uuid": "fea19619-1e8a-4aa2-8f5f-5b9e2dc05ef2"
+                },
+                {
+                  "displayNumber": "D3.b-4",
+                  "hidden": false,
+                  "mappings": [
+                    "7d0d5081-d1c8-44ae-9672-3a75d9e81086",
+                    "f034fb14-bce8-4864-afdb-dda33d2382ae"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 21,
+                  "table": null,
+                  "tag": null,
+                  "text": "Protect against all known types of malicious software.",
+                  "uuid": "498360eb-7951-4b55-a632-c76411ce81f6"
+                }
+              ],
+              "number": "D3.b",
+              "row": 17,
+              "table": null,
+              "text": "Review vendor documentation and examine anti-virus configurations to verify that anti-virus programs;\n* Detect all known types of malicious software,\n* Remove all known types of malicious software, and\n* Protect against all known types of malicious software.\n*(Examples of types of malicious software include viruses, Trojans, worms, spyware, adware, and rootkits).*"
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D3.c",
+                  "hidden": false,
+                  "mappings": [
+                    "5f9a848c-6d51-4e6b-aae5-8bf0fa1d0b41",
+                    "cdcf7165-ed98-41ba-a16a-111d4f525dd9"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** anti-virus configurations, including the master installation of the software, were examined to verify anti-virus mechanisms are Configured to perform automatic updates.",
+                  "uuid": "04d68139-5e6f-4635-8e45-d83aa504de40"
+                }
+              ],
+              "number": "D3.c",
+              "row": 22,
+              "table": null,
+              "text": "Examine anti-virus configurations, including the master installation of the software, to verify anti-virus mechanisms are configured to perform automatic updates."
+            }
+          ],
+          "number": "D3",
+          "row": null,
+          "table": null,
+          "text": "Use anti-virus and anti-spyware software that updates automatically."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** firewall configurations were examined to verify the firewalls are up-to-date.",
+                  "uuid": "3f6eb843-3f31-4766-a5b6-ac9f85ca710b"
+                }
+              ],
+              "number": "D4",
+              "row": 24,
+              "table": null,
+              "text": "Examine firewall configurations to verify they are up-to-date."
+            }
+          ],
+          "number": "D4",
+          "row": null,
+          "table": null,
+          "text": "Maintain up-to-date firewalls, particularly if you use a broadband Internet connection or allow employees to connect to your network from home or other off-site locations."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D5.a",
+                  "hidden": false,
+                  "mappings": [
+                    "a7000c68-9420-4790-b2c0-97d19a183d0f",
+                    "264bfa89-70a1-402e-a287-8f44a8892a6a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the firewall and router configuration standards reviewed to verify they require a review of firewall rule sets at least every six months.",
+                  "uuid": "a1431ad2-5231-4234-8b4a-2dd7391daec4"
+                }
+              ],
+              "number": "D5.a",
+              "row": 26,
+              "table": null,
+              "text": "Verify that firewall and router configuration standards require review of firewall and router rule sets at least every six months."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D5.b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "0bedd96a-00c0-4dcc-b2d0-91c6363cc476",
+                    "d7dfb301-1837-4c50-94fb-9e915bf4eb19"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the document(s) relating to rule set reviews that were examined to verify that rule sets are reviewed at least every six months for firewall and router rule sets.",
+                  "uuid": "cff0f69b-513c-4f74-a560-aa1f5f63682a"
+                },
+                {
+                  "displayNumber": "D5.b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "b72f4495-5a4e-4ac1-a47b-0e3b935ba6b6",
+                    "71c552d7-f3df-4251-ad56-7292f4a46e22"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel interviewed** who confirm that rule sets are reviewed at least every six months for firewall and router rule sets.",
+                  "uuid": "9f52583d-f8e4-4b3f-af51-bca0044e9f6a"
+                }
+              ],
+              "number": "D5.b",
+              "row": 27,
+              "table": null,
+              "text": "Examine documentation relating to rule set reviews and interview responsible personnel to verify that the rule sets are reviewed at least every six months."
+            }
+          ],
+          "number": "D5",
+          "row": null,
+          "table": null,
+          "text": "Regularly ensure that ports not used for your business are closed."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D6",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that information and instructions are promptly passed along to employees regarding any new security risks or possible breaches.",
+                  "uuid": "ea4ba7aa-11aa-4978-830a-7d154c169809"
+                }
+              ],
+              "number": "D6",
+              "row": 30,
+              "table": null,
+              "text": "Verify that that information and instructions are promptly passed along to employees regarding any new security risks or possible breaches."
+            }
+          ],
+          "number": "D6",
+          "row": null,
+          "table": null,
+          "text": "Promptly pass along information and instructions to employees regarding any new security risks or possible breaches."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D7.a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "bffcd5fa-5ca6-47f6-8ef3-50c669cb6901",
+                    "7ca01ccb-c6d7-4521-8f93-f254e73f1aa2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 32,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented security policies and procedures examined to verify that procedures define reviewing the following at least daily, either manually or via log tools:\n* All security events.\n* Logs of all system components that store, process, or transmit confidential data and/or SAD, or that could impact the security of confidential data and/or SAD.\n* Logs of all critical system components.\n* Logs of all servers and system components that perform security functions.",
+                  "uuid": "9963b390-0c54-45c1-abd7-4405b3e6f3f7"
+                },
+                {
+                  "displayNumber": "D7.a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "eb827a9a-0693-4ea2-987c-b9bb290df7c9",
+                    "212fd15b-7131-4f27-a824-fa02faed3cba"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "Describe the manual or log tools used for daily review of logs.",
+                  "uuid": "9703da97-ef35-4521-9ec2-09ef84549272"
+                }
+              ],
+              "number": "D7.a",
+              "row": 32,
+              "table": null,
+              "text": "Examine security policies and procedures to verify that procedures are defined for, reviewing the following at least daily, either manually or via log tools:\n* All security events.\n* Logs of all system components that store, process, or transmit customer data, or that could impact the security of customer data.\n* Logs of all critical system components.\n* Logs of all servers and system components that perform security functions (for example, firewalls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), authentication servers, e-commerce redirection servers, etc.)."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D7.b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "a0afb3c0-42ab-43fc-b090-8bfa9b9bfee5",
+                    "e08beadf-9288-40cd-8129-cba1add7261f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 34,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the personnel interviewed who confirm that the following are reviewed at least daily:\n* All security events.\n* Logs of all system components that store, process, or transmit confidential data, or that could impact the security of confidential data.\n* Logs of all critical system components.\nLogs of all servers and system components that perform security functions.",
+                  "uuid": "b8eb9fd4-5802-4aba-832d-905002a347d1"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 35,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that the following are reviewed at least daily:",
+                  "uuid": "be24d4f7-0872-4b02-abf5-18cc585fb01e"
+                },
+                {
+                  "displayNumber": "D7.b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "4af4fe9d-efda-4747-b9b1-f7c31ec962c8",
+                    "c289f93c-63ef-4420-bb75-a62767316bbc"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 36,
+                  "table": null,
+                  "tag": null,
+                  "text": "All security events.",
+                  "uuid": "8cdd45ce-d3ea-43fd-8310-8699e0e9e1bc"
+                },
+                {
+                  "displayNumber": "D7.b-3",
+                  "hidden": false,
+                  "mappings": [
+                    "63255f63-3d71-4e4b-af95-0e96e06b11ec",
+                    "7a554cee-4ec5-428a-a088-ab01baa6990c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 37,
+                  "table": null,
+                  "tag": null,
+                  "text": "Logs of all system components that store, process, or transmit customer data, or that could impact the security of customer data.",
+                  "uuid": "b324b4f5-4dd3-4f0b-8897-f43da354e07e"
+                },
+                {
+                  "displayNumber": "D7.b-4",
+                  "hidden": false,
+                  "mappings": [
+                    "016a8ba2-8ff4-4609-9b38-9772d145fb35",
+                    "2bff1a6b-f33d-4e41-9832-8837561890b7"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 38,
+                  "table": null,
+                  "tag": null,
+                  "text": "Logs of all critical system components.",
+                  "uuid": "23845a3f-f2cd-4be4-b08a-476f375e97ed"
+                },
+                {
+                  "displayNumber": "D7.b-5",
+                  "hidden": false,
+                  "mappings": [
+                    "0bc843a1-0677-4035-ac2c-f75c5bb3110d",
+                    "ea07c1c8-2e88-4a8a-b68d-3f8abcf33300"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 39,
+                  "table": null,
+                  "tag": null,
+                  "text": "Logs of all servers and system components that perform security functions.",
+                  "uuid": "2a9ec40f-a971-4ec6-b4cd-0d51bfb16312"
+                }
+              ],
+              "number": "D7.b",
+              "row": 34,
+              "table": null,
+              "text": "Observe processes and interview personnel to verify that the following are reviewed at least daily:\n* All security events.\n* Logs of all system components that store, process, or transmit customer data, or that could impact the security of customer data.\n* Logs of all critical system components.\n* Logs of all servers and system components that perform security functions (for example, firewalls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), authentication servers, e-commerce redirection servers, etc.)"
+            }
+          ],
+          "number": "D7",
+          "row": null,
+          "table": null,
+          "text": "Keep logs of activity on your network and monitor them for signs of unauthorized access to customer information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D8-1",
+                  "hidden": false,
+                  "mappings": [
+                    "3e93c562-8501-4f6d-96a6-daf1a28fbfd0",
+                    "63fa3e5f-5563-481d-bafd-1ef050946361"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 41,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the vendor document(s) examined to verify defined vendor instructions for intrusion-detection and/or intrusion-prevention techniques",
+                  "uuid": "40eda9c4-b09c-455f-bd3f-32ac276d98b2"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 42,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** IDS/IPS configurations were examined and compared to vendor documentation to verify intrusion-detection, and/or intrusion-prevention techniques are:",
+                  "uuid": "f9eea554-d301-457d-be66-2b3607a605f3"
+                },
+                {
+                  "displayNumber": "D8-2",
+                  "hidden": false,
+                  "mappings": [
+                    "9a1fa3a9-0532-4abc-b552-ec55328e8210",
+                    "bce1bcda-d078-4435-b49e-60155cf1e9bd"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 43,
+                  "table": null,
+                  "tag": null,
+                  "text": "Configured per vendor instructions to ensure optimal protection.",
+                  "uuid": "69bfd44e-692c-4f5e-b83c-8281458bdc27"
+                },
+                {
+                  "displayNumber": "D8-3",
+                  "hidden": false,
+                  "mappings": [
+                    "b7cebb51-7b18-4ddd-bf7f-2354f42ba6c6",
+                    "efe916b7-8761-4b4e-bdfc-ec25077e06ba"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 44,
+                  "table": null,
+                  "tag": null,
+                  "text": "Maintained per vendor instructions to ensure optimal protection.",
+                  "uuid": "4a50f929-4b4c-428e-97c5-cdbc19c28a7f"
+                },
+                {
+                  "displayNumber": "D8-4",
+                  "hidden": false,
+                  "mappings": [
+                    "96fe6ce8-4019-4994-a042-a83062dc95a0",
+                    "f484a0e8-aed1-4df5-9840-fc3f829a71f5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 45,
+                  "table": null,
+                  "tag": null,
+                  "text": "Updated per vendor instructions to ensure optimal protection.",
+                  "uuid": "4a0e2f35-7f72-4565-8e57-51c5dccf4714"
+                }
+              ],
+              "number": "D8",
+              "row": 41,
+              "table": null,
+              "text": "Examine IDS/IPS configurations and vendor documentation to verify intrusion-detection, and/or intrusion-prevention techniques are configured, maintained, and updated per vendor instructions to ensure optimal protection."
+            }
+          ],
+          "number": "D8",
+          "row": null,
+          "table": null,
+          "text": "Use an up-to-date intrusion detection system to alert you of attacks."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D9",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 47,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Descibe how** processes were observed to Monitor both in- and out-bound transfers of information for indications of a compromise, such as unexpectedly large amounts of data being transmitted from your system to an unknown user.",
+                  "uuid": "0f979dd6-8adc-4baf-9048-42fd22e07fe1"
+                }
+              ],
+              "number": "D9",
+              "row": 47,
+              "table": null,
+              "text": "Verify that in- and out-bound transfers of infortmation are monitored for indications of a compromise, such as unexpectedly large amounts of data being transmitted from your system to an unknown user."
+            }
+          ],
+          "number": "D9",
+          "row": null,
+          "table": null,
+          "text": "Monitor both in- and out-bound transfers of information for indications of a compromise, such as unexpectedly large amounts of data being transmitted from your system to an unknown user."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D10",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 49,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the incident response plan includes specific incident response procedures.",
+                  "uuid": "f3835eae-5b5c-4272-afcc-9e0b9b31a3a1"
+                }
+              ],
+              "number": "D10",
+              "row": 49,
+              "table": null,
+              "text": "Verify that the incident response plan includes specific incident response procedures."
+            }
+          ],
+          "number": "D10",
+          "row": null,
+          "table": null,
+          "text": "Take immediate action to secure any information that has or may have been compromised. For example, if a computer connected to the Internet is compromised, disconnect the computer from the Internet."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D11",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 51,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the incident response plan includes evidence gathering and retention requirements.",
+                  "uuid": "e54a8189-b808-4383-b79e-067fc9bed746"
+                }
+              ],
+              "number": "D11",
+              "row": 51,
+              "table": null,
+              "text": "Verify that the incident response plan includes evidence gathering and retention requirements."
+            }
+          ],
+          "number": "D11",
+          "row": null,
+          "table": null,
+          "text": "Preserve and review files or programs that may reveal how a breach occurred."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D12",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 53,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the incident response plan includes contact information for security professionals if feasible and appropriate to help assess a breach as soon as possible",
+                  "uuid": "3d827135-4476-4e81-a1c2-2e4313dc9ffd"
+                }
+              ],
+              "number": "D12",
+              "row": 53,
+              "table": null,
+              "text": "Verify that the incident response plan includes contact information for security professionals if feasible and appropriate to help assess a breach as soon as possible."
+            }
+          ],
+          "number": "D12",
+          "row": null,
+          "table": null,
+          "text": "If feasible and appropriate, bring in security professionals to help assess a breach as soon as possible."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D13",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 55,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the incident response plan includes procedures for notifying consumers if their personal information is subject to a breach that poses a significant risk of identity theft or related harm.",
+                  "uuid": "26f6dffc-476f-4bad-8888-0dc935af0a81"
+                }
+              ],
+              "number": "D13",
+              "row": 55,
+              "table": null,
+              "text": "Verify that the incident response plan includes procedures for notifying consumers if their personal information is subject to a breach that poses a significant risk of identity theft or related harm."
+            }
+          ],
+          "number": "D13",
+          "row": null,
+          "table": null,
+          "text": "Notify consumers if their personal information is subject to a breach that poses a significant risk of identity theft or related harm."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D14",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 57,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the incident response plan includes procedures for notifying law enforcement if the breach may involve criminal activity or there is evidence that the breach has resulted in identity theft or related harm.",
+                  "uuid": "bc74e268-2285-4593-af5d-aa5d6ba74880"
+                }
+              ],
+              "number": "D14",
+              "row": 57,
+              "table": null,
+              "text": "Verify that the incident response plan includes procedures for notifying law enforcement if the breach may involve criminal activity or there is evidence that the breach has resulted in identity theft or related harm."
+            }
+          ],
+          "number": "D14",
+          "row": null,
+          "table": null,
+          "text": "Notify law enforcement if the breach may involve criminal activity or there is evidence that the breach has resulted in identity theft or related harm."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D15",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 59,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the incident response plan includes procedures for notifying the credit bureaus and other businesses that may be affected by the breach.",
+                  "uuid": "c6fb71fd-9905-4e9f-a9c8-b5f38d7124c5"
+                }
+              ],
+              "number": "D15",
+              "row": 59,
+              "table": null,
+              "text": "Verify that the incident response plan includes procedures for notifying the credit bureaus and other businesses that may be affected by the breach."
+            }
+          ],
+          "number": "D15",
+          "row": null,
+          "table": null,
+          "text": "Notify the credit bureaus and other businesses that may be affected by the breach."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "D16",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 61,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide the name of the assessor who attests that the incident response plan includes analysis of legal requirements for reporting compromises (for example, California Bill 1386, which requires notification of affected consumers in the event of an actual or suspected compromise for any business with California residents in their database).",
+                  "uuid": "81d9fcbf-03a4-4fd9-96d4-ec026b51e2a1"
+                }
+              ],
+              "number": "D16",
+              "row": 61,
+              "table": null,
+              "text": "Verify that the incident response plan includes analysis of legal requirements for reporting compromises (for example, California Bill 1386, which requires notification of affected consumers in the event of an actual or suspected compromise for any business with California residents in their database)."
+            }
+          ],
+          "number": "D16",
+          "row": null,
+          "table": null,
+          "text": "Check to see if breach notification is required under applicable state law."
+        }
+      ],
+      "number": "D",
+      "row": null,
+      "table": 3,
+      "text": "Detecting and Managing System Failures"
+    }
+  ],
+  "sectionRegex": null,
+  "tagOptions": [],
+  "template": "glba_pci_dss_v3-2.docx",
+  "tlcHeader": "GLBA Safeguards Rule",
+  "tlcPosition": 4,
+  "uuid": "95f4b2f3-dbc3-4809-aaff-8ce9e362d22f"
+}

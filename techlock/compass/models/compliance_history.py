@@ -2,19 +2,18 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-
-from sqlalchemy.dialects.postgresql import ARRAY
-
+from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
-from ..models.int_enum import IntEnum
 from ..models.compliance import Plan
 
 __all__ = [
@@ -29,7 +28,7 @@ __all__ = [
 
 COMPLIANCE_HISTORY_CLAIM_SPEC = ClaimSpec(
     actions=[
-        'read'
+        'read',
     ],
     resource_name='compliances_history',
     filter_fields=[
@@ -41,9 +40,7 @@ COMPLIANCE_HISTORY_CLAIM_SPEC = ClaimSpec(
 
 
 class ComplianceHistorySchema(BaseModelSchema):
-    entity_id = mf.Integer(dump_only=True)
-    compliance_id = mf.Integer()
-    user_id = mf.String(require=True, allow_none=False)
+    compliance_id = mf.String()
     tasks = mf.List(mf.Integer, require=True, allow_none=False)
     start_date = mf.Date(require=True, allow_none=False)
     end_date = mf.Date(required=True, allow_none=False)
@@ -55,8 +52,10 @@ class ComplianceHistoryPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliances_history by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliances_history by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -66,13 +65,11 @@ class ComplianceHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema
 class ComplianceHistory(BaseModel):
     __tablename__ = 'compliances_history'
 
-    entity_id = db.Column('history_id', db.Integer, primary_key=True)
-    audit_id = db.Column('id', db.Integer)
-    user_id = db.Column(db.String, nullable=False)
-    tasks = db.Column(ARRAY(db.Integer), nullable=False)
-    start_date = db.Column(db.Date, nullable=False)
-    end_date = db.Column(db.Date, nullable=False)
-    plan = db.Column(IntEnum(Plan), nullable=False)
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"), nullable=False)
+    tasks = sa.Column(ARRAY(st.Integer), nullable=False)
+    start_date = sa.Column(st.Date, nullable=False)
+    end_date = sa.Column(st.Date, nullable=False)
+    plan = sa.Column(st.Enum(Plan), nullable=False)
 
 
 @dataclass

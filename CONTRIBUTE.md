@@ -58,7 +58,7 @@ Only PRs were the CI pipeline succeeds will be merged.
     ```conf
     NEXUS_HOST=nexus.techlockinc.com
 
-    AUDIENCE=user-management
+    AUDIENCE=compliance
 
     REDIS_HOST=127.0.0.1
     REDIS_PORT=6100

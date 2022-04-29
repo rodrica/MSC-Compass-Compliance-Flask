@@ -1,14 +1,13 @@
 import logging
 from typing import Any, Dict
 
+from flask.views import MethodView
 from flask_smorest import Blueprint
 from techlock.common.api import BadRequestException
 from techlock.common.api.auth import access_required
 from techlock.common.api.auth.claim import ClaimSet
 from techlock.common.api.models.dry_run import DryRunSchema
 from techlock.common.config import AuthInfo
-
-from flask.views import MethodView
 
 from ..models import AUDIT_HISTORY_CLAIM_SPEC as claim_spec
 from ..models import (
@@ -27,12 +26,11 @@ blp = Blueprint('audits_history', __name__, url_prefix='/audits_history')
 @blp.route('')
 class AuditHistorys(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     @access_required('read', claim_spec=claim_spec)
-    @blp.arguments(schema=AuditHistoryListQueryParametersSchema,
-                   location='query')
+    @blp.arguments(
+        schema=AuditHistoryListQueryParametersSchema,
+        location='query',
+    )
     @blp.response(status_code=200, schema=AuditHistoryPageableSchema)
     def get(self, query_params: AuditHistoryListQueryParameters, current_user: AuthInfo, claims: ClaimSet):
         logger.info('GET audits_history')
@@ -65,14 +63,13 @@ class AuditHistorys(MethodView):
 @blp.route('/<audit_history_id>')
 class AuditHistoryById(MethodView):
 
-    def __init__(self, *args, **kwargs):
-        MethodView.__init__(self, *args, **kwargs)
-
     def get_audit_history(self, current_user: AuthInfo, claims: ClaimSet, audit_history_id: str):
-        audit_history = AuditHistory.get(current_user,
-                                         audit_history_id,
-                                         claims=claims,
-                                         raise_if_not_found=True)
+        audit_history = AuditHistory.get(
+            current_user,
+            audit_history_id,
+            claims=claims,
+            raise_if_not_found=True,
+        )
 
         return audit_history
 
@@ -80,9 +77,11 @@ class AuditHistoryById(MethodView):
     @blp.response(status_code=200, schema=AuditHistorySchema)
     def get(self, audit_history_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Getting audit_history', extra={'id': audit_history_id})
-        audit_history = self.get_audit_history(current_user,
-                                               claims,
-                                               audit_history_id)
+        audit_history = self.get_audit_history(
+            current_user,
+            claims,
+            audit_history_id,
+        )
 
         return audit_history
 
@@ -93,9 +92,11 @@ class AuditHistoryById(MethodView):
     def put(self, data: Dict[str, Any], dry_run: bool, audit_history_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.debug('Updating audit_history', extra={'data': data})
 
-        audit_history = self.get_audit_history(current_user,
-                                               claims.filter_by_action('read'),
-                                               audit_history_id)
+        audit_history = self.get_audit_history(
+            current_user,
+            claims.filter_by_action('read'),
+            audit_history_id,
+        )
 
         for k, v in data.items():
             if hasattr(audit_history, k):
@@ -104,9 +105,11 @@ class AuditHistoryById(MethodView):
                 raise BadRequestException(f'AuditHistory has no attribute: {k}')
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        audit_history.save(current_user,
-                           claims=claims.filter_by_action('update'),
-                           commit=not dry_run)
+        audit_history.save(
+            current_user,
+            claims=claims.filter_by_action('update'),
+            commit=not dry_run,
+        )
 
         return audit_history
 
@@ -116,13 +119,17 @@ class AuditHistoryById(MethodView):
     def delete(self, dry_run: bool, audit_history_id: str, current_user: AuthInfo, claims: ClaimSet):
         logger.info('Deleting audit_history', extra={'id': audit_history_id})
 
-        audit_history = self.get_audit_history(current_user,
-                                               claims.filter_by_action('read'),
-                                               audit_history_id)
+        audit_history = self.get_audit_history(
+            current_user,
+            claims.filter_by_action('read'),
+            audit_history_id,
+        )
 
         # no need to rollback on dry-run, flask-sqlalchemy does this for us.
-        audit_history.delete(current_user,
-                             claims=claims.filter_by_action('delete'),
-                             commit=not dry_run)
+        audit_history.delete(
+            current_user,
+            claims=claims.filter_by_action('delete'),
+            commit=not dry_run,
+        )
 
         return

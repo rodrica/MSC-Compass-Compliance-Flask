@@ -2,15 +2,17 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'AuditTimeline',
@@ -39,7 +41,7 @@ AUDIT_TIMELINE_CLAIM_SPEC = ClaimSpec(
 
 
 class AuditTimelineSchema(BaseModelSchema):
-    audit_id = mf.Integer()
+    audit_id = mf.String()
     date = mf.Date(required=True, allow_none=False)
     compliant = mf.Integer(requird=True, allow_none=False)
     notice = mf.Integer(requird=True, allow_none=False)
@@ -54,8 +56,10 @@ class AuditTimelinePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter audits_timeline by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter audits_timeline by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -65,14 +69,14 @@ class AuditTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class AuditTimeline(BaseModel):
     __tablename__ = 'audits_timeline'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
-    date = db.Column(db.Date, nullable=True)
-    compliant = db.Column(db.Integer, nullable=False)
-    notice = db.Column(db.Integer, nullable=False)
-    noncompliant = db.Column(db.Integer, nullable=False)
-    pending = db.Column(db.Integer, nullable=False)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
+    date = sa.Column(st.Date, nullable=True)
+    compliant = sa.Column(st.Integer, nullable=False)
+    notice = sa.Column(st.Integer, nullable=False)
+    noncompliant = sa.Column(st.Integer, nullable=False)
+    pending = sa.Column(st.Integer, nullable=False)
 
-    audit = db.relationship('Audit')
+    audit = relationship('Audit')
 
 
 @dataclass

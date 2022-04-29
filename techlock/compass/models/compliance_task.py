@@ -3,17 +3,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
-from ..models.int_enum import IntEnum
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'ComplianceTask',
@@ -59,8 +58,10 @@ class ComplianceTaskPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceTaskListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliance_tasks by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliance_tasks by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -70,8 +71,8 @@ class ComplianceTaskListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class ComplianceTask(BaseModel):
     __tablename__ = 'compliance_tasks'
 
-    frequency = db.Column(IntEnum(Frequency), nullable=False)
-    text = db.Column(db.Text, nullable=False)
+    frequency = sa.Column(st.Enum(Frequency), nullable=False)
+    text = sa.Column(st.Text, nullable=False)
 
 
 @dataclass

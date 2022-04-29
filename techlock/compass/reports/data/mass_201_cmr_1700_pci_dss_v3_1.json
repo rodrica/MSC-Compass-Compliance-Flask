@@ -1,0 +1,1172 @@
+{
+  "columnMapping": [
+    {
+      "mapping": [
+        4,
+        0,
+        1,
+        3
+      ]
+    }
+  ],
+  "complianceOnly": false,
+  "complianceOptions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "component": "s1gi",
+  "defaultNavigation": null,
+  "highestPriority": 0,
+  "mapped": true,
+  "name": "MASS 201 CMR 1700 (PCI DSS v3.1)",
+  "processor": "sgi",
+  "requirements": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(1)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "e659b470-6619-4aea-9a74-745a17081ca9"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented information security policy** examined.",
+                  "uuid": "79134e80-4932-48fe-a90a-1bbee8fc0e80"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how **the information security policy was examined to verify that it is published and disseminated to:",
+                  "uuid": "731eec2c-6ad5-4e51-a462-9894b7eca725"
+                },
+                {
+                  "displayNumber": "17.03(1)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "de7c955c-7adb-4371-8c96-7e2c866261b0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant personnel.",
+                  "uuid": "818c6a2f-d481-4941-bd23-92fdeec50d15"
+                },
+                {
+                  "displayNumber": "17.03(1)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "62c85977-00d5-4226-98d9-f8790cb357e0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant vendors and business partners.",
+                  "uuid": "890bb8ce-5f9b-4930-ba3d-59578ce3d804"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Develop, implement, maintain, and monitor a comprehensive, written information security program applicable to any records containing personal information. Such comprehensive information security program must be reasonably consistent with industry standards, and must contain administrative, technical, and physical safeguards to ensure the security and confidentiality of personal information."
+            }
+          ],
+          "number": "17.03(1)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(a)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 8,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the personnel** designated to maintain the comprehensive information security program.",
+                  "uuid": "e0b3a2ac-9e15-4002-a13d-220444007c5d"
+                }
+              ],
+              "number": null,
+              "row": 8,
+              "table": null,
+              "text": "Designate one or more employees to maintain the comprehensive information security program."
+            }
+          ],
+          "number": "17.03(3)(a)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was verified that an annual risk-assessment process is documented that:",
+                  "uuid": "2e229e3e-ddc8-4821-b676-54d639d94abe"
+                },
+                {
+                  "displayNumber": "17.03(3)(b)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "c48a7591-5ca1-49eb-bbdb-9fb5b243871e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Identifies critical assets, threats and vulnerabilities.",
+                  "uuid": "cc598fbd-2cac-4b98-aadb-b6b7aeaddd19"
+                },
+                {
+                  "displayNumber": "17.03(3)(b)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "2246356a-6df4-42e8-9e97-7230ddb5e4d8"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "Results in formal, documented analysis of risk.",
+                  "uuid": "8c828c95-206a-4fc4-8ea3-61432b288051"
+                }
+              ],
+              "number": null,
+              "row": 10,
+              "table": null,
+              "text": "Identify and assess reasonably foreseeable internal and external risks to the security, confidentiality, and/or integrity of any electronic, paper, or other records containing personal information, and evaluating and improving, where necessary, the effectiveness of the current safeguards for limiting such risks, including but not limited to:\n* ongoing employee (including temporary and contract employee) training;\n* employee compliance with policies and procedures; and\nmeans for detecting and preventing security system failures."
+            }
+          ],
+          "number": "17.03(3)(b)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(c)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "d92c4717-44a2-4467-b1bf-12ef4961d264"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy to control distribution of media** that was reviewed to verify the policy covers all distributed media, including that distributed to individuals.",
+                  "uuid": "89fe1d7f-f966-4bd0-95d6-21da355a7ef2"
+                },
+                {
+                  "displayNumber": "17.03(3)(c)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "a7c5452e-4fae-40ab-9e3e-9d35166f19f2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how **media distribution is controlled, including distribution to individuals.",
+                  "uuid": "8173e076-9e66-43a4-8834-4e9e427f0cda"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "Develop security policies for employees that take into account whether and how employees should be allowed to keep, access and transport records containing personal information outside of business premises."
+            }
+          ],
+          "number": "17.03(3)(c)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(d)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the policies **and procedures that Impose disciplinary measures for violations of the comprehensive information security program rules.",
+                  "uuid": "994be213-95b5-47ea-aae3-91abd3c617b0"
+                }
+              ],
+              "number": null,
+              "row": 17,
+              "table": null,
+              "text": "Impose disciplinary measures for violations of the comprehensive information security program rules."
+            }
+          ],
+          "number": "17.03(3)(d)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(e)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "e494389f-0533-4d21-ab4a-e8338d54fcaf"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of users terminated in the past six months selected.",
+                  "uuid": "585141b2-e319-4e60-8756-eaef2bfd34d8"
+                },
+                {
+                  "displayNumber": "17.03(3)(e)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "2177cd10-cece-4bc2-bef0-c3540e225f36"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***local access ***were reviewed to verify that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "3780fc3e-4a17-49b5-9907-6e0baaf74047"
+                },
+                {
+                  "displayNumber": "17.03(3)(e)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "e6fdccc7-9998-4fd3-8771-0aba729db9ca"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 21,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***remote access ***were reviewed to verify that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "5076cba6-02c4-48f8-8adf-79f868d78ab3"
+                }
+              ],
+              "number": null,
+              "row": 19,
+              "table": null,
+              "text": "Prevent terminated employees from accessing records containing personal information by immediately terminating their physical and electronic access to such records, including deactivating their passwords and user names."
+            }
+          ],
+          "number": "17.03(3)(e)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(f)",
+                  "hidden": false,
+                  "mappings": [
+                    "14660dfc-a97f-4cc3-886a-a1c7f4f40627"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 23,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policies and procedures to manage service providers with whom confidential data is shared, or that could affect the security of confidential data**, reviewed to verify policy defines the following:\n* Maintain a list of service providers.\n* Maintain a written agreement that includes an acknowledgement that the service providers will maintain all applicable PCI DSS requirements to the extent the service provider handles, has access to, or otherwise stores, processes, or transmits the customer’s confidential data or sensitive authentication data, or manages the customer's confidential data environment on behalf of a customer.\n* Ensure there is an established process for engaging service providers including proper due diligence prior to engagement.\n* Maintain a program to monitor service providers’ PCI DSS compliance status at least annually.\n* Maintain information about which PCI DSS requirements are managed by each service provider, and which are managed by the entity.\n*",
+                  "uuid": "0f5ff5e3-4092-4540-9ae4-738ea8de22f6"
+                }
+              ],
+              "number": null,
+              "row": 23,
+              "table": null,
+              "text": "Take all reasonable steps to verify that any third-party service provider with access to personal information has the capacity to protect such information in the manner provided for in 201 CMR 17.00; and taking all reasonable steps to ensure that such third party service provider is applying to such personal information protective security measures at least as stringent as those required to be applied to personal information under 201 CMR 17.00."
+            }
+          ],
+          "number": "17.03(3)(f)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(g)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 25,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document **that gives procedures on limiting the amount of personal information collected to that reasonably necessary to accomplish the legitimate purpose for which it is collected",
+                  "uuid": "376c4e80-83c6-4a51-a01e-3a5e57da2604"
+                }
+              ],
+              "number": null,
+              "row": 25,
+              "table": null,
+              "text": "Limit the amount of personal information collected to that reasonably necessary to accomplish the legitimate purpose for which it is collected; limit the time such information is retained to that reasonably necessary to accomplish such purpose; and limit access to those persons who are reasonable required to know such information in order to accomplish such purpose or to comply with state or federal record retention requirements."
+            }
+          ],
+          "number": "17.03(3)(g)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(h)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "bbe0f183-3512-4fd0-87cd-f8159f9152d6"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the data-flow diagram**(s) examined.",
+                  "uuid": "9af44b31-9e6f-4587-a452-3b9af4cbcd75"
+                },
+                {
+                  "displayNumber": "17.03(3)(h)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "4aea40b8-d7a4-46bc-94dd-6a15ec554c9b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel **interviewed for this testing procedure.",
+                  "uuid": "53832557-cb0d-4c58-b745-e78d78e4c539"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 29,
+                  "table": null,
+                  "tag": null,
+                  "text": "For the interview, **summarize the relevant details discussed **to verify the diagram:",
+                  "uuid": "ff9a02ef-8dac-45e1-b316-a3ec20ff6595"
+                },
+                {
+                  "displayNumber": "17.03(3)(h)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "76282767-1603-4dab-8046-33c537b4e3bc"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "Shows all confidential data flows across systems and networks.",
+                  "uuid": "727882cb-9f96-44a7-938f-469a0104f790"
+                },
+                {
+                  "displayNumber": "17.03(3)(h)-4",
+                  "hidden": false,
+                  "mappings": [
+                    "cecd5043-d2d2-424e-8253-814f458b32db"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 31,
+                  "table": null,
+                  "tag": null,
+                  "text": "Is kept current and updated as needed upon changes to the environment.",
+                  "uuid": "0f6b5821-9272-4852-ad68-0551bf118afb"
+                }
+              ],
+              "number": null,
+              "row": 27,
+              "table": null,
+              "text": "Identify paper, electronic and other records, computer systems, and storage media, including laptops and portable devices used to store personal information, to determine which records contain personal information, except where the comprehensive information security program provides for the handling of all records as if they all contained personal information."
+            }
+          ],
+          "number": "17.03(3)(h)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(i)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "6b6643c9-382c-426c-bdc2-d456fbf14f2e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented procedures for protecting confidential data** reviewed to verify controls for physically securing all media are defined.",
+                  "uuid": "fe52554f-1059-45bc-aa3b-5e1e5bee4e78"
+                },
+                {
+                  "displayNumber": "17.03(3)(i)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "24cd468b-2b26-4c69-baab-2d78a92068da"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 34,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For all types of media used,*** describe the controls** for physically securing the media used.",
+                  "uuid": "284e0cd1-ba0b-49b9-8a80-5b1e7e5c08ea"
+                }
+              ],
+              "number": null,
+              "row": 33,
+              "table": null,
+              "text": "Reasonably restrict physical access to records containing personal information, including a written procedure that sets forth the manner in which physical access to such records is restricted; and store such records and data in locked facilities, storage area or containers."
+            }
+          ],
+          "number": "17.03(3)(i)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(j)",
+                  "hidden": false,
+                  "mappings": [
+                    "4d8340c3-c464-456d-a23b-dfbb72863eb3"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 36,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented security policies and procedures** examined to verify that procedures define reviewing the following at least daily, either manually or via log tools:\n* All security events\n* Logs of all system components that store, process, or transmit CHD and/or SAD\n* Logs of all critical system components\n* Logs of all servers and system components that perform security functions.",
+                  "uuid": "e7e905ee-0146-4367-81f8-e47e3f4f625f"
+                }
+              ],
+              "number": null,
+              "row": 36,
+              "table": null,
+              "text": "Regularly monitor to ensure that the comprehensive information security program is operating in a manner reasonably calculated to prevent unauthorized access to or unauthorized use of personal information; and upgrade information safeguards as necessary to limit risks."
+            }
+          ],
+          "number": "17.03(3)(j)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(k)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 38,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify **any security measures reviewed or assessed internally or by an auditor.",
+                  "uuid": "af5c079d-1e6b-4f24-99c0-8bd76a88167a"
+                }
+              ],
+              "number": null,
+              "row": 38,
+              "table": null,
+              "text": "Review the scope of the security measures at least annually or whenever there is a material change in business practices that may reasonably implicate the security or integrity of records containing personal information."
+            }
+          ],
+          "number": "17.03(3)(k)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.03(3)(l)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "5eb5b14f-985c-4153-a523-f00212b5fa22"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 40,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify that processes are defined to modify and evolve the incident response plan:\n* According to lessons learned.\n* To incorporate industry developments.",
+                  "uuid": "023c7fd0-68b7-4ec2-8bb8-0e1aa50c2cee"
+                },
+                {
+                  "displayNumber": "17.03(3)(l)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "2027e05a-4ccf-47ea-a909-5874de055f49"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 41,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample of responsible personnel** interviewed who confirm that processes are implemented to modify and evolve the incident response plan:\n* According to lessons learned.\n* To incorporate industry developments.",
+                  "uuid": "98b6d21c-413f-4971-a7d0-4c839ea64991"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 42,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how **it was observed that processes are implemented to modify and evolve the incident response plan:",
+                  "uuid": "a8c0417a-23a1-46d0-8206-4932936a2444"
+                },
+                {
+                  "displayNumber": "17.03(3)(l)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "cc7d6051-6856-45b4-8982-439c54d06d25"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 43,
+                  "table": null,
+                  "tag": null,
+                  "text": "According to lessons learned.",
+                  "uuid": "dcde613c-467d-4a56-880f-43a35fd8a810"
+                },
+                {
+                  "displayNumber": "17.03(3)(l)-4",
+                  "hidden": false,
+                  "mappings": [
+                    "c4bdaf15-4039-4248-b9f5-c92dfd1d30ed"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 44,
+                  "table": null,
+                  "tag": null,
+                  "text": "To incorporate industry developments.",
+                  "uuid": "c9d5a0f1-768a-43ae-ab49-a004e5baf144"
+                }
+              ],
+              "number": null,
+              "row": 40,
+              "table": null,
+              "text": "Document responsive actions taken in connection with any incident involving a breach of security, and perform a post-incident review of events and actions taken, if any, to make changes in business practices relating to protection of personal information."
+            }
+          ],
+          "number": "17.03(3)(l)",
+          "row": null,
+          "table": null,
+          "text": ""
+        }
+      ],
+      "number": "17.03",
+      "row": null,
+      "table": 0,
+      "text": "Duty to Protect and Standards for Protecting Personal Information"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(1)",
+                  "hidden": false,
+                  "mappings": [
+                    "fc2d0e32-560c-43ef-9d21-3f4e4d3f19c6"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 47,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the written procedures for user identification management** examined to verify processes are defined for each of the items below:\n* Assign all users a unique ID before allowing them to access system components or confidential data.\n* Control addition, deletion, and modification of user IDs, credentials, and other identifier objects.\n* Immediately revoke access for any terminated users.\n* Remove/disable inactive user accounts at least every 90 days.\n* Manage IDs used by vendors to access, support, or maintain system components via remote access as follows:\nEnabled only during the time period needed and disabled when not in use.\nMonitored when in use.\n* Limit repeated access attempts by locking out the user ID after not more than six attempts.\n* Set the lockout duration to a minimum of 30 minutes or until an administrator enables the user ID.\n* If a session has been idle for more than 15 minutes, require the user to re-authenticate to re-activate the terminal or session.",
+                  "uuid": "0eb68dae-a5ce-409b-a81b-660c6955f2d0"
+                }
+              ],
+              "number": null,
+              "row": 47,
+              "table": null,
+              "text": "Secure user authentication protocols including:\n(a) control of user IDs and other identifiers;\n(b) a reasonably secure method of assigning and selecting passwords, or use of unique identifier technologies, such as biometrics or token devices;\n(c) control of data security passwords to ensure that such passwords are kept in a safe location and/or format that does not compromise the security of the data they protect;\n(d) restrict access to active users and active user accounts only;\n(e) block access to user identification after multiple unsuccessful attempts to gain access or the limitation places on access for the particular system."
+            }
+          ],
+          "number": "17.04(1)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(2)(a)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "b3f6281c-1483-437e-aefa-f0472b4e1ce0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 49,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the selected sample** of roles for this testing procedure.",
+                  "uuid": "0db3d0fa-e827-4bf6-b473-2fa6af315c78"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 50,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each role in the selected sample*, **describe how **the role was examined to verify access needs for each role are defined and include:",
+                  "uuid": "45fa7087-09d9-44b2-b157-03b679073d56"
+                },
+                {
+                  "displayNumber": "17.04(2)(a)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "f8eb479a-e199-4ccc-a02a-52c1c470ceb6"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 51,
+                  "table": null,
+                  "tag": null,
+                  "text": "System components and data resources that each role needs to access for their job function.",
+                  "uuid": "52c073df-d55f-4160-94a2-8705807849b9"
+                },
+                {
+                  "displayNumber": "17.04(2)(a)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "e0e3c8a2-ca40-4837-a01e-b32a36541f72"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 52,
+                  "table": null,
+                  "tag": null,
+                  "text": "Identification of privilege necessary for each role to perform their job function.",
+                  "uuid": "4998c413-c8c3-4dd1-9258-9c38eb285978"
+                }
+              ],
+              "number": null,
+              "row": 49,
+              "table": null,
+              "text": "Restrict access to records and files containing personal information to those who need such information to perform their job duties."
+            }
+          ],
+          "number": "17.04(2)(a)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(2)(b)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "a67fb6ab-b229-4d29-95a9-b59962776119"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 54,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible administrative personnel** interviewed for this testing procedure.",
+                  "uuid": "641a5dfb-9b31-4eb4-b737-50e7a56191b7"
+                },
+                {
+                  "displayNumber": "17.04(2)(b)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "68d8d256-d8fb-44f0-84e1-84445ee0aae4"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 55,
+                  "table": null,
+                  "tag": null,
+                  "text": "For the interview, **summarize the relevant details discussed** to confirm that all users are assigned a unique ID for access to system components or confidential data.",
+                  "uuid": "5ec8b245-fed5-489a-a74e-009b74dc1fbe"
+                }
+              ],
+              "number": null,
+              "row": 54,
+              "table": null,
+              "text": "Assign unique identifications plus passwords, which are not vendor supplied default passwords, to each person with computer access, that are reasonably designed to maintain the integrity of the security of the access controls."
+            }
+          ],
+          "number": "17.04(2)(b)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(3)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "0fa069c8-b060-4a28-8177-3ee68a2811d2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 57,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** all locations where confidential data is transmitted or received over open, public networks.",
+                  "uuid": "54de37ac-0fab-42db-876b-4f031defcadf"
+                },
+                {
+                  "displayNumber": "17.04(3)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "c79bf16a-c917-4048-af6b-a48562fa5d5c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 58,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented standards** examined.",
+                  "uuid": "c244a52f-823d-4a92-bacc-f79379a49c1e"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 59,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the documented standards were examined and compared to system configurations to verify the use of:",
+                  "uuid": "9a3952d0-32b7-487f-b739-4d863408836e"
+                },
+                {
+                  "displayNumber": "17.04(3)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "0a47100c-79d1-40b0-9b82-85419dc67550"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 60,
+                  "table": null,
+                  "tag": null,
+                  "text": "Security protocols observed in use",
+                  "uuid": "6e888034-e062-4f26-86d2-eccd83d0f507"
+                },
+                {
+                  "displayNumber": "17.04(3)-4",
+                  "hidden": false,
+                  "mappings": [
+                    "479eeb2f-4832-4cee-8eeb-e1451886f18c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 61,
+                  "table": null,
+                  "tag": null,
+                  "text": "Strong cryptography for all locations",
+                  "uuid": "86d53f3c-bea5-4d57-81b4-6f6f0c7a31b0"
+                }
+              ],
+              "number": null,
+              "row": 57,
+              "table": null,
+              "text": "To the extent technically feasible, encrypt all transmitted records and files containing personal information that will travel across public networks, and encrypt all data containing personal information to be transmitted wirelessly."
+            }
+          ],
+          "number": "17.04(3)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(4)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "0ec330ae-a601-4cc7-bdff-8c00b4776e5f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 63,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed who confirm the following are logged:\n* All individual access to confidential data.\n* All actions taken by any individual with root or administrative privileges.\n* Access to all audit trails.\n* Invalid logical access attempts.\n* Use of and changes to identification and authentication mechanisms, including:\n* All elevation of privileges.\n* All changes, additions, or deletions to any account with root or administrative privileges.\n* Initialization of audit logs.\n* Stopping or pausing of audit logs.\n* Creation and deletion of system level objects.",
+                  "uuid": "01608a89-c98c-47f1-ab0c-d2b8d3a91ad3"
+                },
+                {
+                  "displayNumber": "17.04(4)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "4bab607c-0311-403f-b45a-e0cb56844b37"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 64,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample of audit logs** observed to verify the following are logged:\n* All individual access to confidential data.\n* All actions taken by any individual with root or administrative privileges.\n* Access to all audit trails.\n* Invalid logical access attempts.\n* Use of and changes to identification and authentication mechanisms, including.\n* All elevation of privileges.\n* All changes, additions, or deletions to any account with root or administrative privileges.\n* Initialization of audit logs.\n* Stopping or pausing of audit logs.\n* Creation and deletion of system level objects.",
+                  "uuid": "3b37f592-60fc-4b03-8008-e4e1e1bc70cb"
+                }
+              ],
+              "number": null,
+              "row": 63,
+              "table": null,
+              "text": "Reasonably monitor systems, for unauthorized user of or access to personal information."
+            }
+          ],
+          "number": "17.04(4)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(5)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "0a92ac7b-6e5a-4b27-8f3d-e412b79e1a13"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 66,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Indicate whether** disk encryption is used. **(yes/no)**",
+                  "uuid": "33ef125a-8f3a-4884-88f5-3604111ebcfe"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 67,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “yes,” complete the remainder. *\n*If “no,” **mark the remainder **as “Not Applicable.’*",
+                  "uuid": "5feddd5c-e4a2-4ff8-a709-a7cc7cdb0a96"
+                },
+                {
+                  "displayNumber": "17.04(5)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "d29dd72d-ce24-4fb6-bf42-9d0e0867d958"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 68,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the disk encryption mechanism(s) in use.",
+                  "uuid": "435e1537-0ab3-4b00-a676-f3cc56d8fcce"
+                },
+                {
+                  "displayNumber": "17.04(5)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "67bad51b-74ad-4e06-8611-20442b585d56"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 69,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each disk encryption mechanism in use*, **describe how **the configuration was inspected and the authentication process observed to verify that logical access to encrypted file systems is separate from the native operating system’s authentication mechanism.",
+                  "uuid": "5e427a7c-b903-4d60-9383-5a022db55f7e"
+                }
+              ],
+              "number": null,
+              "row": 66,
+              "table": null,
+              "text": "Encrypt all personal information stored on laptops or other portable devices."
+            }
+          ],
+          "number": "17.04(5)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(6)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 71,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policies and configuration standards** that define the following:\n* Firewall software/hardware is required for all devices (containing personal information) that connect to the Internet when outside the network, and which are also used to access the network.",
+                  "uuid": "92eb5235-c7d6-4ba0-a41e-b0d6e2dceaf8"
+                }
+              ],
+              "number": null,
+              "row": 71,
+              "table": null,
+              "text": "For files containing personal information on a system that is connected to the Internet, there must be reasonably up-to-date firewall protection and operating system security patches, reasonably designed to maintain the integrity of the personal information."
+            }
+          ],
+          "number": "17.04(6)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 73,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** anti-virus configurations, including the master installation of the software, were examined to verify anti-virus mechanisms are:",
+                  "uuid": "89f870b5-44d7-4beb-b581-7ccb7b819415"
+                },
+                {
+                  "displayNumber": "17.04(7)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "1193bd0a-bd90-4ef1-a19a-958c0541375d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 74,
+                  "table": null,
+                  "tag": null,
+                  "text": "Configured to perform automatic updates, and",
+                  "uuid": "e6350669-9587-479c-a7dc-da0a63edf1df"
+                },
+                {
+                  "displayNumber": "17.04(7)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "3d976f52-c4b5-40bc-b275-f77a526e1ea1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 75,
+                  "table": null,
+                  "tag": null,
+                  "text": "Configured to perform periodic scans.",
+                  "uuid": "245d18c0-d4d1-4236-bd89-aebd5b0b47a2"
+                }
+              ],
+              "number": null,
+              "row": 73,
+              "table": null,
+              "text": "Implement reasonably up-to-date versions of system security agent software which must include malware protection and reasonably up-to-date patches and virus definitions, or a version of such software that can still be supported with up-to-date patches and virus definitions, and is set to receive the most current security updates on a regular basis."
+            }
+          ],
+          "number": "17.04(7)",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.04(8)",
+                  "hidden": false,
+                  "mappings": [
+                    "57ef159d-9350-4e5c-844a-b20f2ac5a2a0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 77,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented security awareness program** reviewed to verify it provides awareness to all personnel about the importance of confidential data security.",
+                  "uuid": "9e6f4144-7bad-4fb5-b25e-c6bd1d94e11f"
+                }
+              ],
+              "number": null,
+              "row": 77,
+              "table": null,
+              "text": "Educate and train all employees on the proper use of the computer security system and the importance of personal information security."
+            }
+          ],
+          "number": "17.04(8)",
+          "row": null,
+          "table": null,
+          "text": ""
+        }
+      ],
+      "number": "17.04",
+      "row": null,
+      "table": 0,
+      "text": "Computer System Security Requirements"
+    }
+  ],
+  "sectionRegex": null,
+  "tagOptions": [],
+  "template": "mass_201_cmr_1700_pci_dss_v3-1.docx",
+  "tlcHeader": "Mass 201 CMR 17.00",
+  "tlcPosition": 12,
+  "uuid": "2aeecb75-a770-4d10-971c-af027ce6cf01"
+}

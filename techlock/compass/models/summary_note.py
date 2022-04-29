@@ -2,16 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
-
+import sqlalchemy as sa
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'SummaryNote',
@@ -40,9 +40,9 @@ SUMMARY_NOTE_CLAIM_SPEC = ClaimSpec(
 
 
 class SummaryNoteSchema(BaseModelSchema):
-    audit_id = mf.Integer(allow_none=True)
+    audit_id = mf.String(allow_none=True)
 
-    compliance_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
 
     audit = mf.Nested('AuditSchema', dump_only=True)
 
@@ -54,8 +54,10 @@ class SummaryNotePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class SummaryNoteListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter summary_notes by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter summary_notes by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -65,13 +67,13 @@ class SummaryNoteListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class SummaryNote(BaseModel):
     __tablename__ = 'summary_notes'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
 
-    audit = db.relationship('Audit')
+    audit = relationship('Audit')
 
-    compliance = db.relationship('Compliance')
+    compliance = relationship('Compliance')
 
 
 @dataclass

@@ -39,8 +39,9 @@ setup(
     author='Michiel Vanderlee',
     author_email='jmt.vanderlee@gmail.com',
     packages=find_packages(exclude=('tests', 'docs')),
+    include_package_data=True,
     install_requires=[
-        'tl_msc_common==1.0.0.dev0+master.7685c9b52085692fc7506a06b9397a37dd406307',
+        'tl_msc_common==1.0.0.dev0+master.eb648af0e14efc1a536fcd6b4e8f1ac9c3837ce7',
         'Flask-HTTPAuth==3.3.0',
     ],
 )

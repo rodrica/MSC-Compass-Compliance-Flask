@@ -1,0 +1,4457 @@
+{
+  "columnMapping": [],
+  "complianceOnly": false,
+  "complianceOptions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "component": "sgi",
+  "defaultNavigation": null,
+  "highestPriority": 0,
+  "mapped": true,
+  "name": "ISO 27002 (PCI DSS v3.2.x)",
+  "processor": "sgi",
+  "requirements": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "5.1.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "831dcfe3-513a-478f-ae71-67594fb6ec94",
+                    "3ee7a604-11e0-4f73-a174-668bb44ccd44"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented information security policy** examined.",
+                  "uuid": "999b97b8-0a05-475a-b5a6-7039806a80f8"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the information security policy was examined to verify that it is published and disseminated to:",
+                  "uuid": "03a2b140-c1dd-4e73-a3ad-57f93a58cc46"
+                },
+                {
+                  "displayNumber": "5.1.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "6aecf438-ea83-41b5-9fa4-ea8869e8fc30",
+                    "348ef231-622c-459f-9bbf-205cc45379bd"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant personnel.",
+                  "uuid": "4eb8263c-ccdd-4591-bad1-0d6a8d545f24"
+                },
+                {
+                  "displayNumber": "5.1.1-3",
+                  "hidden": false,
+                  "mappings": [
+                    "60e7b31f-ab07-403b-81f4-1083c0d39684",
+                    "493c5955-78a5-47b3-acba-4fcb48055306"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant vendors and business partners.",
+                  "uuid": "e45b1575-75ef-4326-b17e-9182cf65938e"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "An information security policy document should be approved by management, and published and communicated to all employees and relevant external parties."
+            }
+          ],
+          "number": "5.1.1",
+          "row": null,
+          "table": null,
+          "text": "Information security policy document."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "5.1.2",
+                  "hidden": false,
+                  "mappings": [
+                    "3dcb5b5c-cdd7-485f-b5a7-235fee82b7d2",
+                    "32ec0889-958b-423d-851f-de0fac09285b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 8,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the information security policies and procedures** reviewed to verify:\n* The formal assignment of information security to a Chief Security Officer or other security-knowledgeable member of management.\n* The following information security responsibilities are specifically and formally assigned:",
+                  "uuid": "5e140246-64fa-4c57-86c3-2c777bb8c9de"
+                }
+              ],
+              "number": null,
+              "row": 8,
+              "table": null,
+              "text": "The policies for information security should be reviewed at planned intervals or if significant changes occur to ensure their continuing suitability, adequacy and effectiveness."
+            }
+          ],
+          "number": "5.1.2",
+          "row": null,
+          "table": null,
+          "text": "Review of the policies for information security."
+        }
+      ],
+      "number": "A.5",
+      "row": null,
+      "table": 0,
+      "text": "Information Security Policies"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "6.1.1",
+                  "hidden": false,
+                  "mappings": [
+                    "3dcb5b5c-cdd7-485f-b5a7-235fee82b7d2",
+                    "32ec0889-958b-423d-851f-de0fac09285b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the information security policies and procedures** reviewed to verify:\n* The formal assignment of information security to a Chief Security Officer or other security-knowledgeable member of management.\n* The following information security responsibilities are specifically and formally assigned:",
+                  "uuid": "c786d73d-50bb-4819-b40b-4a3e9a661e26"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "All information security responsibilities should be defined and allocated."
+            }
+          ],
+          "number": "6.1.1",
+          "row": null,
+          "table": null,
+          "text": "Information security roles and responsibilities"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "6.1.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify responsibility should be segregated to reduce opportunities for unauthorized or unintentional modification or misuse of the organization’s assets.",
+                  "uuid": "d87d3870-fbb6-413c-8f21-557388f9be4c"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "Conflicting duties and areas of responsibility should be segregated to reduce opportunities for unauthorized or unintentional modification or misuse of the organization’s assets."
+            }
+          ],
+          "number": "6.1.2",
+          "row": null,
+          "table": null,
+          "text": "Segregation of duties"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "6.1.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify appropriate contacts with relevant authorities should be maintained.",
+                  "uuid": "37c2b3f8-3ef0-4f02-a024-aff633549f54"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "Appropriate contacts with relevant authorities should be maintained."
+            }
+          ],
+          "number": "6.1.3",
+          "row": null,
+          "table": null,
+          "text": "Contact with authorities"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "6.1.4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify appropriate contacts with special interest groups or other specialist security forums and professional associations should be maintained.",
+                  "uuid": "48d1ee51-fb9a-4261-8e81-178ecba08609"
+                }
+              ],
+              "number": null,
+              "row": 9,
+              "table": null,
+              "text": "Appropriate contacts with special interest groups or other specialist security forums and professional associations should be maintained."
+            }
+          ],
+          "number": "6.1.4",
+          "row": null,
+          "table": null,
+          "text": "Contact with special interest groups"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "6.1.5",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the personnel interviewed to confirm that Information Security is addressed in project management.",
+                  "uuid": "8455fd35-661b-43bf-acba-be918be64f17"
+                }
+              ],
+              "number": null,
+              "row": 11,
+              "table": null,
+              "text": "Information security should be addressed in project management, regardless of the type of the project."
+            }
+          ],
+          "number": "6.1.5",
+          "row": null,
+          "table": null,
+          "text": "Information security in project management"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "6.2.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "29eada78-3d7d-4937-bdb8-e2b3624bcb63",
+                    "711b8b87-3273-416d-a88e-668500675eca"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Indicate whether** mobile and/or employee-owned computers with direct connectivity to the Internet when outside the network are used to access the organization’s network. **(yes/no)**",
+                  "uuid": "2c069e9f-8475-427f-9257-73e0538d9a48"
+                },
+                {
+                  "displayNumber": "6.2.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "23a080fb-7244-4b78-9a31-99bc3aafa77e",
+                    "3d279c32-58a8-4fab-b6fe-244b374662ad"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “no,”* **identify the document** reviewed that explicitly prohibits mobile and/or employee-owned computers with direct connectivity to the Internet when outside the network from being used to access the organization’s network.",
+                  "uuid": "1181bfd5-ef16-4bb1-b467-ec81805fa97b"
+                },
+                {
+                  "displayNumber": "6.2.1-3",
+                  "hidden": false,
+                  "mappings": [
+                    "c8d5e3b6-ea6e-4782-a2dd-ca4605df87b2",
+                    "72d977fb-7592-4e54-9842-badda73ad2bf"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “yes,”* **identify the documented policies and configuration standards** that define the following:\n* Personal firewall software is required for all mobile and/or employee-owned devices that connect to the Internet when outside the network, and which are also used to access the network.\n* Specific configuration settings are defined for personal firewall software.\n* Personal firewall software is configured to actively run.\n* Personal firewall software is configured to not be alterable by users of mobile and/or employee-owned devices.",
+                  "uuid": "507a866f-b9f4-4925-aeb6-669dd667d088"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "A policy and supporting security measures should be adopted to manage the risks introduced by using mobile devices."
+            }
+          ],
+          "number": "6.2.1",
+          "row": null,
+          "table": null,
+          "text": "Mobile device policy"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "6.2.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify policy and supporting security measures should be implemented to protect information accessed, processed or stored at teleworking sites.",
+                  "uuid": "a0197f37-f390-4e6c-8f08-756053c4ee78"
+                }
+              ],
+              "number": null,
+              "row": 18,
+              "table": null,
+              "text": "A policy and supporting security measures should be implemented to protect information accessed, processed or stored at teleworking sites."
+            }
+          ],
+          "number": "6.2.2",
+          "row": null,
+          "table": null,
+          "text": "Teleworking"
+        }
+      ],
+      "number": "A.6",
+      "row": null,
+      "table": 1,
+      "text": "Organization of Information Security"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "7.1.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "57c4974a-88c5-4509-8ce1-7e7c033b01fd",
+                    "f6291003-1133-4140-a62c-c425e4eaf8ab"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the Human Resources personnel** interviewed who confirm background checks are conducted (within the constraints of local laws) prior to hire on potential personnel who will have access to cardholder data or the cardholder data environment.",
+                  "uuid": "5b8e04fb-7540-48e1-9f68-55c2f65be93b"
+                },
+                {
+                  "displayNumber": "7.1.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "dd4be78f-08f3-4717-9d93-e103bcaf05ab",
+                    "f9d55d81-14ee-4d9e-b557-a95e50253472"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that background checks are conducted (within the constraints of local laws) prior to hire on potential personnel who will have access to cardholder data or the cardholder data environment.",
+                  "uuid": "31a89bf1-1e51-4d7e-952e-8e7f425b2e43"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Background verification checks on all candidates for employment should be carried out in accordance with relevant laws, regulations and ethics and should be proportional to the business requirements, the classification of the information to be accessed and the perceived risks."
+            }
+          ],
+          "number": "7.1.1",
+          "row": null,
+          "table": null,
+          "text": "Screening"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was verified that, per the security awareness program, all personnel:",
+                  "uuid": "fc248c4b-9d68-4049-a2d2-73a0fb5009ab"
+                },
+                {
+                  "displayNumber": "7.1.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "26fb6aa0-8757-4409-a60f-4b2bd9951b0e",
+                    "9854cbd9-6c90-4086-ba94-4159b78fadcb"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "Acknowledge that they have read and understand the information security policy (including whether this is in writing or electronic).",
+                  "uuid": "ef6cc2b0-5763-498c-b98d-77d819c5fe80"
+                },
+                {
+                  "displayNumber": "7.1.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "c86ae5c6-4b89-4495-a762-3860cb9d0a78",
+                    "90d7c55f-32b4-4610-a1b0-3481d64c0042"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 8,
+                  "table": null,
+                  "tag": null,
+                  "text": "Provide an acknowledgement at least annually.",
+                  "uuid": "3d86185b-9c5e-4ec5-a5be-3af7921e27c1"
+                }
+              ],
+              "number": null,
+              "row": 6,
+              "table": null,
+              "text": "The contractual agreements with employees and contractors should state their and the organization’s responsibilities for information security."
+            }
+          ],
+          "number": "7.1.2",
+          "row": null,
+          "table": null,
+          "text": "Terms and conditions of employment"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "7.2.1",
+                  "hidden": false,
+                  "mappings": [
+                    "0dbae85d-1362-4255-a406-052553bb24ac",
+                    "909217cd-428f-41c8-bca2-5b8896a55349"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the security awareness program provides multiple methods of communicating awareness and educating personnel.",
+                  "uuid": "8a64672f-eb8a-49ac-b083-6968bb0c1aa2"
+                }
+              ],
+              "number": null,
+              "row": 11,
+              "table": null,
+              "text": "Management should require all employees and contractors to apply information security in accordance with the established policies and procedures of the organization."
+            }
+          ],
+          "number": "7.2.1",
+          "row": null,
+          "table": null,
+          "text": "Management responsibilities"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "7.2.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "a884f665-8495-4f4c-93e8-369021e6b335",
+                    "75267262-fff7-4bea-b554-66abb2628c72"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the security awareness program was verified to provide awareness to all personnel about the cardholder data security policy and procedures.",
+                  "uuid": "202e2b51-0782-4f1d-881f-67c4b947e46c"
+                },
+                {
+                  "displayNumber": "7.2.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "0ad75827-10c6-46a9-92e7-f5165e5cac98",
+                    "46729f53-0177-4a1e-b317-70fc6b26685d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented security awareness program procedures and additional documentation** examined to verify that:\n* The security awareness program provides multiple methods of communicating awareness and educating personnel.\n* Personnel attend security awareness training:\n    * Upon hire, and\n    * At least annually\n* Personnel acknowledge, in writing or electronically and at least annually, that they have read and understand the information security policy.",
+                  "uuid": "a6607f70-28bb-4785-937b-689decaeae58"
+                }
+              ],
+              "number": null,
+              "row": 13,
+              "table": null,
+              "text": "All employees of the organization and, where relevant, contractors should receive appropriate awareness education and training and regular updates in organizational policies and procedures, as relevant for their job function."
+            }
+          ],
+          "number": "7.2.2",
+          "row": null,
+          "table": null,
+          "text": "Information security awareness, education and training"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "7.2.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify appropriate contacts with relevant authorities should be maintained.",
+                  "uuid": "c75360f3-0f75-47fb-897f-0ee92351ee3e"
+                }
+              ],
+              "number": null,
+              "row": 16,
+              "table": null,
+              "text": "There should be a formal and communicated disciplinary process in place to take action against employees who have committed an information security breach."
+            }
+          ],
+          "number": "7.2.3",
+          "row": null,
+          "table": null,
+          "text": "Disciplinary process"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "7.3.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify responsibilities and duties that remain valid after termination or change of employment should be defined, communicated to the employee or contractor and enforced.",
+                  "uuid": "66987fa0-2118-488a-881e-36e81a5da042"
+                }
+              ],
+              "number": null,
+              "row": 19,
+              "table": null,
+              "text": "Information security responsibilities and duties that remain valid after termination or change of employment should be defined, communicated to the employee or contractor and enforced."
+            }
+          ],
+          "number": "7.3.1",
+          "row": null,
+          "table": null,
+          "text": "Termination or change of employment responsibilities"
+        }
+      ],
+      "number": "A.7",
+      "row": null,
+      "table": 2,
+      "text": "Human resources security"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the system inventory was examined to verify that a list of hardware and software components is:",
+                  "uuid": "b6499a8a-c62e-4909-9758-517d6d8fe1b0"
+                },
+                {
+                  "displayNumber": "8.1.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "9088ddef-0005-4179-9a60-a8346f2519aa",
+                    "8c1eedfc-db7f-423a-8be6-f9298265d528"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "Maintained",
+                  "uuid": "7024873c-0350-40cd-9f12-0a830a19f750"
+                },
+                {
+                  "displayNumber": "8.1.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "a0ffa1de-2aaf-4c67-baa4-6f12d8596e63",
+                    "f2dbbdb7-9959-4a46-bc5d-bf81947cc381"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "Includes a description of function/use for each",
+                  "uuid": "f6466c29-6343-4558-8b5a-c383fb12a2c2"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Assets associated with information and information processing facilities should be identified and an inventory of these assets should be drawn up and maintained."
+            }
+          ],
+          "number": "8.1.1",
+          "row": null,
+          "table": null,
+          "text": "Inventory of assets"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.1.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify assets maintained in the inventory should be owned.",
+                  "uuid": "0c7e13d9-4ee2-4d51-8c98-a8307eebb8f1"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "Assets maintained in the inventory should be owned."
+            }
+          ],
+          "number": "8.1.2",
+          "row": null,
+          "table": null,
+          "text": "Ownership of assets"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.1.3",
+                  "hidden": false,
+                  "mappings": [
+                    "660c4971-6116-46d2-b3b6-9621109fd9ba",
+                    "eb4883de-bcaa-4301-a112-16ccdfe1ee7e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the usage policies were verified to define acceptable uses for the technology.",
+                  "uuid": "12a5902f-aafc-4307-bc83-a922545c88ba"
+                }
+              ],
+              "number": null,
+              "row": 9,
+              "table": null,
+              "text": "Rules for the acceptable use of information and of assets associated with information and information processing facilities should be identified, documented and implemented."
+            }
+          ],
+          "number": "8.1.3",
+          "row": null,
+          "table": null,
+          "text": "Acceptable use of assets"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.1.4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify assets maintained in the inventory should be owned.",
+                  "uuid": "73240ce4-f0a4-4b65-8c3d-da42a0a69bec"
+                }
+              ],
+              "number": null,
+              "row": 11,
+              "table": null,
+              "text": "All employees and external party users should return all of the organizational assets in their possession upon termination of their employment, contract or agreement."
+            }
+          ],
+          "number": "8.1.4",
+          "row": null,
+          "table": null,
+          "text": "Return of assets"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.2.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify Information should be classified in terms of legal requirements, value, criticality and sensitivity to unauthorized disclosure or modification.",
+                  "uuid": "b77f9234-c9cf-4921-81f7-2945ce1babf8"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "Information should be classified in terms of legal requirements, value, criticality and sensitivity to unauthorized disclosure or modification."
+            }
+          ],
+          "number": "8.2.1",
+          "row": null,
+          "table": null,
+          "text": "Classification of information"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.2.2",
+                  "hidden": false,
+                  "mappings": [
+                    "aef3a8b8-6d6e-4ea7-a004-c4b60e0d0e2b",
+                    "8ad6fc5f-2182-46ca-b792-640daeaffcb5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the usage policies were verified to define a method to accurately and readily determine:\n* Owner\n* Contact Information\n* Purpose",
+                  "uuid": "48820a69-8397-4ae9-aa4d-e78d1942afde"
+                }
+              ],
+              "number": null,
+              "row": 16,
+              "table": null,
+              "text": "An appropriate set of procedures for information labelling should be developed and implemented in accordance with the information classification scheme adopted by the organization."
+            }
+          ],
+          "number": "8.2.2",
+          "row": null,
+          "table": null,
+          "text": "Labelling of information"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.2.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify assets maintained in the inventory should be owned.",
+                  "uuid": "081ba4de-ce76-4aaa-83cb-4e594e662dba"
+                }
+              ],
+              "number": null,
+              "row": 18,
+              "table": null,
+              "text": "Procedures for handling assets should be developed and implemented in accordance with the information classification scheme adopted by the organization."
+            }
+          ],
+          "number": "8.2.3",
+          "row": null,
+          "table": null,
+          "text": "Handling of assets"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.3.1",
+                  "hidden": false,
+                  "mappings": [
+                    "a4e6eb54-1f09-44d3-bdeb-80c6d0dc1c81",
+                    "501234ef-6b8a-4462-b10b-b3676bb97a4d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 21,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** media was observed to be classified so the sensitivity of the data can be determined.",
+                  "uuid": "a6250a0e-cccf-4aac-84f3-cd130e8d3140"
+                }
+              ],
+              "number": null,
+              "row": 21,
+              "table": null,
+              "text": "Procedures should be implemented for the management of removable media in accordance with the classification scheme adopted by the organization."
+            }
+          ],
+          "number": "8.3.1",
+          "row": null,
+          "table": null,
+          "text": "Management of removable media"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.3.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "8ffa32cd-d6e2-40c2-ae06-4437ffabc91d",
+                    "bacfaa9d-7430-4d94-a59f-1831c00cf49c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 23,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed who confirm that hard-copy materials are crosscut shredded, incinerated, or pulped such that there is reasonable assurance the hard-copy materials cannot be reconstructed.",
+                  "uuid": "201e7b54-96e6-4932-b52f-946f24e68181"
+                },
+                {
+                  "displayNumber": "8.3.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "349c6421-3213-466f-bd66-d2d7f319c0e6",
+                    "5aac5e61-dfca-4ff1-b4f0-ed964ca32275"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the procedures state that hard-copy materials are crosscut shredded, incinerated, or pulped such that there is reasonable assurance that hardcopy materials cannot be reconstructed.",
+                  "uuid": "507ff089-a93a-44fc-a315-12339a45e258"
+                }
+              ],
+              "number": null,
+              "row": 23,
+              "table": null,
+              "text": "Media should be disposed of securely when no longer required, using formal procedures."
+            }
+          ],
+          "number": "8.3.2",
+          "row": null,
+          "table": null,
+          "text": "Disposal of media"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "8.3.3-1",
+                  "hidden": false,
+                  "mappings": [
+                    "d4234eb5-ef94-49a8-af5e-4afa2e18bfa5",
+                    "0c5be80c-9405-472c-90f3-1c536560b190"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify responsible personnel** interviewed who confirm that proper management authorization is obtained whenever media is moved from a secured area (including when media is distributed to individuals).",
+                  "uuid": "6e00e207-8e38-48a2-bcd4-3d9cfccbb622"
+                },
+                {
+                  "displayNumber": "8.3.3-2",
+                  "hidden": false,
+                  "mappings": [
+                    "b9d882e9-6a8f-473d-8558-a2f5ee47e141",
+                    "3f2136b7-c229-4834-8296-051abde50650"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** offsite tracking logs were examined to verify proper management authorization is obtained whenever media is moved from a secured area (including when media is distributed to individuals).",
+                  "uuid": "c1052c35-45cd-483f-a2f7-713c83d828c3"
+                }
+              ],
+              "number": null,
+              "row": 26,
+              "table": null,
+              "text": "Media containing information should be protected against unauthorized access, misuse or corruption during transportation."
+            }
+          ],
+          "number": "8.3.3",
+          "row": null,
+          "table": null,
+          "text": "Physical media transfer"
+        }
+      ],
+      "number": "A.8",
+      "row": null,
+      "table": 3,
+      "text": "Asset management"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.1.1",
+                  "hidden": false,
+                  "mappings": [
+                    "5c3ba559-dc34-402c-9fbf-ccdcdae9e356",
+                    "837ebba0-392a-49d3-ad22-a16a1537c51d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the written policy for access control** that was examined to verify the policy incorporates as follows:\n* Defining access needs and privilege assignments for each role.\n* Restriction of access to privileged user IDs to least privileges necessary to perform job responsibilities.\n* Assignment of access based on individual personnel’s job classification and function\n* Documented approval (electronically or in writing) by authorized parties for all access, including listing of specific privileges approved.",
+                  "uuid": "c90e1512-0855-4f24-8178-c0f3b77e13ca"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "An access control policy should be established, documented and reviewed based on business and information security requirements."
+            }
+          ],
+          "number": "9.1.1",
+          "row": null,
+          "table": null,
+          "text": "Access control policy"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.1.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "f1b452ef-b03d-4744-8705-9f0562f04e4f",
+                    "8a074947-d085-47f1-bafd-4f2a96151987"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of user IDs examined for this testing procedure.",
+                  "uuid": "34c3272a-e733-4f78-a7f3-a2ff913ee913"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** each item in the sample of user IDs was compared with documented approvals to verify that:",
+                  "uuid": "8bab2b94-80b2-4507-b65b-f494669da76e"
+                },
+                {
+                  "displayNumber": "9.1.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "762e9615-ad65-4254-845a-47c34a237738",
+                    "47ef527a-2c3c-4474-a8dd-2e4b6a50b33b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "Documented approval exists for the assigned privileges.",
+                  "uuid": "498f412c-9d2b-4127-a069-638e4eb884d4"
+                },
+                {
+                  "displayNumber": "9.1.2-3",
+                  "hidden": false,
+                  "mappings": [
+                    "f06ea35d-accf-4ae6-8670-1214296e5d23",
+                    "f369465a-8dce-4764-82a6-9f4b1f01def9"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 8,
+                  "table": null,
+                  "tag": null,
+                  "text": "The approval was by authorized parties.",
+                  "uuid": "43fe5cf4-a0d3-49fe-8710-61756360c3a7"
+                },
+                {
+                  "displayNumber": "9.1.2-4",
+                  "hidden": false,
+                  "mappings": [
+                    "6748cff6-de04-4830-8efe-ee6d5375fc37",
+                    "fc4d022f-c6a5-436d-aab3-49e4daec2c32"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "That specified privileges match the roles assigned to the individual.",
+                  "uuid": "69ec85cc-9252-4526-b208-d0a24b7491b7"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "Users should only be provided with access to the network and network services that they have been specifically authorized to use."
+            }
+          ],
+          "number": "9.1.2",
+          "row": null,
+          "table": null,
+          "text": "Access to networks and network services"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.2.1",
+                  "hidden": false,
+                  "mappings": [
+                    "5c3ba559-dc34-402c-9fbf-ccdcdae9e356",
+                    "837ebba0-392a-49d3-ad22-a16a1537c51d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the written policy for access control** that was examined to verify the policy incorporates as follows:\n* Defining access needs and privilege assignments for each role.\n* Restriction of access to privileged user IDs to least privileges necessary to perform job responsibilities.\n* Assignment of access based on individual personnel’s job classification and function\n* Documented approval (electronically or in writing) by authorized parties for all access, including listing of specific privileges approved.",
+                  "uuid": "5bd4490d-0f01-4057-bd9e-52a56de62664"
+                }
+              ],
+              "number": null,
+              "row": 12,
+              "table": null,
+              "text": "A formal user registration and de-registration process should be implemented to enable assignment of access rights."
+            }
+          ],
+          "number": "9.2.1",
+          "row": null,
+          "table": null,
+          "text": "User registration and de-registration"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.2.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "ed2a25cf-269a-40fa-8890-c9e0f5d58a3f",
+                    "82a4fca7-a277-4791-98e9-178714808f37"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the selected sample** of roles for this testing procedure.",
+                  "uuid": "241851c1-b013-4678-b776-47c2aca8e7e7"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each role in the selected sample***, describe how** the role was examined to verify access needs for each role are defined and include:",
+                  "uuid": "305749ae-7b3f-4196-99aa-bf7b1c12f3ff"
+                },
+                {
+                  "displayNumber": "9.2.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "1b3a71a2-05f1-415b-ae6d-3958b422178d",
+                    "4ace04d0-4a24-4503-bbab-7ae8d501e728"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "System components and data resources that each role needs to access for their job function.",
+                  "uuid": "08d7731f-3f40-4d28-a909-3352de978b75"
+                },
+                {
+                  "displayNumber": "9.2.2-3",
+                  "hidden": false,
+                  "mappings": [
+                    "ee398d65-a39d-4ab8-a2ef-766d8c0138f9",
+                    "dee22442-523c-40c5-98f3-36515837f894"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "Identification of privilege necessary for each role to perform their job function.",
+                  "uuid": "52ce5f6d-cbfb-46f2-92c4-41a45a24624d"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "A formal user access provisioning process should be implemented to assign or revoke access rights for all user types to all systems and services."
+            }
+          ],
+          "number": "9.2.2",
+          "row": null,
+          "table": null,
+          "text": "User access provisioning"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.2.3",
+                  "hidden": false,
+                  "mappings": [
+                    "5c3ba559-dc34-402c-9fbf-ccdcdae9e356",
+                    "837ebba0-392a-49d3-ad22-a16a1537c51d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the written policy for access control** that was examined to verify the policy incorporates as follows:\n* Defining access needs and privilege assignments for each role.\n* Restriction of access to privileged user IDs to least privileges necessary to perform job responsibilities.\n* Assignment of access based on individual personnel’s job classification and function\n* Documented approval (electronically or in writing) by authorized parties for all access, including listing of specific privileges approved.",
+                  "uuid": "7213fc84-2114-4135-8544-a766bb230f3a"
+                }
+              ],
+              "number": null,
+              "row": 19,
+              "table": null,
+              "text": "The allocation and use of privileged access rights should be restricted and controlled."
+            }
+          ],
+          "number": "9.2.3",
+          "row": null,
+          "table": null,
+          "text": "Management of privileged access rights"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.2.4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 21,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that contains the management of secret authentication information for users.",
+                  "uuid": "675aa5e4-169c-41d8-931f-fba150756e99"
+                }
+              ],
+              "number": null,
+              "row": 21,
+              "table": null,
+              "text": "The allocation of secret authentication information should be controlled through a formal management process."
+            }
+          ],
+          "number": "9.2.4",
+          "row": null,
+          "table": null,
+          "text": "Management of secret authentication information for users"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.2.5",
+                  "hidden": false,
+                  "mappings": [
+                    "70bef53d-219a-4b55-ad64-a6cb8d404de3",
+                    "f619e4ac-e5ae-4d8d-8eba-0d5c2ceaf147"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 23,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** user accounts were observed to verify that any inactive accounts over 90 days old are either removed or disabled.",
+                  "uuid": "48363108-08fe-4d1c-a343-a2c60e11d461"
+                }
+              ],
+              "number": null,
+              "row": 23,
+              "table": null,
+              "text": "Asset owners should review users’ access rights at regular intervals."
+            }
+          ],
+          "number": "9.2.5",
+          "row": null,
+          "table": null,
+          "text": "Review of user access rights"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.2.6-1",
+                  "hidden": false,
+                  "mappings": [
+                    "403e1030-0734-4019-ab77-2fb9cce36996",
+                    "2dc87cfc-d630-476f-9842-6f0ce04befa4"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 25,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of users terminated in the past six months that were selected for this testing procedure.",
+                  "uuid": "3559ba4f-ed65-427e-9dca-ed451d24d303"
+                },
+                {
+                  "displayNumber": "9.2.6-2",
+                  "hidden": false,
+                  "mappings": [
+                    "6a3c283b-8d5f-48c3-94a6-0d5ca31c7f39",
+                    "078d5282-e371-4d00-b85a-5a21e2f67f9d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***local access*** verified that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "e5df130f-1c43-4043-a65b-f95953c241d5"
+                },
+                {
+                  "displayNumber": "9.2.6-3",
+                  "hidden": false,
+                  "mappings": [
+                    "2e3cd100-36d7-4397-be47-781ebaaba12d",
+                    "0a440624-33b1-4618-bf3d-fc460730619c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***remote access*** verified that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "7b188c7e-1e94-4dee-95f8-b76ec3bfa0f4"
+                }
+              ],
+              "number": null,
+              "row": 25,
+              "table": null,
+              "text": "The access rights of all employees and external party users to information and information processing facilities should be removed upon termination of their employment, contract or agreement, or adjusted upon change."
+            }
+          ],
+          "number": "9.2.6",
+          "row": null,
+          "table": null,
+          "text": "Removal or adjustment of user access rights"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.3.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that contains the management of secret authentication information for users.",
+                  "uuid": "88235661-a99b-4f81-a76d-404e7a181f62"
+                }
+              ],
+              "number": null,
+              "row": 30,
+              "table": null,
+              "text": "Users should be required to follow the organization’s practices in the use of secret authentication information."
+            }
+          ],
+          "number": "9.3.1",
+          "row": null,
+          "table": null,
+          "text": "User of secret authentication information"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.4.1",
+                  "hidden": false,
+                  "mappings": [
+                    "5c3ba559-dc34-402c-9fbf-ccdcdae9e356",
+                    "837ebba0-392a-49d3-ad22-a16a1537c51d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the written policy for access control** that was examined to verify the policy incorporates:\n* Access to information and application system.",
+                  "uuid": "732e2437-b0b1-437c-b17e-927e3bfbebbd"
+                }
+              ],
+              "number": null,
+              "row": 33,
+              "table": null,
+              "text": "Access to information and application system functions should be restricted in accordance with the access control policy."
+            }
+          ],
+          "number": "9.4.1",
+          "row": null,
+          "table": null,
+          "text": "Information access restriction"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.4.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "ff358133-7aed-44f0-934d-47ea4b690d58",
+                    "175167fb-2100-40fd-8351-18800834d075"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 35,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** all databases containing cardholder data.",
+                  "uuid": "f3f404a5-0d44-46d3-854f-d1de3ee9aa96"
+                },
+                {
+                  "displayNumber": "9.4.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "07c268bf-53d9-4584-adb6-1c3e8284c02f",
+                    "51a70f09-0da9-437b-a11f-8e9c643fbf73"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 36,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** database and/or application configuration settings verified that all users are authenticated prior to access.",
+                  "uuid": "949bb361-9d59-4ba2-94ff-76c92f500926"
+                }
+              ],
+              "number": null,
+              "row": 35,
+              "table": null,
+              "text": "Where required by the access control policy, access to systems and applications should be controlled by a secure log-on procedure."
+            }
+          ],
+          "number": "9.4.2",
+          "row": null,
+          "table": null,
+          "text": "Secure log-on procedures"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.4.3",
+                  "hidden": false,
+                  "mappings": [
+                    "21d24226-6e18-420b-8ec9-1ba78f1a30ed",
+                    "57d0de14-b112-4e16-9ae0-a0def90aabaa"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 38,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the written procedures for user identification management** examined to verify processes are defined for each of the items below:\n* Assign all users a unique ID before allowing them to access system components or cardholder data.\n* Control addition, deletion, and modification of user IDs, credentials, and other identifier objects.\n* Immediately revoke access for any terminated users.\n* Remove/disable inactive user accounts at least every 90 days.\n* Manage IDs used by vendors to access, support, or maintain system components via remote access as follows:\n* Enabled only during the time period needed and disabled when not in use.\n* Monitored when in use.\n* Limit repeated access attempts by locking out the user ID after not more than six attempts.\n* Set the lockout duration to a minimum of 30 minutes or until an administrator enables the user ID.\n* If a session has been idle for more than 15 minutes, require the user to re-authenticate to re-activate the terminal or session.",
+                  "uuid": "21d58bf4-1577-45a9-9f1a-ab686520a602"
+                }
+              ],
+              "number": null,
+              "row": 38,
+              "table": null,
+              "text": "Password management systems should be interactive and should ensure quality passwords."
+            }
+          ],
+          "number": "9.4.3",
+          "row": null,
+          "table": null,
+          "text": "Password management system"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.4.4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 40,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor** who attests that users cannot installed software or utility programs and that they are tightly controlled.",
+                  "uuid": "1fe6639d-707c-47b4-8878-3c9e9495f4f1"
+                }
+              ],
+              "number": null,
+              "row": 40,
+              "table": null,
+              "text": "The use of utility programs that might be capable of overriding system and application controls should be restricted and tightly controlled."
+            }
+          ],
+          "number": "9.4.4",
+          "row": null,
+          "table": null,
+          "text": "Use of privileged utility programs"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "9.4.5",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 42,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor** who attests that access to program source code is restricted.",
+                  "uuid": "d6cdc980-74f3-4385-9432-b724710d513c"
+                }
+              ],
+              "number": null,
+              "row": 42,
+              "table": null,
+              "text": "Access to program source code should be restricted."
+            }
+          ],
+          "number": "9.4.5",
+          "row": null,
+          "table": null,
+          "text": "Access control to program source code"
+        }
+      ],
+      "number": "A.9",
+      "row": null,
+      "table": 4,
+      "text": "Access Control"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "10.1.1",
+                  "hidden": false,
+                  "mappings": [
+                    "0d75be6e-3404-4e9f-8359-a1e94433a0fa",
+                    "011d6f0c-a0ed-47c0-9181-245000de8254"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documentation** examined to verify that the NPI is rendered unreadable using any of the following methods:\n* One-way hashes based on strong cryptography,\n* Truncation\n* Index tokens and pads, with the pads being securely stored\n* Strong cryptography, with associated key-management processes and procedures",
+                  "uuid": "81d14217-538e-4aca-8be7-e6db1a3cea84"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "A policy on the use of cryptographic controls for protection of information should be developed and implemented."
+            }
+          ],
+          "number": "10.1.1",
+          "row": null,
+          "table": null,
+          "text": "Policy on the use of cryptographic controls"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "10.1.2",
+                  "hidden": false,
+                  "mappings": [
+                    "ccae0d84-f114-45e3-9f28-aee87ca1d7e2",
+                    "b73597f4-6acb-46ef-b80c-c138eac9a86a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented key-management policies and processes** examined to verify processes are defined to protect keys used for encryption of cardholder data against disclosure and misuse and include at least the following:\n* Access to keys is restricted to the fewest number of custodians necessary.\n* Key-encrypting keys are at least as strong as the data-encrypting keys they protect.\n* Key-encrypting keys are stored separately from data-encrypting keys.\n* Keys are stored securely in the fewest possible locations and forms.",
+                  "uuid": "786b48f0-ed00-4f41-b8fc-2d47beafb99e"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "A policy on the use, protection and lifetime of cryptographic keys should be developed and implemented through their whole lifecycle."
+            }
+          ],
+          "number": "10.1.2",
+          "row": null,
+          "table": null,
+          "text": "Key management"
+        }
+      ],
+      "number": "A.10",
+      "row": null,
+      "table": 5,
+      "text": "Cryptography"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify and briefly describe** all of the following with systems in the confidential data environment:",
+                  "uuid": "318df34b-d56f-4707-affb-eb885c40fd91"
+                },
+                {
+                  "displayNumber": "11.1.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "b2c07a98-17d2-4d17-8385-705f9f3ff4c4",
+                    "46ad5061-bcb7-430a-b75b-76df397c4acb"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "All computer rooms",
+                  "uuid": "8a55d486-8f70-4301-8bbe-103fd37786d3"
+                },
+                {
+                  "displayNumber": "11.1.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "bedaa552-a538-445e-8ab5-a86376131b45",
+                    "010d2372-0804-454b-bc2e-15e2b57e6de1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "All data centers",
+                  "uuid": "985098c8-7e81-4713-bec5-3750f7666200"
+                },
+                {
+                  "displayNumber": "11.1.1-3",
+                  "hidden": false,
+                  "mappings": [
+                    "c8f8796c-8703-495b-b93e-00d55525aa76",
+                    "5dcdacf2-f868-489d-8780-662bdbd8f24e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "Any other physical areas",
+                  "uuid": "11758a75-11f1-474c-99ba-dfe1b8fb6f06"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each area identified (add rows as needed),* complete the following:",
+                  "uuid": "191aa093-6cb9-4ed3-966c-6df3128ba545"
+                },
+                {
+                  "displayNumber": "11.1.1-4",
+                  "hidden": false,
+                  "mappings": [
+                    "faea1007-cdc9-4f57-9770-629d30420e82",
+                    "dc82c0e6-dd7d-4c5d-9649-f446deae2a3d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 8,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the physical security controls to be in place, including authorized badges and lock and key.",
+                  "uuid": "d52689cd-239b-488d-9592-fb9f78e9246a"
+                },
+                {
+                  "displayNumber": "11.1.1-5",
+                  "hidden": false,
+                  "mappings": [
+                    "1ec18024-e7de-4282-8893-162f3726f41f",
+                    "e80593c2-ce77-49f0-a4e1-ecfcc443355a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the randomly selected systems in the confidential environment for which a system administrator login attempt was observed.",
+                  "uuid": "710770b6-55ff-47c9-ac63-aca9b42815c0"
+                },
+                {
+                  "displayNumber": "11.1.1-6",
+                  "hidden": false,
+                  "mappings": [
+                    "4d919f82-9f50-4833-b844-7b071ba1a2d5",
+                    "630a4a71-e0b6-4fac-a0d6-a06ce65c7e04"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** consoles for the randomly selected systems were observed to verify that they are “locked” when not in use to prevent unauthorized use.",
+                  "uuid": "071bf0b1-0170-4bdd-8a06-32cf2f8cb18c"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Security perimeters should be defined and used to protect areas that contain either sensitive or critical information and information processing facilities."
+            }
+          ],
+          "number": "11.1.1",
+          "row": null,
+          "table": null,
+          "text": "Physical security perimeter"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.1.2",
+                  "hidden": false,
+                  "mappings": [
+                    "01792866-482b-4ced-8a6a-ba8e652d64b8",
+                    "5037d3f2-b13f-4666-87da-e9b1f2a7185e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** personnel accessing sensitive areas were observed to verify that all personnel are authorized before being granted access.",
+                  "uuid": "b24d9785-0be0-401b-bc33-9a7ccdc7965d"
+                }
+              ],
+              "number": null,
+              "row": 12,
+              "table": null,
+              "text": "Secure areas should be protected by appropriate entry controls to ensure that only authorized personnel are allowed access."
+            }
+          ],
+          "number": "11.1.2",
+          "row": null,
+          "table": null,
+          "text": "Physical entry controls"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.1.3",
+                  "hidden": false,
+                  "mappings": [
+                    "25c4d8da-9018-4544-b2b8-5bae0fde8988",
+                    "e30e801c-38dd-4262-88ba-91c30135b4b0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** either the video cameras or access control mechanisms (or both) observed to monitor the entry/exit points to sensitive areas.",
+                  "uuid": "e34ce94e-99da-49cc-b667-0def27506b19"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "Physical security for offices, rooms and facilities should be designed and applied."
+            }
+          ],
+          "number": "11.1.3",
+          "row": null,
+          "table": null,
+          "text": "Securing offices, rooms, facilities"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.1.4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented  Business Continuity and Disaster Recovery Policy to show** Protecting against external and environmental threats",
+                  "uuid": "5df64a11-6a48-497d-9ff5-724eddf24473"
+                }
+              ],
+              "number": null,
+              "row": 16,
+              "table": null,
+              "text": "Physical protection against natural disasters, malicious attack or accidents should be designed and applied."
+            }
+          ],
+          "number": "11.1.4",
+          "row": null,
+          "table": null,
+          "text": "Protecting against external and environmental threats"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.1.5",
+                  "hidden": false,
+                  "mappings": [
+                    "2405038c-4287-49a0-b1bc-8ba1e0359ca5",
+                    "75f7770f-5071-4044-b0c1-f3043a451557"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented processes** reviewed to verify that procedures are defined for identifying and distinguishing between onsite personnel and visitors, including the following:\n* Identifying onsite personnel and visitors (for example, assigning badges),\n* Changing access requirements, and\n* Revoking terminated onsite personnel and expired visitor identification (such as ID badges).",
+                  "uuid": "47779baa-38d4-4ff5-8268-99db5af6708e"
+                }
+              ],
+              "number": null,
+              "row": 18,
+              "table": null,
+              "text": "Procedures for working in secure areas should be designed and applied."
+            }
+          ],
+          "number": "11.1.5",
+          "row": null,
+          "table": null,
+          "text": "Working in secure areas"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.1.6",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** how access points such as delivery and loading areas and other points where unauthorized persons could enter the premises should be controlled and, if possible, isolated from information processing facilities to avoid unauthorized access.",
+                  "uuid": "a2964450-78d0-4e50-9d67-c0380567205f"
+                }
+              ],
+              "number": null,
+              "row": 20,
+              "table": null,
+              "text": "Access points such as delivery and loading areas and other points where unauthorized persons could enter the premises should be controlled and, if possible, isolated from information processing facilities to avoid unauthorized access."
+            }
+          ],
+          "number": "11.1.6",
+          "row": null,
+          "table": null,
+          "text": "Delivery and loading areas"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.1",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 23,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who confirms** equipment should be sited and protected to reduce the risks from environmental threats and hazards, and opportunities for unauthorized access.",
+                  "uuid": "bb45210b-5aee-4b6d-81b2-aa91e1111615"
+                }
+              ],
+              "number": null,
+              "row": 23,
+              "table": null,
+              "text": "Equipment should be sited and protected to reduce the risks from environmental threats and hazards, and opportunities for unauthorized access."
+            }
+          ],
+          "number": "11.2.1",
+          "row": null,
+          "table": null,
+          "text": "Equipment siting and protection"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.2",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 25,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who confirms** equipment is protected from power failures and other disruptions caused by failures in supporting utilities.",
+                  "uuid": "723d39de-ad80-483e-ab05-7f60213d67b8"
+                }
+              ],
+              "number": null,
+              "row": 25,
+              "table": null,
+              "text": "Equipment should be protected from power failures and other disruptions caused by failures in supporting utilities."
+            }
+          ],
+          "number": "11.2.2",
+          "row": null,
+          "table": null,
+          "text": "Supporting utilities"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.3",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who confirms** power and telecommunications cabling carrying data or supporting information services is protected from interception, interference or damage.",
+                  "uuid": "5cf7acef-639c-4aa7-853f-ea8cadec9397"
+                }
+              ],
+              "number": null,
+              "row": 27,
+              "table": null,
+              "text": "Power and telecommunications cabling carrying data or supporting information services should be protected from interception, interference or damage."
+            }
+          ],
+          "number": "11.2.3",
+          "row": null,
+          "table": null,
+          "text": "Cabling security"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.4",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 29,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who confirms** equipment is correctly maintained to ensure its continued availability and integrity.",
+                  "uuid": "c3c1bd12-ddc8-4737-ae3e-cd8fd341cd4a"
+                }
+              ],
+              "number": null,
+              "row": 29,
+              "table": null,
+              "text": "Equipment should be correctly maintained to ensure its continued availability and integrity."
+            }
+          ],
+          "number": "11.2.4",
+          "row": null,
+          "table": null,
+          "text": "Equipment maintenance"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.5",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 31,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who confirms** equipment, information or software is not taken off-site without prior authorization.",
+                  "uuid": "29a51ab1-3a89-40ac-9289-e96316c7daf9"
+                }
+              ],
+              "number": null,
+              "row": 31,
+              "table": null,
+              "text": "Equipment, information or software should not be taken off-site without prior authorization."
+            }
+          ],
+          "number": "11.2.5",
+          "row": null,
+          "table": null,
+          "text": "Removal of assets"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.6",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who confirms** security is applied to off-site assets taking into account the different risks of working outside the organization’s premises.",
+                  "uuid": "59da4ae9-b510-4808-8332-87d3eca3c011"
+                }
+              ],
+              "number": null,
+              "row": 33,
+              "table": null,
+              "text": "Security should be applied to off-site assets taking into account the different risks of working outside the organization’s. premises"
+            }
+          ],
+          "number": "11.2.6",
+          "row": null,
+          "table": null,
+          "text": "Security of equipment and assets off-premises"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.7",
+                  "hidden": false,
+                  "mappings": [
+                    "1f8aa373-2526-478f-a3ec-628dfa6d2f87",
+                    "070c4cc1-457d-4798-bb92-8968b38360aa"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 35,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the policy document for periodic media destruction** that was examined to verify it covers all media and defines requirements for the following:\n* Hard-copy materials must be crosscut shredded, incinerated, or pulped such that there is reasonable assurance the hard-copy materials cannot be reconstructed.\n* Storage containers used for materials that are to be destroyed must be secured.\n* Confidential data on electronic media must be rendered unrecoverable (e.g. via a secure wipe program in accordance with industry-accepted standards for secure deletion, or by physically destroying the media).",
+                  "uuid": "6afbcee3-4b6d-4735-b48f-8bfc921e9d4c"
+                }
+              ],
+              "number": null,
+              "row": 35,
+              "table": null,
+              "text": "All items of equipment containing storage media should be verified to ensure that any sensitive data and licensed software has been removed or securely overwritten prior to disposal or re-use."
+            }
+          ],
+          "number": "11.2.7",
+          "row": null,
+          "table": null,
+          "text": "Secure disposal or re-use of equipment"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.8",
+                  "hidden": false,
+                  "mappings": [
+                    "41f3fba3-f565-4157-93b7-27dadf071590",
+                    "f797c73e-ea8d-4cad-87c1-83f854d8dc9e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 37,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that the storage location is reviewed at least annually to confirm that backup media storage is secure.",
+                  "uuid": "79ffb501-2907-44a6-aeaa-3e40363c6c06"
+                }
+              ],
+              "number": null,
+              "row": 37,
+              "table": null,
+              "text": "Users should ensure that unattended equipment has appropriate protection."
+            }
+          ],
+          "number": "11.2.8",
+          "row": null,
+          "table": null,
+          "text": "Unattended user equipment"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "11.2.9",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 39,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that a clear desk policy exists and is followed on the premises.",
+                  "uuid": "ae5f66f2-c63d-4360-bf9a-599242d4d2ad"
+                }
+              ],
+              "number": null,
+              "row": 39,
+              "table": null,
+              "text": "A clear desk policy for papers and removable storage media and a clear screen policy for information processing facilities should be adopted."
+            }
+          ],
+          "number": "11.2.9",
+          "row": null,
+          "table": null,
+          "text": "Clear desk and clear screen policy"
+        }
+      ],
+      "number": "A.11",
+      "row": null,
+      "table": 6,
+      "text": "Physical and environmental security"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.1.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify all** operating procedure documents.",
+                  "uuid": "950553cf-d2ef-46ee-a6a1-a7f484e37f89"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Operating procedures should be documented and made available to all users who need them."
+            }
+          ],
+          "number": "12.1.1",
+          "row": null,
+          "table": null,
+          "text": "Documented operating procedures"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.1.2",
+                  "hidden": false,
+                  "mappings": [
+                    "75071cec-75fb-4b5e-b7a7-8ba0c2d1caba",
+                    "42de7d07-4d2e-45bf-acdf-8288a9431a95"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented change-control procedures** related to implementing security patches and software modification examined to verify procedures are defined for:\n* Documentation of impact.\n* Documented change approval by authorized parties.\n* Functionality testing to verify that the change does not adversely impact the security of the system.\n* Back-out procedures.",
+                  "uuid": "d6b61ed2-070f-4559-b39a-90da43b6d434"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "Changes to the organization, business processes, information processing facilities and systems that affect information security should be controlled."
+            }
+          ],
+          "number": "12.1.2",
+          "row": null,
+          "table": null,
+          "text": "Change management"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.1.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identifiy** how resources are monitored.",
+                  "uuid": "bbd4fc27-b76d-4f1a-bfe3-dc8bb885dedf"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "The use of resources should be monitored, tuned and projections made of future capacity requirements to ensure the required system performance."
+            }
+          ],
+          "number": "12.1.3",
+          "row": null,
+          "table": null,
+          "text": "Capacity management"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.1.4-1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the network documentation** that illustrates that the development/test environments are separate from the production environment(s).",
+                  "uuid": "db33167b-3bbe-491e-b8ba-38eac96992f7"
+                },
+                {
+                  "displayNumber": "12.1.4-2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** network device configurations were examined to verify that the development/test environments are separate from the production environment(s).",
+                  "uuid": "1a73a077-1786-4241-87bd-1d7505ecd03a"
+                }
+              ],
+              "number": null,
+              "row": 9,
+              "table": null,
+              "text": "Development, testing, and operational environments should be separated to reduce the risks of unauthorized access or changes to the operational environment."
+            }
+          ],
+          "number": "12.1.4",
+          "row": null,
+          "table": null,
+          "text": "Separation of development, testing and operational environments"
+        },
+        {
+          "number": "12.2",
+          "row": null,
+          "table": null,
+          "text": ""
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.2.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "c45254f8-c71c-45f2-ba7a-cc6cd5cfaccf",
+                    "4a49ff22-395a-4bcc-a371-29111d67a2e1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the vendor documentation** reviewed to verify that anti-virus programs:\n* Detect all known types of malicious software,\n* Remove all known types of malicious software, and\n* Protect against all known types of malicious software.",
+                  "uuid": "79f8fec3-ad64-48cd-b887-b7515a7af1ea"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** anti-virus configurations were examined to verify that anti-virus programs:",
+                  "uuid": "8425c257-8167-42fa-9a2d-8e94d1330540"
+                },
+                {
+                  "displayNumber": "12.2.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "7395071b-48df-4be2-a579-368c7f299c7a",
+                    "b453db76-15bf-4fe6-a022-70a54e11ee53"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "Detect all known types of malicious software,",
+                  "uuid": "7cb5c975-2675-4a2d-8446-ef081603a22a"
+                },
+                {
+                  "displayNumber": "12.2.1-3",
+                  "hidden": false,
+                  "mappings": [
+                    "4d508925-f087-44f8-906d-330264c29c63",
+                    "6e1fbcb0-7140-4181-923a-547d2639410c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "Remove all known types of malicious software, and",
+                  "uuid": "34988a24-a6ee-4878-8f1d-4e713bb39699"
+                },
+                {
+                  "displayNumber": "12.2.1-4",
+                  "hidden": false,
+                  "mappings": [
+                    "7d0d5081-d1c8-44ae-9672-3a75d9e81086",
+                    "f034fb14-bce8-4864-afdb-dda33d2382ae"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "Protect against all known types of malicious software.",
+                  "uuid": "54b21cd9-d250-4a84-88fe-cd86f0f16a25"
+                }
+              ],
+              "number": null,
+              "row": 13,
+              "table": null,
+              "text": "Detection, prevention and recovery controls to protect against malware should be implemented, combined with appropriate user awareness."
+            }
+          ],
+          "number": "12.2.1",
+          "row": null,
+          "table": null,
+          "text": "Controls against malware"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.3.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests b**ackup copies of information, software and system images are taken and tested regularly in accordance with an agreed backup policy.",
+                  "uuid": "78af5150-f566-40f9-ad93-9b3f0cd50bb0"
+                }
+              ],
+              "number": null,
+              "row": 20,
+              "table": null,
+              "text": "Backup copies of information, software and system images should be taken and tested regularly in accordance with an agreed backup policy."
+            }
+          ],
+          "number": "12.3.1",
+          "row": null,
+          "table": null,
+          "text": "Information backup"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.4.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "e465c486-b655-4a50-84eb-ce11a6f9b36c",
+                    "19868cc3-3aae-4f3f-bd90-17af60c61779"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 23,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed who confirm the following are logged:\n* All individual access to cardholder data.\n* All actions taken by any individual with root or administrative privileges.\n* Access to all audit trails.\n* Invalid logical access attempts.\n* Use of and changes to identification and authentication mechanisms, including:\n    * All elevation of privileges.\n    * All changes, additions, or deletions to any account with root or administrative privileges.\n* Initialization of audit logs.\n* Stopping or pausing of audit logs.\n* Creation and deletion of system level objects.",
+                  "uuid": "2d3b3229-2a75-4c53-b5e4-8077d13b867e"
+                },
+                {
+                  "displayNumber": "12.4.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "0bc047b3-f4fd-4ee5-9a86-2bf6bf6aa683",
+                    "047e8692-e590-4b85-9345-2b6efaf3e679"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample of audit logs** selected for reviewing all the above is logged.",
+                  "uuid": "9bf04a5e-deea-43bc-98e4-007ad540c408"
+                }
+              ],
+              "number": null,
+              "row": 23,
+              "table": null,
+              "text": "Event logs recording user activities, exceptions, faults and information security events should be produced, kept and regularly reviewed."
+            }
+          ],
+          "number": "12.4.1",
+          "row": null,
+          "table": null,
+          "text": "Event logging"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.4.2",
+                  "hidden": false,
+                  "mappings": [
+                    "a79a42e8-da68-4acb-a454-d0c5eaa0e132",
+                    "012a1fe8-267f-4704-ad16-99a06aed69bb"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** system configurations and permissions were examined to verify that current audit trail files are protected from unauthorized modifications. (e.g., via access control mechanisms, physical segregation, and/or network segregation).",
+                  "uuid": "118e9cfb-8346-4d71-a643-dc73ee24899e"
+                }
+              ],
+              "number": null,
+              "row": 26,
+              "table": null,
+              "text": "Logging facilities and log information should be protected against tampering and unauthorized access."
+            }
+          ],
+          "number": "12.4.2",
+          "row": null,
+          "table": null,
+          "text": "Protection of log information"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.4.3",
+                  "hidden": false,
+                  "mappings": [
+                    "6c8d981e-e2b0-42d4-828d-188d62d4a0ba",
+                    "1401fbf9-2531-4782-8e35-dd59bcda99f5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** configuration settings were observed to verify all actions taken by any individual with root or administrative privileges are logged.",
+                  "uuid": "29810a6b-a9a2-435b-b24a-b53854545c65"
+                }
+              ],
+              "number": null,
+              "row": 28,
+              "table": null,
+              "text": "System administrator and system operator activities should be logged and the logs protected and regularly reviewed."
+            }
+          ],
+          "number": "12.4.3",
+          "row": null,
+          "table": null,
+          "text": "Administrator and operator logs"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.4.4",
+                  "hidden": false,
+                  "mappings": [
+                    "090514d9-6f4f-4e7a-8fdd-736fc9aa79a7",
+                    "0c503b9b-e4d3-4a87-b744-019325e966cd"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented time-synchronization configuration standards** examined to verify that time synchronization technology is implemented and kept current per PCI DSS Requirements 6.1 and 6.2.",
+                  "uuid": "79c23df8-e939-4b2a-b641-731e52d7617c"
+                }
+              ],
+              "number": null,
+              "row": 30,
+              "table": null,
+              "text": "The clocks of all relevant information processing systems within an organization or security domain should be synchronized to a single reference time source."
+            }
+          ],
+          "number": "12.4.4",
+          "row": null,
+          "table": null,
+          "text": "Clock synchronization"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.5.1",
+                  "hidden": false,
+                  "mappings": [
+                    "ad9ff075-7d22-495e-b349-5ec66a5c534d",
+                    "d59b21eb-f4c5-4535-b722-f3fae6387643"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed who confirm that access to privileged user IDs is:\n* Assigned only to roles that specifically require such privileged access.\n* Restricted to least privileges necessary to perform job responsibilities.",
+                  "uuid": "a077b0ba-8df6-4182-8b46-01a9ef9ec4fb"
+                }
+              ],
+              "number": null,
+              "row": 33,
+              "table": null,
+              "text": "Procedures should be implemented to control the installation of software on operational systems."
+            }
+          ],
+          "number": "12.5.1",
+          "row": null,
+          "table": null,
+          "text": "Installation of software on operational systems"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.6.1",
+                  "hidden": false,
+                  "mappings": [
+                    "69aae6c0-6520-419e-8289-623f84524092",
+                    "8b751378-58b7-4279-a0a3-e92843aa79e3"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 36,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policies and procedures** related to security-patch installation examined to verify processes are defined for:\n* Installation of applicable critical vendor-supplied security patches within one month of release.\n* Installation of all applicable vendor-supplied security patches within an appropriate time frame.",
+                  "uuid": "36d84bf6-d1fc-44b4-af0c-e01bd0286514"
+                }
+              ],
+              "number": null,
+              "row": 36,
+              "table": null,
+              "text": "Information about technical vulnerabilities of information systems being used should be obtained in a timely fashion, the organization’s exposure to such vulnerabilities evaluated and appropriate measures taken to address the associated risk."
+            }
+          ],
+          "number": "12.6.1",
+          "row": null,
+          "table": null,
+          "text": "Management of technical vulnerabilities"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.6.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 38,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** rules governing the installation of software by users should be established and implemented.",
+                  "uuid": "9b886482-5aa2-4a86-b12e-7ab147a6f030"
+                }
+              ],
+              "number": null,
+              "row": 38,
+              "table": null,
+              "text": "Rules governing the installation of software by users should be established and implemented."
+            }
+          ],
+          "number": "12.6.2",
+          "row": null,
+          "table": null,
+          "text": "Restrictions on software installation"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "12.7.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 41,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** audit requirements and activities involving verification of operational systems are carefully planned and agreed to minimize disruptions to business processes.",
+                  "uuid": "b1a8206b-e361-4710-abff-e447b840ebef"
+                }
+              ],
+              "number": null,
+              "row": 41,
+              "table": null,
+              "text": "Audit requirements and activities involving verification of operational systems should be carefully planned and agreed to minimize disruptions to business processes."
+            }
+          ],
+          "number": "12.7.1",
+          "row": null,
+          "table": null,
+          "text": "Information systems audit controls"
+        }
+      ],
+      "number": "A.12",
+      "row": null,
+      "table": 7,
+      "text": "Operations security"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document(s)** reviewed to verify procedures define the formal processes for:",
+                  "uuid": "f5851038-d1d7-4024-a6b7-67203c5b5553"
+                },
+                {
+                  "displayNumber": "13.1.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "e81835c0-c4e5-45b6-84a6-8c0670c85b13",
+                    "efaf775a-d8f8-4d12-96ea-62318beecd54"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "Testing and approval of all network connections.",
+                  "uuid": "54f24e69-0a78-46a0-9004-30292425c840"
+                },
+                {
+                  "displayNumber": "13.1.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "6747d58b-91ce-4f4b-ab96-2d5da5beac5c",
+                    "b74b3504-118b-4d0f-a70a-bf3684a56359"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "Testing and approval of all changes to firewall and router configurations.",
+                  "uuid": "667f3cd5-e178-4b0c-9928-04bf27fa6265"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Networks should be managed and controlled to protect information in systems and applications."
+            }
+          ],
+          "number": "13.1.1",
+          "row": null,
+          "table": null,
+          "text": "Network controls"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "13.1.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** Security mechanisms, service levels and management requirements of all network services are identified and included in network services agreements, whether these services are provided in-house or outsourced.",
+                  "uuid": "3033a71d-9fff-45ad-ae3e-013f3e685249"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "Security mechanisms, service levels and management requirements of all network services should be identified and included in network services agreements, whether these services are provided in-house or outsourced."
+            }
+          ],
+          "number": "13.1.2",
+          "row": null,
+          "table": null,
+          "text": "Security of network services"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "13.1.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** Groups of information services, users and information systems are segregated on networks.",
+                  "uuid": "c2d16991-c762-48ab-8b7f-00011d90fd56"
+                }
+              ],
+              "number": null,
+              "row": 9,
+              "table": null,
+              "text": "Groups of information services, users and information systems should be segregated on networks."
+            }
+          ],
+          "number": "13.1.3",
+          "row": null,
+          "table": null,
+          "text": "Segregation in networks"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "13.2.1",
+                  "hidden": false,
+                  "mappings": [
+                    "f585d8a4-aa68-4a08-a7c7-51b4054f94ff",
+                    "816d4fa2-5330-4e27-979d-d4bdcfc846e0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** reviewed to verify that processes are specified for the following:\n* For acceptance of only trusted keys and/or certificates.\n* For the protocol in use to only support secure versions and configurations (that insecure versions or configurations are not supported).\n* For implementation of proper encryption strength per the encryption methodology in use.",
+                  "uuid": "38331ece-5ecd-4c34-99d9-62e516f18bc2"
+                }
+              ],
+              "number": null,
+              "row": 12,
+              "table": null,
+              "text": "Formal transfer policies, procedures and controls should be in place to protect the transfer of information through the use of all types of communication facilities."
+            }
+          ],
+          "number": "13.2.1",
+          "row": null,
+          "table": null,
+          "text": "Information transfer policies and procedures"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "13.2.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests a**greements address the secure transfer of business information between the organization and external parties.",
+                  "uuid": "db3d15e8-eaea-4506-a125-933e5846b009"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "Agreements should address the secure transfer of business information between the organization and external parties."
+            }
+          ],
+          "number": "13.2.2",
+          "row": null,
+          "table": null,
+          "text": "Agreements on information transfer"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "13.2.3-1",
+                  "hidden": false,
+                  "mappings": [
+                    "c13bb41f-4905-40eb-be7c-de7064f9b33c",
+                    "a8f49a47-850d-4170-8e86-bec5918e6d6c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Indicate whether** end-user messaging technologies are used to send cardholder data. **(yes/no)**",
+                  "uuid": "7527781d-2e67-4fa9-920e-f524a9a2baf0"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “no,” mark the remainder of 4.2.a as “Not Applicable” and proceed to 4.2.b.*\n*If “yes,” complete the following:*",
+                  "uuid": "1e8bb03c-be09-4812-96fb-26c7e882d432"
+                },
+                {
+                  "displayNumber": "13.2.3-2",
+                  "hidden": false,
+                  "mappings": [
+                    "959f8f2e-de84-4612-a52a-5dd2680018cc",
+                    "1a79bf38-dd54-4a5b-8b63-edef674e17ce"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes for sending PAN were observed to verify that PAN is rendered unreadable or secured with strong cryptography whenever it is sent via end-user messaging technologies.",
+                  "uuid": "b7d5dcdb-d43b-43b5-b05c-8b56ba9f65eb"
+                },
+                {
+                  "displayNumber": "13.2.3-3",
+                  "hidden": false,
+                  "mappings": [
+                    "7dc048de-5c4c-40ef-88c7-20d177beef31",
+                    "2309c4eb-0539-4691-a9cc-f525175ecd6d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe the sample** of outbound transmissions that were observed as they occurred.",
+                  "uuid": "b8f858a0-a514-4c92-8fdb-d0a16e5623df"
+                },
+                {
+                  "displayNumber": "13.2.3-4",
+                  "hidden": false,
+                  "mappings": [
+                    "e11bd091-87bd-45da-8c05-c9221bb069e9",
+                    "e028707e-f39d-435a-ae04-d332f459b0b2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the sample of outbound transmissions verified that PAN is rendered unreadable or secured with strong cryptography whenever it is sent via end-user messaging technologies.",
+                  "uuid": "921ff885-afef-4f5c-b492-fea84d4634a5"
+                }
+              ],
+              "number": null,
+              "row": 16,
+              "table": null,
+              "text": "Information involved in electronic messaging should be appropriately protected."
+            }
+          ],
+          "number": "13.2.3",
+          "row": null,
+          "table": null,
+          "text": "Electronic messaging"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "13.2.4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** requirements for confidentiality or non-disclosure agreements reflecting the organization’s needs for the protection of information are identified, regularly reviewed and documented.",
+                  "uuid": "b3151a76-0c6f-47c2-bff1-3ee3a5e26038"
+                }
+              ],
+              "number": null,
+              "row": 22,
+              "table": null,
+              "text": "Requirements for confidentiality or non-disclosure agreements reflecting the organization’s needs for the protection of information should be identified, regularly reviewed and documented."
+            }
+          ],
+          "number": "13.2.4",
+          "row": null,
+          "table": null,
+          "text": "Confidentiality or non-disclosure agreements"
+        }
+      ],
+      "number": "A.13",
+      "row": null,
+      "table": 8,
+      "text": "Communications security"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.1.1-1",
+                  "hidden": false,
+                  "mappings": [
+                    "513f47bd-6371-4c18-83a4-05f9d0c9a824",
+                    "5069f6a3-8be1-4225-ae03-97dd3cf6c5cf"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the policy documentation** examined to verify it defines that system configuration standards are applied when new systems are configured and verified as being in place before a system is installed on the network",
+                  "uuid": "e440e90e-546e-411d-8d0f-c1b22af9eee3"
+                },
+                {
+                  "displayNumber": "14.1.1-2",
+                  "hidden": false,
+                  "mappings": [
+                    "21f6b89b-21fb-4604-a5e9-b8c978490f7f",
+                    "79801b73-c852-4900-ae59-01ebf40eb1c5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed who confirm that system configuration standards are applied when new systems are configured and verified as being in place before a system is installed on the network.",
+                  "uuid": "2ca5f484-5b2b-4e48-8326-99cf8c4e4f6f"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "The information security related requirements should be included in the requirements for new information systems or enhancements to existing information systems."
+            }
+          ],
+          "number": "14.1.1",
+          "row": null,
+          "table": null,
+          "text": "Information security requirements analysis and specification"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.1.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "e7b66400-cf3c-4e2e-b5b1-eb37e1a7b2d0",
+                    "2e7da71e-7daa-4f3a-ac57-96974fed3386"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe the sample** of inbound and outbound transmissions observed as they occurred.",
+                  "uuid": "0fb3a789-2c47-4758-86fa-38066321b4c0"
+                },
+                {
+                  "displayNumber": "14.1.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "cf5902b7-1ca1-4058-8159-0143626b6921",
+                    "fc4e351f-a0a1-47ec-88e0-fb344d7de08f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the samples of inbound and outbound transmissions were observed as they occurred to verify that all confidential data is encrypted with strong cryptography during transit.",
+                  "uuid": "0d568007-a46d-4461-aa7b-b8a5ea6fe109"
+                }
+              ],
+              "number": null,
+              "row": 6,
+              "table": null,
+              "text": "Information involved in application services passing over public networks should be protected from fraudulent activity, contract dispute and unauthorized disclosure and modification."
+            }
+          ],
+          "number": "14.1.2",
+          "row": null,
+          "table": null,
+          "text": "Securing application services on public networks"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.1.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** users are trained and applications require secure connections to communicate.",
+                  "uuid": "56f74836-0198-4a68-b30d-d617d944bce7"
+                }
+              ],
+              "number": null,
+              "row": 9,
+              "table": null,
+              "text": "Information involved in application service transactions should be protected to prevent incomplete transmission, mis-routing, unauthorized message alteration, unauthorized disclosure, unauthorized message duplication or replay."
+            }
+          ],
+          "number": "14.1.3",
+          "row": null,
+          "table": null,
+          "text": "Protecting application services transactions"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** development systems and software follow best practice for security within the organization.",
+                  "uuid": "0c3144ee-75f4-494e-b31b-533129471afa"
+                }
+              ],
+              "number": null,
+              "row": 12,
+              "table": null,
+              "text": "Rules for the development of software and systems should be established and applied to developments within the organization."
+            }
+          ],
+          "number": "14.2.1",
+          "row": null,
+          "table": null,
+          "text": "Secure development policy"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.2",
+                  "hidden": false,
+                  "mappings": [
+                    "75071cec-75fb-4b5e-b7a7-8ba0c2d1caba",
+                    "42de7d07-4d2e-45bf-acdf-8288a9431a95"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented change-control procedures** related to implementing security patches and software modification examined to verify procedures are defined for:\n* Documentation of impact.\n* Documented change approval by authorized parties.\n* Functionality testing to verify that the change does not adversely impact the security of the system.\n* Back-out procedures.",
+                  "uuid": "5e4adfa0-f68c-49ea-9152-e0ed81fa97de"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "Changes to systems within the development lifecycle should be controlled by the use of formal change control procedures."
+            }
+          ],
+          "number": "14.2.2",
+          "row": null,
+          "table": null,
+          "text": "System change control procedures"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.3",
+                  "hidden": false,
+                  "mappings": [
+                    "b597bf18-42c0-4b9d-a34d-a8e5035caa3e",
+                    "65d7cb86-2629-4dc3-b4c9-8f0ca651ce75"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed for this testing procedure who confirm that all custom application code changes are reviewed as follows:\n* Code changes are reviewed by individuals other than the originating code author, and by individuals who are knowledgeable in code-review techniques and secure coding practices.\n* Code reviews ensure code is developed according to secure coding guidelines (see PCI DSS Requirement 6.5).\n* Appropriate corrections are implemented prior to release.\n* Code-review results are reviewed and approved by management prior to release.",
+                  "uuid": "3c0d9e7a-760d-4b6f-843c-098a7ebb3f43"
+                }
+              ],
+              "number": null,
+              "row": 16,
+              "table": null,
+              "text": "When operating platforms are changed, business critical applications should be reviewed and tested to ensure there is no adverse impact on organizational operations or security."
+            }
+          ],
+          "number": "14.2.3",
+          "row": null,
+          "table": null,
+          "text": "Technical review of applications after operating platform changes"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.4-1",
+                  "hidden": false,
+                  "mappings": [
+                    "76943158-1faa-4036-9329-5797632f6dc3",
+                    "29d75b07-d214-46ce-8016-5a236d344973"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the personnel assigned to development/test environments** interviewed who confirm that separation of duties is in place between development/test environments and the production environment.",
+                  "uuid": "ec6ef485-fe81-4901-9496-e2e12ea5e83f"
+                },
+                {
+                  "displayNumber": "14.2.4-2",
+                  "hidden": false,
+                  "mappings": [
+                    "75cbc7d1-7de2-465d-9279-29240b1aad71",
+                    "f3020c7d-004f-4178-9efa-c035e78d6886"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the personnel assigned to production environments** interviewed who confirm that separation of duties is in place between development/test environments and the production environment.",
+                  "uuid": "d13b78c4-5dcd-416d-9f2b-2ec412ecc731"
+                },
+                {
+                  "displayNumber": "14.2.4-3",
+                  "hidden": false,
+                  "mappings": [
+                    "cd1bec28-9e78-425f-b901-50e3563f01d3",
+                    "37b0863c-6cef-4666-b978-36d3c1ae08f5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that separation of duties is in place between development/test environments and the production environment.",
+                  "uuid": "5a2cdef7-0097-4df2-b969-28c888b36f3f"
+                }
+              ],
+              "number": null,
+              "row": 18,
+              "table": null,
+              "text": "Modifications to software packages should be discouraged, limited to necessary changes and all changes should be strictly controlled."
+            }
+          ],
+          "number": "14.2.4",
+          "row": null,
+          "table": null,
+          "text": "Restrictions on changes to software packages"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.5",
+                  "hidden": false,
+                  "mappings": [
+                    "63b76395-7d58-4089-9461-beb9be5003ea",
+                    "78de8620-dd71-4dba-b131-7d8d339b2561"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** examined to verify that software-development processes are based on industry standards and/or best practices.",
+                  "uuid": "bbde5722-1bba-4b00-a19e-f2cff1fb0276"
+                }
+              ],
+              "number": null,
+              "row": 22,
+              "table": null,
+              "text": "Principles for engineering secure systems should be established, documented, maintained and applied to any information system implementation efforts."
+            }
+          ],
+          "number": "14.2.5",
+          "row": null,
+          "table": null,
+          "text": "Secure system engineering principles"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.6",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** development systems and software follow best practice for security within the organization.",
+                  "uuid": "ca768473-5340-495c-9586-1ae54eb43e2d"
+                }
+              ],
+              "number": null,
+              "row": 24,
+              "table": null,
+              "text": "Organizations should establish and appropriately protect secure development environments for system development and integration efforts that cover the entire system development lifecycle."
+            }
+          ],
+          "number": "14.2.6",
+          "row": null,
+          "table": null,
+          "text": "Secure development environment"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.7",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that describes how the organization should supervise and monitor the activity of outsourced system development.",
+                  "uuid": "1588c20f-5311-45fb-9679-46cd0dc1f8b4"
+                }
+              ],
+              "number": null,
+              "row": 26,
+              "table": null,
+              "text": "The organization should supervise and monitor the activity of outsourced system development."
+            }
+          ],
+          "number": "14.2.7",
+          "row": null,
+          "table": null,
+          "text": "Outsourced development"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.8",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that describes how testing of security functionality should be carried out during development.",
+                  "uuid": "5013a231-75b4-40ae-ad21-b6f38dde3440"
+                }
+              ],
+              "number": null,
+              "row": 28,
+              "table": null,
+              "text": "Testing of security functionality should be carried out during development."
+            }
+          ],
+          "number": "14.2.8",
+          "row": null,
+          "table": null,
+          "text": "System security testing"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.2.9",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that describes User Acceptance testing",
+                  "uuid": "702c7910-8ee9-4e1a-988e-4fc8c043010a"
+                }
+              ],
+              "number": null,
+              "row": 30,
+              "table": null,
+              "text": "Acceptance testing programs and related criteria should be established for new information systems, upgrades and new versions."
+            }
+          ],
+          "number": "14.2.9",
+          "row": null,
+          "table": null,
+          "text": "System acceptance testing"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "14.3.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that describes how test data is protected.",
+                  "uuid": "73d2618d-7b36-4e72-8845-9f915e4a9c2a"
+                }
+              ],
+              "number": null,
+              "row": 33,
+              "table": null,
+              "text": "Test data should be selected carefully, protected and controlled."
+            }
+          ],
+          "number": "14.3.1",
+          "row": null,
+          "table": null,
+          "text": "Protection of test data"
+        }
+      ],
+      "number": "A.14",
+      "row": null,
+      "table": 9,
+      "text": "System acquisition, development and maintenance"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "15.1.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that contains Information security policy for supplier relationships.",
+                  "uuid": "daa1ca45-f76a-4daa-8ef2-1abc1520dd9b"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Information security requirements for mitigating the risks associated with supplier’s access to the organization’s assets should be agreed with the supplier and documented."
+            }
+          ],
+          "number": "15.1.1",
+          "row": null,
+          "table": null,
+          "text": "Information security policy for supplier relationships"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "15.1.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** addressing security within supplier agreements.",
+                  "uuid": "e20ed64d-9cc4-41d8-ba97-1b79b7ea2d96"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "All relevant information security requirements should be established and agreed with each supplier that may access, process, store, communicate, or provide IT infrastructure components for, the organization’s information."
+            }
+          ],
+          "number": "15.1.2",
+          "row": null,
+          "table": null,
+          "text": "Addressing security within supplier agreements"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "15.1.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the document** that addresses Information and communication technology supply chain",
+                  "uuid": "35a4a706-ab13-4f53-ae9b-ace6963a7819"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "Agreements with suppliers should include requirements to address the information security risks associated with information and communications technology services and product supply chain."
+            }
+          ],
+          "number": "15.1.3",
+          "row": null,
+          "table": null,
+          "text": "Information and communication technology supply chain"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "15.2.1",
+                  "hidden": false,
+                  "mappings": [
+                    "01d03cce-4591-46f6-b9f8-cf80f8f0b93b",
+                    "a4808d9d-95b1-4090-907b-6de7f305dbc0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policies and procedures** reviewed to verify that processes are implemented to manage service providers with whom cardholder data is shared, or that could affect the security of cardholder data.",
+                  "uuid": "ff0e2627-9c32-4df1-8d3a-2fa986ca8c3a"
+                }
+              ],
+              "number": null,
+              "row": 10,
+              "table": null,
+              "text": "Organizations should regularly monitor, review and audit supplier service delivery."
+            }
+          ],
+          "number": "15.2.1",
+          "row": null,
+          "table": null,
+          "text": "Monitoring and review of supplier services"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "15.2.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 12,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the assessor who attests** when changes to the provision of services by suppliers, including maintaining and improving existing information security policies, procedures and controls, are managed, taking account of the criticality of business information, systems and processes involved and re-assessment of risks.",
+                  "uuid": "da77db24-5980-4ba5-86a0-269d917bb04c"
+                }
+              ],
+              "number": null,
+              "row": 12,
+              "table": null,
+              "text": "Changes to the provision of services by suppliers, including maintaining and improving existing information security policies, procedures and controls, should be managed, taking account of the criticality of business information, systems and processes involved and re-assessment of risks."
+            }
+          ],
+          "number": "15.2.2",
+          "row": null,
+          "table": null,
+          "text": "Managing changes to supplier services"
+        }
+      ],
+      "number": "A.15",
+      "row": null,
+      "table": 10,
+      "text": "Supplier relationships"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "16.1.1",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Roles and responsibilities.",
+                  "uuid": "3c2df6de-af42-4b8f-bd46-a3763de5d0e9"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "Management responsibilities and procedures should be established to ensure a quick, effective and orderly response to information security incidents."
+            }
+          ],
+          "number": "16.1.1",
+          "row": null,
+          "table": null,
+          "text": "Responsibilities and procedures"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "16.1.2",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Communication strategies.",
+                  "uuid": "c9f01ac9-e0c1-41f2-a6c2-12354e3bee01"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "Information security events should be reported through appropriate management channels as quickly as possible."
+            }
+          ],
+          "number": "16.1.2",
+          "row": null,
+          "table": null,
+          "text": "Reporting information security events"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "16.1.3",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Reporting information security weaknesses",
+                  "uuid": "a1784fc2-f023-4c25-baff-4f68077cfb01"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "Employees and contractors using the organization’s information systems and services should be required to note and report any observed or suspected information security weaknesses in systems or services."
+            }
+          ],
+          "number": "16.1.3",
+          "row": null,
+          "table": null,
+          "text": "Reporting information security weaknesses"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "16.1.4",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Assessment of and decision on information security events.",
+                  "uuid": "4b053f09-e82a-4f05-8f43-4cb555efce50"
+                }
+              ],
+              "number": null,
+              "row": 9,
+              "table": null,
+              "text": "Information security events should be assessed and it should be decided if they are to be classified as information security incidents."
+            }
+          ],
+          "number": "16.1.4",
+          "row": null,
+          "table": null,
+          "text": "Assessment of and decision on information security events"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "16.1.5",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Business recovery and continuity procedures.\n* Analysis of legal requirements for reporting compromises.\n* Responses for all critical system components.\n* Reference or inclusion of incident response procedures from the payment brands.",
+                  "uuid": "281cb48a-e712-4fe7-b335-7cc59fd91e53"
+                }
+              ],
+              "number": null,
+              "row": 11,
+              "table": null,
+              "text": "Information security incidents should be responded to in accordance with the documented procedures."
+            }
+          ],
+          "number": "16.1.5",
+          "row": null,
+          "table": null,
+          "text": "Response to information security incidents"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "16.1.6-1",
+                  "hidden": false,
+                  "mappings": [
+                    "3fa0ba1d-a3da-4d42-b96e-d217644d02dd",
+                    "311423e2-65ff-4de4-894e-fd3c8a837061"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy** reviewed to verify that processes are defined to modify and evolve the incident response plan:\n* According to lessons learned.\n* To incorporate industry developments.",
+                  "uuid": "4a79acfa-a888-41dd-ab20-f0e4fd5fdd5e"
+                },
+                {
+                  "displayNumber": "16.1.6-2",
+                  "hidden": false,
+                  "mappings": [
+                    "c73e1889-2d9d-4716-b906-7825d75d4b79",
+                    "f2080857-a890-4e54-bd26-6348f70db707"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample of responsible personnel** interviewed who confirm that processes are implemented to modify and evolve the incident response plan:\n* According to lessons learned.\n* To incorporate industry developments.",
+                  "uuid": "299e4907-4aee-4639-b6bd-415bf88cfe0c"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that processes are implemented to modify and evolve the incident response plan:",
+                  "uuid": "f82497c9-17ac-4aab-9637-b84b1a72ff70"
+                },
+                {
+                  "displayNumber": "16.1.6-3",
+                  "hidden": false,
+                  "mappings": [
+                    "2ed22ec4-7439-4e78-8487-e481af29b194",
+                    "74719b80-f3c3-44e1-8cb8-4a5aa844543f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "According to lessons learned.",
+                  "uuid": "4dede5eb-c401-41a0-afb3-092465626d9b"
+                },
+                {
+                  "displayNumber": "16.1.6-4",
+                  "hidden": false,
+                  "mappings": [
+                    "caa6cabc-a9cb-4fe3-9ae0-3f4d6aea4a85",
+                    "6a51d8ad-95c6-43df-866f-59556fb5e18e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "To incorporate industry developments.",
+                  "uuid": "eabe7857-4198-4b4f-95b5-49ee72cec3b0"
+                }
+              ],
+              "number": null,
+              "row": 13,
+              "table": null,
+              "text": "Knowledge gained from analyzing and resolving information security incidents should be used to reduce the likelihood or impact of future incidents."
+            }
+          ],
+          "number": "16.1.6",
+          "row": null,
+          "table": null,
+          "text": "Learning from information security incidents"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "16.1.7",
+                  "hidden": false,
+                  "mappings": [
+                    "1a36f5c0-21f8-42a1-a322-cf30c6149bda",
+                    "474d9aa5-dc20-4779-bf75-5e4c00973d10"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the incident response plan was verified to include:\n* Collection of evidence",
+                  "uuid": "d2c30c08-9ac0-455b-b6c0-7dd5a11c11dd"
+                }
+              ],
+              "number": null,
+              "row": 19,
+              "table": null,
+              "text": "The organization should define and apply procedures for the identification, collection, acquisition and preservation of information, which can serve as evidence."
+            }
+          ],
+          "number": "16.1.7",
+          "row": null,
+          "table": null,
+          "text": "Collection of evidence"
+        }
+      ],
+      "number": "A.16",
+      "row": null,
+      "table": 11,
+      "text": "Information security incident management"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.1.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented Business Continuity and Disaster Recovery Policy to show** Planning information security continuity",
+                  "uuid": "cf12528d-1ca7-4f24-9f88-7d53658354a3"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "The organization should determine its requirements for information security and the continuity of information security management in adverse situations, e.g. during a crisis or disaster."
+            }
+          ],
+          "number": "17.1.1",
+          "row": null,
+          "table": null,
+          "text": "Planning information security continuity"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.1.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented Business Continuity and Disaster Recovery Policy to show** Implementing information security continuity",
+                  "uuid": "432863cb-429d-4a84-b4ec-cd81a753cae1"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "The organization should establish, document, implement and maintain processes, procedures and controls to ensure the required level of continuity for information security during an adverse situation."
+            }
+          ],
+          "number": "17.1.2",
+          "row": null,
+          "table": null,
+          "text": "Implementing information security continuity"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.1.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented Business Continuity and Disaster Recovery Policy to show it** verifies, review and evaluate information security continuity",
+                  "uuid": "ddaa1cdb-7963-423d-b5c0-93b5862bc5f9"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "The organization should verify the established and implemented information security continuity controls at regular intervals in order to ensure that they are valid and effective during adverse situations."
+            }
+          ],
+          "number": "17.1.3",
+          "row": null,
+          "table": null,
+          "text": "Verify, review and evaluate information security continuity"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "17.2.1",
+                  "hidden": false,
+                  "mappings": [
+                    "41f3fba3-f565-4157-93b7-27dadf071590",
+                    "f797c73e-ea8d-4cad-87c1-83f854d8dc9e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 10,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that the storage location is reviewed at least annually to confirm that backup media storage is secure.",
+                  "uuid": "99f2ff79-13b1-4e6a-9181-59140d818624"
+                }
+              ],
+              "number": null,
+              "row": 10,
+              "table": null,
+              "text": "Information processing facilities should be implemented with redundancy sufficient to meet availability requirements."
+            }
+          ],
+          "number": "17.2.1",
+          "row": null,
+          "table": null,
+          "text": "Availability of information processing facilities"
+        }
+      ],
+      "number": "A.17",
+      "row": null,
+      "table": 12,
+      "text": "Information security aspects of business continuity management"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "18.1.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented** policy that contains applicable legislation and contractual requirements.",
+                  "uuid": "7316d390-f6c0-4d31-81bb-3d5a0152ef5f"
+                }
+              ],
+              "number": null,
+              "row": 3,
+              "table": null,
+              "text": "All relevant legislative statutory, regulatory, contractual requirements and the organization’s approach to meet these requirements should be explicitly identified, documented and kept up to date for each information system and the organization."
+            }
+          ],
+          "number": "18.1.1",
+          "row": null,
+          "table": null,
+          "text": "Identification of applicable legislation and contractual requirements"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "18.1.2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented** policy that contains intellectual property rights.",
+                  "uuid": "b89e2409-7314-4562-8b1d-72733f5c26d1"
+                }
+              ],
+              "number": null,
+              "row": 5,
+              "table": null,
+              "text": "Appropriate procedures should be implemented to ensure compliance with legislative, regulatory and contractual requirements related to intellectual property rights and use of proprietary software products."
+            }
+          ],
+          "number": "18.1.2",
+          "row": null,
+          "table": null,
+          "text": "Intellectual property rights"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "18.1.3",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented** policy that contains protection of records.",
+                  "uuid": "3f15f30c-d9be-4f2e-9c80-b1fc929f3299"
+                }
+              ],
+              "number": null,
+              "row": 7,
+              "table": null,
+              "text": "Records should be protected from loss, destruction, falsification, unauthorized access and unauthorized release, in accordance with legislated, regulatory, contractual and business requirements."
+            }
+          ],
+          "number": "18.1.3",
+          "row": null,
+          "table": null,
+          "text": "Protection of records"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "18.1.4",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented** policy that contains the privacy and protection of personally identifiable information.",
+                  "uuid": "c5e42087-5c5b-49f2-b89d-0b8f7731cd78"
+                }
+              ],
+              "number": null,
+              "row": 9,
+              "table": null,
+              "text": "Privacy and protection of personally identifiable information should be ensured as required in relevant legislation and regulation where applicable."
+            }
+          ],
+          "number": "18.1.4",
+          "row": null,
+          "table": null,
+          "text": "Privacy and protection of personally identifiable information"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "18.1.5",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented** policy that contains the regulation of cryptographic controls.",
+                  "uuid": "49571523-482c-4a75-9b7d-a63ad3c4172d"
+                }
+              ],
+              "number": null,
+              "row": 11,
+              "table": null,
+              "text": "Cryptographic controls should be used in compliance with all relevant agreements, legislation and regulations."
+            }
+          ],
+          "number": "18.1.5",
+          "row": null,
+          "table": null,
+          "text": "Regulation of cryptographic controls"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "18.2.1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented** audits that have occurred.",
+                  "uuid": "65441f34-baa9-4914-aa33-86e1ed48a188"
+                }
+              ],
+              "number": null,
+              "row": 14,
+              "table": null,
+              "text": "The organization’s approach to managing information security and its implementation (i.e. control objectives, controls, policies, processes and procedures for information security) should be reviewed independently at planned intervals or when significant changes occur."
+            }
+          ],
+          "number": "18.2.1",
+          "row": null,
+          "table": null,
+          "text": "Independent review of information security"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the information security policy was verified to be:",
+                  "uuid": "d163468e-f14b-47c1-834b-21c75ee2f2c8"
+                },
+                {
+                  "displayNumber": "18.2.2-1",
+                  "hidden": false,
+                  "mappings": [
+                    "06db8da9-f46b-4792-8fa8-78bc4ebfc7a1",
+                    "634caefb-4e3a-4bef-8c95-5cf96a31a69f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "Reviewed at least annually.",
+                  "uuid": "43b0cc06-951c-40b3-ba71-5ef183ddfda6"
+                },
+                {
+                  "displayNumber": "18.2.2-2",
+                  "hidden": false,
+                  "mappings": [
+                    "1724fc2a-78b6-44f2-b200-0f267b1a116f",
+                    "71de7e0c-5921-4ec0-9929-276e8490eb6f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "Updated as needed to reflect changes to business objectives or the risk environment.",
+                  "uuid": "8a8a109a-ceec-49d1-ac4d-b1a517383418"
+                }
+              ],
+              "number": null,
+              "row": 16,
+              "table": null,
+              "text": "Managers should regularly review the compliance of information processing and procedures within their area of responsibility with the appropriate security policies, standards and any other security requirements."
+            }
+          ],
+          "number": "18.2.2",
+          "row": null,
+          "table": null,
+          "text": "Compliance with security policies and standards"
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "18.2.3-1",
+                  "hidden": false,
+                  "mappings": [
+                    "5a94c8f4-ac22-4f88-a8ee-3484ebfedcbb",
+                    "b68f1a42-b790-440d-a796-a3e16c7b6348"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the policy documentation** examined to verify that system configuration standards are updated as new vulnerability issues are identified.",
+                  "uuid": "aba4453d-d119-41c8-b608-c81e7e53e2d5"
+                },
+                {
+                  "displayNumber": "18.2.3-2",
+                  "hidden": false,
+                  "mappings": [
+                    "e4994933-7e64-41e1-be95-8527de24487b",
+                    "836dbf00-087b-4c5a-9fcb-e9a5d0555479"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 21,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible personnel** interviewed who confirm that system configuration standards are updated as new vulnerability issues are identified.",
+                  "uuid": "ee29c982-4218-43f8-8828-ccbeb3b764e7"
+                }
+              ],
+              "number": null,
+              "row": 20,
+              "table": null,
+              "text": "Information systems should be regularly reviewed for compliance with the organization’s information security policies and standards."
+            }
+          ],
+          "number": "18.2.3",
+          "row": null,
+          "table": null,
+          "text": "Technical compliance review"
+        }
+      ],
+      "number": "A.18",
+      "row": null,
+      "table": 13,
+      "text": "Compliance"
+    }
+  ],
+  "sectionRegex": null,
+  "tagOptions": [],
+  "template": "iso_27002_pci_dss_v3-2.docx",
+  "tlcHeader": "ISO 27002",
+  "tlcPosition": 10,
+  "uuid": "8e7f3662-ed43-4894-97ce-68d34ea807d3"
+}

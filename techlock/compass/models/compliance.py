@@ -3,19 +3,17 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-
 from sqlalchemy.dialects.postgresql import ARRAY
-
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
-from ..models.int_enum import IntEnum
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Compliance',
@@ -63,8 +61,10 @@ class CompliancePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliances by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliances by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -74,11 +74,11 @@ class ComplianceListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Compliance(BaseModel):
     __tablename__ = 'compliances'
 
-    user_id = db.Column(db.String, nullable=False)
-    tasks = db.Column(ARRAY(db.Integer), nullable=False)
-    start_date = db.Column(db.Date, nullable=False)
-    end_date = db.Column(db.Date, nullable=False)
-    plan = db.Column(IntEnum(Plan), nullable=False)
+    user_id = sa.Column(st.String, nullable=False)
+    tasks = sa.Column(ARRAY(st.Integer), nullable=False)
+    start_date = sa.Column(st.Date, nullable=False)
+    end_date = sa.Column(st.Date, nullable=False)
+    plan = sa.Column(st.Enum(Plan), nullable=False)
 
 
 @dataclass

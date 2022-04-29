@@ -2,15 +2,15 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Detail',
@@ -51,8 +51,10 @@ class DetailPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class DetailListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter details by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter details by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -62,12 +64,11 @@ class DetailListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Detail(BaseModel):
     __tablename__ = 'details'
 
-    code = db.Column(db.String, nullable=False)
+    code = sa.Column(st.String, nullable=False)
 
-    compliant_until = db.Column(db.Date, nullable=True)
-    timestamp = db.Column(db.TIMESTAMP, nullable=False)
-    timezone = db.Column(db.String,
-                         nullable=False)
+    compliant_until = sa.Column(st.Date, nullable=True)
+    timestamp = sa.Column(st.TIMESTAMP, nullable=False)
+    timezone = sa.Column(st.String, nullable=False)
 
 
 @dataclass

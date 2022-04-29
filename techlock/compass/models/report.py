@@ -2,13 +2,14 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Report',
@@ -54,9 +55,9 @@ class ReportListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 
 class Report(BaseModel):
     __tablename__ = 'reports'
-    versions = db.relationship(
+    versions = relationship(
         'ReportVersion',
-        back_populates='report'
+        back_populates='report',
     )
 
 

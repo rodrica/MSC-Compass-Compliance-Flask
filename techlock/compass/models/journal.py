@@ -2,15 +2,16 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
+import sqlalchemy as sa
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Journal',
@@ -39,11 +40,11 @@ JOURNAL_CLAIM_SPEC = ClaimSpec(
 
 
 class JournalSchema(BaseModelSchema):
-    audit_id = mf.Integer(allow_none=True)
-    audit_instruction_id = mf.Integer(allow_none=True)
+    audit_id = mf.String(allow_none=True)
+    audit_instruction_id = mf.String(allow_none=True)
 
-    compliance_id = mf.Integer(allow_none=True)
-    compliance_period_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
+    compliance_period_id = mf.String(allow_none=True)
 
     audit = mf.Nested('AuditSchema', dump_only=True)
     audit_instruction = mf.Nested('ReportInstructionSchema', dump_only=True)
@@ -57,8 +58,10 @@ class JournalPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class JournalListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter journals by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter journals by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -68,19 +71,17 @@ class JournalListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Journal(BaseModel):
     __tablename__ = 'journals'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
-    audit_instruction_id = db.Column(db.Integer,
-                                     db.ForeignKey("report_instructions.id"))
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
+    audit_instruction_id = sa.Column(UUID, sa.ForeignKey("report_instructions.id"))
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id = db.Column(db.Integer,
-                                    db.ForeignKey("compliance_periods.id"))
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(UUID, sa.ForeignKey("compliance_periods.id"))
 
-    audit = db.relationship('Audit')
-    audit_instruction = db.relationship('ReportInstruction')
+    audit = relationship('Audit')
+    audit_instruction = relationship('ReportInstruction')
 
-    compliance = db.relationship('Compliance')
-    compliance_period = db.relationship('CompliancePeriod')
+    compliance = relationship('Compliance')
+    compliance_period = relationship('CompliancePeriod')
 
 
 @dataclass

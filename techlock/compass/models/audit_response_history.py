@@ -2,19 +2,20 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.report_version import Compliance
-
-from ..models.int_enum import IntEnum
 
 __all__ = [
     'AuditResponseHistory',
@@ -28,7 +29,7 @@ __all__ = [
 
 AUDIT_RESPONSE_HISTORY_CLAIM_SPEC = ClaimSpec(
     actions=[
-        'read'
+        'read',
     ],
     resource_name='audit_responses_history',
     filter_fields=[
@@ -40,10 +41,9 @@ AUDIT_RESPONSE_HISTORY_CLAIM_SPEC = ClaimSpec(
 
 
 class AuditResponseHistorySchema(BaseModelSchema):
-    entity_id = mf.Integer(dump_only=True)
-    audit_response_id = mf.Integer(dump_only=True)
-    audit_id = mf.Integer(dump_only=True)
-    instruction_id = mf.Integer(dump_only=True)
+    audit_response_id = mf.String(dump_only=True)
+    audit_id = mf.String(dump_only=True)
+    instruction_id = mf.String(dump_only=True)
     compliance = EnumField(Compliance, dump_only=True)
 
     audit = mf.Nested('AuditSchema', dump_only=True)
@@ -55,8 +55,10 @@ class AuditResponseHistoryPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditResponseHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter audit_responses_history by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter audit_responses_history by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -66,19 +68,13 @@ class AuditResponseHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSch
 class AuditResponseHistory(BaseModel):
     __tablename__ = 'audit_responses_history'
 
-    entity_id = db.Column('history_id', db.Integer, primary_key=True)
-    audit_response_id = db.Column('id', db.Integer)
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"),
-                         nullable=False)
-    instruction_id = db.Column(db.Integer,
-                               db.ForeignKey("report_instructions.id"),
-                               nullable=False)
-    compliance = db.Column(IntEnum(Compliance),
-                           nullable=False,
-                           default=Compliance.pending)
+    audit_response_id = sa.Column(UUID, sa.ForeignKey("audit_responses.id"))
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"), nullable=False)
+    instruction_id = sa.Column(UUID, sa.ForeignKey("report_instructions.id"), nullable=False)
+    compliance = sa.Column(st.Enum(Compliance), nullable=False, default=Compliance.pending)
 
-    audit = db.relationship('Audit')
-    instruction = db.relationship('ReportInstruction')
+    audit = relationship('Audit')
+    instruction = relationship('ReportInstruction')
 
 
 @dataclass

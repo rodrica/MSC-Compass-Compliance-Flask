@@ -1,4 +1,4 @@
-# Techlock User Management Service
+# Techlock Compliance Management Service
 
 This project uses `make` to help you develop.
 To view available commands and what they do, you can view the `Makefile` at the root of this project.
@@ -33,7 +33,7 @@ All api calls are performed in Postman
         "tenant1",
       ],
       "claims": [
-        "allow:*:user-management:*:*:*",
+        "allow:*:compliance:*:*:*",
       ]
     }
     ```
@@ -48,6 +48,21 @@ All api calls are performed in Postman
     At the top you will find an `Authorize` button, enter the token and authorize.
     You can now try out the api via the swagger page.
 
+## Create new DB migration
+
+After you've created or modified an SQLAlchemy model, you must generate a new migration file so we can update the database.
+
+For this we use [Flask-Migrate](https://flask-migrate.readthedocs.io/)
+
+```shell
+flask db migrate -m "A descriptive message"
+```
+
+We can then apply the new migration:
+
+```shell
+flask db upgrade
+```
 
 ## View API documentation
 
@@ -72,7 +87,7 @@ For example, you can use Postman to generate a new token by executing the follow
     "tenant1"
   ],
   "claims": [
-    "allow:*:user-management:*:*:*"
+    "allow:*:compliance:*:*:*"
   ]
 }
 ```
@@ -116,22 +131,13 @@ To run the e2e test you run `./run_tests.sh --end-to-end`
 OS Variables:
 | Key | Required | Default | Description | Allowed Values |
 |-----|----------|---------|-------------|----------------|
-| IDP_NAME | False | MOCK | Which IDP to use for /user endpoints, default to the mock idp which does nothing | AUTH0, COGNITO, MOCK |
 
 ConfigManager
 | Key | Required | Default | Description | Allowed Values |
 |-----|----------|---------|-------------|----------------|
-| idp.name | False | MOCK | Which IDP to use for /user endpoints, default to the mock idp which does nothing | AUTH0, COGNITO, MOCK |
-| auth0.domain | True if  | |
-| auth0.client_id |
-| | | | | |
-| sns.topics.UserNotification | False | | Which SNS Topic to publish UserNotifications to. If not set, will log each message in an error message | True, False |
 
 ### Hydrator
 
 OS Variables:
 | Key | Required | Default | Description |
 |-----|----------|---------|-------------|
-| HYDRATOR_BASIC_ENABLED | False | True | Flag to enable Basic authentication for the /hydrator endpoint | true, false |
-| HYDRATOR_BASIC_USER | True if HYDRATOR_BASIC_ENABLED is True | | Username to use in Basic authentication | |
-| HYDRATOR_BASIC_PASSWORD | True if HYDRATOR_BASIC_ENABLED is True | | Password to use in Basic authentication | |

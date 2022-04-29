@@ -1,0 +1,2837 @@
+{
+  "columnMapping": [],
+  "complianceOnly": false,
+  "complianceOptions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "component": "sgi",
+  "defaultNavigation": null,
+  "highestPriority": 0,
+  "mapped": true,
+  "name": "HIPAA (PCI DSS v3.2.x)",
+  "processor": "sgi",
+  "requirements": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(1)(i)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "831dcfe3-513a-478f-ae71-67594fb6ec94",
+                    "3ee7a604-11e0-4f73-a174-668bb44ccd44"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 2,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented information security policy** examined.",
+                  "uuid": "60fc49d2-e799-4439-9428-aaf940ed2e51"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the information security policy was examined to verify that it is published and disseminated to:",
+                  "uuid": "47af3841-a4a3-4b20-ac8a-e78805b5b736"
+                },
+                {
+                  "displayNumber": "164.308(a)(1)(i)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "6aecf438-ea83-41b5-9fa4-ea8869e8fc30",
+                    "348ef231-622c-459f-9bbf-205cc45379bd"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant personnel.",
+                  "uuid": "2d593ad6-ea0e-4a54-93bb-1c967644b3ba"
+                },
+                {
+                  "displayNumber": "164.308(a)(1)(i)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "60e7b31f-ab07-403b-81f4-1083c0d39684",
+                    "493c5955-78a5-47b3-acba-4fcb48055306"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "All relevant vendors and business partners.",
+                  "uuid": "f05d35a6-2902-4efe-a3a0-d72468fe8c80"
+                }
+              ],
+              "number": "164.308(a)(1)(i)",
+              "row": 2,
+              "table": null,
+              "text": "Examine the information security policy and verify that the policy is published and disseminated to all relevant personnel (including vendors and business partners)."
+            }
+          ],
+          "number": "164.308(a)(1)(i)",
+          "row": null,
+          "table": null,
+          "text": "Security Management Process: Implement policies and procedures to prevent, detect, contain, and correct security violations."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(A)",
+                  "hidden": false,
+                  "mappings": [
+                    "7612c351-97c9-4026-b341-2547775462e0",
+                    "daa0e579-f146-4966-89b9-827d886d3e08"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that the documented annual risk-assessment process:\n* Identifies critical assets, threats, and vulnerabilities\n* Results in a formal, documented analysis of risk.",
+                  "uuid": "f0223790-a092-4533-8d58-1548aba4616d"
+                }
+              ],
+              "number": "164.308(a)(1)(ii)(A)",
+              "row": 7,
+              "table": null,
+              "text": "Verify that an annual risk assessment process is documented that identifies assets, threats, vulnerabilities, and results in a formal risk assessment."
+            }
+          ],
+          "number": "164.308(a)(1)(ii)(A)",
+          "row": null,
+          "table": null,
+          "text": "Risk Analysis (R): Conduct an accurate and thorough assessment of the potential risks and vulnerabilities to the confidentiality, integrity, and availability of electronic protected health information held by the covered entity."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(B)",
+                  "hidden": false,
+                  "mappings": [
+                    "25b9ba0f-0e20-4270-afea-cfc1e0dcd4f8",
+                    "c5dd218d-6bc3-4a20-afd0-c726b77ee6e5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Review** risk-assessment documentation to verify that the risk-assessment process is performed at least annually and upon significant changes to the environment.",
+                  "uuid": "c6e5f0db-bf49-4782-9726-e6362887094c"
+                }
+              ],
+              "number": "164.308(a)(1)(ii)(B)",
+              "row": 9,
+              "table": null,
+              "text": "Review risk-assessment documentation to verify that the risk-assessment process is performed at least annually and upon significant changes to the environment."
+            }
+          ],
+          "number": "164.308(a)(1)(ii)(B)",
+          "row": null,
+          "table": null,
+          "text": "Risk Management (R): Implement security measures sufficient to reduce risks and vulnerabilities to a reasonable and appropriate level to comply with Section 164.306(a)."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(C)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the Human Resources personnel interviewed who confirm that employees are sanctioned when they violate security policies.",
+                  "uuid": "6a695fe7-4619-4d87-8b69-6682832c456a"
+                }
+              ],
+              "number": "164.308(a)(1)(ii)(C)",
+              "row": 11,
+              "table": null,
+              "text": "Inquire with Human Resource department management and verify that employees are sanctioned when they violate security policies."
+            }
+          ],
+          "number": "164.308(a)(1)(ii)(C)",
+          "row": null,
+          "table": null,
+          "text": "Sanction Policy (R): Apply appropriate sanctions against workforce members who fail to comply with the security policies and procedures of the covered entity."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(D).a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "bffcd5fa-5ca6-47f6-8ef3-50c669cb6901",
+                    "7ca01ccb-c6d7-4521-8f93-f254e73f1aa2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented security policies and procedures examined to verify that procedures define reviewing the following at least daily, either manually or via log tools:\n* All security events.\n* Logs of all system components that store, process, or transmit CHD and/or SAD, or that could impact the security of CHD and/or SAD.\n* Logs of all critical system components.\nLogs of all servers and system components that perform security functions.",
+                  "uuid": "74eba790-cccb-4be6-9811-ead95cf7e6be"
+                },
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(D).a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "eb827a9a-0693-4ea2-987c-b9bb290df7c9",
+                    "212fd15b-7131-4f27-a824-fa02faed3cba"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "Describe the manual or log tools used for daily review of logs.",
+                  "uuid": "a7f7bd72-b502-411a-87f5-eddd15272ab5"
+                }
+              ],
+              "number": "164.308(a)(1)(ii)(D).a",
+              "row": 13,
+              "table": null,
+              "text": "Examine security policies and procedures to verify that procedures are defined for, reviewing the following at least daily, either manually or via log tools:\n* All security events.\n* Logs of all system components that store, process, or transmit customer data, or that could impact the security of customer data.\n* Logs of all critical system components.\n* Logs of all servers and system components that perform security functions (for example, firewalls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), authentication servers, e-commerce redirection servers, etc.)."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(D).b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "a0afb3c0-42ab-43fc-b090-8bfa9b9bfee5",
+                    "e08beadf-9288-40cd-8129-cba1add7261f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the personnel interviewed who confirm that the following are reviewed at least daily:\n* All security events.\n* Logs of all system components that store, process, or transmit CHD and/or SAD, or that could impact the security of CHD and/or SAD.\n* Logs of all critical system components.\nLogs of all servers and system components that perform security functions.",
+                  "uuid": "323049a0-af4f-47f4-a573-cd43cca3380a"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that the following are reviewed at least daily:",
+                  "uuid": "94f30c1f-6cb1-4fa9-b2ff-0ecceb67d6c3"
+                },
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(D).b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "4af4fe9d-efda-4747-b9b1-f7c31ec962c8",
+                    "c289f93c-63ef-4420-bb75-a62767316bbc"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 17,
+                  "table": null,
+                  "tag": null,
+                  "text": "All security events.",
+                  "uuid": "fc5edcab-624c-4de8-9af4-4d610f237415"
+                },
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(D).b-3",
+                  "hidden": false,
+                  "mappings": [
+                    "63255f63-3d71-4e4b-af95-0e96e06b11ec",
+                    "7a554cee-4ec5-428a-a088-ab01baa6990c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "Logs of all system components that store, process, or transmit customer data, or that could impact the security of customer data.",
+                  "uuid": "fe2da417-c7c1-47d6-b67b-07238625d967"
+                },
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(D).b-4",
+                  "hidden": false,
+                  "mappings": [
+                    "016a8ba2-8ff4-4609-9b38-9772d145fb35",
+                    "2bff1a6b-f33d-4e41-9832-8837561890b7"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 19,
+                  "table": null,
+                  "tag": null,
+                  "text": "Logs of all critical system components.",
+                  "uuid": "03b6d581-57e6-4341-a4d7-30eb3b1afdd8"
+                },
+                {
+                  "displayNumber": "164.308(a)(1)(ii)(D).b-5",
+                  "hidden": false,
+                  "mappings": [
+                    "0bc843a1-0677-4035-ac2c-f75c5bb3110d",
+                    "ea07c1c8-2e88-4a8a-b68d-3f8abcf33300"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "Logs of all servers and system components that perform security functions.",
+                  "uuid": "d9726a70-298e-4079-9c42-2c4453a3ce56"
+                }
+              ],
+              "number": "164.308(a)(1)(ii)(D).b",
+              "row": 15,
+              "table": null,
+              "text": "Observe processes and interview personnel to verify that the following are reviewed at least daily:\n* All security events.\n* Logs of all system components that store, process, or transmit customer data, or that could impact the security of customer data.\n* Logs of all critical system components.\n* Logs of all servers and system components that perform security functions (for example, firewalls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), authentication servers, e-commerce redirection servers, etc.)"
+            }
+          ],
+          "number": "164.308(a)(1)(ii)(D)",
+          "row": null,
+          "table": null,
+          "text": "Information System Activity Review (R): Implement procedures to regularly review records of information system activity, such as audit logs, access reports, and security incident tracking reports."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(2)",
+                  "hidden": false,
+                  "mappings": [
+                    "69ea2e20-6526-4809-9f47-e7ce7ba7a72f",
+                    "8270768e-8458-4f18-b6e5-7a243c848584"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Provide the name of the assessor** who attests that responsibilities were verified to be formally assigned for:\n* Establishing security policies and procedures.\n* Documenting security policies and procedures.\n* Distributing security policies and procedures.",
+                  "uuid": "457aa3ef-6f78-45b9-a6a7-11a53aa6c07b"
+                }
+              ],
+              "number": "164.308(a)(2)",
+              "row": 22,
+              "table": null,
+              "text": "Verify that responsibility for establishing, documenting and distributing security policies and procedures is formally assigned."
+            }
+          ],
+          "number": "164.308(a)(2)",
+          "row": null,
+          "table": null,
+          "text": "Assigned Security Responsibility: Identify the security official who is responsible for the development and implementation of the policies and procedures required by this subpart for the entity."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(3)(i)",
+                  "hidden": false,
+                  "mappings": [
+                    "5c3ba559-dc34-402c-9fbf-ccdcdae9e356",
+                    "837ebba0-392a-49d3-ad22-a16a1537c51d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the written policy for access control that was examined to verify the policy incorporates:\n* Defining access needs and privilege assignments for each role.\n* Restriction of access to privileged user IDs to least privileges necessary to perform job responsibilities.\n* Assignment of access based on individual personnel’s job classification and function\n* Documented approval (electronically or in writing) by authorized parties for all access, including listing of specific privileges approved.",
+                  "uuid": "9f361b63-067e-47be-bb95-d81b958c81a6"
+                }
+              ],
+              "number": "164.308(a)(3)(i)",
+              "row": 24,
+              "table": null,
+              "text": "Examine written policy for access control, and verify that the policy incorporates as follows:\n* Defining access needs and privilege assignments for each role.\n* Restriction of access to privileged user IDs to least privileges necessary to perform job responsibilities.\n* Assignment of access based on individual personnel’s job classification and function.\n* Documented approval (electronically or in writing) by authorized parties for all access, including listing of specific privileges approved."
+            }
+          ],
+          "number": "164.308(a)(3)(i)",
+          "row": null,
+          "table": null,
+          "text": "Workforce Security: Implement policies and procedures to ensure that all members of its workforce have appropriate access to electronic protected health information, as provided under paragraph (a)(4) of this section, and to prevent those workforce members who do not have access under paragraph (a)(4) of this section from obtaining access to electronic protected health information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(A)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "f1b452ef-b03d-4744-8705-9f0562f04e4f",
+                    "8a074947-d085-47f1-bafd-4f2a96151987"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the sample of user IDs examined for this testing procedure.",
+                  "uuid": "2124feb6-1a8c-4227-bded-1b03535ad15a"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** each item in the sample of user IDs was compared with documented approvals to verify that:",
+                  "uuid": "aef740cc-de3b-4a9a-acf2-f295ee5aecd2"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(A)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "762e9615-ad65-4254-845a-47c34a237738",
+                    "47ef527a-2c3c-4474-a8dd-2e4b6a50b33b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "Documented approval exists for the assigned privileges.",
+                  "uuid": "fefd8cb1-e2f1-44d8-8cfe-50b2bed41e86"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(A)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "f06ea35d-accf-4ae6-8670-1214296e5d23",
+                    "f369465a-8dce-4764-82a6-9f4b1f01def9"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 29,
+                  "table": null,
+                  "tag": null,
+                  "text": "The approval was by authorized parties.",
+                  "uuid": "c85529ab-b33d-48a8-8426-3cf7a448346b"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(A)-4",
+                  "hidden": false,
+                  "mappings": [
+                    "6748cff6-de04-4830-8efe-ee6d5375fc37",
+                    "fc4d022f-c6a5-436d-aab3-49e4daec2c32"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "That specified privileges match the roles assigned to the individual.",
+                  "uuid": "78271633-3a62-4069-9afc-1a15c951d669"
+                }
+              ],
+              "number": "164.308(a)(3)(ii)(A)",
+              "row": 26,
+              "table": null,
+              "text": "Select a sample of user IDs and compare with documented approvals to verify that:\n* Documented approval exists for the assigned privileges.\n* The approval was by authorized parties.\n* That specified privileges match the roles assigned to the individual."
+            }
+          ],
+          "number": "164.308(a)(3)(ii)(A)",
+          "row": null,
+          "table": null,
+          "text": "Authorization and/or Supervision (A): Implement procedures for the authorization and/or supervision of workforce members who work with electronic protected health information or in locations where it might be accessed."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(B)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "ce37eef0-f76f-48c2-b251-843243d62edf",
+                    "05cfa974-4ede-4fe4-9ce6-255495a6c69e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 32,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the sample of user IDs examined for this testing procedure.",
+                  "uuid": "ab028ce7-51c4-4fc1-bac0-f372585e246d"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(B)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "b4fcd1b0-0ac1-4670-bc88-56de743d3f67",
+                    "48ca6069-fc71-4f68-acb3-a0a457167af0"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 33,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the responsible management personnel interviewed who confirm that privileges assigned are based on that individual’s job classification and function.",
+                  "uuid": "a93c05e3-aa31-48dd-ae15-d4de983fd53b"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(B)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "1b5546e3-f814-4f4a-aa37-bba1689ecc33",
+                    "577b50cf-9c72-4b64-90e2-1219f45844c5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 34,
+                  "table": null,
+                  "tag": null,
+                  "text": "For the interview, **summarize the relevant details discussed** to confirm that privileges assigned to each user ID in the selected sample are based on an individual’s job classification and function.",
+                  "uuid": "4503f237-aebf-4056-bd24-8965a620ec2f"
+                }
+              ],
+              "number": "164.308(a)(3)(ii)(B)",
+              "row": 32,
+              "table": null,
+              "text": "Select a sample of user IDs and interview responsible management personnel to verify that privileges assigned are based on that individual’s job classification and function."
+            }
+          ],
+          "number": "164.308(a)(3)(ii)(B)",
+          "row": null,
+          "table": null,
+          "text": "Workforce Clearance Procedure (A): Implement procedures to determine that the access of a workforce member to electronic protected health information is appropriate."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(C).a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "403e1030-0734-4019-ab77-2fb9cce36996",
+                    "2dc87cfc-d630-476f-9842-6f0ce04befa4"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 36,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the sample of users terminated in the past six months selected.",
+                  "uuid": "252dc759-21f7-4b8f-9e14-2fa2a81afcfa"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(C).a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "6a3c283b-8d5f-48c3-94a6-0d5ca31c7f39",
+                    "078d5282-e371-4d00-b85a-5a21e2f67f9d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 37,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***local access*** were reviewed to verify that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "05289f91-eed1-4a63-9a81-46dfd205e88e"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(C).a-3",
+                  "hidden": false,
+                  "mappings": [
+                    "2e3cd100-36d7-4397-be47-781ebaaba12d",
+                    "0a440624-33b1-4618-bf3d-fc460730619c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 38,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the current user access lists for ***remote access*** were reviewed to verify that the sampled user IDs have been deactivated or removed from the access lists.",
+                  "uuid": "cedfa251-0687-4edc-a76b-9a097bea35e9"
+                }
+              ],
+              "number": "164.308(a)(3)(ii)(C).a",
+              "row": 36,
+              "table": null,
+              "text": "Select a sample of users terminated in the past six months, and review current user access lists*—*for both local and remote access—to verify that their IDs have been deactivated or removed from the access lists."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(C).b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "d6803103-f812-434e-8cdb-2e99a9d770c1",
+                    "1268179c-11a7-4167-98e5-0097aeeb0c19"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 39,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For the sample of users terminated in the past six months at 8.1.3.a*, **describe how** it was determined which, if any, physical authentication methods, the terminated users had access to prior to termination.",
+                  "uuid": "529afe1d-b308-491e-9bc3-244ac70d7301"
+                },
+                {
+                  "displayNumber": "164.308(a)(3)(ii)(C).b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "e254d223-8443-460c-988a-8d3adc567c2b",
+                    "e7547963-fa33-4847-9328-559c0f132c4e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 40,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the physical authentication method(s) for the terminated employees were verified to have been returned or deactivated.",
+                  "uuid": "818fda2a-f711-48af-ab80-d43eca20c0f5"
+                }
+              ],
+              "number": "164.308(a)(3)(ii)(C).b",
+              "row": 39,
+              "table": null,
+              "text": "Verify all physical authentication methods—such as, smart cards, tokens, etc.—have been returned or deactivated."
+            }
+          ],
+          "number": "164.308(a)(3)(ii)(C)",
+          "row": null,
+          "table": null,
+          "text": "Termination Procedure (A): Implement procedures for terminating access to electronic protected health information when the employment of a workforce member ends or as required by determinations made as specified in paragraph (a)(3)(ii)(B) of this section."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(4)(i)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "ed2a25cf-269a-40fa-8890-c9e0f5d58a3f",
+                    "82a4fca7-a277-4791-98e9-178714808f37"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 42,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the selected sample** of roles for this testing procedure.",
+                  "uuid": "3e04f4bc-fb10-42cc-a050-85a1c5fe45d5"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 43,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each role in the selected sample*, **describe how** the role was examined to verify access needs for each role are defined and include:",
+                  "uuid": "8e0e94a1-f667-4d55-9a4f-a9f1fcb18e9d"
+                },
+                {
+                  "displayNumber": "164.308(a)(4)(i)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "1b3a71a2-05f1-415b-ae6d-3958b422178d",
+                    "4ace04d0-4a24-4503-bbab-7ae8d501e728"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 44,
+                  "table": null,
+                  "tag": null,
+                  "text": "* System components and data resources that each role needs to access for their job function.",
+                  "uuid": "c471bd1a-980b-40b2-933a-09c6ea215219"
+                },
+                {
+                  "displayNumber": "164.308(a)(4)(i)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "ee398d65-a39d-4ab8-a2ef-766d8c0138f9",
+                    "dee22442-523c-40c5-98f3-36515837f894"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 45,
+                  "table": null,
+                  "tag": null,
+                  "text": "* Identification of privilege necessary for each role to perform their job function.",
+                  "uuid": "44272424-7b8d-47bb-aa28-df29f037c39e"
+                }
+              ],
+              "number": "164.308(a)(4)(i)",
+              "row": 42,
+              "table": null,
+              "text": "Select a sample of roles and verify access needs for each role are defined and include:\n* System components and data resources that each role needs to access for their job function.\n* Identification of privilege necessary for each role to perform their job function."
+            }
+          ],
+          "number": "164.308(a)(4)(i)",
+          "row": null,
+          "table": null,
+          "text": "Information Access Management: Implement policies and procedures for authorizing access to electronic protected health information that are consistent with the applicable requirements of subpart E of this part."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(4)(ii)(A)-1",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 47,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** whether the organization is a healthcare clearinghouse that is part of a larger organization. **(yes/no)**",
+                  "uuid": "8b88343f-86b0-4a51-98d6-9bf1c9e11051"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 48,
+                  "table": null,
+                  "tag": null,
+                  "text": "*If “no,” mark the remainder of 164.308(a)(4)(ii)(A) as “Not Applicable”*\n*If “yes,” complete the following:*",
+                  "uuid": "ae35aae3-42c3-4faf-a180-0ce603607641"
+                },
+                {
+                  "displayNumber": "164.308(a)(4)(ii)(A)-2",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 49,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the policies and procedures that protect the electronic protected health information of the clearinghouse from unauthorized access by the larger organization.",
+                  "uuid": "8215bb13-6988-4bb3-864f-97cf45e4a4a1"
+                }
+              ],
+              "number": "164.308(a)(4)(ii)(A)",
+              "row": 47,
+              "table": null,
+              "text": ""
+            }
+          ],
+          "number": "164.308(a)(4)(ii)(A)",
+          "row": null,
+          "table": null,
+          "text": "Isolating Healthcare Clearinghouse Functions (R): If a healthcare clearinghouse is part of a larger organization, the clearinghouse must implement policies and procedures that protect the electronic protected health information of the clearinghouse from unauthorized access by the larger organization."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(4)(ii)(C)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "3ea31fc5-24ff-4f6a-99e3-dd0b6816d40c",
+                    "b9892474-f221-45ec-a217-30009622ad7b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 51,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** vendor documentation examined.",
+                  "uuid": "7108cecb-35b3-4521-94de-6224b29c50ff"
+                },
+                {
+                  "displayNumber": "164.308(a)(4)(ii)(C)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "efa26c0f-b94d-4afe-9f09-e4bd912f1a2d",
+                    "b9825f40-c035-430d-864f-4c0eb5fb8696"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 52,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** system settings were examined with the vendor documentation to verify that access control systems are in place on all system components.",
+                  "uuid": "0b6eb4d4-835e-454a-b93c-39001395cde0"
+                }
+              ],
+              "number": "164.308(a)(4)(ii)(C)",
+              "row": 51,
+              "table": null,
+              "text": "Confirm that access control systems are in place on all system components."
+            }
+          ],
+          "number": "164.308(a)(4)(ii)(C)",
+          "row": null,
+          "table": null,
+          "text": "Access Establishment and Modification (A): Implement policies and procedures that, based upon the entity's access authorization policies, establish, document, review, and modify a user's right of access to a workstation, transaction, program, or process."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(i)",
+                  "hidden": false,
+                  "mappings": [
+                    "a884f665-8495-4f4c-93e8-369021e6b335",
+                    "75267262-fff7-4bea-b554-66abb2628c72"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 54,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented security awareness training documentation reviewed to verify it includes at least the following topics:\n* Locking rooms and file cabinets where records are kept;\n* Not sharing or openly posting employee passwords in work areas;\n* Encrypting sensitive customer information when it is transmitted electronically via public networks;\n* Referring calls or other requests for customer information to designated individuals who have been trained in how your company safeguards personal data; and\n* Reporting suspicious attempts to obtain customer information to designated personnel.",
+                  "uuid": "3901a021-2fa7-429d-83ad-62c14b6b3f43"
+                }
+              ],
+              "number": "164.308(a)(5)(i)",
+              "row": 54,
+              "table": null,
+              "text": "Review the security awareness training documentation to verify it provides awareness to all personnel about the importance of protecting customer information."
+            }
+          ],
+          "number": "164.308(a)(5)(i)",
+          "row": null,
+          "table": null,
+          "text": "Security Awareness and Training: Implement a security awareness and training program for all members of its workforce (including management)."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(A)",
+                  "hidden": false,
+                  "mappings": [
+                    "0dbae85d-1362-4255-a406-052553bb24ac",
+                    "909217cd-428f-41c8-bca2-5b8896a55349"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 56,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** how the security awareness program provides multiple methods of communicating awareness and educating personnel.",
+                  "uuid": "def6f8fe-c744-4927-be98-f3d2a57666dc"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(A)",
+              "row": 56,
+              "table": null,
+              "text": "Verify that the security awareness program provides multiple methods of communicating awareness and educating personnel (for example, posters, letters, memos, web-based training, meetings, and promotions)."
+            }
+          ],
+          "number": "164.308(a)(5)(ii)(A)",
+          "row": null,
+          "table": null,
+          "text": "Security Reminders (A): Periodic security updates."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(B).a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "daf44496-66d1-47a4-987b-79eca0ad2d09",
+                    "9f6a3dd6-fbf5-4d7f-a182-b00e82cc6ed2"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 58,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the sample** of system components selected (including all operating system types commonly affected by malicious software).",
+                  "uuid": "0db2cc84-bf77-46fc-8c61-6528e4a9076d"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(B).a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "db398415-e248-4450-9845-0ce7869e690a",
+                    "f13f737e-6877-46b9-a4f9-f51436c0e9bc"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 59,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each item in the sample*, **describe how** anti-virus software was observed to be deployed.",
+                  "uuid": "e6449ce5-6274-4253-bb55-53ecb6eba483"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(B).a",
+              "row": 58,
+              "table": null,
+              "text": "For a sample of system components including all operating system types commonly affected by malicious software, verify that anti-virus software is deployed if applicable anti-virus technology exists."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(B).b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "c45254f8-c71c-45f2-ba7a-cc6cd5cfaccf",
+                    "4a49ff22-395a-4bcc-a371-29111d67a2e1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 60,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the vendor documentation reviewed to verify that anti-virus programs:\n* Detect all known types of malicious software,\n* Remove all known types of malicious software, and\n* Protect against all known types of malicious software.",
+                  "uuid": "cd2ead64-1406-4a70-b9c1-2d5bee7ad3a7"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 61,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** anti-virus configurations were examined to verify that anti-virus programs:",
+                  "uuid": "62c8080d-41b5-4a17-8184-20d35a2b296c"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(B).b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "7395071b-48df-4be2-a579-368c7f299c7a",
+                    "b453db76-15bf-4fe6-a022-70a54e11ee53"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 62,
+                  "table": null,
+                  "tag": null,
+                  "text": "Detect all known types of malicious software,",
+                  "uuid": "e2ad88b0-fceb-4f98-a8e4-1875b457b269"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(B).b-3",
+                  "hidden": false,
+                  "mappings": [
+                    "4d508925-f087-44f8-906d-330264c29c63",
+                    "6e1fbcb0-7140-4181-923a-547d2639410c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 63,
+                  "table": null,
+                  "tag": null,
+                  "text": "Remove all known types of malicious software, and",
+                  "uuid": "9dd94368-c3d9-4b97-ad7e-696bc47a93a8"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(B).b-4",
+                  "hidden": false,
+                  "mappings": [
+                    "7d0d5081-d1c8-44ae-9672-3a75d9e81086",
+                    "f034fb14-bce8-4864-afdb-dda33d2382ae"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 64,
+                  "table": null,
+                  "tag": null,
+                  "text": "Protect against all known types of malicious software.",
+                  "uuid": "b4a90bf8-50e3-44d7-8088-cfc7df001310"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(B).b",
+              "row": 60,
+              "table": null,
+              "text": "Review vendor documentation and examine anti-virus configurations to verify that anti-virus programs;\n* Detect all known types of malicious software,\n* Remove all known types of malicious software, and\n* Protect against all known types of malicious software.\n*(Examples of types of malicious software include viruses, Trojans, worms, spyware, adware, and rootkits).*"
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(B).c",
+                  "hidden": false,
+                  "mappings": [
+                    "5f9a848c-6d51-4e6b-aae5-8bf0fa1d0b41",
+                    "cdcf7165-ed98-41ba-a16a-111d4f525dd9"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 65,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** anti-virus configurations, including the master installation of the software, were examined to verify anti-virus mechanisms are Configured to perform automatic updates.",
+                  "uuid": "c1382ccb-1159-4893-b1ce-40b1f5cb6498"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(B).c",
+              "row": 65,
+              "table": null,
+              "text": "Examine anti-virus configurations, including the master installation of the software, to verify anti-virus mechanisms are configured to perform automatic updates."
+            }
+          ],
+          "number": "164.308(a)(5)(ii)(B)",
+          "row": null,
+          "table": null,
+          "text": "Protection from Malicious Software (A): Procedures for guarding against, detecting, and reporting malicious software."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(C).a",
+                  "hidden": false,
+                  "mappings": [
+                    "6b2ae9a0-4f44-45ff-9b29-ec180f78efa8",
+                    "9a9a0a1f-8a16-4cd7-a9d8-8b4c867dad23"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 67,
+                  "table": null,
+                  "tag": null,
+                  "text": "For all items in the sample, **describe how** configuration settings were observed to verify access to all audit trails is logged.",
+                  "uuid": "5c8c6afb-3529-4a2a-9e40-d2bc15a33add"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(C).a",
+              "row": 67,
+              "table": null,
+              "text": "Verify access to all audit trails is logged."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(C).b",
+                  "hidden": false,
+                  "mappings": [
+                    "c79a3f7d-7b43-4a4a-bb1c-cbc58b719f20",
+                    "62778558-4f00-410d-9a9b-c5b3dab645bd"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 68,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented security policies and procedures examined to verify that procedures define following up on exceptions and anomalies identified during the review process.",
+                  "uuid": "05a0d6c3-3ec6-4886-9228-9ba4aa76266a"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(C).b",
+              "row": 68,
+              "table": null,
+              "text": "Examine security policies and procedures to verify that procedures are defined for following up on exceptions and anomalies identified during the review process."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(C).c-1",
+                  "hidden": false,
+                  "mappings": [
+                    "26d81a31-00d5-443b-a822-0143f36a7bea",
+                    "f3334e61-f423-4ecf-9b91-7f3c760db4c3"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 69,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were observed to verify that follow-up to exceptions and anomalies is performed.",
+                  "uuid": "f24d3fc8-b83a-436e-9e7c-b37ad61f173c"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(C).c-2",
+                  "hidden": false,
+                  "mappings": [
+                    "1576405b-d63c-458a-b12e-234f8db2cb3d",
+                    "5729df68-5c41-4f63-a547-38ea37f10bd4"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 70,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the personnel interviewed who confirm that follow-up to exceptions and anomalies is performed.",
+                  "uuid": "e9f24498-608b-4917-b797-cb56bcbfb157"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(C).c",
+              "row": 69,
+              "table": null,
+              "text": "Observe processes and interview personnel to verify that follow-up to exceptions and anomalies is performed."
+            }
+          ],
+          "number": "164.308(a)(5)(ii)(C)",
+          "row": null,
+          "table": null,
+          "text": "Log-in Monitoring (A): Procedures for monitoring log-in attempts and reporting discrepancies."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "8927f610-7d90-4266-9a9e-c2c898e06bae",
+                    "50fefd82-7d4d-4c6b-bb0c-796c37ef69e5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 72,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented password procedures examined to verify the procedures define that:\n* First-time passwords must be set to a unique value for each user.\n* First-time passwords must be changed after the first use.\n* Reset passwords must be set to a unique value for each user.\n* Reset passwords must be changed after the first use.",
+                  "uuid": "cbab7cb4-dcf3-4799-9fae-f3fd92b6b4ba"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 73,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** security personnel were observed to:",
+                  "uuid": "bd49fc9e-e176-4fc5-8955-1725a9dddfe5"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "3007680b-7306-48c7-9718-c9e241d7958d",
+                    "dda8e705-6982-4cf2-9790-43430110c686"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 74,
+                  "table": null,
+                  "tag": null,
+                  "text": "Set first-time passwords to a unique value for each new user.",
+                  "uuid": "fe4d5678-b446-4e8d-ab0c-d4c66383c064"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).a-3",
+                  "hidden": false,
+                  "mappings": [
+                    "48bdfa13-9795-433a-93e2-e454e128e1bb",
+                    "7c611f3b-d470-46ea-b1a5-2fc816a664ad"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 75,
+                  "table": null,
+                  "tag": null,
+                  "text": "Set first-time passwords to be changed after first use.",
+                  "uuid": "b0f8d0c4-7bb2-4da8-9c05-2a630d5b8d99"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).a-4",
+                  "hidden": false,
+                  "mappings": [
+                    "4e9ceec9-2f6a-47cd-8063-fbc7837ece9f",
+                    "5a290fce-d46a-4d0b-9cf9-656a72d3087c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 76,
+                  "table": null,
+                  "tag": null,
+                  "text": "Set reset passwords to a unique value for each existing user.",
+                  "uuid": "89cac98c-f09e-4a83-a7ed-0af7614f52ce"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).a-5",
+                  "hidden": false,
+                  "mappings": [
+                    "9b145f84-8ef1-44ec-8ee5-4fbfc9dc0f83",
+                    "a6d054a8-4d82-4499-8cab-1a3e211a91b5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 77,
+                  "table": null,
+                  "tag": null,
+                  "text": "Set reset passwords to be changed after first use.",
+                  "uuid": "840edca9-dece-48b6-bfbc-bae164f741a0"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(D).a",
+              "row": 72,
+              "table": null,
+              "text": "Examine password procedures and observe security personnel to verify that first-time passwords for new users, and reset passwords for existing users, are set to a unique value for each user and changed after first use."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "fdeec822-ca26-4c45-af59-7c48c9b49daa",
+                    "cfdf60f5-bcbf-42e1-9187-ad3c19a613a1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 78,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the document examined to verify that authentication procedures for modifying authentication credentials define that if a user requests a reset of an authentication credential by a non-face-to-face method, the user’s identity is verified before the authentication credential is modified.",
+                  "uuid": "07603f0b-fd5d-462a-aad0-f89dfeddc6a5"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "c232eb78-e13a-4867-8916-715ab160cfbb",
+                    "dd8fb05a-a43e-45a8-a84a-0131006ad921"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 79,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the non-face-to-face methods used for requesting password resets.",
+                  "uuid": "6727ae3f-10bd-4da3-9e4d-2976da974e15"
+                },
+                {
+                  "displayNumber": "164.308(a)(5)(ii)(D).b-3",
+                  "hidden": false,
+                  "mappings": [
+                    "a9a42e4e-d262-47fc-be82-19b098370e6e",
+                    "5d7849cd-ac7f-4d00-acf7-e15355304274"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 80,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** security personnel were observed to verify that if a user requests a reset of an authentication credential by a non-face-to-face method, the user’s identity is verified before the authentication credential is modified.",
+                  "uuid": "e463a072-ee7e-4104-ac3f-27f994f1c9e0"
+                }
+              ],
+              "number": "164.308(a)(5)(ii)(D).b",
+              "row": 78,
+              "table": null,
+              "text": "Examine authentication procedures for modifying authentication credentials and observe security personnel to verify that, if a user requests a reset of an authentication credential by phone, e-mail, web, or other non-face-to-face method, the user’s identity is verified before the authentication credential is modified."
+            }
+          ],
+          "number": "164.308(a)(5)(ii)(D)",
+          "row": null,
+          "table": null,
+          "text": "Password Management (A): Procedures for creating, changing, and safeguarding passwords."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(6)(i)",
+                  "hidden": false,
+                  "mappings": [
+                    "6d270465-be02-4ab0-bdca-2d182977537f",
+                    "baaf640e-fb15-4cd7-9627-ad56b2ab6b43"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 82,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented incident response plan and related procedures examined to verify the entity is prepared to respond immediately to a system breach, with defined processes as follows:\n* Create the incident response plan to be implemented in the event of system breach.\n* Test the plan at least annually.\n* Designate specific personnel to be available on a 24/7 basis to respond to alerts:\n24/7 incident monitoring\n24/7 incident response\n* Provide appropriate training to staff with security breach response responsibilities.\n* Include alerts from security monitoring systems, including but not limited to intrusion-detection, intrusion-prevention, firewalls, and file-integrity monitoring systems.\n* Develop a process to modify and evolve the incident response plan according to lessons learned and to incorporate industry developments.",
+                  "uuid": "8a0e6170-63a5-468b-8ab8-a2b42894c07c"
+                }
+              ],
+              "number": "164.308(a)(6)(i)",
+              "row": 82,
+              "table": null,
+              "text": "Examine the incident response plan and related procedures to verify entity is prepared to respond immediately to a system breach."
+            }
+          ],
+          "number": "164.308(a)(6)(i)",
+          "row": null,
+          "table": null,
+          "text": "Security Incident Procedures: Implement policies and procedures to address security incidents."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(6)(ii).a-1",
+                  "hidden": false,
+                  "mappings": [
+                    "72102150-aae7-46ad-b6b6-e0b1d2c77ea3",
+                    "3a485887-a915-46d5-9029-800bd6bc6733"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 84,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were reviewed to verify that ***monitoring*** alerts from security monitoring systems, including detection of unauthorized wireless access points, are covered in the Incident Response Plan.",
+                  "uuid": "f7e312d2-1abe-42a9-a56f-88c3aa2477e1"
+                },
+                {
+                  "displayNumber": "164.308(a)(6)(ii).a-2",
+                  "hidden": false,
+                  "mappings": [
+                    "d5a6984a-a605-4ace-9fd3-02c0a79c265e",
+                    "1991a2aa-3973-4a79-beef-4e66ad32d752"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 85,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes were reviewed to verify that ***responding to*** alerts from security monitoring systems, including detection of unauthorized wireless access points, are covered in the Incident Response Plan.",
+                  "uuid": "fbfa7e33-6376-4672-90f9-f6efc5db3b93"
+                }
+              ],
+              "number": "164.308(a)(6)(ii).a",
+              "row": 84,
+              "table": null,
+              "text": "Verify through observation and review of processes that monitoring and responding to alerts from security monitoring systems, including detection of unauthorized wireless access points, are covered in the Incident Response Plan."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(6)(ii).b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "3fa0ba1d-a3da-4d42-b96e-d217644d02dd",
+                    "311423e2-65ff-4de4-894e-fd3c8a837061"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 86,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented policy reviewed to verify that processes are defined to modify and evolve the incident response plan:\n* According to lessons learned.\n* To incorporate industry developments.",
+                  "uuid": "ab8f4890-7c5e-4351-83d1-1fb0c80241e4"
+                },
+                {
+                  "displayNumber": "164.308(a)(6)(ii).b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "c73e1889-2d9d-4716-b906-7825d75d4b79",
+                    "f2080857-a890-4e54-bd26-6348f70db707"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 87,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the sample of responsible personnel interviewed who confirm that processes are implemented to modify and evolve the incident response plan:\n* According to lessons learned.\n* To incorporate industry developments.",
+                  "uuid": "cda8d01b-2ea1-4d39-9082-b271c0c54970"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 88,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that processes are implemented to modify and evolve the incident response plan:",
+                  "uuid": "af8348b9-b1f7-4560-9fc1-b550afbf5ab8"
+                },
+                {
+                  "displayNumber": "164.308(a)(6)(ii).b-3",
+                  "hidden": false,
+                  "mappings": [
+                    "2ed22ec4-7439-4e78-8487-e481af29b194",
+                    "74719b80-f3c3-44e1-8cb8-4a5aa844543f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 89,
+                  "table": null,
+                  "tag": null,
+                  "text": "According to lessons learned.",
+                  "uuid": "69265613-3db1-47de-a94e-22cb33338fb7"
+                },
+                {
+                  "displayNumber": "164.308(a)(6)(ii).b-4",
+                  "hidden": false,
+                  "mappings": [
+                    "caa6cabc-a9cb-4fe3-9ae0-3f4d6aea4a85",
+                    "6a51d8ad-95c6-43df-866f-59556fb5e18e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 90,
+                  "table": null,
+                  "tag": null,
+                  "text": "To incorporate industry developments.",
+                  "uuid": "ba24aef3-d3bb-4146-bcc2-b39ea1ee62b3"
+                }
+              ],
+              "number": "164.308(a)(6)(ii).b",
+              "row": 86,
+              "table": null,
+              "text": "Verify through observation, review of policies, and interviews of responsible personnel that there is a process to modify and evolve the incident response plan according to lessons learned and to incorporate industry developments."
+            }
+          ],
+          "number": "164.308(a)(6)(ii)",
+          "row": null,
+          "table": null,
+          "text": "Response and Reporting (R): Identify and respond to suspected or known security incidents; mitigate, to the extent practicable, harmful effects of security incidents that are known to the covered entity; and document security incidents and their outcomes."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(7)(i)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 92,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented contingency plan and related procedures examined to verify the entity is prepared to respond immediately to an emergency.",
+                  "uuid": "ddad63a2-66f3-4bf5-807c-5c3e6c6764ea"
+                }
+              ],
+              "number": "164.308(a)(7)(i)",
+              "row": 92,
+              "table": null,
+              "text": "Examine the contingency plan and related procedures to verify entity is prepared to respond immediately to an emergency."
+            }
+          ],
+          "number": "164.308(a)(7)(i)",
+          "row": null,
+          "table": null,
+          "text": "Contingency Plan: Establish (and implement as needed) policies and procedures for responding to an emergency or other occurrence (for example, fire, vandalism, system failure, and natural disaster) that damages systems that contain electronic protected health information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(7)(ii)(A)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 94,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented data backup plan and related procedures to verify entity is able to create and maintain retrievable exact copies of electronic protected health information.",
+                  "uuid": "dcf7a80e-ce58-45db-aae1-1d4b915917cc"
+                }
+              ],
+              "number": "164.308(a)(7)(ii)(A)",
+              "row": 94,
+              "table": null,
+              "text": "Examine the data backup plan and related procedures to verify entity is able to create and maintain retrievable exact copies of electronic protected health information."
+            }
+          ],
+          "number": "164.308(a)(7)(ii)(A)",
+          "row": null,
+          "table": null,
+          "text": "Data Backup Plan (R): Establish and implement procedures to create and maintain retrievable exact copies of electronic protected health information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(7)(ii)(B)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 96,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented disaster recovery plan and related procedures to verify entity is able to restore any loss of data.",
+                  "uuid": "19ad11a9-bc87-483a-a283-9fc4004e036c"
+                }
+              ],
+              "number": "164.308(a)(7)(ii)(B)",
+              "row": 96,
+              "table": null,
+              "text": "Examine the disaster recovery plan and related procedures to verify entity is able to restore any loss of data."
+            }
+          ],
+          "number": "164.308(a)(7)(ii)(B)",
+          "row": null,
+          "table": null,
+          "text": "Disaster Recovery Plan (R): Establish (and implement as needed) procedures to restore any loss of data."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(7)(ii)(C)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 98,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented emergency mode operation plan and related procedures to verify entity is able to continue critical business processes for protection of the security of electronic protected health information while operating in emergency mode.",
+                  "uuid": "ffe62df4-f171-46c8-8cfa-35c54f8388ae"
+                }
+              ],
+              "number": "164.308(a)(7)(ii)(C)",
+              "row": 98,
+              "table": null,
+              "text": "Examine the emergency mode operation plan and related procedures to verify entity is able to continue critical business processes for protection of the security of electronic protected health information while operating in emergency mode."
+            }
+          ],
+          "number": "164.308(a)(7)(ii)(C)",
+          "row": null,
+          "table": null,
+          "text": "Emergency Mode Operation Plan (R): Establish (and implement as needed) procedures to enable continuation of critical business processes for protection of the security of electronic protected health information while operating in emergency mode."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(7)(ii)(D)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 100,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented contingency plan and related procedures to verify entity periodically tests and revises the contingency plan.",
+                  "uuid": "ebd2ee22-c512-4833-8382-91ef31ed6083"
+                }
+              ],
+              "number": "164.308(a)(7)(ii)(D)",
+              "row": 100,
+              "table": null,
+              "text": "Examine the contingency plan and related procedures to verify entity periodically tests and revises the contingency plan."
+            }
+          ],
+          "number": "164.308(a)(7)(ii)(D)",
+          "row": null,
+          "table": null,
+          "text": "Testing and Revision Procedure (A): Implement procedures for periodic testing and revision of contingency plans."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(a)(7)(ii)(E)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 102,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the document containing applications and data criticality analysis to verity entity assesses the relative criticality of specific applications and data in support of other contingency plan components.",
+                  "uuid": "640142aa-2eaf-4f51-96e2-211f62a1112c"
+                }
+              ],
+              "number": "164.308(a)(7)(ii)(E)",
+              "row": 102,
+              "table": null,
+              "text": "Examine the document containing applications and data criticality analysis to verity entity assesses the relative criticality of specific applications and data in support of other contingency plan components."
+            }
+          ],
+          "number": "164.308(a)(7)(ii)(E)",
+          "row": null,
+          "table": null,
+          "text": "Applications and Data Criticality Analysis (A): Assess the relative criticality of specific applications and data in support of other contingency plan components."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 104,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the information security policy was verified to be:",
+                  "uuid": "153e34ae-1191-4ce9-986c-6cdae63fff89"
+                },
+                {
+                  "displayNumber": "164.308(a)(8)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "06db8da9-f46b-4792-8fa8-78bc4ebfc7a1",
+                    "634caefb-4e3a-4bef-8c95-5cf96a31a69f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 105,
+                  "table": null,
+                  "tag": null,
+                  "text": "Reviewed at least annually.",
+                  "uuid": "9412d97a-bb97-47b8-b97f-761dc4ecf6b4"
+                },
+                {
+                  "displayNumber": "164.308(a)(8)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "1724fc2a-78b6-44f2-b200-0f267b1a116f",
+                    "71de7e0c-5921-4ec0-9929-276e8490eb6f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 106,
+                  "table": null,
+                  "tag": null,
+                  "text": "Updated as needed to reflect changes to business objectives or the risk environment.",
+                  "uuid": "c52bf0a9-3ef9-4f88-820c-38679007f42f"
+                }
+              ],
+              "number": "164.308(a)(8)",
+              "row": 104,
+              "table": null,
+              "text": "Verify that the information security policy is reviewed at least annually and updated as needed to reflect changes to business objectives or the risk environment."
+            }
+          ],
+          "number": "164.308(a)(8)",
+          "row": null,
+          "table": null,
+          "text": "Evaluation: Perform a periodic technical and nontechnical evaluation, based initially upon the standards implemented under this rule and subsequently, in response to environmental or operational changes affecting the security of electronic protected health information that establishes the extent to which an entity’s security policies and procedures meet the requirements of this subpart."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(b)(1)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "24d58058-1e38-4de9-b410-f98189850866",
+                    "30ddfaed-437c-4ebd-a9f1-fb0f8f7eb78c"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 108,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the policies and procedures** reviewed to verify that processes included proper due diligence prior to engaging any service provider.",
+                  "uuid": "9abade65-3cef-4fb5-85dc-1d782324a8af"
+                },
+                {
+                  "displayNumber": "164.308(b)(1)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "09b31012-7ff7-407c-ac3d-ceab2d1dc7b9",
+                    "2c5ffeb1-7097-4382-be1b-606317d39d1d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 109,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that the above policies and procedures are implemented.",
+                  "uuid": "43f42752-2524-4355-8154-357125b10fbc"
+                }
+              ],
+              "number": "164.308(b)(1)",
+              "row": 108,
+              "table": null,
+              "text": "Verify that policies and procedures are documented and implemented including proper due diligence prior to engaging any service provider."
+            }
+          ],
+          "number": "164.308(b)(1)",
+          "row": null,
+          "table": null,
+          "text": "Business Associate Contracts and Other Arrangements: A covered entity, in accordance with § 164.306, may permit a business associate to create, receive, maintain, or transmit electronic protected health information on the covered entity’s behalf only if the covered entity obtains satisfactory assurances, in accordance with Sec. 164.314(a), that the business associate will appropriately safeguard the information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.308(b)(4)",
+                  "hidden": false,
+                  "mappings": [
+                    "656fe432-6254-4711-a793-11a6a30306c3",
+                    "86c927f1-986c-4fb1-b215-a6f6e5eaf2b5"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 111,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** written agreements for each service provider were observed to confirm they include an acknowledgement by service providers that they will maintain all applicable GLBA requirements to the extent the service provider handles, has access to, or otherwise stores, processes, or transmits the customer data, or manages the customer's network, applications or systems on behalf of a customer.",
+                  "uuid": "ebbfe6f8-9904-4421-8009-f5c97deeb01f"
+                }
+              ],
+              "number": "164.308(b)(4)",
+              "row": 111,
+              "table": null,
+              "text": "Observe written agreements and confirm they include an acknowledgement by service providers that they are responsible for the security of customer data the service providers possess or otherwise store, process or transmit on behalf of the customer, or to the extent that they could impact the security of the customer’s network, applications or systems."
+            }
+          ],
+          "number": "164.308(b)(4)",
+          "row": null,
+          "table": null,
+          "text": "Written Contract or Other Arrangement (R): Document the satisfactory assurances required by paragraph (b)(1) of this section through a written contract or other arrangement with the business associate that meets the applicable requirements of § 164.314(a)."
+        }
+      ],
+      "number": "164.308",
+      "row": null,
+      "table": 0,
+      "text": "Administrative Safeguards"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 2,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify and briefly describe** all of the storage areas containing protected health information:",
+                  "uuid": "0d1a8262-9638-4db7-bc91-75284cc29817"
+                },
+                {
+                  "displayNumber": "164.310(a)(1)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "b2c07a98-17d2-4d17-8385-705f9f3ff4c4",
+                    "46ad5061-bcb7-430a-b75b-76df397c4acb"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 3,
+                  "table": null,
+                  "tag": null,
+                  "text": "All computer rooms",
+                  "uuid": "2b042a2e-903f-400d-918e-5cf6fb27721c"
+                },
+                {
+                  "displayNumber": "164.310(a)(1)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "bedaa552-a538-445e-8ab5-a86376131b45",
+                    "010d2372-0804-454b-bc2e-15e2b57e6de1"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "All data centers",
+                  "uuid": "a5181ffd-6cc6-4871-a0e1-bb854b068cd4"
+                },
+                {
+                  "displayNumber": "164.310(a)(1)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "c8f8796c-8703-495b-b93e-00d55525aa76",
+                    "5dcdacf2-f868-489d-8780-662bdbd8f24e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 5,
+                  "table": null,
+                  "tag": null,
+                  "text": "Any other physical areas",
+                  "uuid": "7f042ec0-23a7-4378-98f8-682340268e15"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each identified area, complete the following*:",
+                  "uuid": "2bb2110a-72a1-4c58-acc0-3ac43c2138db"
+                },
+                {
+                  "displayNumber": "164.310(a)(1)-4",
+                  "hidden": false,
+                  "mappings": [
+                    "faea1007-cdc9-4f57-9770-629d30420e82",
+                    "dc82c0e6-dd7d-4c5d-9649-f446deae2a3d"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 7,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the physical security controls to be in place, including authorized badges and lock and key.",
+                  "uuid": "8e165f39-dc7c-45ad-85a9-117783743228"
+                }
+              ],
+              "number": "164.310(a)(1)",
+              "row": 2,
+              "table": null,
+              "text": "Verify the existence of physical security controls for each computer room, data center, and other physical areas with systems in the PHI data environment.\n* Verify that access is controlled with badge readers or other devices including authorized badges and lock and key."
+            }
+          ],
+          "number": "164.310(a)(1)",
+          "row": null,
+          "table": null,
+          "text": "Facility Access Controls: Implement policies and procedures to limit physical access to its electronic information systems and the facility or facilities in which they are housed, while ensuring that properly authorized access is allowed."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(a)(2)(i)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented disaster recovery plan and/or emergency mode operation plan and related procedures that allow facility access in support of restoration of lost data under the disaster recovery plan and emergency mode operations plan in the event of an emergency.",
+                  "uuid": "e6acd1b9-708b-403f-91b2-6af1279e1d09"
+                }
+              ],
+              "number": "164.310(a)(2)(i)",
+              "row": 9,
+              "table": null,
+              "text": "Examine the disaster recovery plan and/or emergency mode operation plan and related procedures that allow facility access in support of restoration of lost data under the disaster recovery plan and emergency mode operations plan in the event of an emergency."
+            }
+          ],
+          "number": "164.310(a)(2)(i)",
+          "row": null,
+          "table": null,
+          "text": "Contingency Operations (A): Establish (and implement as needed) procedures that allow facility access in support of restoration of lost data under the disaster recovery plan and emergency mode operations plan in the event of an emergency."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(a)(2)(ii)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented facility security plan plan that describes how entity safeguards the facility and the equipment therein from unauthorized physical access, tampering, and theft.",
+                  "uuid": "05e6d768-fbcf-4a05-b2cf-8b1e07114010"
+                }
+              ],
+              "number": "164.310(a)(2)(ii)",
+              "row": 11,
+              "table": null,
+              "text": "Examine the facility security plan plan that describes how entity safeguards the facility and the equipment therein from unauthorized physical access, tampering, and theft."
+            }
+          ],
+          "number": "164.310(a)(2)(ii)",
+          "row": null,
+          "table": null,
+          "text": "Facility Security Plan (A): Implement policies and procedures to safeguard the facility and the equipment therein from unauthorized physical access, tampering, and theft."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(a)(2)(iii).a",
+                  "hidden": false,
+                  "mappings": [
+                    "2405038c-4287-49a0-b1bc-8ba1e0359ca5",
+                    "75f7770f-5071-4044-b0c1-f3043a451557"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented processes reviewed to verify that procedures are defined for identifying and distinguishing between onsite personnel and visitors, including the following:\n* Identifying new onsite personnel or visitors (for example, assigning badges),\n* Changing access requirements, and\n* Revoking terminated onsite personnel and expired visitor identification (such as ID badges).",
+                  "uuid": "e70f2f96-5764-43f3-b57e-06b2f52a0a99"
+                }
+              ],
+              "number": "164.310(a)(2)(iii).a",
+              "row": 13,
+              "table": null,
+              "text": "Review documented processes to verify that procedures are defined for identifying and distinguishing between onsite personnel and visitors.\nVerify procedures include the following:\n* Identifying new onsite personnel or visitors (for example, assigning badges),\n* Changing access requirements, and\n* Revoking terminated onsite personnel and expired visitor identification (such as ID badges)."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** processes for identifying and distinguishing between onsite personnel and visitors were observed to verify that:",
+                  "uuid": "5c88c644-fabd-4230-a88e-de06a46b6ff1"
+                },
+                {
+                  "displayNumber": "164.310(a)(2)(iii).b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "30c3f741-6447-4edd-a23e-7a00756fadf2",
+                    "44287e02-2b40-4b69-ad6b-e5c93dcafa63"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "Visitors are clearly identified, and",
+                  "uuid": "a4473d76-a35f-4d46-9fe3-10e2bf55c8b0"
+                },
+                {
+                  "displayNumber": "164.310(a)(2)(iii).b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "700119c1-90b3-43b1-89c7-4289b5fe40ad",
+                    "e9cd489a-1ec7-4bd1-8bcd-61dce858ba98"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "It is easy to distinguish between onsite personnel and visitors.",
+                  "uuid": "87e3e1eb-76d1-48c7-ad73-f94a1f3677af"
+                }
+              ],
+              "number": "164.310(a)(2)(iii).b",
+              "row": 14,
+              "table": null,
+              "text": "Observe processes for identifying and distinguishing between onsite personnel and visitors to verify that:\n* Visitors are clearly identified, and\nIt is easy to distinguish between onsite personnel and visitors."
+            }
+          ],
+          "number": "164.310(a)(2)(iii)",
+          "row": null,
+          "table": null,
+          "text": "Access Control and Validation Procedures (A): Implement procedures to control and validate a person's access to facilities based on their role or function, including visitor control, and control of access to software programs for testing and revision."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(a)(2)(iv)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented processes to verify that entity documents repairs and modifications to the physical components of a facility which are related to security (for example, hardware, walls, doors, and locks).",
+                  "uuid": "3fcaca96-7696-41fd-8e15-6fd19f8ecc36"
+                }
+              ],
+              "number": "164.310(a)(2)(iv)",
+              "row": 18,
+              "table": null,
+              "text": "Review documented processes to verify that entity documents repairs and modifications to the physical components of a facility which are related to security (for example, hardware, walls, doors, and locks)."
+            }
+          ],
+          "number": "164.310(a)(2)(iv)",
+          "row": null,
+          "table": null,
+          "text": "Maintenance Records (A): Implement policies and procedures to document repairs and modifications to the physical components of a facility which are related to security (for example, hardware, walls, doors, and locks)."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(b)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented policies and procedures that specify the proper functions to be performed, the manner in which those functions are to be performed, and the physical attributes of the surroundings of a specific workstation or class of workstation that can access electronic protected health information.",
+                  "uuid": "26f8d45e-daad-4503-9369-e83e18ad06de"
+                }
+              ],
+              "number": "164.310(b)",
+              "row": 20,
+              "table": null,
+              "text": "Review documented policies and procedures that specify the proper functions to be performed, the manner in which those functions are to be performed, and the physical attributes of the surroundings of a specific workstation or class of workstation that can access electronic protected health information."
+            }
+          ],
+          "number": "164.310(b)",
+          "row": null,
+          "table": null,
+          "text": "Workstation Use: Implement policies and procedures that specify the proper functions to be performed, the manner in which those functions are to be performed, and the physical attributes of the surroundings of a specific workstation or class of workstation that can access electronic protected health information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(c)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** it was observed that all workstations that access electronic protected health information are located in areas restricted authorized users.",
+                  "uuid": "6491d172-7843-426c-ab36-f75e6c33cff1"
+                }
+              ],
+              "number": "164.310(c)",
+              "row": 22,
+              "table": null,
+              "text": "Verify that all workstations that access electronic protected health information are located in areas restricted authorized users."
+            }
+          ],
+          "number": "164.310(c)",
+          "row": null,
+          "table": null,
+          "text": "Workstation Security: Implement physical safeguards for all workstations that access electronic protected health information to restrict access to authorized users."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(d)(1)",
+                  "hidden": false,
+                  "mappings": [
+                    "4f28af32-5e80-47b1-8d1d-f41d40bcf830",
+                    "5af25210-4906-4bf4-8d16-a2a4485838da"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documented policy to control distribution of media** that was reviewed to verify the policy covers all distributed media, including that distributed to individuals.",
+                  "uuid": "d6bfe08d-db04-46aa-aba7-b3746e0fc391"
+                }
+              ],
+              "number": "164.310(d)(1)",
+              "row": 24,
+              "table": null,
+              "text": "Verify that a policy exists to control distribution of media, and that the policy covers all distributed media including that distributed to individuals."
+            }
+          ],
+          "number": "164.310(d)(1)",
+          "row": null,
+          "table": null,
+          "text": "Device and Media Controls: Implement policies and procedures that govern the receipt and removal of hardware and electronic media that contain electronic protected health information into and out of a facility, and the movement of these items within the facility."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(d)(2)(i)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "905286c9-c754-4def-86a1-57a188c8d67c",
+                    "d6c7f85a-f8b8-43c6-ba6e-47e741c36bc9"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** PHI data on electronic media is rendered unrecoverable, via secure wiping of media and/or physical destruction of media.",
+                  "uuid": "6d88fb3c-85fb-46ff-b6cd-75e6365fc990"
+                },
+                {
+                  "displayNumber": "164.310(d)(2)(i)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "04742537-6e7f-4bfe-a110-85f3e3b34a64",
+                    "f449a725-40eb-45f4-88a9-62fcb42862d6"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 27,
+                  "table": null,
+                  "tag": null,
+                  "text": "If data is rendered unrecoverable via secure deletion or a secure wipe program, **identify** the industry-accepted standards used.",
+                  "uuid": "e364f991-a27d-48c6-8aad-196ae62c786d"
+                }
+              ],
+              "number": "164.310(d)(2)(i)",
+              "row": 26,
+              "table": null,
+              "text": "Verify that PHI data on electronic media is rendered unrecoverable via a secure wipe program in accordance with industry-accepted standards for secure deletion, or otherwise physically destroying the media."
+            }
+          ],
+          "number": "164.310(d)(2)(i)",
+          "row": null,
+          "table": null,
+          "text": "Disposal (R): Implement policies and procedures to address the final disposition of electronic protected health information and/or the hardware or electronic media on which it is stored."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(d)(2)(ii)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 29,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the procedures for removal of electronic protected health information from electronic media before the media are made available for reuse.",
+                  "uuid": "04faeb53-5dc9-42e2-a45e-ee3ab5a8f321"
+                }
+              ],
+              "number": "164.310(d)(2)(ii)",
+              "row": 29,
+              "table": null,
+              "text": "Verify that PHI data on electronic media is removed before the media are made available for reuse."
+            }
+          ],
+          "number": "164.310(d)(2)(ii)",
+          "row": null,
+          "table": null,
+          "text": "Media Reuse (R): Implement procedures for removal of electronic protected health information from electronic media before the media are made available for reuse."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(d)(2)(iii)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "d4234eb5-ef94-49a8-af5e-4afa2e18bfa5",
+                    "0c5be80c-9405-472c-90f3-1c536560b190"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 31,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** responsible personnel interviewed who confirm that proper management authorization is obtained whenever media is moved from a secured area (including when media is distributed to individuals).",
+                  "uuid": "b1c18fe5-3895-480f-96ed-306e32c2ab4b"
+                },
+                {
+                  "displayNumber": "164.310(d)(2)(iii)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "b9d882e9-6a8f-473d-8558-a2f5ee47e141",
+                    "3f2136b7-c229-4834-8296-051abde50650"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 32,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each item in the sample above,* **describe how** offsite tracking logs were examined to verify proper management authorization is obtained whenever media is moved from a secured area (including when media is distributed to individuals).",
+                  "uuid": "08579154-443c-4273-9a7f-7dca048d12f3"
+                }
+              ],
+              "number": "164.310(d)(2)(iii)",
+              "row": 31,
+              "table": null,
+              "text": "Select a recent sample of several days of offsite tracking logs for all media. From examination of the logs and interviews with responsible personnel, verify proper management authorization is obtained whenever media is moved from a secured area (including when media is distributed to individuals)."
+            }
+          ],
+          "number": "164.310(d)(2)(iii)",
+          "row": null,
+          "table": null,
+          "text": "Accountability (A): Maintain a record of the movements of hardware and electronic media and any person responsible therefore."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.310(d)(2)(iv)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 34,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** responsible personnel interviewed who confirm that before equipment is moved, a retrievable exact copy of electronic protected health information is created, when needed.",
+                  "uuid": "2540aa68-281f-476f-a11f-efde413346b9"
+                }
+              ],
+              "number": "164.310(d)(2)(iv)",
+              "row": 34,
+              "table": null,
+              "text": "Verify that before equipment is moved, a retrievable exact copy of electronic protected health information is created, when needed."
+            }
+          ],
+          "number": "164.310(d)(2)(iv)",
+          "row": null,
+          "table": null,
+          "text": "Data Backup and Storage (A): Create a retrievable exact copy of electronic protected health information, when needed, before movement of equipment."
+        }
+      ],
+      "number": "164.310",
+      "row": null,
+      "table": 1,
+      "text": "Physical Safeguards"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(a)(1)",
+                  "hidden": false,
+                  "mappings": [
+                    "6282436d-36f9-4442-9eb9-f75cd4a5dc25",
+                    "b65fb73d-d7a8-49e3-b75a-f4848b75435e"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 2,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** system settings were examined to verify that access control systems are configured to enforce privileges assigned to individuals based on job classification and function.",
+                  "uuid": "8060441f-8963-421b-9904-cab9d46b5a8b"
+                }
+              ],
+              "number": "164.312(a)(1)",
+              "row": 2,
+              "table": null,
+              "text": "Confirm that access control systems are configured to enforce privileges assigned to individuals based on job classification and function."
+            }
+          ],
+          "number": "164.312(a)(1)",
+          "row": null,
+          "table": null,
+          "text": "Access Control: Implement technical policies and procedures for electronic information systems that maintain electronic protected health information to allow access only to those persons or software programs that have been granted access rights as specified in § 164.308(a)(4)."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(a)(2)(i)",
+                  "hidden": false,
+                  "mappings": [
+                    "5f217363-dcbf-4702-ba70-f310dbe73748",
+                    "1d041105-5aae-4a9b-b11d-abb26697ceee"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 4,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the responsible administrative personnel** interviewed who confirm that all users are assigned a unique ID for access to system components or PHI data.",
+                  "uuid": "d7bc7e98-829b-47c0-89c8-88c9a9a77ed7"
+                }
+              ],
+              "number": "164.312(a)(2)(i)",
+              "row": 4,
+              "table": null,
+              "text": "Interview administrative personnel to confirm that all users are assigned a unique ID for access to system components or PHI data."
+            }
+          ],
+          "number": "164.312(a)(2)(i)",
+          "row": null,
+          "table": null,
+          "text": "Unique User Identification (R): Assign a unique name and/or number for identifying and tracking user identity."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(a)(2)(ii)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 6,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the documented processes to verify that entity can obtain necessary electronic protected health information during an emergency.",
+                  "uuid": "f55b9513-6e2c-4e15-94fc-3f7aff614832"
+                }
+              ],
+              "number": "164.312(a)(2)(ii)",
+              "row": 6,
+              "table": null,
+              "text": "Review documented processes to verify that entity can obtain necessary electronic protected health information during an emergency."
+            }
+          ],
+          "number": "164.312(a)(2)(ii)",
+          "row": null,
+          "table": null,
+          "text": "Emergency Access Procedure (R): Establish (and implement as needed) procedures for obtaining necessary electronic protected health information during an emergency."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(a)(2)(iii)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "4c9f8f6e-e5c7-4fd3-8542-36645713fbf3",
+                    "1c345555-2992-437c-b172-3966463ad372"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 8,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the sample of system components selected for this testing procedure.",
+                  "uuid": "1413707f-7c2a-4ce3-8ba0-d085708cae1a"
+                },
+                {
+                  "displayNumber": "164.312(a)(2)(iii)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "48fe807b-9bd0-46dd-8c29-b4c38851003e",
+                    "0746dc6f-6d9b-42b0-8fa5-77a7a8320a52"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 9,
+                  "table": null,
+                  "tag": null,
+                  "text": "*For each item in the sample,* **describe how** system configuration settings were inspected to verify that system/session idle time out features have been set to 15 minutes or less.",
+                  "uuid": "ee73ffc5-cc69-4d27-8ad5-2ce39ed01e78"
+                }
+              ],
+              "number": "164.312(a)(2)(iii)",
+              "row": 8,
+              "table": null,
+              "text": "For a sample of system components, inspect system configuration settings to verify that system/session idle time out features have been set to 15 minutes or less."
+            }
+          ],
+          "number": "164.312(a)(2)(iii)",
+          "row": null,
+          "table": null,
+          "text": "Automatic Logoff (A): Implement electronic procedures that terminate an electronic session after a predetermined time of inactivity."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(a)(2)(iv)",
+                  "hidden": false,
+                  "mappings": [
+                    "0d75be6e-3404-4e9f-8359-a1e94433a0fa",
+                    "011d6f0c-a0ed-47c0-9181-245000de8254"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 11,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documentation** examined to verify that the PAN is rendered unreadable using any of the following methods:\n* One-way hashes based on strong cryptography,\n* Truncation\n* Index tokens and pads, with the pads being securely stored\n* Strong cryptography, with associated key-management processes and procedures",
+                  "uuid": "f61ecf23-c26c-483c-a72b-35598c3054a8"
+                }
+              ],
+              "number": "164.312(a)(2)(iv)",
+              "row": 11,
+              "table": null,
+              "text": "Examine documentation about the system used to protect electronic protected health information, including the vendor, type of system/process, and the encryption algorithms (if applicable) to verify that the electronic protected health information is rendered unreadable using strong cryptography, with associated key-management processes and procedures."
+            }
+          ],
+          "number": "164.312(a)(2)(iv)",
+          "row": null,
+          "table": null,
+          "text": "Encryption and Decryption (A): Implement a mechanism to encrypt and decrypt electronic protected health information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(b)-1",
+                  "hidden": false,
+                  "mappings": [
+                    "ff02826b-9df2-47f9-b176-813a9d58f567",
+                    "9f0cf51b-9ad5-4a20-8e56-a7abd5377529"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 13,
+                  "table": null,
+                  "tag": null,
+                  "text": "Identify the system administrator(s) interviewed who confirm that:\n* Audit trails are enabled and active for system components.\n* Access to system components is linked to individual users.",
+                  "uuid": "5ba5ebac-d527-4539-ac15-3d5696c9a3f2"
+                },
+                {
+                  "displayNumber": "",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": true,
+                  "number": null,
+                  "priority": null,
+                  "row": 14,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** audit trails were observed to verify the following:",
+                  "uuid": "2d7ebbb0-854e-4f69-b036-a5d87117afec"
+                },
+                {
+                  "displayNumber": "164.312(b)-2",
+                  "hidden": false,
+                  "mappings": [
+                    "b382a867-41df-4056-b799-6b08a16cac4f",
+                    "a8e61fff-6d1a-4084-9c3b-549e0e67eb07"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 15,
+                  "table": null,
+                  "tag": null,
+                  "text": "Audit trails are enabled and active for system components.",
+                  "uuid": "a112aaa8-4dfe-43fe-9c47-04a907a1c075"
+                },
+                {
+                  "displayNumber": "164.312(b)-3",
+                  "hidden": false,
+                  "mappings": [
+                    "8948dcf6-7f5c-47db-bdb5-4da3002ac76f",
+                    "71975310-e154-4827-837e-954b0f0de398"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 16,
+                  "table": null,
+                  "tag": null,
+                  "text": "Access to system components is linked to individual users.",
+                  "uuid": "88e48c52-31dc-4825-a779-0456da5488fd"
+                }
+              ],
+              "number": "164.312(b)",
+              "row": 13,
+              "table": null,
+              "text": "Implement audit trails to link all access to system components to each individual user."
+            }
+          ],
+          "number": "164.312(b)",
+          "row": null,
+          "table": null,
+          "text": "Audit Controls: Implement hardware, software, and/or procedural mechanisms that record and examine activity in information systems that contain or use electronic protected health information."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(c)(1)",
+                  "hidden": false,
+                  "mappings": [],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 18,
+                  "table": null,
+                  "tag": null,
+                  "text": "Identify the system administrator(s) interviewed who confirm that controls have been implemented which protect electronic protected health information from improper alteration or destruction.",
+                  "uuid": "f594458a-8da0-406b-b15c-25bb2b711002"
+                }
+              ],
+              "number": "164.312(c)(1)",
+              "row": 18,
+              "table": null,
+              "text": "Implement controls to protect electronic protected health information from improper alteration or destruction."
+            }
+          ],
+          "number": "164.312(c)(1)",
+          "row": null,
+          "table": null,
+          "text": "Integrity: Implement policies and procedures to protect electronic protected health information from improper alteration or destruction."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(c)(2)",
+                  "hidden": false,
+                  "mappings": [
+                    "9dda92ff-336b-422b-943f-12c4a9b7640a",
+                    "86404a0f-ed60-40a0-a329-4615eaa6328b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 20,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** configuration settings were observed to verify all individual access to electronic protected health information is logged.",
+                  "uuid": "64375a1d-d390-4a32-ad6e-2dc9a8989a22"
+                }
+              ],
+              "number": "164.312(c)(2)",
+              "row": 20,
+              "table": null,
+              "text": "Verify all individual access to electronic protected health information is logged."
+            }
+          ],
+          "number": "164.312(c)(2)",
+          "row": null,
+          "table": null,
+          "text": "Mechanism to Authenticate Electronic Protected Health Information (A): Implement electronic mechanisms to corroborate that electronic protected health information has not been altered or destroyed in an unauthorized manner."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(d)",
+                  "hidden": false,
+                  "mappings": [
+                    "21d24226-6e18-420b-8ec9-1ba78f1a30ed",
+                    "57d0de14-b112-4e16-9ae0-a0def90aabaa"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 22,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** the written procedures for user identification management examined to verify processes are defined for each of the items below:\n* Assign all users a unique ID before allowing them to access system components or electronic protected health information data.\n* Control addition, deletion, and modification of user IDs, credentials, and other identifier objects.\n* Immediately revoke access for any terminated users.\n* Remove/disable inactive user accounts at least every 90 days.\n* Manage IDs used by vendors to access, support, or maintain system components via remote access as follows:\nEnabled only during the time period needed and disabled when not in use.\nMonitored when in use.\n* Limit repeated access attempts by locking out the user ID after not more than six attempts.\n* Set the lockout duration to a minimum of 30 minutes or until an administrator enables the user ID.\n* If a session has been idle for more than 15 minutes, require the user to re-authenticate to re-activate the terminal or session.",
+                  "uuid": "aa0ea4b4-6a26-4cdd-b5e7-f12530c9dc2b"
+                }
+              ],
+              "number": "164.312(d)",
+              "row": 22,
+              "table": null,
+              "text": "Review procedures and confirm they define processes for verifying that a person or entity seeking access to electronic protected health information is the one claimed."
+            }
+          ],
+          "number": "164.312(d)",
+          "row": null,
+          "table": null,
+          "text": "Person or Entity Authentication: Implement procedures to verify that a person or entity seeking access to electronic protected health information is the one claimed."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(e)(1).a",
+                  "hidden": false,
+                  "mappings": [
+                    "14b17383-c042-41e5-80c6-cc441c9862f6",
+                    "14ccaf35-c013-40db-830b-8a0ee2d0735a"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 24,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify** all locations where electronic protected health information is transmitted or received over open, public networks.",
+                  "uuid": "e8e67d17-890c-4cfa-8e18-78c3d6a6e19d"
+                }
+              ],
+              "number": "164.312(e)(1).a",
+              "row": 24,
+              "table": null,
+              "text": "Identify all locations where electronic protected health information is transmitted or received over open, public networks. Examine system configurations to verify the use of security protocols and strong cryptography for all locations."
+            },
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(e)(1).b-1",
+                  "hidden": false,
+                  "mappings": [
+                    "e7b66400-cf3c-4e2e-b5b1-eb37e1a7b2d0",
+                    "2e7da71e-7daa-4f3a-ac57-96974fed3386"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 25,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe** the sample of inbound and outbound transmissions observed as they occurred.",
+                  "uuid": "5881ca33-dbdd-47bd-b022-af8a44559842"
+                },
+                {
+                  "displayNumber": "164.312(e)(1).b-2",
+                  "hidden": false,
+                  "mappings": [
+                    "cf5902b7-1ca1-4058-8159-0143626b6921",
+                    "fc4e351f-a0a1-47ec-88e0-fb344d7de08f"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 26,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** the samples of inbound and outbound transmissions were observed as they occurred to verify that all electronic protected health information is encrypted with strong cryptography during transit.",
+                  "uuid": "090d4cd0-800e-4847-837a-a5c5e5cb37db"
+                }
+              ],
+              "number": "164.312(e)(1).b",
+              "row": 25,
+              "table": null,
+              "text": "Select and observe a sample of inbound and outbound transmissions as they occur to verify that all electronic protected health information is encrypted with strong cryptography during transit."
+            }
+          ],
+          "number": "164.312(e)(1)",
+          "row": null,
+          "table": null,
+          "text": "Transmission Security: Implement technical security measures to guard against unauthorized access to electronic protected health information that is being transmitted over an electronic communications network."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(e)(2)(i)",
+                  "hidden": false,
+                  "mappings": [
+                    "9dda92ff-336b-422b-943f-12c4a9b7640a",
+                    "86404a0f-ed60-40a0-a329-4615eaa6328b"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 28,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Describe how** configuration settings were observed to verify all individual access to electronic protected health information is logged.",
+                  "uuid": "249c9640-ceda-4e62-b11b-9bf0eeeade70"
+                }
+              ],
+              "number": "164.312(e)(2)(i)",
+              "row": 28,
+              "table": null,
+              "text": "Verify all individual access to electronic protected health information is logged."
+            }
+          ],
+          "number": "164.312(e)(2)(i)",
+          "row": null,
+          "table": null,
+          "text": "Integrity Controls (A): Implement security measures to ensure that electronically transmitted electronic protected health information is not improperly modified without detection until disposed of."
+        },
+        {
+          "children": [
+            {
+              "instructions": [
+                {
+                  "displayNumber": "164.312(e)(2)(ii)",
+                  "hidden": false,
+                  "mappings": [
+                    "0d75be6e-3404-4e9f-8359-a1e94433a0fa",
+                    "011d6f0c-a0ed-47c0-9181-245000de8254"
+                  ],
+                  "notice": false,
+                  "number": null,
+                  "priority": null,
+                  "row": 30,
+                  "table": null,
+                  "tag": null,
+                  "text": "**Identify the documentation** examined to verify that the PAN is rendered unreadable using any of the following methods:\n* One-way hashes based on strong cryptography,\n* Truncation\n* Index tokens and pads, with the pads being securely stored\n* Strong cryptography, with associated key-management processes and procedures",
+                  "uuid": "33873d67-a528-4150-8982-31ebb8d60631"
+                }
+              ],
+              "number": "164.312(e)(2)(ii)",
+              "row": 30,
+              "table": null,
+              "text": "Examine documentation about the system used to protect electronic protected health information, including the vendor, type of system/process, and the encryption algorithms (if applicable) to verify that the electronic protected health information is rendered unreadable using strong cryptography, with associated key-management processes and procedures."
+            }
+          ],
+          "number": "164.312(e)(2)(ii)",
+          "row": null,
+          "table": null,
+          "text": "Encryption (A): Implement a mechanism to encrypt electronic protected health information whenever deemed appropriate."
+        }
+      ],
+      "number": "164.312",
+      "row": null,
+      "table": 2,
+      "text": "Technical Safeguards"
+    }
+  ],
+  "sectionRegex": null,
+  "tagOptions": [],
+  "template": "hipaa_pci_dss_v3-2.docx",
+  "tlcHeader": "HIPAA",
+  "tlcPosition": 7,
+  "uuid": "609b759e-b28f-4dde-aea2-9dca3e469dc7"
+}

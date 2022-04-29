@@ -3,18 +3,18 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
-from techlock.compass.models.int_enum import IntEnum
-
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'Event',
@@ -56,13 +56,11 @@ class Visibility(enum.Enum):
 
 
 class EventSchema(BaseModelSchema):
-    user_id = mf.String(allow_none=True)
+    audit_id = mf.String(allow_none=True)
+    audit_instruction_id = mf.String(allow_none=True)
 
-    audit_id = mf.Integer(allow_none=True)
-    audit_instruction_id = mf.Integer(allow_none=True)
-
-    compliance_id = mf.Integer(allow_none=True)
-    compliance_period_id = mf.Integer(allow_none=True)
+    compliance_id = mf.String(allow_none=True)
+    compliance_period_id = mf.String(allow_none=True)
 
     timestamp = mf.DateTime(requird=True, allow_none=False)
     type = EnumField(Type, required=True, allow_none=False)
@@ -80,8 +78,10 @@ class EventPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class EventListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter events by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter events by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -91,26 +91,21 @@ class EventListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class Event(BaseModel):
     __tablename__ = 'events'
 
-    user_id = db.Column(db.String, nullable=True)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
+    audit_instruction_id = sa.Column(UUID, sa.ForeignKey("report_instructions.id"))
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"))
+    compliance_id = sa.Column(UUID, sa.ForeignKey("compliances.id"))
+    compliance_period_id = sa.Column(UUID, sa.ForeignKey("compliance_periods.id"))
 
-    audit_instruction_id = db.Column(db.Integer,
-                                     db.ForeignKey("report_instructions.id"))
+    timestamp = sa.Column(st.TIMESTAMP, nullable=False)
+    type = sa.Column(st.Enum(Type), nullable=False)
+    visibility = sa.Column(st.Enum(Visibility), nullable=False)
 
-    compliance_id = db.Column(db.Integer, db.ForeignKey("compliances.id"))
-    compliance_period_id = db.Column(db.Integer,
-                                     db.ForeignKey("compliance_periods.id"))
+    audit = relationship('Audit')
+    audit_instruction = relationship('ReportInstruction')
 
-    timestamp = db.Column(db.TIMESTAMP, nullable=False)
-    type = db.Column(IntEnum(Type), nullable=False)
-    visibility = db.Column(IntEnum(Visibility), nullable=False)
-
-    audit = db.relationship('Audit')
-    audit_instruction = db.relationship('ReportInstruction')
-
-    compliance = db.relationship('Compliance')
-    compliance_period = db.relationship('CompliancePeriod')
+    compliance = relationship('Compliance')
+    compliance_period = relationship('CompliancePeriod')
 
 
 @dataclass

@@ -2,19 +2,20 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 from techlock.compass.models.report_version import Compliance
-
-from ..models.int_enum import IntEnum
 
 __all__ = [
     'AuditResponse',
@@ -43,8 +44,8 @@ AUDIT_RESPONSE_CLAIM_SPEC = ClaimSpec(
 
 
 class AuditResponseSchema(BaseModelSchema):
-    audit_id = mf.Integer(required=True, allow_none=False)
-    instruction_id = mf.Integer(required=True, allow_none=False)
+    audit_id = mf.String(required=True, allow_none=False)
+    instruction_id = mf.String(required=True, allow_none=False)
     compliance = EnumField(Compliance, required=True, allow_none=False)
 
     audit = mf.Nested('AuditSchema', dump_only=True)
@@ -56,8 +57,10 @@ class AuditResponsePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter audit_responses by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter audit_responses by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -67,17 +70,12 @@ class AuditResponseListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class AuditResponse(BaseModel):
     __tablename__ = 'audit_responses'
 
-    audit_id = db.Column(db.Integer, db.ForeignKey("audits.id"),
-                         nullable=False)
-    instruction_id = db.Column(db.Integer,
-                               db.ForeignKey("report_instructions.id"),
-                               nullable=False)
-    compliance = db.Column(IntEnum(Compliance),
-                           nullable=False,
-                           default=Compliance.pending)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"), nullable=False)
+    instruction_id = sa.Column(UUID, sa.ForeignKey("report_instructions.id"), nullable=False)
+    compliance = sa.Column(st.Enum(Compliance), nullable=False, default=Compliance.pending)
 
-    audit = db.relationship('Audit')
-    instruction = db.relationship('ReportInstruction')
+    audit = relationship('Audit')
+    instruction = relationship('ReportInstruction')
 
 
 @dataclass

@@ -2,15 +2,17 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
-
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
-
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
 __all__ = [
     'ComplianceTimeline',
@@ -39,7 +41,7 @@ COMPLIANCE_TIMELINE_CLAIM_SPEC = ClaimSpec(
 
 
 class ComplianceTimelineSchema(BaseModelSchema):
-    compliance_id = mf.Integer(requird=True, allow_null=False)
+    compliance_id = mf.String(requird=True, allow_null=False)
     date = mf.Date(requird=True, allow_null=False)
     pending = mf.Integer(requird=True, allow_null=False)
     passed = mf.Integer(requird=True, allow_null=False)
@@ -55,8 +57,10 @@ class ComplianceTimelinePageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class ComplianceTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter compliances_timeline by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter compliances_timeline by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -66,17 +70,15 @@ class ComplianceTimelineListQueryParametersSchema(BaseOffsetListQueryParamsSchem
 class ComplianceTimeline(BaseModel):
     __tablename__ = 'compliances_timeline'
 
-    compliance_id = db.Column(db.Integer,
-                              db.ForeignKey('compliances.id'),
-                              nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    pending = db.Column(db.Integer, nullable=False)
-    passed = db.Column(db.Integer, nullable=False)
-    failed = db.Column(db.Integer, nullable=False)
-    remediation = db.Column(db.Integer, nullable=False)
-    overdue = db.Column(db.Integer, nullable=False)
+    compliance_id = sa.Column(UUID, sa.ForeignKey('compliances.id'), nullable=False)
+    date = sa.Column(st.Date, nullable=False)
+    pending = sa.Column(st.Integer, nullable=False)
+    passed = sa.Column(st.Integer, nullable=False)
+    failed = sa.Column(st.Integer, nullable=False)
+    remediation = sa.Column(st.Integer, nullable=False)
+    overdue = sa.Column(st.Integer, nullable=False)
 
-    compliance = db.relationship('Compliance')
+    compliance = relationship('Compliance')
 
 
 @dataclass

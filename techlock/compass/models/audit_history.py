@@ -2,19 +2,18 @@ from dataclasses import dataclass
 
 import marshmallow as ma
 import marshmallow.fields as mf
+import sqlalchemy as sa
+import sqlalchemy.sql.sqltypes as st  # Prevent class name overlap.
 from marshmallow_enum import EnumField
-
-from sqlalchemy.dialects.postgresql import ARRAY
-
+from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from techlock.common.api import (
     BaseOffsetListQueryParams,
     BaseOffsetListQueryParamsSchema,
     ClaimSpec,
     OffsetPageableResponseBaseSchema,
 )
-from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema, db
+from techlock.common.orm.sqlalchemy import BaseModel, BaseModelSchema
 
-from ..models.int_enum import IntEnum
 from .audit import Phase
 
 __all__ = [
@@ -44,9 +43,8 @@ AUDIT_HISTORY_CLAIM_SPEC = ClaimSpec(
 
 
 class AuditHistorySchema(BaseModelSchema):
-    entity_id = mf.Integer(dump_only=True)
-    audit_id = mf.Integer()
-    user_id = mf.String()
+    audit_id = mf.String()
+    auditor = mf.String()
     reports = mf.List(mf.Integer)
     start_date = mf.Date()
     estimated_remediation_date = mf.Date()
@@ -61,8 +59,10 @@ class AuditHistoryPageableSchema(OffsetPageableResponseBaseSchema):
 
 
 class AuditHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
-    name = mf.String(allow_none=True,
-                     description='Used to filter audits_history by name prefix.')
+    name = mf.String(
+        allow_none=True,
+        description='Used to filter audits_history by name prefix.',
+    )
 
     @ma.post_load
     def make_object(self, data, **kwargs):
@@ -72,16 +72,15 @@ class AuditHistoryListQueryParametersSchema(BaseOffsetListQueryParamsSchema):
 class AuditHistory(BaseModel):
     __tablename__ = 'audits_history'
 
-    entity_id = db.Column('history_id', db.Integer, primary_key=True)
-    audit_id = db.Column('id', db.Integer)
-    user_id = db.Column(db.String)
-    reports = db.Column(ARRAY(db.Integer))
-    start_date = db.Column(db.Date)
-    estimated_remediation_date = db.Column(db.Date)
-    remediation_date = db.Column(db.Date)
-    estimated_end_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
-    phase = db.Column(IntEnum(Phase), default=Phase.scoping_and_validation)
+    audit_id = sa.Column(UUID, sa.ForeignKey("audits.id"))
+    auditor = sa.Column(st.String)
+    reports = sa.Column(ARRAY(st.Integer))
+    start_date = sa.Column(st.Date)
+    estimated_remediation_date = sa.Column(st.Date)
+    remediation_date = sa.Column(st.Date)
+    estimated_end_date = sa.Column(st.Date)
+    end_date = sa.Column(st.Date)
+    phase = sa.Column(st.Enum(Phase), default=Phase.scoping_and_validation)
 
 
 @dataclass
